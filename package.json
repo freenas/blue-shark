@@ -1,0 +1,15 @@
+{
+    "name": "blue-shark",
+    "version": "0.1.0",
+    "dependencies": {
+        "montage": "montagejs/montage"
+    },
+    "devDependencies": {
+        "montage-testing": "~0.4.3"
+    },
+    "exclude": [
+        "run-tests.html",
+        "test"
+    ],
+    "bundle": [ "ui/main.reel" ]
+}
