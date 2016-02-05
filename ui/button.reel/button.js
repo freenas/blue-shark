@@ -1,10 +1,10 @@
-var Button = require("montage/ui/base/abstractButton.js").Button;
+var AbstractButton = require("montage/ui/base/abstract-button.js").AbstractButton;
 
 /**
  * @class Button
  * @extends Component
  */
-exports.Button = Button.specialize({
+exports.Button = AbstractButton.specialize({
     hasTemplate: {
         value: true
     }

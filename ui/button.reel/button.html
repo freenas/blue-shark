@@ -7,13 +7,24 @@
     {
         "owner": {
             "properties": {
-                "element": {"#": "owner"},
+                "element": {"#": "owner"}
+            }
+        },
+        "buttonLabel": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "buttonLabel"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner.value"}
             }
         }
     }
     </script>
 </head>
 <body>
-    <button data-montage-id="owner" class="Button" style="font-size: 100px;"></button>
+    <button data-montage-id="owner" class="Button">
+        <span data-montage-id="buttonLabel" class="Button-label"></span>
+    </button>
 </body>
 </html>
