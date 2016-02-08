@@ -10,10 +10,39 @@
                 "element": {"#": "owner"}
             }
         },
-        "buttonSmall": {
-            "prototype": "../button-small.reel",
+        "button": {
+            "prototype": "blue-shark/ui/button.reel",
             "properties": {
-                "element": {"#": "buttonSmall"}
+                "element": {"#": "button"},
+                "value": "button"
+            }
+        },
+        "buttonPrimary": {
+            "prototype": "blue-shark/ui/button.reel",
+            "properties": {
+                "element": {"#": "buttonPrimary"},
+                "value": "button"
+            }
+        },
+        "buttonAlert": {
+            "prototype": "blue-shark/ui/button.reel",
+            "properties": {
+                "element": {"#": "buttonAlert"},
+                "value": "button"
+            }
+        },
+        "buttonSmall": {
+            "prototype": "blue-shark/ui/button.reel",
+            "properties": {
+                "element": {"#": "buttonSmall"},
+                "value": "button"
+            }
+        },
+        "buttonSmallPrimary": {
+            "prototype": "blue-shark/ui/button.reel",
+            "properties": {
+                "element": {"#": "buttonSmallPrimary"},
+                "value": "button"
             }
         }
     }
@@ -21,7 +50,19 @@
 </head>
 <body>
     <div data-montage-id="owner" class="Main">
-        <div data-montage-id="buttonSmall"></div>
+        <div class="container">
+            <h1>Buttons</h1>
+            <h3>Default Button</h3>
+            <div data-montage-id="button"></div>
+            <h3>Primary Button</h3>
+            <div data-montage-id="buttonPrimary" class="Button--primary"></div>
+            <h3>Alert Button</h3>
+            <div data-montage-id="buttonAlert" class="Button--alert"></div>
+            <h3>Small Button</h3>
+            <div data-montage-id="buttonSmall" class="Button--small"></div>
+            <h3>Small Primary Button</h3>
+            <div data-montage-id="buttonSmallPrimary" class="Button--small Button--primary"></div>
+        </div>
     </div>
 </body>
 </html>
