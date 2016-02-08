@@ -1,4 +1,4 @@
-.Checkbox {
+/*.Checkbox {
     position: relative;
     display: inline-block;
     font-size: 1em;
@@ -16,9 +16,9 @@
     -webkit-appearance: none;
     cursor: pointer;
     z-index: 1;
-}
+}*/
 
-.Checkbox input:focus { outline: none; }
+/*.Checkbox input:focus { outline: none; }*/
 
 /* $fix - what should the focus state be? */
 
@@ -26,7 +26,7 @@
     border: 1px solid #2B9CD8;
 }*/
 
-.Checkbox-icon {
+/*.Checkbox-icon {
     box-sizing: border-box;
     position: relative;
     width:  1.5em;
@@ -60,4 +60,4 @@
     font-weight: 300;
     display: inline-block;
     vertical-align: middle;
-}
+}*/
