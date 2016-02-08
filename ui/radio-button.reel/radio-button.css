@@ -2,7 +2,6 @@
     display: inline-block;
     margin-right: 2em;
     height: 2em;
-    font-family: "Lato", Helvetica, Arial, sans-serif;
     box-sizing: border-box;
     font-weight: 300;
     margin:     0;
@@ -15,7 +14,10 @@
     width: 100%;
 }
 
-.RadioButton-description { display: inline-block; }
+.RadioButton-description {
+    display: inline-block;
+    font-family: "Lato", Helvetica, Arial, sans-serif;
+}
 
 input[type='radio'] {
     position: absolute;

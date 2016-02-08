@@ -13,30 +13,11 @@
         "select": {
             "prototype": "blue-shark/ui/select.reel",
             "properties": {
-                "element": {"#": "select"},
-                "options": [
-                    {
-                        "value": "none",
-                        "label": "None"
-                    },
-                    {
-                        "value": "optimal",
-                        "label": "Optimal"
-                    },
-                    {
-                        "value": "virtualization",
-                        "label": "Virtualization"
-                    },
-                    {
-                        "value": "backups",
-                        "label": "Backups"
-                    },
-                    {
-                        "value": "media",
-                        "label": "Media"
-                    }
-                ],
-                "selectedValue": "none"
+                "element": {"#": "select"}
+            },
+            "bindings": {
+                "options": {"<-": "@owner.options"},
+                "selectedValue": {"<-": "@owner.options[3].value"}
             }
         }
     }
