@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="select.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+        "selected": {
+            "prototype": "montage/ui/button.reel",
+            "properties": {
+                "element": {"#": "selected"}
+            },
+            "bindings": {
+                "label": {"<-": "@options.selection.0.label.defined() ? @options.selection.0.label : ''"}
+            },
+            "listeners": [
+                {
+                    "type": "action",
+                    "listener": {"@": "owner"}
+                }
+            ]
+        },
+        "options": {
+            "prototype": "montage/ui/repetition.reel",
+            "properties": {
+                "element": {"#": "options"},
+                "isSelectionEnabled": true
+            },
+            "bindings": {
+                "content": {"<-": "@owner.options"}
+            }
+        },
+        "option": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "option"}
+            },
+            "bindings": {
+                "iteration": {"<-": "@options:iteration"},
+                "iteration.selected": {"<->": "@owner.selectedValue == iteration.object.value"},
+                "value": {"<-": "iteration.object.label"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Select">
+        <button data-montage-id="selected" class="Select-currentOption"></button>
+        <div data-montage-id="options" class="Select-options">
+            <div data-montage-id="option" class="Select-option"></div>
+        </div>
+    </div>
+</body>
+</html>
