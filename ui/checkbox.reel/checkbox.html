@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="checkbox.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+        "checkbox": {
+            "prototype": "montage/ui/checkbox.reel",
+            "properties": {
+                "element": {"#": "checkbox"}
+            }
+        },
+        "descriptions": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "description"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner.description"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Checkbox">
+        <input type='checkbox' data-montage-id="checkbox">
+        <div>
+            <span class="Checkbox-icon"></span>
+            <span data-montage-id="description" class="Checkbox-description"></span>
+        </div>
+    </div>
+</body>
+</html>
