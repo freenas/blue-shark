@@ -12,8 +12,8 @@ exports.Main = Component.specialize(/** @lends Main# */ {
     options: {
         value: [
             {
-                "value": "none",
-                "label": "None"
+                "value": "option1",
+                "label": "Option 1"
             },
             {
                 "value": "optimal",
@@ -31,6 +31,12 @@ exports.Main = Component.specialize(/** @lends Main# */ {
                 "value": "media",
                 "label": "Media"
             }
+        ]
+    },
+
+    selected: {
+        value: [
+            "optimal", "backups"
         ]
     }
 });
