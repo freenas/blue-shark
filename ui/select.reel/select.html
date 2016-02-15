@@ -16,7 +16,7 @@
                 "element": {"#": "selected"}
             },
             "bindings": {
-                "label": {"<-": "@options.selection.0.label.defined() ? @options.selection.0.label : ''"}
+                "label": {"<-": "@options.selection.0.label.defined() ? @options.selection.0.label : @options.content.0.value" }
             },
             "listeners": [
                 {

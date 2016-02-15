@@ -16,8 +16,16 @@
                 "element": {"#": "select"}
             },
             "bindings": {
-                "options": {"<-": "@owner.options"},
-                "selectedValue": {"<-": "@owner.options[3].value"}
+                "options": {"<-": "@owner.options"}
+            }
+        },
+        "selectTwo": {
+            "prototype": "blue-shark/ui/select.reel",
+            "properties": {
+                "element": {"#": "selectTwo"}
+            },
+            "bindings": {
+                "options": {"<-": "@owner.options"}
             }
         }
     }
@@ -29,6 +37,7 @@
             <h1>Select</h1>
             <h3>Default Select</h3>
             <div data-montage-id="select"></div>
+            <div data-montage-id="selectTwo"></div>
         </div>
     </div>
 </body>

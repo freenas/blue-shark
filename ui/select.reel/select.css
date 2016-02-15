@@ -42,7 +42,7 @@
     text-align: center;
     width:  1.2em;
     height: 1.2em;
-    right:  .15em;
+    right:  .125em;
     top:    50%;
     margin-top: -.625em;
     background: #FFF;
@@ -76,7 +76,7 @@
     cursor: pointer;
     visibility: hidden;
     opacity: 0;
-    transition: opacity .2s, visibility .2s;
+    z-index: 1000;
 }
 
 .Select-currentOption:focus + .Select-options,
