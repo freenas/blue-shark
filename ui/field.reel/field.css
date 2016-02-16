@@ -1,0 +1,134 @@
+.Field {
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 1em;
+    margin-bottom: 1em;
+    margin-top: -.5em;
+}
+
+.Field + .Field {
+    margin-top: 0;
+}
+
+.Field > * {
+    font-family: "Lato";
+    font-size: 1em;
+    margin-top: .5em;
+}
+
+/* Title */
+
+.Field-title {
+    line-height: 1.5em;
+    min-width: 10em;
+    max-width: 10em;
+    margin-right: 3.5em;
+}
+
+/* Control */
+
+.Field-control {
+    flex: 1;
+    min-width: 10em;
+}
+
+/* Field-info */
+
+.Field-info-condition {
+    position: relative;
+    display: inline-block;
+    height: 1em;
+    margin-left: -1em;
+}
+
+/* Icon Background */
+
+.Field-info {
+    margin-top: -.15em;
+    position: absolute;
+    font-size: 1.5em;
+    width:  1em;
+    height: 1em;
+    right: -2em;
+    border-radius: 50%;
+    border: 1px solid #2B9CD8;
+    color: #2B9CD8;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    outline: none;
+}
+
+/* Icon Symbol */
+
+.Field-info:after {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'freenas';
+    content: '\69';
+    font-size: .5em;
+    top:    0;
+    bottom: 0;
+    left:   0;
+    right:  0;
+}
+
+/* Field Description */
+
+.Field-info-description {
+    position: absolute;
+    color: #000;
+    font-size: .65em;
+    font-weight: 300;
+    padding: .75em 1em;
+    left: -.8em;
+    top:    2.5em;
+    width: 15em;
+    border-radius: 4px;
+    color: #000;
+    border-radius: 0.3em;
+    background: rgba(2555,255,255,1);
+    box-shadow: 0 2px 4px rgba(0,0,0,.5);
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-1em);
+    transition: all .25s ease-out;
+}
+
+.Field-info-description:after {
+    position: absolute;
+    content: '';
+    background: #fff;
+    height: 1.2em;
+    width:  1.2em;
+    left: 1em;
+    top: -.5em;
+    border-radius: .2em;
+    transform: rotate(45deg);
+    z-index: 5;
+}
+
+/* States */
+
+.Field-info:hover {
+    color: #fff;
+    border-color: #FFF;
+}
+
+.Field-info.is-expanded {
+    background: #2B9CD8;
+    color: #fff;
+}
+
+.Field-info.is-expanded .Field-info-description {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+
+
+

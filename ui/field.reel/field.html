@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="field.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            },
+            "listeners": [
+                {
+                    "type": "action",
+                    "listener": {"@": "owner"}
+                }
+            ]
+        },
+        "fieldTitle": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "fieldTitle"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner.label"}
+            }
+        },
+        "condition": {
+            "prototype": "montage/ui/condition.reel",
+            "properties": {
+                "element": {"#": "condition"}
+            },
+            "bindings": {
+                "condition": {"<-": "@owner.documentationReference"}
+            }
+        },
+        "fieldInfoButton": {
+            "prototype": "montage/ui/button.reel",
+            "properties": {
+                "element": {"#": "fieldInfoButton"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Field">
+        <div class="Field-title">
+            <label data-montage-id="fieldTitle"></label>
+            <div data-montage-id="condition" class="Field-info-condition">
+                <div data-montage-id="fieldInfoButton" class="Field-info"></div>
+            </div>
+        </div>
+
+        <div class="Field-control">
+            <div data-param="*"></div>
+        </div>
+    </div>
+</body>
+</html>

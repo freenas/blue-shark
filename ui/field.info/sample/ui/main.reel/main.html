@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+        "fieldTextInput": {
+            "prototype": "blue-shark/ui/field.reel",
+            "properties": {
+                "element": {"#": "fieldTextInput"},
+                "title": "Field Text Input Title",
+                "documentationReference": "reference Id"
+            }
+        },
+        "textInput": {
+            "prototype": "blue-shark/ui/text-field.reel",
+            "properties": {
+                "element": {"#": "textInput"},
+                "placeholderValue": "enter single line of text"
+            }
+        },
+        "textAreaGroup": {
+            "prototype": "blue-shark/ui/field.reel",
+            "properties": {
+                "element": {"#": "textAreaGroup"},
+                "title": "Text Area Group Title"
+            }
+        },
+        "textArea": {
+            "prototype": "blue-shark/ui/text-Area.reel",
+            "properties": {
+                "element": {"#": "textArea"},
+                "placeholderValue": "enter large amounts of text"
+            }
+        },
+        "checkboxFieldGroup": {
+            "prototype": "blue-shark/ui/field.reel",
+            "properties": {
+                "element": {"#": "checkboxFieldGroup"},
+                "title": "Checkbox Group Title",
+                "documentationReference": "reference Id"
+            }
+        },
+        "checkboxField": {
+            "prototype": "blue-shark/ui/checkbox.reel",
+            "properties": {
+                "element": {"#": "checkboxField"}
+            }
+        },
+        "defaultTwo": {
+            "prototype": "blue-shark/ui/field.reel",
+            "properties": {
+                "element": {"#": "defaultTwo"},
+                "title": "A really really long title"
+            }
+        },
+        "select": {
+            "prototype": "blue-shark/ui/select.reel",
+            "properties": {
+                "element": {"#": "select"},
+                "options": [
+                    {"value": "test1", "label": "test1"},
+                    {"value": "test2", "label": "test2"}
+                ]
+            }
+        },
+        "radioGroupField": {
+            "prototype": "blue-shark/ui/field.reel",
+            "properties": {
+                "element": {"#": "radioGroupField"},
+                "title": "Radio Group"
+            }
+        },
+        "radioGroupOptions": {
+            "prototype": "blue-shark/ui/radio-button-field-group.reel",
+            "properties": {
+                "element": {"#": "radioGroupOptions"},
+                "options": [
+                    {"label": "option1", "value": "option1"},
+                    {"label": "option2", "value": "option2"},
+                    {"label": "option3", "value": "option3"},
+                    {"label": "option4", "value": "option4"}
+                ]
+            }
+        },
+        "toggleField": {
+            "prototype": "blue-shark/ui/field.reel",
+            "properties": {
+                "element": {"#": "toggleField"},
+                "title": "Toggle"
+            }
+        },
+        "toggle": {
+            "prototype": "blue-shark/ui/toggle-switch.reel",
+            "properties": {
+                "element": {"#": "toggle"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Main">
+        <div class="container">
+            <h1>Fields</h1>
+            <div data-montage-id="fieldTextInput">
+                <div data-montage-id="textInput"></div>
+            </div>
+            <div data-montage-id="textAreaGroup">
+                <div data-montage-id="textArea"></div>
+            </div>
+            <div data-montage-id="checkboxFieldGroup">
+                <div data-montage-id="checkboxField"></div>
+            </div>
+            <div data-montage-id="defaultTwo">
+                <div data-montage-id="select"></div>
+            </div>
+            <div data-montage-id="radioGroupField">
+                <div data-montage-id="radioGroupOptions"></div>
+            </div>
+            <div data-montage-id="toggleField">
+                <div data-montage-id="toggle"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
