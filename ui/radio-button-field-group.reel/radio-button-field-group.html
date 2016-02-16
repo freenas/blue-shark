@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="radio-button-field-group.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+        "options": {
+            "prototype": "montage/ui/repetition.reel",
+            "properties": {
+                "element": {"#": "options"},
+                "isSelectionEnabled": true
+            },
+            "bindings": {
+                "content": {"<-": "@owner.options"}
+            }
+        },
+        "radioButtonController": {
+            "prototype": "montage/core/radio-button-controller",
+            "bindings": {
+                "content": {"<-": "@owner.options"}
+            }
+        },
+        "option": {
+            "prototype": "./radio-button-field.reel",
+            "properties": {
+                "element": {"#": "option"},
+                "radioButtonController": {"@": "radioButtonController"}
+            },
+            "bindings": {
+                "label": {"<-": "@options:iteration.object.label"},
+                "value": {"<-": "@options:iteration.object.value"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="RadioButtonFieldGroup">
+        <div data-montage-id="options" class="RadioButtonFieldGroup-options">
+            <div data-montage-id="option"></div>
+        </div>
+    </div>
+</body>
+</html>

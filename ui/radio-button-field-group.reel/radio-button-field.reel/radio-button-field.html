@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="radio-button-field.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"},
+                "labelElement": {"#": "label"}
+            }
+        },
+        "radioButton": {
+            "prototype": "./radio-button.reel",
+            "properties": {
+                "element": {"#": "radioButton"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner.id"},
+                "radioButtonController": {"<-": "@owner.radioButtonController"}
+            }
+        },
+        "label": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "label"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner.label"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="RadioButtonField">
+        <span data-montage-id="radioButton" class="RadioButtonField-control"></span>
+        <label data-montage-id="label" class="RadioButtonField-label"></label>
+    </div>
+</body>
+</html>
