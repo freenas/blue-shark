@@ -1,1 +1,13 @@
-.Main {}
+.Main {
+    padding: 0 2em;
+    max-width: 40em;
+}
+
+.Main ul {
+    list-style: none;
+    padding: 0;
+}
+
+.Main a {
+    color: #2B9CD8;
+}
