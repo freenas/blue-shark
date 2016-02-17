@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="field-text-input.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+        "field": {
+            "prototype": "ui/field.reel",
+            "properties": {
+                "element": {"#": "field"}
+            },
+            "bindings": {
+                "label": {"<-": "@owner.label"},
+                "documentationReference": {"<-": "@owner.documentationReference"}
+            }
+        },
+        "textInput": {
+            "prototype": "ui/text-field.reel",
+            "properties": {
+                "element": {"#": "textInput"}
+            },
+            "bindings": {
+                "placeholderValue": {"<-": "@owner.placeholderValue"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="FieldTextInput">
+        <div data-montage-id="field">
+            <div data-montage-id="textInput"></div>
+        </div>
+    </div>
+</body>
+</html>
