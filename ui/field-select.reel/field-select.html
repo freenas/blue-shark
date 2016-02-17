@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="field-select.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+        "field": {
+            "prototype": "ui/field.reel",
+            "properties": {
+                "element": {"#": "field"}
+            },
+            "bindings": {
+                "label": {"<-": "@owner.label"},
+                "documentationReference": {"<-": "@owner.documentationReference"}
+            }
+        },
+        "select": {
+            "prototype": "ui/select.reel",
+            "properties": {
+                "element": {"#": "select"}
+            },
+            "bindings": {
+                "options": {"<-": "@owner.options"},
+                "selectedValue": {"<->": "@owner.selectedValue"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="FieldSelect">
+        <div data-montage-id="field">
+            <div data-montage-id="select"><div>
+        <div>
+    </div>
+</body>
+</html>

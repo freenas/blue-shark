@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+        "fieldSelect": {
+            "prototype": "blue-shark/ui/field-select.reel",
+            "properties": {
+                "element": {"#": "fieldSelect"},
+                "label": "test label",
+                "options": [
+                    {
+                        "value": "none",
+                        "label": "None"
+                    },
+                    {
+                        "value": "optimal",
+                        "label": "Optimal"
+                    },
+                    {
+                        "value": "virtualization",
+                        "label": "Virtualization"
+                    },
+                    {
+                        "value": "backups",
+                        "label": "Backups"
+                    },
+                    {
+                        "value": "media",
+                        "label": "Media"
+                    }
+                ]
+            },
+            "bindings": {
+                "selectedValue": {"<->": "media"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Main">
+        <div class="container">
+            <h1>Field Select</h1>
+            <h3>Default</h3>
+            <div data-montage-id="fieldSelect"></div>
+        </div>
+    </div>
+</body>
+</html>
