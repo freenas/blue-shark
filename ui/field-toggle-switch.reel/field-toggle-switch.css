@@ -1,3 +1,5 @@
-.FieldToggleSwitch {
+/* centering adjustment */
 
+.FieldToggleSwitch .blueShark-ToggleSwitch {
+    margin-top: -0.25em;
 }
