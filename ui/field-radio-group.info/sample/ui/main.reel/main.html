@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"},
+                "myFoo": true
+            }
+        },
+        "fieldRadioGroup": {
+            "prototype": "blue-shark/ui/field-radio-group.reel",
+            "properties": {
+                "element": {"#": "fieldRadioGroup"},
+                "label": "test label",
+                "options": [
+                    {"label": "option1", "value": "option1"},
+                    {"label": "option2", "value": "option2"},
+                    {"label": "option3", "value": "option3"},
+                    {"label": "option4", "value": "option4"}
+                ]
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Main">
+        <div class="container">
+            <h1>Field Text Area</h1>
+            <h3>Default</h3>
+            <div data-montage-id="fieldRadioGroup"></div>
+        </div>
+    </div>
+</body>
+</html>
