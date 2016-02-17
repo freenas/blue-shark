@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"},
+                "myFoo": true
+            }
+        },
+        "fieldCheckbox": {
+            "prototype": "blue-shark/ui/field-checkbox.reel",
+            "properties": {
+                "element": {"#": "fieldCheckbox"},
+                "label": "test label",
+                "checked": true
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Main">
+        <div class="container">
+            <h1>Field Text Area</h1>
+            <h3>Default</h3>
+            <div data-montage-id="fieldCheckbox"></div>
+        </div>
+    </div>
+</body>
+</html>

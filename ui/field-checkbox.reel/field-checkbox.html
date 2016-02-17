@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="field-checkbox.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+        "field": {
+            "prototype": "ui/field.reel",
+            "properties": {
+                "element": {"#": "field"}
+            },
+            "bindings": {
+                "label": {"<-": "@owner.label"},
+                "documentationReference": {"<-": "@owner.documentationReference"}
+            }
+        },
+        "checkbox": {
+            "prototype": "ui/checkbox.reel",
+            "properties": {
+                "element": {"#": "checkbox"}
+            },
+            "bindings": {
+                "checked": {"<->": "@owner.checked"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="FieldCheckbox">
+        <div data-montage-id="field">
+            <div data-montage-id="checkbox"><div>
+        </div>
+    </div>
+</body>
+</html>
