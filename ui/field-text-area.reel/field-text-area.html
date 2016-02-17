@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="field-text-area.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+        "field": {
+            "prototype": "ui/field.reel",
+            "properties": {
+                "element": {"#": "field"}
+            },
+            "bindings": {
+                "label": {"<-": "@owner.label"},
+                "documentationReference": {"<-": "@owner.documentationReference"}
+            }
+        },
+        "textArea": {
+            "prototype": "ui/text-area.reel",
+            "properties": {
+                "element": {"#": "textArea"}
+            },
+            "bindings": {
+                "placeholderValue": {"<-": "@owner.placeholderValue"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="FieldTextArea">
+        <div data-montage-id="field">
+            <div data-montage-id="textArea">
+        </div>
+    </div>
+</body>
+</html>
