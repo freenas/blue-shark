@@ -29,7 +29,7 @@
 /* Control */
 
 .Field-control {
-    flex-grow: 1;
+    flex: 1;
 }
 
 /* Field-info */
