@@ -29,8 +29,7 @@
 /* Control */
 
 .Field-control {
-    flex: 1;
-    min-width: 10em;
+    flex-grow: 1;
 }
 
 /* Field-info */
