@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="field-select-multiple.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+        "field": {
+            "prototype": "ui/field.reel",
+            "properties": {
+                "element": {"#": "field"}
+            },
+            "bindings": {
+                "label": {"<-": "@owner.label"},
+                "documentationReference": {"<-": "@owner.documentationReference"}
+            }
+        },
+        "selectMultiple": {
+            "prototype": "ui/select-multiple.reel",
+            "properties": {
+                "element": {"#": "selectMultiple"}
+            },
+            "bindings": {
+                "options": {"<-": "@owner.options"},
+                "selectedValues": {"<->": "@owner.selectedValues"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="FieldSelectMultiple">
+        <div data-montage-id="field">
+            <div data-montage-id="selectMultiple"><div>
+        <div>
+    </div>
+</body>
+</html>
