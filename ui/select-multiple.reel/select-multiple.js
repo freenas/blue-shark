@@ -169,12 +169,16 @@ exports.SelectMultiple = Component.specialize({
                     }
                 }
                 optionsFragment = document.createDocumentFragment();
-                for (i = 0; i < this._options.length; i++) {
-                    optionElement = document.createElement("option");
-                    optionElement.selected = selectedMap.has(this._options[i][this._valuePropertyName] || this._options[i]);
-                    optionElement.textContent = this._options[i][this._labelPropertyName] || this._options[i];
-                    optionsFragment.appendChild(optionElement);
+
+                if (this._options) {
+                    for (i = 0; i < this._options.length; i++) {
+                        optionElement = document.createElement("option");
+                        optionElement.selected = selectedMap.has(this._options[i][this._valuePropertyName] || this._options[i]);
+                        optionElement.textContent = this._options[i][this._labelPropertyName] || this._options[i];
+                        optionsFragment.appendChild(optionElement);
+                    }
                 }
+
                 this._element.innerHTML = "";
                 this._element.appendChild(optionsFragment);
                 this._needsUpdateOptions = false;
