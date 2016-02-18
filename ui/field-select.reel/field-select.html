@@ -26,8 +26,11 @@
                 "element": {"#": "select"}
             },
             "bindings": {
+                "hasOptionalValue": {"<-": "@owner.hasOptionalValue"},
                 "options": {"<-": "@owner.options"},
-                "selectedValue": {"<->": "@owner.selectedValue"}
+                "selectedValue": {"<->": "@owner.selectedValue"},
+                "valuePropertyName": {"<-": "@owner.valuePropertyName"},
+                "labelPropertyName": {"<-": "@owner.labelPropertyName"}
             }
         }
     }
