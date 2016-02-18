@@ -35,6 +35,8 @@
 /* Field-info */
 
 .Field-info-condition {
+    /* $fix - remove display none when condition is met */
+    display: none;
     position: relative;
     display: inline-block;
     height: 1em;
