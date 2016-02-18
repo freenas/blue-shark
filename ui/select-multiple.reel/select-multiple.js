@@ -25,13 +25,13 @@ exports.SelectMultiple = Component.specialize({
             }
             for (i = 0; i < children.length; i++) {
                 if (children[i].selected) {
-                    if (!selectedMap.has(this._options[i][this._valuePropertyName])) {
-                        this.selectedValues.push(this._options[i][this._valuePropertyName]);
+                    if (!selectedMap.has(this._options[i][this._valuePropertyName] || this._options[i])) {
+                        this.selectedValues.push(this._options[i][this._valuePropertyName] || this._options[i]);
                     }
                 } else {
-                    if (selectedMap.has(this._options[i][this._valuePropertyName])) {
+                    if (selectedMap.has(this._options[i][this._valuePropertyName] || this._options[i])) {
                         this.selectedValues.splice(
-                            this.selectedValues.indexOf(this._options[i][this._valuePropertyName]),
+                            this.selectedValues.indexOf(this._options[i][this._valuePropertyName] || this._options[i]),
                             1
                         );
                     }
@@ -171,8 +171,8 @@ exports.SelectMultiple = Component.specialize({
                 optionsFragment = document.createDocumentFragment();
                 for (i = 0; i < this._options.length; i++) {
                     optionElement = document.createElement("option");
-                    optionElement.selected = selectedMap.has(this._options[i][this._valuePropertyName]);
-                    optionElement.textContent = this._options[i][this._labelPropertyName] || "";
+                    optionElement.selected = selectedMap.has(this._options[i][this._valuePropertyName] || this._options[i]);
+                    optionElement.textContent = this._options[i][this._labelPropertyName] || this._options[i];
                     optionsFragment.appendChild(optionElement);
                 }
                 this._element.innerHTML = "";

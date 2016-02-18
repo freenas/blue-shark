@@ -16,7 +16,7 @@
                 "element": {"#": "selected"}
             },
             "bindings": {
-                "label": {"<-": "@options.selection.0.label.defined() ? @options.selection.0.label : @options.content.0.value" }
+                "label": {"<-": "@options.selection.0.label.defined() ? @options.selection.0.label : @options.content.0.label" }
             },
             "listeners": [
                 {
@@ -42,7 +42,7 @@
             },
             "bindings": {
                 "iteration": {"<-": "@options:iteration"},
-                "iteration.selected": {"<->": "@owner.selectedValue == iteration.object.value"},
+                "iteration.selected": {"<->": "@owner._selectedValue == iteration.object.value"},
                 "value": {"<-": "iteration.object.label"}
             }
         }
