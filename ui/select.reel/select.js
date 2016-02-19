@@ -4,11 +4,16 @@
 var Component = require("montage/ui/component").Component,
     Montage = require("montage/core/core").Montage;
 
+
 /**
  * @class Select
  * @extends Component
  */
 exports.Select = Component.specialize({
+
+    converter: {
+        value: null
+    },
 
     _options: {
         value: null
@@ -19,7 +24,11 @@ exports.Select = Component.specialize({
             var options = null;
 
             if (content) {
-                options = this._getSelectOptionsFromArray(content);
+                if (this.converter) {
+                    options = this.converter.convert(content);
+                } else {
+                    options = content;
+                }
 
                 var indexNoneOption = options.indexOf(NONE_SELECT_OPTION);
 
@@ -86,78 +95,6 @@ exports.Select = Component.specialize({
         }
     },
 
-     _labelPropertyName: {
-        value: "label"
-    },
-
-    labelPropertyName: {
-        get: function () {
-            return this._labelPropertyName;
-        },
-        set: function (value) {
-            if (this._labelPropertyName !== value) {
-                if (value) {
-                    this._labelPropertyName = value + "";
-                } else {
-                    this._labelPropertyName = "label";
-                }
-
-                this._updateOptionsIfNeeeded();
-            }
-        }
-    },
-
-    _valuePropertyName: {
-        value: "value"
-    },
-
-    valuePropertyName: {
-        get: function () {
-            return this._valuePropertyName;
-        },
-        set: function (value) {
-            if (this._valuePropertyName !== value) {
-                if (value) {
-                    this._valuePropertyName = value + "";
-                } else {
-                    this._valuePropertyName = "value";
-                }
-
-                this._updateOptionsIfNeeeded();
-            }
-        }
-    },
-
-    _getSelectOptionsFromArray: {
-        value: function (content) {
-            if (!Array.isArray(content)) {
-                throw new TypeError("Select.getOptionsFromArray: array expected got '" + typeof content + "' instead");
-            }
-
-            var options = [],
-                valuePropertyName = this._valuePropertyName,
-                labelPropertyName = this._labelPropertyName,
-                option,
-                item;
-
-            //TODO: implement pool of SelectOption
-            for (var i = 0, length = content.length; i < length; i++) {
-                item = content[i];
-
-                if (typeof item !== "object") {
-                    option = new SelectOption().initWithLabel(item);
-
-                } else {
-                    option = new SelectOption().initWithLabel(item[labelPropertyName], item[valuePropertyName]);
-                }
-
-                options.push(option);
-            }
-
-            return options;
-        }
-    },
-
     _updateOptionsIfNeeeded: {
         value: function () {
             if (this._options) {
@@ -168,35 +105,7 @@ exports.Select = Component.specialize({
 
 });
 
-var SelectOption = exports.SelectOption = Montage.specialize({
-
-    initWithLabel: {
-        value: function (label) {
-            this.label = this.value = label + "";
-
-            return this;
-        }
-    },
-
-    initWithLabelAndValue: {
-        value: function (label, value) {
-            this.label = label + "";
-            this.value = value + "";
-
-            return this;
-        }
-    },
-
-    label: {
-        value: null
-    },
-
-    value: {
-        value: null
-    }
-
-});
 
 var NONE_OPTION_LABEL = "none",
     NONE_OPTION_VALUE = "_none",
-    NONE_SELECT_OPTION = new SelectOption().initWithLabelAndValue(NONE_OPTION_LABEL, NONE_OPTION_VALUE);
+    NONE_SELECT_OPTION = {label: NONE_OPTION_LABEL, value: NONE_OPTION_VALUE};
