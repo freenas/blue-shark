@@ -35,13 +35,13 @@
 /* Field-info */
 
 .Field-info-condition {
-    /* $fix - remove display none when condition is met */
     display: none;
     position: relative;
-    display: inline-block;
     height: 1em;
     margin-left: -1em;
 }
+
+.Field-info-condition.is-visible { display: inline-block; }
 
 /* Icon Background */
 
