@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="view-select.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"},
+                "repetition": {"@": "repetition"}
+            },
+            "bindings": {
+                "classList.has('is-expanded')": {"<-": "@owner.isExpanded"}
+            }
+        },
+        "repetition": {
+            "prototype": "montage/ui/repetition.reel",
+            "properties": {
+                "element": {"#": "repetition"}
+            },
+            "bindings": {
+                "content": {"<-": "@owner.content"}
+            }
+        },
+        "option": {
+            "prototype": "./view-select-option.reel",
+            "properties": {
+                "element": {"#": "option"}
+            },
+            "bindings": {
+                "iteration": {"<-": "@repetition:iteration"},
+                "iconId": {"<-": "iteration.object.value"},
+                "iteration.selected": {"<->": "@owner.selectedValue == iteration.object.value"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="ViewSelect">
+        <div data-montage-id="repetition" class="ViewSelect-options">
+            <div data-montage-id="option"></div>
+        </div>
+        <div class="ViewSelect-arrowIcon">
+            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M9.32 3.734L22.808 16.22l-.028-1.44L9.29 28.294 8.586 29 10 30.415l.708-.708 13.487-13.513.733-.735-.762-.705L10.68 2.266l-.734-.68-1.36 1.468.735.68z" fill="currentColor" fill-rule="evenodd"/></svg>
+        </div>
+    </div>
+</body>
+</html>

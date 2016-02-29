@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+        "default": {
+            "prototype": "blue-shark/ui/view-select.reel",
+            "properties": {
+                "element": {"#": "default"},
+                "selectedValue": "list",
+                "content": [{"value": "list"}, {"value": "grid"}, {"value": "table"}]
+            }
+        },
+        "returnValue": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "returnValue"}
+            },
+            "bindings": {
+                "value": {"<-": "@default.selectedValue"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Main">
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+            <symbol id="list" viewBox="0 0 32 32">
+                <title>List View</title>
+                <g fill="currentColor" fill-rule="evenodd"><path d="M10 27h20v-2H10v2zM2 23h6v6H2zM10 17h20v-2H10v2zM2 13h6v6H2z"/><g><path d="M10 7h20V5H10v2zM2 3h6v6H2z"/></g></g>
+            </symbol>
+            <symbol id="grid" viewBox="0 0 32 32">
+                <title>Grid View</title>
+                <g fill="currentColor" fill-rule="evenodd"><path d="M3 3h11v11H3zM18 3h11v11H18zM18 18h11v11H18zM3 18h11v11H3z"/></g>
+            </symbol>
+            <symbol id="table" viewBox="0 0 32 32">
+                <title>Table View</title>
+                <path d="M2 2h29v28H2V2zm2 4h7v6H4V6zm9 0h7v6h-7V6zm9 0h7v6h-7V6zm0 8h7v6h-7v-6zM4 14h7v6H4v-6zm9 0h7v6h-7v-6zm0 8h7v6h-7v-6zm9 0h7v6h-7v-6zM4 22h7v6H4v-6z" fill="currentColor" fill-rule="evenodd"/>
+            </symbol>
+        </svg>
+        <div class="container">
+            <h1>View Select</h1>
+            <h3>Default</h3>
+            <div data-montage-id="default"></div>
+            <p>
+                <span>current view: </span><span data-montage-id="returnValue"></span>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
