@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+        "default": {
+            "prototype": "blue-shark/ui/multiple-select.reel",
+            "properties": {
+                "element": {"#": "default"},
+                "content": [
+                    {"label": "value1ThatisreallyLongandshouldcutoffatsomepoint"},
+                    {"label": "value2"},
+                    {"label": "value3"},
+                    {"label": "value4"}
+                ],
+                "options": [
+                    {"label": "option1"},
+                    {"label": "option2"},
+                    {"label": "option3"},
+                    {"label": "option4"},
+                    {"label": "option5"},
+                    {"label": "option6"}
+                ]
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Main">
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+            <symbol id="i-plus" viewBox="0 0 32 32">
+                <title>Plus Icon</title>
+                <g fill="currentColor" fill-rule="evenodd"><path d="M15 3v27h2V2h-2v1z"/><path d="M3 17h27v-2H2v2h1z"/></g>
+            </symbol>
+        </svg>
+        <div class="container">
+            <h1>Multiple Select</h1>
+            <div data-montage-id="default"></div>
+        </div>
+    </div>
+</body>
+</html>

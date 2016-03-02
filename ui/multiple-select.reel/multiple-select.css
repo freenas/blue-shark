@@ -1,0 +1,119 @@
+.MultipleSelect {}
+
+.MultipleSelect-input {
+    position: relative;
+    margin-bottom: .5em;
+}
+
+.MultipleSelect-input-field:focus {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius:  0;
+}
+
+.MultipleSelect-input-clearButton {
+    position: absolute;
+    padding: .25em;
+    right: .5em;
+    top: 50%;
+    margin-top: -.6em;
+    height: 1.2em;
+    width: 1.2em;
+    color: #333;
+    z-index: 1;
+    transform: rotate(45deg);
+    background: #ddd;
+    border-radius: 2em;
+    cursor: pointer;
+    outline: none;
+    visibility: hidden;
+    opacity: 0;
+    transition-property: visibility, opacity;
+    transition-duration: .2s;
+}
+
+.MultipleSelect-input-options {
+    position: absolute;
+    top: 2em;
+    left: 0;
+    right: 0;
+    max-height: 8.5em;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    color: #333;
+    background-color: #ddd;
+    border: 1px solid #2B9CD8;
+    border-top: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,.3);
+    z-index: 100;
+    overflow: scroll;
+    visibility: hidden;
+    opacity: 0;
+    transition-property: visibility, opacity;
+    transition-duration: .2s;
+}
+
+.MultipleSelect-input-option {
+    cursor: pointer;
+    padding: .25em .5em .35em;
+    font-family: 'lato';
+    font-weight: 200;
+}
+
+.MultipleSelect-input-option:hover {
+    background: #2B9CD8;
+    color: #fff;
+}
+
+.MultipleSelect-input-error {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: red;
+    font-family: 'lato';
+    font-weight: 300;
+    padding: .5em;
+    transform: translateY(100%);
+    z-index: 1;
+    box-shadow: 0 2px 4px rgba(0,0,0,.3);
+    visibility: hidden;
+    opacity: 0;
+    transition-property: visibility, opacity;
+    transition-duration: .2s;
+}
+
+.MultipleSelect-values {
+    box-sizing: border-box;
+    color: #FFF;
+    max-height: 8em;
+    padding: .25em;
+    width: 100%;
+    background: rgba(0, 0, 0, .25);
+    border-radius: .3em;
+    border: 1px solid transparent;
+    border-top: 1px solid rgba(0, 0, 0, .23);
+    border-bottom: 1px solid rgba(255, 255, 255, .15);
+    overflow: scroll;
+}
+
+/*
+
+States
+
+*/
+
+.MultipleSelect-input-field:focus + .MultipleSelect-input-options,
+.MultipleSelect-input-options:active,
+.MultipleSelect-input.has-value .MultipleSelect-input-clearButton,
+.MultipleSelect-input.has-error .MultipleSelect-input-error {
+    visibility: visible;
+    opacity: 1;
+}
+
+.MultipleSelect-input.has-error .MultipleSelect-input-field {
+    border-color: red;
+    border-bottom: none !important;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+

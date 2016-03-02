@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="multiple-select-value.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            },
+            "listeners": [
+                {
+                    "type": "action",
+                    "listener": {"@": "owner"}
+                }
+            ]
+        },
+        "value": {
+            "prototype": "ui/text-field.reel",
+            "properties": {
+                "element": {"#": "label"},
+                "enabled": false
+            },
+            "bindings": {
+                "value": {"<-": "@owner.label"}
+            }
+        },
+        "deleteButton": {
+            "prototype": "montage/ui/button.reel",
+            "properties": {
+                "element": {"#": "deleteButton"}
+            }
+        },
+        "errorMessage": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "errorMessage"},
+                "value": "This is the error message that if it is really long should wrap"
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="MultipleSelectValue">
+        <div data-montage-id="label" class="MultipleSelectValue-label"></div>
+        <svg data-montage-id="deleteButton" class="MultipleSelectValue-delete">
+            <use xlink:href="#i-plus"/>
+        </svg>
+        <div class="MultipleSelectValue-error">
+            <div data-montage-id="errorMessage" class="MultipleSelectValue-error-message"></div>
+        </div>
+    </div>
+</body>
+</html>

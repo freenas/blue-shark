@@ -1,0 +1,83 @@
+.MultipleSelectValue {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    background: none;
+}
+
+.MultipleSelectValue-label.blueShark-TextField {
+    flex: 1;
+    background: none;
+    border-color: transparent;
+    font-family: 'lato', sans-serif;
+    font-weight: 200;
+    font-size: 1em;
+    color: #ddd;
+    padding: .25em .5em .35em;
+    margin-right: .25em;
+    width: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.MultipleSelectValue-label.blueShark-TextField:hover { background: rgba(255,255,255,.1); }
+
+.MultipleSelectValue-label.blueShark-TextField:focus {
+    cursor: text;
+    color: #FFF;
+    background: none;
+}
+
+.MultipleSelectValue-delete {
+    align-self: center;
+    height: 1.4em;
+    width:  1.4em;
+    padding: .25em;
+    color: red;
+    transform: rotate(45deg);
+    cursor: pointer;
+    border-radius: 50%;
+    outline: none;
+}
+
+.MultipleSelectValue-delete:hover {
+    background: red;
+    color: #fff;
+}
+
+.MultipleSelectValue-error {
+    position: relative;
+    z-index: 1;
+    padding: .5em;
+    width: 100%;
+    font-family: 'lato';
+    font-weight: 200;
+    display: none;
+    margin-bottom: .5em;
+}
+
+/* States */
+
+.MultipleSelectValue.has-error .MultipleSelectValue-label {
+    border-color: red !important;
+    border-bottom: none !important;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.MultipleSelectValue.has-error .MultipleSelectValue-error {
+    display: block;
+}
+
+.MultipleSelectValue.has-error .MultipleSelectValue-error:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -.25em;
+    right: -.25em;
+    bottom: 0;
+    background: red;
+    z-index: -1;
+}
