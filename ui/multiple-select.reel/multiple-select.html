@@ -8,7 +8,13 @@
         "owner": {
             "properties": {
                 "element": {"#": "owner"},
-                "input": {"@": "input"}
+                "_inputField": {"@": "input"},
+                "_optionsController": {"@": "optionsController"},
+                "_optionsList": {"@": "options"}
+            },
+            "bindings": {
+                "_typedValue": {"<-": "!@owner._isScrollingOptions ? @input.value : @owner._typedValue"},
+                "_filterOptions": {"<-": "!!@owner._typedValue"}
             },
             "listeners": [
                 {
@@ -24,7 +30,8 @@
                 "hasTemplate": false
             },
             "bindings": {
-                "classList.has('has-value')": {"<-": "@input.value"}
+                "classList.has('has-value')": {"<-": "@input.value"},
+                "classList.has('has-error')": {"<-": "!!@owner._inputError"}
             }
         },
         "input": {
@@ -32,6 +39,9 @@
             "properties": {
                 "element": {"#": "input"},
                 "placeholderValue": "enter input"
+            },
+            "bindings": {
+                "classList.has('has-options')": {"<-": "!!@owner.options && @owner.options.length > 0"}
             }
         },
         "inputErrorMessage": {
@@ -47,43 +57,55 @@
                 "element": {"#": "clearButton"}
             }
         },
+        "optionsController": {
+            "prototype": "montage/core/range-controller",
+            "bindings": {
+                "content": {"<-": "@owner._filterOptions && @owner.options.filter{label.startsWith(@owner._typedValue)} || @owner.options"}
+            }
+        },
         "options": {
             "prototype": "montage/ui/repetition.reel",
             "properties": {
                 "element": {"#": "options"},
+                "contentController": {"@": "optionsController"},
                 "isSelectionEnabled": true
-            },
-            "bindings": {
-                "content": {"<-": "@owner.options"}
             }
         },
         "option": {
-            "prototype": "montage/ui/text.reel",
+            "prototype": "./multiple-select-option.reel",
             "properties": {
                 "element": {"#": "option"}
             },
             "bindings": {
-                "value": {"<-": "@options:iteration.object.label"}
+                "option": {"<-": "@options:iteration.object"},
+                "selected": {"<->": "@owner._selectedOption"},
+                "valueToAdd": {"<->": "@owner._valueToAdd"}
+            }
+        },
+        "valuesController": {
+            "prototype": "montage/core/range-controller",
+            "bindings": {
+                "content": {"<->": "@owner.values"}
             }
         },
         "values": {
             "prototype": "montage/ui/repetition.reel",
             "properties": {
-                "element": {"#": "values"}
-            },
-            "bindings": {
-                "content": {"<-": "@owner.content"}
+                "element": {"#": "values"},
+                "contentController": {"@": "valuesController"}
             }
         },
         "value": {
-           "prototype": "./multiple-select-value.reel",
-           "properties": {
-               "element": {"#": "value"}
-           },
-           "bindings": {
-               "label": {"<-": "@values:iteration.object.label"}
-           }
-       }
+            "prototype": "./multiple-select-value.reel",
+            "properties": {
+               "element": {"#": "value"},
+               "contentController": {"@": "valuesController"}
+            },
+            "bindings": {
+                "object": {"<-": "@values:iteration.object"},
+                "converter": {"<-": "@owner.converter"}
+            }
+        }
     }
     </script>
 </head>

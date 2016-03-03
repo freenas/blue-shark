@@ -5,7 +5,7 @@
     margin-bottom: .5em;
 }
 
-.MultipleSelect-input-field:focus {
+.MultipleSelect-input-field.has-options:focus {
     border-bottom-right-radius: 0;
     border-bottom-left-radius:  0;
 }
@@ -45,23 +45,12 @@
     border-top: none;
     box-shadow: 0 2px 4px rgba(0,0,0,.3);
     z-index: 100;
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
     visibility: hidden;
     opacity: 0;
     transition-property: visibility, opacity;
     transition-duration: .2s;
-}
-
-.MultipleSelect-input-option {
-    cursor: pointer;
-    padding: .25em .5em .35em;
-    font-family: 'lato';
-    font-weight: 200;
-}
-
-.MultipleSelect-input-option:hover {
-    background: #2B9CD8;
-    color: #fff;
 }
 
 .MultipleSelect-input-error {
@@ -101,7 +90,7 @@ States
 
 */
 
-.MultipleSelect-input-field:focus + .MultipleSelect-input-options,
+.MultipleSelect-input-field.has-options:focus + .MultipleSelect-input-options,
 .MultipleSelect-input-options:active,
 .MultipleSelect-input.has-value .MultipleSelect-input-clearButton,
 .MultipleSelect-input.has-error .MultipleSelect-input-error {

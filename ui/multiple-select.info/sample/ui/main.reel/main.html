@@ -10,24 +10,28 @@
                 "element": {"#": "owner"}
             }
         },
+        "converter": {
+            "prototype": "montage/core/converter/number-converter"
+        },
         "default": {
             "prototype": "blue-shark/ui/multiple-select.reel",
             "properties": {
                 "element": {"#": "default"},
-                "content": [
-                    {"label": "value1ThatisreallyLongandshouldcutoffatsomepoint"},
-                    {"label": "value2"},
-                    {"label": "value3"},
-                    {"label": "value4"}
-                ],
                 "options": [
-                    {"label": "option1"},
-                    {"label": "option2"},
-                    {"label": "option3"},
+                    {"label": "foo"},
+                    {"label": "aaoption2"},
+                    {"label": "aaaoption3"},
                     {"label": "option4"},
-                    {"label": "option5"},
-                    {"label": "option6"}
+                    {"label": "option42"},
+                    {"label": "_option6"}
+                ],
+                "values": [
+                    {"label": "value1ThatisreallyLongandshouldcutoffatsomepoint"},
+                    {"label": "value2"}
                 ]
+            },
+            "bindings": {
+                "converter": {"<-": "@owner.fakeConverter"}
             }
         }
     }

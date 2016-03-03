@@ -7,7 +7,11 @@
     {
         "owner": {
             "properties": {
-                "element": {"#": "owner"}
+                "element": {"#": "owner"},
+                "valueField": {"@": "value"}
+            },
+            "bindings": {
+                "classList.has('has-error')": {"<-": "@owner._inputError"}
             },
             "listeners": [
                 {
@@ -19,11 +23,10 @@
         "value": {
             "prototype": "ui/text-field.reel",
             "properties": {
-                "element": {"#": "label"},
-                "enabled": false
+                "element": {"#": "label"}
             },
             "bindings": {
-                "value": {"<-": "@owner.label"}
+                "value": {"<-": "@owner.object.label"}
             }
         },
         "deleteButton": {
@@ -44,7 +47,7 @@
 </head>
 <body>
     <div data-montage-id="owner" class="MultipleSelectValue">
-        <div data-montage-id="label" class="MultipleSelectValue-label"></div>
+        <div data-montage-id="label" class="MultipleSelectValue-label" tabindex="-1"></div>
         <svg data-montage-id="deleteButton" class="MultipleSelectValue-delete">
             <use xlink:href="#i-plus"/>
         </svg>
