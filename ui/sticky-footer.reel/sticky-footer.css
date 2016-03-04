@@ -1,0 +1,16 @@
+.StickyFooter {
+    padding: 1em;
+    transition: background-color .25s ease-in-out;
+}
+
+.has-stickyFooter {
+    position: relative;
+}
+
+.has-stickyFooter .StickyFooter {
+    position: absolute;
+    bottom: 0;
+    left: 2em;
+    right: 2em;
+    background-color: orange;
+}

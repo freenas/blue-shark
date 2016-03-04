@@ -1,0 +1,63 @@
+.Scrollbar {
+    /*background-image: -webkit-gradient(
+        linear,
+        left top,
+        right top,
+        from(#151515),
+        to(#282828)
+    );*/
+    border-radius: 9999px;
+    background-color: rgba(255,255,255,.1);
+    z-index: 2;
+}
+
+.ScrollbarHandle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-transition: opacity 300ms, width 200ms, height 200ms;
+}
+
+.Scrollbar.isAnimating .ScrollbarHandle {
+    -webkit-transition: opacity 300ms, width 200ms, height 200ms, -webkit-transform 200ms;
+}
+
+.ScrollbarHandle:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 9999px;
+    box-shadow: inset 0 0 1px rgba(255, 255, 255, .4);
+    background-color: #aaa;
+}
+
+.ScrollbarHandle:active:before {
+    /*opacity: .7;*/
+    background-color: #ccc;
+}
+
+.ScrollbarHorizontal {
+    background-color: rgba(255,255,255,.1);
+    /*background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        from(#151515),
+        to(#282828)
+    );*/
+}
+
+.ScrollbarHorizontal .ScrollbarHandle:before {
+    /*background: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        from(#888),
+        to(#666)
+    );*/
+}

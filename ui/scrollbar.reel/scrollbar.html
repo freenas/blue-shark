@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="scrollbar.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"},
+                "handle": {"@": "handle"}
+            }
+        },
+        "handle": {
+            "prototype": "ui/draggable.reel",
+            "properties": {
+                "element": {"#": "handle"}
+            },
+            "bindings": {
+                "drag": {"<->": "@owner.offset"},
+                "isRounding": {"<-": "@owner.isRounding"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Scrollbar">
+        <div data-montage-id="handle" class="ScrollbarHandle"></div>
+    </div>
+</body>
+</html>

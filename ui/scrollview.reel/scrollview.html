@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+
+        /* Style added here to workaround a problem with Montage/Firefox not */
+        /* loading or parsing the css file on time for width/height measurement */
+
+        .Scrollview {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        .ScrollviewContentWrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+        }
+        .ScrollviewContent {
+            position: absolute;
+        }
+        .ScrollviewHorizontalScrollbar {
+            position: absolute;
+            bottom: 4px;
+            left: 4px;
+        }
+        .ScrollviewVerticalScrollbar {
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+    </style>
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"},
+                "contentWrapperElement": {"#": "contentWrapper"},
+                "contentElement": {"#": "content"},
+                "horizontalScrollbar": {"@": "horizontalScrollbar"},
+                "verticalScrollbar": {"@": "verticalScrollbar"}
+            }
+        },
+        "horizontalScrollbar": {
+            "prototype": "ui/scrollbar.reel",
+            "properties": {
+                "element": {"#": "horizontalScrollbar"},
+                "type": "horizontal",
+                "isRounding": true
+            },
+            "bindings": {
+                "length": {"<-": "@owner._contentWidth"},
+                "handleLength": {"<-": "@owner._visibleWidth"},
+                "offset": {"<->": "@owner.scrollLeft"},
+                "minHandlePixelSize": {"<-": "@owner.scrollbarsSize"}
+            }
+        },
+        "verticalScrollbar": {
+            "prototype": "ui/scrollbar.reel",
+            "properties": {
+                "element": {"#": "verticalScrollbar"},
+                "isRounding": true
+            },
+            "bindings": {
+                "length": {"<-": "@owner._contentHeight"},
+                "handleLength": {"<-": "@owner._visibleHeight"},
+                "offset": {"<->": "@owner.scrollTop"},
+                "minHandlePixelSize": {"<-": "@owner.scrollbarsSize"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Scrollview">
+        <div data-montage-id="verticalScrollbar" class="ScrollviewVerticalScrollbar"></div>
+        <div data-montage-id="horizontalScrollbar" class="ScrollviewHorizontalScrollbar"></div>
+        <div data-montage-id="contentWrapper" class="ScrollviewContentWrapper">
+            <div data-montage-id="content" class="ScrollviewContent">
+                <div data-param="*"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
