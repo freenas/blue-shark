@@ -60,7 +60,7 @@
         "optionsController": {
             "prototype": "montage/core/range-controller",
             "bindings": {
-                "content": {"<-": "@owner._filterOptions && @owner.options.filter{label.startsWith(@owner._typedValue)} || @owner.options"}
+                "content": {"<-": "@owner._filterOptions && @owner.options.filter{path(@owner.labelPath).startsWith(@owner._typedValue)} || @owner.options"}
             }
         },
         "options": {
@@ -79,7 +79,8 @@
             "bindings": {
                 "option": {"<-": "@options:iteration.object"},
                 "selected": {"<->": "@owner._selectedOption"},
-                "valueToAdd": {"<->": "@owner._valueToAdd"}
+                "valueToAdd": {"<->": "@owner._valueToAdd"},
+                "labelPath": {"<-": "@owner.labelPath"}
             }
         },
         "valuesController": {
@@ -103,7 +104,8 @@
             },
             "bindings": {
                 "object": {"<-": "@values:iteration.object"},
-                "converter": {"<-": "@owner.converter"}
+                "converter": {"<-": "@owner.converter"},
+                "labelPath": {"<-": "@owner.labelPath"}
             }
         }
     }

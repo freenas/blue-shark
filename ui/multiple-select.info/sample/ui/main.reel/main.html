@@ -18,17 +18,18 @@
             "properties": {
                 "element": {"#": "default"},
                 "options": [
-                    {"label": "foo"},
-                    {"label": "aaoption2"},
-                    {"label": "aaaoption3"},
-                    {"label": "option4"},
-                    {"label": "option42"},
-                    {"label": "_option6"}
+                    {"name": "foo", "myProperty": "blah 1"},
+                    {"name": "aaoption2", "myProperty": "blah 2"},
+                    {"name": "aaaoption3", "myProperty": "blah 3"},
+                    {"name": "option4", "myProperty": "blah 4"},
+                    {"name": "option42", "myProperty": "blah 5"},
+                    {"name": "_option6", "myProperty": "blah 6"}
                 ],
                 "values": [
-                    {"label": "value1ThatisreallyLongandshouldcutoffatsomepoint"},
-                    {"label": "value2"}
-                ]
+                    {"name": "value1ThatisreallyLongandshouldcutoffatsomepoint", "myProperty": "Hello"},
+                    {"name": "value2", "myProperty": "world"}
+                ],
+                "labelPath": "name"
             },
             "bindings": {
                 "converter": {"<-": "@owner.fakeConverter"}
