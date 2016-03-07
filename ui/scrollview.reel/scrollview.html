@@ -34,6 +34,19 @@
             right: 4px;
             top: 4px;
         }
+        .ScrollviewSpacer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+        .ScrollviewFooterWrapper {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
     </style>
     <script type="text/montage-serialization">
     {
@@ -43,7 +56,9 @@
                 "contentWrapperElement": {"#": "contentWrapper"},
                 "contentElement": {"#": "content"},
                 "horizontalScrollbar": {"@": "horizontalScrollbar"},
-                "verticalScrollbar": {"@": "verticalScrollbar"}
+                "verticalScrollbar": {"@": "verticalScrollbar"},
+                "footerWrapperElement": {"#": "footerWrapper"},
+                "spacerElement": {"#": "spacer"}
             }
         },
         "horizontalScrollbar": {
@@ -78,13 +93,16 @@
 </head>
 <body>
     <div data-montage-id="owner" class="Scrollview">
-        <div data-montage-id="verticalScrollbar" class="ScrollviewVerticalScrollbar"></div>
-        <div data-montage-id="horizontalScrollbar" class="ScrollviewHorizontalScrollbar"></div>
-        <div data-montage-id="contentWrapper" class="ScrollviewContentWrapper">
-            <div data-montage-id="content" class="ScrollviewContent">
-                <div data-param="*"></div>
+        <div data-montage-id="spacer" class="ScrollviewSpacer">
+            <div data-montage-id="verticalScrollbar" class="ScrollviewVerticalScrollbar"></div>
+            <div data-montage-id="horizontalScrollbar" class="ScrollviewHorizontalScrollbar"></div>
+            <div data-montage-id="contentWrapper" class="ScrollviewContentWrapper">
+                <div data-montage-id="content" class="ScrollviewContent">
+                    <div data-param="*"></div>
+                </div>
             </div>
         </div>
+        <div data-montage-id="footerWrapper" class="ScrollviewFooterWrapper"></div>
     </div>
 </body>
 </html>

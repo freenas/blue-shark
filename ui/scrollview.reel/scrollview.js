@@ -144,7 +144,7 @@ var Scrollview = exports.Scrollview = Component.specialize({
                     Scrollview.transform = "transform";
                 }
             }
-
+            this._getFooter();
             window.addEventListener("resize", this, false);
             this._element.addEventListener("wheel", this, false);
         }
@@ -205,17 +205,50 @@ var Scrollview = exports.Scrollview = Component.specialize({
         value: 4
     },
 
+    _footerComponent: {
+        value: null
+    },
+
+    _getFooter: {
+        value: function () {
+            var self = this,
+                footerElement;
+
+            if (this.footerWrapperElement.children.length) {
+                footerElement = this.footerWrapperElement.children[0];
+            }
+            if (this.contentElement.children.length > 1) {
+                footerElement = this.contentElement.children[this.contentElement.children.length - 1];
+            }
+            if (footerElement) {
+                if (!this._footerComponent) {
+                    this._footerComponent = footerElement.component;
+                    if (this._footerComponent && !this._footerComponent.__oldWillDraw) {
+                        this._footerComponent.__oldWillDraw = this._footerComponent.willDraw;
+                        this._footerComponent.willDraw = function () {
+                            if (this.__oldWillDraw) this.__oldWillDraw();
+                            self._needsDeferredDraw = 2;
+                            self._needsUpdateScrollbars = true;
+                            self.needsDraw = true;
+                        }
+                    }
+                }
+                return footerElement;
+            } else {
+                return null;
+            }
+        }
+    },
+
     willDraw: {
         value: function () {
-            if (!this._needsUpdateScrollbars) {
-                var content = this.contentElement,
-                    wrapper = this.contentWrapperElement;
+            var content = this.contentElement,
+                wrapper = this.contentWrapperElement;
 
-                this._contentWidth = content.offsetWidth;
-                this._contentHeight = content.offsetHeight;
-                this._visibleWidth = wrapper.offsetWidth;
-                this._visibleHeight = wrapper.offsetHeight;
-            }
+            this._contentWidth = content.offsetWidth;
+            this._contentHeight = content.offsetHeight;
+            this._visibleWidth = wrapper.offsetWidth;
+            this._visibleHeight = wrapper.offsetHeight;
         }
     },
 
@@ -249,6 +282,21 @@ var Scrollview = exports.Scrollview = Component.specialize({
 
     draw: {
         value: function () {
+            var footer = this._getFooter();
+
+            if (footer) {
+                if (this._contentHeight > this._visibleHeight) {
+                    if (footer.parentNode !== this.footerWrapperElement) {
+                        this.footerWrapperElement.appendChild(footer);
+                    }
+                    this.spacerElement.style.bottom = footer.offsetHeight + "px";
+                } else {
+                    if (footer.parentNode === this.footerWrapperElement) {
+                        this.contentElement.appendChild(footer);
+                    }
+                    this.spacerElement.style.bottom = "0";
+                }
+            }
             if (this._needsDeferredDraw) {
                 this.needsDraw = true;
                 this._needsDeferredDraw--;

@@ -1,13 +1,5 @@
 .Scrollbar {
-    /*background-image: -webkit-gradient(
-        linear,
-        left top,
-        right top,
-        from(#151515),
-        to(#282828)
-    );*/
     border-radius: 9999px;
-    background-color: rgba(255,255,255,.1);
     z-index: 2;
 }
 
@@ -37,27 +29,5 @@
 }
 
 .ScrollbarHandle:active:before {
-    /*opacity: .7;*/
     background-color: #ccc;
-}
-
-.ScrollbarHorizontal {
-    background-color: rgba(255,255,255,.1);
-    /*background-image: -webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        from(#151515),
-        to(#282828)
-    );*/
-}
-
-.ScrollbarHorizontal .ScrollbarHandle:before {
-    /*background: -webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        from(#888),
-        to(#666)
-    );*/
 }
