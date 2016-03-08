@@ -171,9 +171,29 @@ var Scrollview = exports.Scrollview = Component.specialize({
             this.scrollLeft += event.deltaX;
             this.scrollTop += event.deltaY;
             event.preventDefault();
+
             if (this.scrollLeft !== previousScrollLeft || this.scrollTop !== previousScrollTop) {
+                this._isScrolling = true;
+                this._setScrolling();
                 event.stopPropagation();
             }
+        }
+    },
+
+    // fixme - look at Josh's ugly code :(
+
+    _isScrolling: {
+        value: false
+    },
+
+    _setScrolling: {
+        value: function () {
+            var self = this;
+            self.classList.toggle('is-scrolling');
+            setTimeout(function () {
+                self.classList.toggle('is-scrolling');
+                self._isScrolling = false;
+            }, 10)
         }
     },
 
@@ -202,7 +222,7 @@ var Scrollview = exports.Scrollview = Component.specialize({
     },
 
     _scrollbarPadding: {
-        value: 4
+        value: 2
     },
 
     _footerComponent: {
@@ -280,6 +300,31 @@ var Scrollview = exports.Scrollview = Component.specialize({
         }
     },
 
+    _handleScrolling: {
+        value: function () {
+
+        }
+    },
+
+    handleLength: {
+        get: function () {
+            return this._handleLength;
+        },
+        set: function (value) {
+            var self = this;
+
+            if (this._handleLength !== value) {
+                this._handleLength = value;
+                this.classList.add("isAnimating");
+                clearTimeout(this._animationTimeout);
+                this._animationTimeout = setTimeout(function () {
+                    self.classList.remove("isAnimating");
+                }, 330);
+                this.needsDraw = true;
+            }
+        }
+    },
+
     draw: {
         value: function () {
             var footer = this._getFooter();
@@ -311,7 +356,7 @@ var Scrollview = exports.Scrollview = Component.specialize({
                 }
                 if (this._needsUpdateScrollbars) {
                     if (this._hasVerticalScrollbar) {
-                        this.contentWrapperElement.style.right = this._scrollbarsSize + this._scrollbarPadding + "px";
+                        // this.contentWrapperElement.style.right = this._scrollbarsSize + this._scrollbarPadding + "px";
                         this.verticalScrollbar.element.style.width = this._scrollbarsSize + "px";
                         if (this._hasHorizontalScrollbar) {
                             this.verticalScrollbar.element.style.bottom = this._scrollbarsSize + this._scrollbarPadding + "px";

@@ -13,7 +13,15 @@
 }
 
 .Scrollbar.isAnimating .ScrollbarHandle {
-    -webkit-transition: opacity 300ms, width 200ms, height 200ms, -webkit-transform 200ms;
+    transition: width 200ms, height 200ms, transform 200ms;
+}
+
+/* animating size and position changes */
+
+.Scrollbar.isAnimating .ScrollbarHandle:before,
+.is-scrolling .ScrollbarHandle:before {
+    opacity: 1;
+    transition: opacity .2s;
 }
 
 .ScrollbarHandle:before {
@@ -24,8 +32,10 @@
     right: 0;
     bottom: 0;
     border-radius: 9999px;
-    box-shadow: inset 0 0 1px rgba(255, 255, 255, .4);
     background-color: #aaa;
+    border: 1px solid #1A1A1A;
+    opacity: 0;
+    transition: opacity .5s 1.5s;
 }
 
 .ScrollbarHandle:active:before {
