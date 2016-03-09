@@ -16,7 +16,7 @@ exports.Main = Component.specialize(/** @lends Main# */ {
 
     fakeConverter: {
         value: {
-            convert: function(value) {
+            revert: function(value) {
                 value.label = value.label.toUpperCase();
                 return value;
             },
