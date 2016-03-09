@@ -37,9 +37,7 @@ exports.MultipleSelectValue = Component.specialize(/** @lends MultipleSelectValu
 
     handleSaveKeyPress: {
         value: function() {
-            var value = {
-                    label: this.valueField.value
-                },
+            var value = this.valueField.value,
                 isValid = true;
             if (this.converter) {
                 if (this.converter.validator && typeof this.converter.validator.validate === 'function') {
