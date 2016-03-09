@@ -47,8 +47,8 @@ exports.MultipleSelectValue = Component.specialize(/** @lends MultipleSelectValu
                 }
                 if (isValid) {
                     this._inputError = false;
-                    if (typeof this.converter.convert === 'function') {
-                        value = this.converter.convert(value);
+                    if (typeof this.converter.revert === 'function') {
+                        value = this.converter.revert(value);
                     }
                 } else {
                     this._inputError = true;
