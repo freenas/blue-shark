@@ -45,7 +45,7 @@
     outline: 0;
 }
 
-.blueShark-Button + .blueShark-Button {
+.Button-group .blueShark-Button + .blueShark-Button {
     margin-left: .5em;
 }
 
