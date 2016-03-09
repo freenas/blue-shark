@@ -167,11 +167,7 @@ exports.MultipleSelect = Component.specialize(/** @lends MultipleSelect# */ {
     _addValueToContent: {
         value: function(value) {
             var isValid = true;
-            if (typeof value === 'string') {
-                value = {
-                    label: value
-                };
-            }
+
             if (this.converter) {
                 if (this.converter.validator && typeof this.converter.validator.validate === 'function') {
                     isValid = this.converter.validator.validate(value);
