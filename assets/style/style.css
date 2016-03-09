@@ -78,6 +78,8 @@ $Icons
     -moz-osx-font-smoothing: grayscale;
 }
 
+/* $fix - these will be removed */
+
 .sharedIcon-checkmark:before {
     content: "\63";
 }

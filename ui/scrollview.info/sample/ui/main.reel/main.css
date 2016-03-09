@@ -45,6 +45,8 @@ body {
     margin-left: 1em;
     position: relative;
     outline: 1px solid #fff;
+    display: flex;
+    flex-direction: column;
 }
 
 /* End Setup Code */

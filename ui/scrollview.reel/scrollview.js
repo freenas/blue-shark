@@ -173,27 +173,23 @@ var Scrollview = exports.Scrollview = Component.specialize({
             event.preventDefault();
 
             if (this.scrollLeft !== previousScrollLeft || this.scrollTop !== previousScrollTop) {
-                this._isScrolling = true;
                 this._setScrolling();
                 event.stopPropagation();
             }
         }
     },
 
-    // fixme - look at Josh's ugly code :(
-
-    _isScrolling: {
-        value: false
-    },
-
     _setScrolling: {
         value: function () {
             var self = this;
-            self.classList.toggle('is-scrolling');
-            setTimeout(function () {
-                self.classList.toggle('is-scrolling');
-                self._isScrolling = false;
-            }, 10)
+            if (this.scrollTimeout) {
+                clearTimeout(this.scrollTimeout);
+                delete this.scrollTimeout;
+            }
+            self.classList.add('is-scrolling');
+            this.scrollTimeout = setTimeout(function () {
+                self.classList.remove('is-scrolling');
+            }, 250);
         }
     },
 

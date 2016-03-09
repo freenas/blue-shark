@@ -33,10 +33,6 @@
     overflow: hidden;
 }
 
-.Select-option.selected {
-    order: -1;
-}
-
 /* arrow icon */
 
 .Select-currentOption:after {
@@ -107,4 +103,5 @@
 .Select-option.selected {
     background: #0095d5;
     cursor: default;
+    order: -1;
 }

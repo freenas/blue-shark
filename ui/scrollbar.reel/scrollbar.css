@@ -35,7 +35,7 @@
     background-color: #aaa;
     border: 1px solid #1A1A1A;
     opacity: 0;
-    transition: opacity .5s 1.5s;
+    transition: opacity .5s 1s;
 }
 
 .ScrollbarHandle:active:before {
