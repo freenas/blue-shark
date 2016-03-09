@@ -10,5 +10,9 @@ var Field = require("../field.reel/field").Field;
 exports.FieldTextInput = Field.specialize({
     hasTemplate: {
         value: true
+    },
+
+    enabled: {
+        value: true
     }
 });

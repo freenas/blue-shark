@@ -11,12 +11,21 @@
                 "myFoo": true
             }
         },
-        "fieldTextInput": {
+        "default": {
             "prototype": "blue-shark/ui/field-text-input.reel",
             "properties": {
-                "element": {"#": "fieldTextInput"},
-                "label": "test label",
-                "placeholderValue": "test value"
+                "element": {"#": "default"},
+                "label": "test",
+                "placeholderValue": "should be test"
+            }
+        },
+        "disabled": {
+            "prototype": "blue-shark/ui/field-text-input.reel",
+            "properties": {
+                "element": {"#": "disabled"},
+                "label": "test",
+                "placeholderValue": "should be test",
+                "enabled": false
             }
         }
     }
@@ -26,8 +35,8 @@
     <div data-montage-id="owner" class="Main">
         <div class="container">
             <h1>Field Text Input</h1>
-            <h3>Default</h3>
-            <div data-montage-id="fieldTextInput"></div>
+            <div data-montage-id="default"></div>
+            <div data-montage-id="disabled"></div>
         </div>
     </div>
 </body>
