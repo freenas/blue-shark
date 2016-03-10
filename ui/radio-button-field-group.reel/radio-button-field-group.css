@@ -1,6 +1,4 @@
-.RadioButtonFieldGroup {
-    margin-top: -1em;
-}
+.RadioButtonFieldGroup {}
 
 .RadioButtonFieldGroup.RadioButtonFieldGroup--block {
     margin-top: 0;

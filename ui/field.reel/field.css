@@ -1,9 +1,11 @@
 .Field {
     box-sizing: border-box;
+    align-items: flex-start;
     display: flex;
-    padding: 0 1em;
-    margin-bottom: 1em;
-    margin-top: -.5em;
+    margin-bottom: 2em;
+    /*margin-top: -.5em;*/
+    /*outline: 1px solid red;*/
+    min-height: 2em;
 }
 
 .Field + .Field {
@@ -13,16 +15,16 @@
 .Field > * {
     font-family: "Lato";
     font-size: 1em;
-    margin-top: .5em;
 }
 
 /* Title */
 
 .Field-title {
     flex: 0;
-    line-height: 1.5em;
-    flex-basis: 4em;
-    margin-right: 3.5em;
+    line-height: 1.25em;
+    flex-basis: 8em;
+    margin-right: 1.5em;
+    margin-top: .3em;
 }
 
 /* Control */
@@ -45,9 +47,10 @@
 /* Icon Background */
 
 .Field-info {
-    margin-top: -.15em;
+    margin-top: -.08em;
     position: absolute;
     font-size: 1.5em;
+    top: 0;
     width:  1em;
     height: 1em;
     right: -2em;
