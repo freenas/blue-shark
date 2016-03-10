@@ -73,8 +73,9 @@
     top:    0px;
     left:   0;
     right:  1px;
+    max-height: 9em;
     background: rgba(90, 90, 90, 1);
-    overflow: hidden;
+    overflow: auto;
     border-radius: 3px;
     box-shadow: 0 0 6px rgba(0, 0, 0, .5);
     cursor: pointer;
