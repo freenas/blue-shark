@@ -22,7 +22,7 @@
 .blueShark-TextField:focus { border: 1px solid #2B9CD8; }
 
 .blueShark-TextField.montage--disabled {
-    background: none;
+    background: rgba(0, 0, 0, .1);
     border-color: transparent;
     opacity: .5;
 }
