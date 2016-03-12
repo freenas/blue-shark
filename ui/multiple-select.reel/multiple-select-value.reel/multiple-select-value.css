@@ -81,3 +81,17 @@
     background: red;
     z-index: -1;
 }
+
+/* $fix - Temporary Styles ---------------------------------- */
+
+.MultipleSelect-values:empty {
+    min-height: 4em;
+}
+
+.MultipleSelect-values:empty:before {
+    content: 'no items have been added';
+    color: #aaa;
+    padding: .4em;
+    font-size: .8em;
+    font-style: italic;
+}

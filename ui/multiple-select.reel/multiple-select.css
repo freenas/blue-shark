@@ -36,7 +36,7 @@
     top: 2em;
     left: 0;
     right: 0;
-    max-height: 8.5em;
+    height: 8.5em;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
     color: #333;
@@ -46,7 +46,6 @@
     box-shadow: 0 2px 4px rgba(0,0,0,.3);
     z-index: 100;
     overflow-x: hidden;
-    overflow-y: scroll;
     visibility: hidden;
     opacity: 0;
     transition-property: visibility, opacity;
@@ -70,10 +69,10 @@
     transition-duration: .2s;
 }
 
-.MultipleSelect-values {
+.MultipleSelect-valuesContainer {
     box-sizing: border-box;
     color: #FFF;
-    max-height: 8em;
+    height: 7.25em;
     padding: .25em;
     width: 100%;
     background: rgba(0, 0, 0, .25);
@@ -81,7 +80,7 @@
     border: 1px solid transparent;
     border-top: 1px solid rgba(0, 0, 0, .23);
     border-bottom: 1px solid rgba(255, 255, 255, .15);
-    overflow: scroll;
+    /*overflow: scroll;*/
 }
 
 /*
