@@ -32,7 +32,8 @@
 }
 
 .MultipleSelect-input-options {
-    position: absolute;
+    /* Fix - should I have to do this? */
+    position: absolute !Important;
     top: 2em;
     left: 0;
     right: 0;
