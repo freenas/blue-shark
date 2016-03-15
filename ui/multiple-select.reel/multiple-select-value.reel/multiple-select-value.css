@@ -22,7 +22,9 @@
     cursor: pointer;
 }
 
-.MultipleSelectValue-label.blueShark-TextField:hover { background: rgba(255,255,255,.1); }
+.MultipleSelectValue-label.blueShark-TextField:hover {
+    background: rgba(255,255,255,.1);
+}
 
 .MultipleSelectValue-label.blueShark-TextField:focus {
     cursor: text;
@@ -85,13 +87,45 @@
 /* $fix - Temporary Styles ---------------------------------- */
 
 .MultipleSelect-values:empty {
-    min-height: 4em;
+    display: none;
+    /*min-height: 4em;*/
 }
 
+/*
 .MultipleSelect-values:empty:before {
     content: 'no items have been added';
     color: #aaa;
     padding: .4em;
     font-size: .8em;
     font-style: italic;
+}
+*/
+
+.MultipleSelectValue-handler {
+    cursor: move;
+    padding: 0 0.5em;
+    margin: 1px 0;
+    background: rgba(255,255,255,.1);
+    display: none;
+}
+
+.MultipleSelectValue.draggable .MultipleSelectValue-handler {
+    display: block;
+}
+
+
+.MultipleSelectValue.dragged {
+    opacity: 0.5;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.MultipleSelectValue.dragOver {
+    border-top: solid 3px rgba(255,255,255,.1);
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }

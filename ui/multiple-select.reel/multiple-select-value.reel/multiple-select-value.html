@@ -11,7 +11,8 @@
                 "valueField": {"@": "value"}
             },
             "bindings": {
-                "classList.has('has-error')": {"<-": "@owner._inputError"}
+                "classList.has('has-error')": {"<-": "@owner._inputError"},
+                "classList.has('draggable')": {"<-": "@owner.draggable"}
             },
             "listeners": [
                 {
@@ -47,6 +48,7 @@
 </head>
 <body>
     <div data-montage-id="owner" class="MultipleSelectValue">
+        <div class="MultipleSelectValue-handler"></div>
         <div data-montage-id="label" class="MultipleSelectValue-label" tabindex="-1"></div>
         <svg data-montage-id="deleteButton" class="MultipleSelectValue-delete">
             <use xlink:href="#i-plus"/>

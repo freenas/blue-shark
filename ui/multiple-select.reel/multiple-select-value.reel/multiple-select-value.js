@@ -26,6 +26,12 @@ exports.MultipleSelectValue = Component.specialize(/** @lends MultipleSelectValu
             };
             KeyComposer.createKey(this.valueField, "escape", "undo").addEventListener("keyPress", this);
             KeyComposer.createKey(this.valueField, "enter", "save").addEventListener("keyPress", this);
+            this.element.addEventListener("dragstart", this);
+            this.element.addEventListener("dragend", this);
+            this.element.addEventListener("dragenter", this);
+            this.element.addEventListener("dragover", this);
+            this.element.addEventListener("dragleave", this);
+            this.element.addEventListener("drop", this);
         }
     },
 
@@ -63,6 +69,52 @@ exports.MultipleSelectValue = Component.specialize(/** @lends MultipleSelectValu
         value: function() {
             this.valueField.element.blur();
             this.valueField.value = this.object.label;
+        }
+    },
+
+    handleDragstart: {
+        value: function(event) {
+            event.dataTransfer.effectAllowed = 'move';
+            event.dataTransfer.setData('text/plain', this.index);
+            this.element.classList.add('dragged');
+        }
+    },
+
+    handleDragend: {
+        value: function(event) {
+            this.element.classList.remove('dragged');
+            this.element.classList.remove('dragOver');
+        }
+    },
+
+    handleDragenter: {
+        value: function(event) {
+            this.element.classList.add('dragOver');
+        }
+    },
+
+    handleDragover: {
+        value: function(event) {
+            if (event.preventDefault) {
+                event.preventDefault();
+            }
+        }
+    },
+
+    handleDragleave: {
+        value: function(event) {
+            this.element.classList.remove('dragOver');
+        }
+    },
+
+    handleDrop: {
+        value: function(event) {
+            this.element.classList.remove('dragged');
+            this.element.classList.remove('dragOver');
+            var draggedIndex = parseInt(event.dataTransfer.getData('text/plain'));
+            var draggedObject = this.contentController.content[draggedIndex];
+            this.contentController.swap(draggedIndex, 1);
+            this.contentController.swap(this.index, 0, [draggedObject]);
         }
     }
 });

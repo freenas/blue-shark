@@ -104,8 +104,10 @@
             },
             "bindings": {
                 "object": {"<-": "@values:iteration.object"},
+                "index": {"<-": "@values:iteration.index"},
                 "converter": {"<-": "@owner.converter"},
-                "labelPath": {"<-": "@owner.labelPath"}
+                "labelPath": {"<-": "@owner.labelPath"},
+                "draggable": {"<-": "@owner.draggable"}
             }
         },
         "inputScroll": {
@@ -120,6 +122,9 @@
             "properties": {
                 "element": {"#": "valuesScroll"},
                 "overflow": "scrollY"
+            },
+            "bindings": {
+                "classList.has('is-empty')": {"<-": "@owner.values.length == 0"}
             }
         }
     }
