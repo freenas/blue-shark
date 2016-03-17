@@ -141,23 +141,33 @@ var Scrollview = exports.Scrollview = Component.specialize({
     },
 
     enterDocument: {
-        value: function () {
-            if (!Scrollview.transform) {
-                if("webkitTransform" in this.element.style) {
-                    Scrollview.transform = "webkitTransform";
-                } else if("MozTransform" in this.element.style) {
-                    Scrollview.transform = "MozTransform";
-                } else if("msTransform" in this.element.style) {
-                    Scrollview.transform = "msTransform";
-                } else if("OTransform" in this.element.style) {
-                    Scrollview.transform = "OTransform";
-                } else {
-                    Scrollview.transform = "transform";
+        value: function (firstTime) {
+            if (firstTime) {
+                if (!Scrollview.transform) {
+                    if("webkitTransform" in this.element.style) {
+                        Scrollview.transform = "webkitTransform";
+                    } else if("MozTransform" in this.element.style) {
+                        Scrollview.transform = "MozTransform";
+                    } else if("msTransform" in this.element.style) {
+                        Scrollview.transform = "msTransform";
+                    } else if("OTransform" in this.element.style) {
+                        Scrollview.transform = "OTransform";
+                    } else {
+                        Scrollview.transform = "transform";
+                    }
                 }
+
+                this._mutationObserver = new MutationObserver(this.handleMutations.bind(this));
             }
+
             this._getFooter();
             window.addEventListener("resize", this, false);
             this._element.addEventListener("wheel", this, false);
+
+            this._mutationObserver.observe(this.element, {
+                subtree: true,
+                childList: true
+            });
         }
     },
 
@@ -165,6 +175,8 @@ var Scrollview = exports.Scrollview = Component.specialize({
         value: function () {
             window.removeEventListener("resize", this, false);
             this._element.removeEventListener("wheel", this, false);
+
+            this._mutationObserver.disconnect();
         }
     },
 
@@ -254,7 +266,6 @@ var Scrollview = exports.Scrollview = Component.specialize({
                         this._footerComponent.__oldWillDraw = this._footerComponent.willDraw;
                         this._footerComponent.willDraw = function () {
                             if (this.__oldWillDraw) this.__oldWillDraw();
-                            self._needsDeferredDraw = 2;
                             self._needsUpdateScrollbars = true;
                             self.needsDraw = true;
                         }
@@ -279,37 +290,21 @@ var Scrollview = exports.Scrollview = Component.specialize({
         }
     },
 
-    _needsDeferredDraw: {
-        value: 0
-    },
-
-    needsDeferredDraw: {
-        set: function (value) {
-            if (value) {
-                // FIXME: 5 is a magical number of redraws,
-                // we should listen to content changes in a better way
-                this._needsDeferredDraw = 5;
-                this.needsDraw = true;
-            }
-        }
-    },
-
-    drawAfterDelay: {
+    _drawAfterDelay: {
         value: function (miliseconds) {
             var self = this;
 
             if (!miliseconds) {
                 miliseconds = 450;
             }
-            setTimeout(function () {
+
+            if (this.__drawAfterDelayTiemout) {
+                clearTimeout(this.__drawAfterDelayTiemout);
+            }
+
+            this.__drawAfterDelayTiemout = setTimeout(function () {
                 self.needsDraw = true;
             }, miliseconds);
-        }
-    },
-
-    _handleScrolling: {
-        value: function () {
-
         }
     },
 
@@ -349,57 +344,59 @@ var Scrollview = exports.Scrollview = Component.specialize({
                     this.spacerElement.style.bottom = "0";
                 }
             }
-            if (this._needsDeferredDraw) {
-                this.needsDraw = true;
-                this._needsDeferredDraw--;
-            } else {
-                this._maxScrollLeft = Math.max(0, this._contentWidth - this._visibleWidth);
-                this._maxScrollTop = Math.max(0, this._contentHeight - this._visibleHeight);
-                if (this.scrollLeft > this._maxScrollLeft) {
-                    this.scrollLeft = this._maxScrollLeft;
-                }
-                if (this.scrollTop > this._maxScrollTop) {
-                    this.scrollTop = this._maxScrollTop;
-                }
-                if (this._needsUpdateScrollbars) {
-                    if (this._hasVerticalScrollbar) {
-                        // this.contentWrapperElement.style.right = this._scrollbarsSize + this._scrollbarPadding + "px";
-                        this.verticalScrollbar.element.style.width = this._scrollbarsSize + "px";
-                        if (this._hasHorizontalScrollbar) {
-                            this.verticalScrollbar.element.style.bottom = this._scrollbarsSize + this._scrollbarPadding + "px";
-                        } else {
-                            this.verticalScrollbar.element.style.bottom = this._scrollbarPadding + "px";
-                        }
-                        this.verticalScrollbar.element.style.display = "block";
-                        this.verticalScrollbar.needsDraw = true;
-                    } else {
-                        this.contentWrapperElement.style.right = "0";
-                        this.verticalScrollbar.element.style.display = "none";
-                    }
+
+            this._maxScrollLeft = Math.max(0, this._contentWidth - this._visibleWidth);
+            this._maxScrollTop = Math.max(0, this._contentHeight - this._visibleHeight);
+
+            if (this.scrollLeft > this._maxScrollLeft) {
+                this.scrollLeft = this._maxScrollLeft;
+            }
+
+            if (this.scrollTop > this._maxScrollTop) {
+                this.scrollTop = this._maxScrollTop;
+            }
+
+            if (this._needsUpdateScrollbars) {
+                if (this._hasVerticalScrollbar) {
+                    // this.contentWrapperElement.style.right = this._scrollbarsSize + this._scrollbarPadding + "px";
+                    this.verticalScrollbar.element.style.width = this._scrollbarsSize + "px";
                     if (this._hasHorizontalScrollbar) {
-                        this.contentWrapperElement.style.bottom = this._scrollbarsSize + this._scrollbarPadding + "px";
-                        this.horizontalScrollbar.element.style.height = this._scrollbarsSize + "px";
-                        if (this._hasVerticalScrollbar) {
-                            this.horizontalScrollbar.element.style.right = this._scrollbarsSize + this._scrollbarPadding + "px";
-                        } else {
-                            this.horizontalScrollbar.element.style.right = this._scrollbarPadding + "px";
-                        }
-                        this.horizontalScrollbar.element.style.display = "block";
-                        this.horizontalScrollbar.needsDraw = true;
+                        this.verticalScrollbar.element.style.bottom = this._scrollbarsSize + this._scrollbarPadding + "px";
                     } else {
-                        this.contentWrapperElement.style.bottom = "0";
-                        this.horizontalScrollbar.element.style.display = "none";
+                        this.verticalScrollbar.element.style.bottom = this._scrollbarPadding + "px";
                     }
-                    this._needsUpdateScrollbars = false;
-                    this.needsDraw = true;
+                    this.verticalScrollbar.element.style.display = "block";
+                    this.verticalScrollbar.needsDraw = true;
                 } else {
-                    if (this._needsUpdateScroll) {
-                        this.contentElement.style[Scrollview.transform] = "translate3d(" + (-this._scrollLeft) + "px," + (-this._scrollTop) + "px,0)";
-                        this._needsUpdateScroll = false;
+                    this.contentWrapperElement.style.right = "0";
+                    this.verticalScrollbar.element.style.display = "none";
+                }
+                if (this._hasHorizontalScrollbar) {
+                    this.contentWrapperElement.style.bottom = this._scrollbarsSize + this._scrollbarPadding + "px";
+                    this.horizontalScrollbar.element.style.height = this._scrollbarsSize + "px";
+                    if (this._hasVerticalScrollbar) {
+                        this.horizontalScrollbar.element.style.right = this._scrollbarsSize + this._scrollbarPadding + "px";
+                    } else {
+                        this.horizontalScrollbar.element.style.right = this._scrollbarPadding + "px";
                     }
+                    this.horizontalScrollbar.element.style.display = "block";
+                    this.horizontalScrollbar.needsDraw = true;
+                } else {
+                    this.contentWrapperElement.style.bottom = "0";
+                    this.horizontalScrollbar.element.style.display = "none";
+                }
+                this._needsUpdateScrollbars = false;
+                this.needsDraw = true;
+            } else {
+                if (this._needsUpdateScroll) {
+                    this.contentElement.style[Scrollview.transform] = "translate3d(" + (-this._scrollLeft) + "px," + (-this._scrollTop) + "px,0)";
+                    this._needsUpdateScroll = false;
                 }
             }
         }
     }
 
 });
+
+
+Scrollview.prototype.handleMutations = Scrollview.prototype.handleResize;
