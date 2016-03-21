@@ -37,10 +37,10 @@
         "input": {
             "prototype": "ui/text-field.reel",
             "properties": {
-                "element": {"#": "input"},
-                "placeholderValue": "enter input"
+                "element": {"#": "input"}
             },
             "bindings": {
+                "placeholderValue": {"<-": "@owner.placeholderValue"},
                 "classList.has('has-options')": {"<-": "!!@owner.options && @owner.options.length > 0"}
             }
         },
