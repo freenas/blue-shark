@@ -42,6 +42,7 @@
     cursor: pointer;
     border-radius: 50%;
     outline: none;
+    margin-right: .25em;
 }
 
 .MultipleSelectValue-delete:hover {
