@@ -7,7 +7,9 @@
     {
         "owner": {
             "properties": {
-                "element": {"#": "owner"}
+                "element": {"#": "owner"},
+                "optionsElement": {"@": "options"},
+                "scrollView": {"@": "scrollView"}
             }
         },
         "selected": {
@@ -45,6 +47,13 @@
                 "iteration.selected": {"<->": "@owner._selectedValue == iteration.object.value"},
                 "value": {"<-": "iteration.object.label"}
             }
+        },
+        "scrollView": {
+            "prototype": "ui/scrollview.reel",
+            "properties": {
+                "element": {"#": "scrollView"},
+                "overflow": "scrollY"
+            }
         }
     }
     </script>
@@ -52,8 +61,10 @@
 <body>
     <div data-montage-id="owner" class="Select">
         <button data-montage-id="selected" class="Select-currentOption"></button>
-        <div data-montage-id="options" class="Select-options">
-            <div data-montage-id="option" class="Select-option"></div>
+        <div data-montage-id="scrollView" class="Select-options-scrollview">
+            <div data-montage-id="options" class="Select-options">
+                <div data-montage-id="option" class="Select-option"></div>
+            </div>
         </div>
     </div>
 </body>
