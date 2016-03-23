@@ -13,8 +13,9 @@
                 "_optionsList": {"@": "options"}
             },
             "bindings": {
-                "_typedValue": {"<-": "!@owner._isScrollingOptions ? @input.value : @owner._typedValue"},
-                "_filterOptions": {"<-": "!!@owner._typedValue"}
+                "_inputErrorMessage": {"<-": "@owner.inputErrorMessage || 'The input is invalid'"},
+                "_optionsPrefix": {"<-": "@owner._typedValue || @input.value || ''"},
+                "_inputError": {"<-": "!!@owner.invalidValue && @owner.invalidValue == @input.value"}
             },
             "listeners": [
                 {
@@ -31,7 +32,7 @@
             },
             "bindings": {
                 "classList.has('has-value')": {"<-": "@input.value"},
-                "classList.has('has-error')": {"<-": "!!@owner._inputError"}
+                "classList.has('has-error')": {"<-": "@owner._inputError"}
             }
         },
         "input": {
@@ -47,8 +48,10 @@
         "inputErrorMessage": {
             "prototype": "montage/ui/text.reel",
             "properties": {
-                "element": {"#": "inputErrorMessage"},
-                "value": "The input is invalid"
+                "element": {"#": "inputErrorMessage"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner._inputErrorMessage"}
             }
         },
         "clearButton": {
@@ -60,7 +63,7 @@
         "optionsController": {
             "prototype": "montage/core/range-controller",
             "bindings": {
-                "content": {"<-": "@owner._filterOptions && @owner.options.filter{path(@owner.labelPath).startsWith(@owner._typedValue)} || @owner.options"}
+                "content": {"<-": "@owner.options.filter{path(@owner.labelPath).startsWith(@owner._optionsPrefix)}"}
             }
         },
         "options": {
@@ -107,7 +110,8 @@
                 "index": {"<-": "@values:iteration.index"},
                 "converter": {"<-": "@owner.converter"},
                 "labelPath": {"<-": "@owner.labelPath"},
-                "draggable": {"<-": "@owner.draggable"}
+                "draggable": {"<-": "@owner.draggable"},
+                "errorMessage": {"<-": "@owner.valueErrorMessage || @owner._inputErrorMessage"}
             }
         },
         "inputScroll": {
@@ -115,6 +119,9 @@
             "properties": {
                 "element": {"#": "inputScroll"},
                 "overflow": "scrollY"
+            },
+            "bindings": {
+                "classList.has('has-content')": {"<-": "@optionsController.content.length > 0"}
             }
         },
         "valuesScroll": {

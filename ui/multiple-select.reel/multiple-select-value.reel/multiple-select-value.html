@@ -11,6 +11,7 @@
                 "valueField": {"@": "value"}
             },
             "bindings": {
+                "_inputError": {"<-": "!!@owner.invalidValue && @owner.invalidValue == @value.value"},
                 "classList.has('has-error')": {"<-": "@owner._inputError"},
                 "classList.has('draggable')": {"<-": "@owner.draggable"}
             },
@@ -39,8 +40,10 @@
         "errorMessage": {
             "prototype": "montage/ui/text.reel",
             "properties": {
-                "element": {"#": "errorMessage"},
-                "value": "This is the error message that if it is really long should wrap"
+                "element": {"#": "errorMessage"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner.errorMessage"}
             }
         }
     }

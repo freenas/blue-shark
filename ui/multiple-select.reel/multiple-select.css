@@ -111,7 +111,7 @@ States
 
 */
 
-.MultipleSelect-input-field.has-options:focus + .MultipleSelect-input-options,
+.MultipleSelect-input-field.has-options:focus + .MultipleSelect-input-options.has-content,
 .MultipleSelect-input-options:active,
 .MultipleSelect-input.has-value .MultipleSelect-input-clearButton,
 .MultipleSelect-input.has-error .MultipleSelect-input-error {

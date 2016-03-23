@@ -21,11 +21,27 @@ exports.MultipleSelect = Component.specialize(/** @lends MultipleSelect# */ {
         value: null
     },
 
-    _inputError: {
+    __inputError: {
         value: null
     },
 
+    _inputError: {
+        get: function() {
+            return this.__inputError;
+        },
+        set: function(inputError) {
+            if (!inputError) {
+                this.invalidValue = null;
+            }
+            this.__inputError = inputError;
+        }
+    },
+
     __selectedOption: {
+        value: null
+    },
+
+    invalidValue: {
         value: null
     },
 
@@ -47,7 +63,7 @@ exports.MultipleSelect = Component.specialize(/** @lends MultipleSelect# */ {
         },
         set: function(value) {
             if (value) {
-                this._addValueToContent(value);
+                this._addValueToContent(value, true);
                 this._clearInput();
                 this._stopScrollingOptions();
             }
@@ -96,6 +112,9 @@ exports.MultipleSelect = Component.specialize(/** @lends MultipleSelect# */ {
                     this._blurInputField();
                     this._clearInput();
                 }
+            } else {
+                this._valueToAdd = this._selectedOption;
+                this._blurInputField();
             }
         }
     },
@@ -126,7 +145,9 @@ exports.MultipleSelect = Component.specialize(/** @lends MultipleSelect# */ {
 
     _selectOption: {
         value: function (option) {
-            this._isScrollingOptions = true;
+            if (!this._typedValue) {
+                this._typedValue = this._inputField.value;
+            }
             this._optionsController.select(option);
             this._inputField.value = this._optionsController.selection[0].label;
             this._selectedOption = option;
@@ -137,7 +158,8 @@ exports.MultipleSelect = Component.specialize(/** @lends MultipleSelect# */ {
         value: function () {
             this._optionsController.clearSelection();
             this._selectedOption = null;
-            this._isScrollingOptions = false;
+            this._inputField.value = this._typedValue;
+            this._typedValue = null;
         }
     },
 
@@ -160,12 +182,13 @@ exports.MultipleSelect = Component.specialize(/** @lends MultipleSelect# */ {
 
     _clearInput: {
         value: function() {
+            this._typedValue = null;
             this._inputField.value = null;
         }
     },
 
     _addValueToContent: {
-        value: function(value) {
+        value: function(value, isFromOptions) {
             var isValid = true;
 
             if (this.converter) {
@@ -173,12 +196,14 @@ exports.MultipleSelect = Component.specialize(/** @lends MultipleSelect# */ {
                     isValid = this.converter.validator.validate(value);
                 }
                 if (isValid) {
-                    this._inputError = false;
-                    if (typeof this.converter.revert === 'function') {
-                        value = this.converter.revert(value);
+                    this.invalidValue = null;
+                    if (!isFromOptions) {
+                        if (typeof this.converter.revert === 'function') {
+                            value = this.converter.revert(value);
+                        }
                     }
                 } else {
-                    this._inputError = true;
+                    this.invalidValue = value;
                 }
             }
             if (isValid) {

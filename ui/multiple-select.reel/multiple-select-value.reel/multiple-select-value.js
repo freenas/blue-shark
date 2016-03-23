@@ -17,6 +17,10 @@ exports.MultipleSelectValue = Component.specialize(/** @lends MultipleSelectValu
         value: null
     },
 
+    invalidValue: {
+        value: null
+    },
+
     prepareForActivationEvents: {
         value: function() {
             this.valueField.delegate = {
@@ -50,12 +54,12 @@ exports.MultipleSelectValue = Component.specialize(/** @lends MultipleSelectValu
                     isValid = this.converter.validator.validate(value);
                 }
                 if (isValid) {
-                    this._inputError = false;
+                    this.invalidValue = null;
                     if (typeof this.converter.revert === 'function') {
                         value = this.converter.revert(value);
                     }
                 } else {
-                    this._inputError = true;
+                    this.invalidValue = value;
                 }
             }
             if (isValid) {
