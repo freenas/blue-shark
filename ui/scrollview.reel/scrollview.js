@@ -193,7 +193,8 @@ var Scrollview = exports.Scrollview = Component.specialize({
 
             this.scrollLeft += event.deltaX;
             this.scrollTop += event.deltaY;
-            event.preventDefault();
+            // event.preventDefault();
+            event.stopPropagation();
 
             if (this.scrollLeft !== previousScrollLeft || this.scrollTop !== previousScrollTop) {
                 this._setScrolling();
