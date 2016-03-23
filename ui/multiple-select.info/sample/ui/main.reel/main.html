@@ -26,15 +26,12 @@
                     {"name": "_option6", "myProperty": "blah 6"}
                 ],
                 "values": [
-                    {"name": "value1ThatisreallyLongandshouldcutoffatsomepoint", "myProperty": "Hello"},
-                    {"name": "value2", "myProperty": "world"},
-                    {"name": "value3", "myProperty": "state"},
-                    {"name": "value4", "myProperty": "city"},
-                    {"name": "value5", "myProperty": "region"}
                 ],
                 "labelPath": "name",
                 "draggable": "true",
-                "placeholderValue": "enter info here"
+                "placeholderValue": "enter info here",
+                "inputErrorMessage": "This is my custom error message",
+                "valueErrorMessage": "This is an error message for values edition"
             },
             "bindings": {
                 "converter": {"<-": "@owner.fakeConverter"}

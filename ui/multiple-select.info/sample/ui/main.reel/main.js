@@ -17,12 +17,19 @@ exports.Main = Component.specialize(/** @lends Main# */ {
     fakeConverter: {
         value: {
             revert: function(value) {
-                value.name = value.name.toUpperCase();
-                return value;
+                console.log('revert');
+                var result = {
+                    name: value.toUpperCase()
+                };
+                return result;
             },
             validator: {
                 validate: function(value) {
-                    return value.name.indexOf("INVALID") == -1;
+                    var isValid = true;
+                    if (typeof value === 'string') {
+                        isValid = value.indexOf("INVALID") == -1;
+                    }
+                    return isValid;
                 }
             }
         }
