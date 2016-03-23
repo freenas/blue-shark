@@ -102,16 +102,15 @@ var Scrollview = exports.Scrollview = Component.specialize({
         },
         set: function (value) {
             value = Math.max(0, value | 0);
+
             if (value > this._maxScrollTop) {
                 value = this._maxScrollTop;
             }
+
             if (this._scrollTop !== value) {
                 this._scrollTop = value;
                 this._needsUpdateScroll = true;
                 this.needsDraw = true;
-                if (this.application && this.application.contextualMenu) {
-                    this.application.contextualMenu.hide();
-                }
             }
         }
     },
@@ -133,9 +132,6 @@ var Scrollview = exports.Scrollview = Component.specialize({
                 this._scrollLeft = value;
                 this._needsUpdateScroll = true;
                 this.needsDraw = true;
-                if (this.application && this.application.contextualMenu) {
-                    this.application.contextualMenu.hide();
-                }
             }
         }
     },
@@ -163,10 +159,18 @@ var Scrollview = exports.Scrollview = Component.specialize({
             this._getFooter();
             window.addEventListener("resize", this, false);
             this._element.addEventListener("wheel", this, false);
+            this._element.addEventListener("transitionend", this, false);
+
+            if (typeof WebKitAnimationEvent !== "undefined") {
+                this._element.addEventListener("webkitAnimationEnd", this, false);
+            } else {
+                this._element.addEventListener("animationend", this, false);
+            }
 
             this._mutationObserver.observe(this.element, {
                 subtree: true,
-                childList: true
+                childList: true,
+                attributes: true
             });
         }
     },
@@ -175,6 +179,13 @@ var Scrollview = exports.Scrollview = Component.specialize({
         value: function () {
             window.removeEventListener("resize", this, false);
             this._element.removeEventListener("wheel", this, false);
+            this._element.removeEventListener("transitionend", this, false);
+
+            if (typeof WebKitAnimationEvent !== "undefined") {
+                this._element.removeEventListener("webkitAnimationEnd", this, false);
+            } else {
+                this._element.removeEventListener("animationend", this, false);
+            }
 
             this._mutationObserver.disconnect();
         }
@@ -193,8 +204,6 @@ var Scrollview = exports.Scrollview = Component.specialize({
 
             this.scrollLeft += event.deltaX;
             this.scrollTop += event.deltaY;
-            // event.preventDefault();
-            event.stopPropagation();
 
             if (this.scrollLeft !== previousScrollLeft || this.scrollTop !== previousScrollTop) {
                 this._setScrolling();
@@ -399,5 +408,5 @@ var Scrollview = exports.Scrollview = Component.specialize({
 
 });
 
-
-Scrollview.prototype.handleMutations = Scrollview.prototype.handleResize;
+Scrollview.prototype.handleAnimationend = Scrollview.prototype.handleWebkitAnimationEnd =
+    Scrollview.prototype.handleTransitionend = Scrollview.prototype.handleMutations = Scrollview.prototype.handleResize;
