@@ -27,10 +27,15 @@
 .RadioButtonField-label {
     font-family: 'lato', 'helvetica neue', helvetica, sans-serif;
     font-weight: 300;
+    color: rgba(255,255,255,.8);
 }
 
 /* Block Modifier */
 
 .RadioButtonFieldGroup--block .RadioButtonField {
     display: block;
+}
+
+.blueShark-RadioButton.montage--disabled + .RadioButtonField-label {
+
 }

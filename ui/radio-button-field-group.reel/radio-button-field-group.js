@@ -8,9 +8,7 @@ var Component = require("montage/ui/component").Component;
  * @extends Component
  */
 exports.RadioButtonFieldGroup = Component.specialize(/** @lends RadioButtonFieldGroup# */ {
-    constructor: {
-        value: function RadioButtonFieldGroup() {
-            this.super();
-        }
+    enabled: {
+        value: true
     }
 });

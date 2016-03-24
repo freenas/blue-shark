@@ -17,7 +17,8 @@
             },
             "bindings": {
                 "label": {"<-": "@owner.label"},
-                "documentationReference": {"<-": "@owner.documentationReference"}
+                "documentationReference": {"<-": "@owner.documentationReference"},
+                "enabled": {"<-": "@owner.enabled"}
             }
         },
         "radioGroup": {
@@ -26,7 +27,8 @@
                 "element": {"#": "radioGroup"}
             },
             "bindings": {
-                "options": {"<->": "@owner.options"}
+                "options": {"<->": "@owner.options"},
+                "enabled": {"<-": "@owner.enabled"}
             }
         }
     }
