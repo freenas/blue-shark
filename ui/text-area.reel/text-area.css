@@ -26,14 +26,14 @@
 }
 
 .blueShark-TextArea.montage--disabled {
+    background: rgba(0, 0, 0, .1);
+    border-color: transparent;
     opacity: .5;
-    border-style: dashed;
     pointer-events: none;
 }
 
 /* Placeholder --------------------- */
 
-.blueShark-TextArea::-webkit-input-placeholder {
-    color: inherit; opacity: .5; }
+.blueShark-TextArea::-webkit-input-placeholder {color: inherit; opacity: .5; }
 .blueShark-TextArea::-moz-placeholder { color: inherit; opacity: .5; }
 .blueShark-TextArea:-ms-input-placeholder { color: inherit; opacity: .5; }
