@@ -35,7 +35,7 @@
 
 .MultipleSelect-input-options {
     /* Fix - should I have to do this? */
-    position: absolute !Important;
+    position: absolute;
     top: 2em;
     left: 0;
     right: 0;
@@ -83,6 +83,8 @@
     border: 1px solid transparent;
     border-top: 1px solid rgba(0, 0, 0, .23);
     border-bottom: 1px solid rgba(255, 255, 255, .15);
+    transition-property: border-color, background-color, opacity;
+    transition-duration: .25s;
 }
 
 /* Empty State */
@@ -126,3 +128,15 @@ States
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
+
+/* disabled */
+
+.MultipleSelect.disabled { pointer-events: none; }
+
+.MultipleSelect.disabled .MultipleSelect-valuesContainer {
+    border-color: transparent;
+    opacity: .5;
+    background-color: rgba(0,0,0,.1);
+}
+
+

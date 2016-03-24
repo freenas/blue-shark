@@ -9,6 +9,10 @@ var Component = require("montage/ui/component").Component,
  * @extends Component
  */
 exports.MultipleSelect = Component.specialize(/** @lends MultipleSelect# */ {
+    enabled: {
+        value:  true
+    },
+
     values: {
         value: null
     },

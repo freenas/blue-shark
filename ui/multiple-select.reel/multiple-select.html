@@ -15,7 +15,8 @@
             "bindings": {
                 "_inputErrorMessage": {"<-": "@owner.inputErrorMessage || 'The input is invalid'"},
                 "_optionsPrefix": {"<-": "@owner._typedValue || @input.value || ''"},
-                "_inputError": {"<-": "!!@owner.invalidValue && @owner.invalidValue == @input.value"}
+                "_inputError": {"<-": "!!@owner.invalidValue && @owner.invalidValue == @input.value"},
+                "classList.has('disabled')": {"<-": "!@owner.enabled"}
             },
             "listeners": [
                 {
@@ -42,7 +43,8 @@
             },
             "bindings": {
                 "placeholderValue": {"<-": "@owner.placeholderValue"},
-                "classList.has('has-options')": {"<-": "!!@owner.options && @owner.options.length > 0"}
+                "classList.has('has-options')": {"<-": "!!@owner.options && @owner.options.length > 0"},
+                "enabled": {"<-": "@owner.enabled"}
             }
         },
         "inputErrorMessage": {
