@@ -190,6 +190,19 @@ var Scrollview = exports.Scrollview = Component.specialize({
         }
     },
 
+
+    scrollIntoView: {
+        value: function (alignWithTop) {
+            alignWithTop = typeof alignWithTop !== "undefined" ? !!alignWithTop : true;
+
+            if (this.overflow === "scrollX" || this.overflow === "scrollY") {
+                this._needsAlignWithTop = alignWithTop;
+                this._setScrolling();
+            }
+        }
+    },
+
+
     handleTransitionend: {
         value: function (event) {
             var target = event.target;
@@ -374,6 +387,17 @@ var Scrollview = exports.Scrollview = Component.specialize({
 
             this._maxScrollLeft = Math.max(0, this._contentWidth - this._visibleWidth);
             this._maxScrollTop = Math.max(0, this._contentHeight - this._visibleHeight);
+
+            if (this._needsAlignWithTop === true || this._needsAlignWithTop === false) {
+                if (this.overflow === "scrollX") {
+                    this.scrollLeft = this._needsAlignWithTop ? 0 : this._maxScrollLeft;
+
+                } else if (this.overflow === "scrollY") {
+                    this.scrollTop = this._needsAlignWithTop ? 0 : this._maxScrollTop;
+                }
+
+                this._needsAlignWithTop = null;
+            }
 
             if (this.scrollLeft > this._maxScrollLeft) {
                 this.scrollLeft = this._maxScrollLeft;
