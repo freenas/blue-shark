@@ -16,7 +16,8 @@
                 }
             ],
             "bindings": {
-                "classList.has('has-error')": {"<-": "@owner.hasError"}
+                "classList.has('has-error')": {"<-": "@owner.hasError"},
+                "classList.has('disabled')": {"<-": "!@owner.enabled"}
             }
         },
         "fieldTitle": {
