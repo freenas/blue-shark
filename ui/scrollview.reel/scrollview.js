@@ -169,8 +169,7 @@ var Scrollview = exports.Scrollview = Component.specialize({
 
             this._mutationObserver.observe(this.element, {
                 subtree: true,
-                childList: true,
-                attributes: true
+                childList: true
             });
         }
     },
@@ -191,6 +190,23 @@ var Scrollview = exports.Scrollview = Component.specialize({
         }
     },
 
+    handleTransitionend: {
+        value: function (event) {
+            var target = event.target;
+
+            if (event.target !== this.element || target !== this.contentWrapperElement) {
+                this.needsDraw = true;
+            }
+        }
+    },
+
+
+    handleMutations: {
+        value: function (event) {
+            this.needsDraw = true;
+        }
+    },
+
     handleResize: {
         value: function () {
             this.needsDraw = true;
@@ -207,7 +223,8 @@ var Scrollview = exports.Scrollview = Component.specialize({
 
             if (this.scrollLeft !== previousScrollLeft || this.scrollTop !== previousScrollTop) {
                 this._setScrolling();
-                event.stopPropagation();
+                event.stopImmediatePropagation();
+                event.preventDefault();
             }
         }
     },
@@ -408,5 +425,4 @@ var Scrollview = exports.Scrollview = Component.specialize({
 
 });
 
-Scrollview.prototype.handleAnimationend = Scrollview.prototype.handleWebkitAnimationEnd =
-    Scrollview.prototype.handleTransitionend = Scrollview.prototype.handleMutations = Scrollview.prototype.handleResize;
+Scrollview.prototype.handleWebkitAnimationEnd = Scrollview.prototype.handleAnimationend;
