@@ -131,8 +131,6 @@ States
 
 /* disabled */
 
-.MultipleSelect.disabled { pointer-events: none; }
-
 .MultipleSelect.disabled .MultipleSelect-valuesContainer {
     border-color: transparent;
     opacity: .5;
