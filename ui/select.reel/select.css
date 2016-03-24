@@ -112,3 +112,12 @@
     cursor: default;
     order: -1;
 }
+
+/* Disabled State */
+
+.Field.disabled .Select {
+    background: rgba(0, 0, 0, .1);
+    border-color: transparent;
+    opacity: .5;
+    pointer-events: none;
+}
