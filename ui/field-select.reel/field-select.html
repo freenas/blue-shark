@@ -17,7 +17,8 @@
             },
             "bindings": {
                 "label": {"<-": "@owner.label"},
-                "documentationReference": {"<-": "@owner.documentationReference"}
+                "documentationReference": {"<-": "@owner.documentationReference"},
+                "enabled": {"<-": "@owner.enabled.defined() ? @owner.enabled : true"}
             }
         },
         "select": {
@@ -29,8 +30,7 @@
                 "hasOptionalValue": {"<-": "@owner.hasOptionalValue"},
                 "selectedValue": {"<->": "@owner.selectedValue"},
                 "converter": {"<-": "@owner.converter"},
-                "options": {"<-": "@owner.options"},
-                "enabled": {"<-": "@owner.enabled"}
+                "options": {"<-": "@owner.options"}
             }
         }
     }
