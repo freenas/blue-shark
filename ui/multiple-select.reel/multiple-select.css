@@ -73,6 +73,7 @@
 }
 
 .MultipleSelect-valuesContainer {
+    position: relative;
     box-sizing: border-box;
     color: #FFF;
     height: 7.25em;
@@ -93,7 +94,7 @@
     display: none;
 }*/
 
-.MultipleSelect-valuesContainer.is-empty:after {
+.MultipleSelect-valuesContainer .Scrollview.is-empty:after {
     content: attr(data-emptyMessage);
     position: absolute;
     color: rgba(255,255,255,.3);
