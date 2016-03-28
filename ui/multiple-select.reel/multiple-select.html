@@ -135,6 +135,16 @@
             "bindings": {
                 "classList.has('is-empty')": {"<-": "@owner.values.length == 0"}
             }
+        },
+        "addIcon": {
+            "prototype": "montage/ui/component",
+            "properties": {
+                "element": {"#": "addIcon"},
+                "hasTemplate": false
+            },
+            "bindings": {
+                "classList.has('is-visible')": {"<-": "@owner.values.length == 0"}
+            }
         }
     }
     </script>
@@ -143,6 +153,9 @@
     <div data-montage-id="owner" class="MultipleSelect">
         <div data-montage-id="inputContainer" class="MultipleSelect-input">
             <svg data-montage-id="clearButton" class="MultipleSelect-input-clearButton">
+                <use xlink:href="#i-plus"/>
+            </svg>
+            <svg data-montage-id="addIcon" class="MultipleSelect-input-add">
                 <use xlink:href="#i-plus"/>
             </svg>
             <div data-montage-id="input" class="MultipleSelect-input-field"></div>

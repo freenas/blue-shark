@@ -1,6 +1,4 @@
-.MultipleSelect {
-    margin-bottom: 1em;
-}
+.MultipleSelect { margin-bottom: 1em; }
 
 .MultipleSelect-input {
     position: relative;
@@ -31,6 +29,24 @@
     opacity: 0;
     transition-property: visibility, opacity;
     transition-duration: .2s;
+}
+
+/* Placeholder add icon */
+
+.MultipleSelect-input-add {
+    position: absolute;
+    height: 1.2em;
+    width: 1.2em;
+    color: rgba(255,255,255,.8);
+    border: 1px solid currentColor;
+    border-radius: 1em;
+    padding: .25em;
+    top: 50%;
+    right: .5em;
+    margin-top: -0.6em;
+    transition-property: visibility, opacity;
+    transition-duration: .25s;
+    pointer-events: none;
 }
 
 .MultipleSelect-input-options {
@@ -89,10 +105,6 @@
 }
 
 /* Empty State */
-
-/*.MultipleSelect-valuesContainer.is-empty {
-    display: none;
-}*/
 
 .MultipleSelect-valuesContainer .Scrollview.is-empty:after {
     content: attr(data-emptyMessage);
