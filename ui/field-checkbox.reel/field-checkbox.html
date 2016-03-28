@@ -17,7 +17,8 @@
             },
             "bindings": {
                 "label": {"<-": "@owner.label"},
-                "documentationReference": {"<-": "@owner.documentationReference"}
+                "documentationReference": {"<-": "@owner.documentationReference"},
+                "enabled": {"<-": "@owner.enabled"}
             }
         },
         "checkbox": {
@@ -27,7 +28,8 @@
             },
             "bindings": {
                 "checked": {"<->": "@owner.checked"},
-                "disabled": {"<-": "@owner.disabled"}
+                "disabled": {"<-": "@owner.disabled"},
+                "enabled": {"<-": "@owner.enabled"}
             }
         }
     }

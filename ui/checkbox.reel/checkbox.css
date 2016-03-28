@@ -22,6 +22,7 @@
     position: relative;
     text-align: middle;
     cursor: pointer;
+    transition: opacity .5s;
 }
 
 .Checkbox label:before {
@@ -38,6 +39,8 @@
     border:         1px solid transparent;
     border-top:     1px solid rgba(0, 0, 0, .23);
     border-bottom:  1px solid rgba(255, 255, 255, .15);
+    transition-property: border-color, box-shadow;
+    transition-duration: .25s;
 }
 
 .Checkbox input:checked + label:after {
@@ -52,6 +55,7 @@
     width: 1.1em;
     height: 1em;
     text-align: center;
+    transition: color .25s;
 }
 
 /* $fix - what should the focus state be? */
@@ -59,3 +63,18 @@
 /*.Checkbox input:focus + label:before {
     border: 1px solid #2B9CD8;
 }*/
+
+/* Disabled State */
+
+.Checkbox input[disabled="disabled"] + label {
+    opacity: .5;
+}
+
+.Checkbox input[disabled="disabled"] + label:before {
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.Checkbox input[disabled="disabled"] + label:after {
+    color: #666;
+}
