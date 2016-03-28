@@ -16,13 +16,24 @@ body {
 }
 
 .container {
-    max-width: 1200px;
+    /*max-width: 1200px;*/
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .examples {
     flex: 1;
     display: flex;
     flex-direction: row;
+    outline: 1px solid red;
+    height: 5em;
+}
+
+.horizontal-container {
+    flex: 1;
+    position: relative;
+    height: 5em;
 }
 
 
@@ -33,8 +44,8 @@ body {
 
 .box {
     display: inline-block;
-    width: 200px;
-    height: 100px;
+    width: 20em;
+    height: 5em;
     background: pink;
 }
 
@@ -69,3 +80,21 @@ body {
     white-space: nowrap;
     position: relative;
 }
+
+/* inception */
+
+.innerVertical {
+    width: 25em;
+    outline: 1px solid red;
+    padding: .5em;
+}
+
+.content {
+    display: flex;
+    flex: 1;
+}
+
+
+
+
+

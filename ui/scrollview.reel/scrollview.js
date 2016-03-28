@@ -409,6 +409,7 @@ var Scrollview = exports.Scrollview = Component.specialize({
 
             if (this._needsUpdateScrollbars) {
                 if (this._hasVerticalScrollbar) {
+                    // adds space for scrollbar
                     // this.contentWrapperElement.style.right = this._scrollbarsSize + this._scrollbarPadding + "px";
                     this.verticalScrollbar.element.style.width = this._scrollbarsSize + "px";
                     if (this._hasHorizontalScrollbar) {
@@ -423,7 +424,8 @@ var Scrollview = exports.Scrollview = Component.specialize({
                     this.verticalScrollbar.element.style.display = "none";
                 }
                 if (this._hasHorizontalScrollbar) {
-                    this.contentWrapperElement.style.bottom = this._scrollbarsSize + this._scrollbarPadding + "px";
+                    // adds space for scrollbar
+                    // this.contentWrapperElement.style.bottom = this._scrollbarsSize + this._scrollbarPadding + "px";
                     this.horizontalScrollbar.element.style.height = this._scrollbarsSize + "px";
                     if (this._hasVerticalScrollbar) {
                         this.horizontalScrollbar.element.style.right = this._scrollbarsSize + this._scrollbarPadding + "px";
