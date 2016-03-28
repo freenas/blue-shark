@@ -8,9 +8,7 @@ var Component = require("montage/ui/component").Component;
  * @extends Component
  */
 exports.FieldToggleSwitch = Component.specialize(/** @lends FieldToggleSwitch# */ {
-    constructor: {
-        value: function FieldToggleSwitch() {
-            this.super();
-        }
+    enabled: {
+        value: true
     }
 });

@@ -17,7 +17,8 @@
             },
             "bindings": {
                 "label": {"<-": "@owner.label"},
-                "documentationReference": {"<-": "@owner.documentationReference"}
+                "documentationReference": {"<-": "@owner.documentationReference"},
+                "enabled": {"<-": "@owner.enabled"}
             }
         },
         "toggleSwitch": {
@@ -26,7 +27,8 @@
                 "element": {"#": "toggleSwitch"}
             },
             "bindings": {
-                "checked": {"<->": "@owner.checked"}
+                "checked": {"<->": "@owner.checked"},
+                "enabled": {"<-": "@owner.enabled"}
             }
         }
     }

@@ -20,6 +20,8 @@
     -moz-transition: background-color .2s cubic-bezier(.5,.15,.2,1);
     -ms-transition: background-color .2s cubic-bezier(.5,.15,.2,1);
     transition: background-color .2s cubic-bezier(.5,.15,.2,1);
+    transition-property: opacity, background-color, border-color;
+    transition-duration: .25s;
 }
 
 
@@ -80,4 +82,10 @@
     right: auto;
     left: .6em;
     color: #FFF;
+}
+
+.blueShark-ToggleSwitch.montage--disabled {
+    opacity: .5;
+    background: transparent;
+    border-color: #666;
 }
