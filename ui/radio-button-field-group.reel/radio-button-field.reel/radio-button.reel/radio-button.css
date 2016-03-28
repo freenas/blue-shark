@@ -56,4 +56,5 @@
 
 .blueShark-RadioButton.montage-RadioButton--checked.montage--disabled:before {
     background-color: transparent;
+    box-shadow: none;
 }
