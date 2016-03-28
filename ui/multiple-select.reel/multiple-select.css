@@ -44,9 +44,14 @@
     top: 50%;
     right: .5em;
     margin-top: -0.6em;
+    opacity: 1;
     transition-property: visibility, opacity;
     transition-duration: .25s;
     pointer-events: none;
+}
+
+.MultipleSelect.disabled .MultipleSelect-input-add {
+    opacity: .5;
 }
 
 .MultipleSelect-input-options {
