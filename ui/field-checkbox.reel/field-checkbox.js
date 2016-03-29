@@ -8,9 +8,7 @@ var Component = require("montage/ui/component").Component;
  * @extends Component
  */
 exports.FieldCheckbox = Component.specialize(/** @lends FieldCheckbox# */ {
-    constructor: {
-        value: function FieldCheckbox() {
-            this.super();
-        }
+    enabled: {
+        value: true
     }
 });
