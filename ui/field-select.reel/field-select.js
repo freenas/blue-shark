@@ -8,9 +8,24 @@ var Component = require("montage/ui/component").Component;
  * @extends Component
  */
 exports.FieldSelect = Component.specialize(/** @lends FieldSelect# */ {
-    constructor: {
-        value: function FieldSelect() {
-            this.super();
+    _options: {
+        value: null
+    },
+
+    options: {
+        get: function() {
+            return this._options;
+        },
+        set: function(options) {
+            this._options = options.map(function(x) {
+                if (typeof x === "string") {
+                    return {
+                        label: x,
+                        value: x
+                    };
+                }
+                return x;
+            })
         }
     }
 });
