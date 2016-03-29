@@ -9,6 +9,10 @@ var Component = require("montage/ui/component").Component,
  * @extends Component
  */
 exports.Checkbox = Component.specialize({
+    enabled: {
+        value: true
+    },
+
     _uuid: {
         value: null
     },
