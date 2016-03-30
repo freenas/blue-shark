@@ -11,10 +11,6 @@ var Component = require("montage/ui/component").Component,
  */
 exports.Select = Component.specialize({
 
-    _isFirstTime: {
-        value: true
-    },
-
     _maxHeight: {
         value: 144
     },
@@ -25,6 +21,7 @@ exports.Select = Component.specialize({
 
     _setOptionsHeight: {
         value: function () {
+            console.log("setOptionsHeight");
             if (this._optionsHeight < this._maxHeight) {
                 this.scrollView.element.style.height = this._optionsHeight + "px";
             } else {
@@ -33,13 +30,35 @@ exports.Select = Component.specialize({
         }
     },
 
+    enterDocument: {
+        value: function (isFirstTime) {
+            if (isFirstTime) {
+                this._mutationObserver = new MutationObserver(this.handleMutations.bind(this));
+            }
+
+            this._mutationObserver.observe(this.element, {
+                subtree: true,
+                childList: true
+            });
+        }
+    },
+
+    handleMutations: {
+        value: function (event) {
+            this.needsDraw =  true;
+        }
+    },
+
+    exitDocument: {
+        value: function () {
+            this._mutationObserver.disconnect();
+        }
+    },
+
     draw: {
         value: function () {
-            if (this._isFirstTime) {
-                this._optionsHeight = this.optionsElement.element.offsetHeight;
-                this._setOptionsHeight();
-                this._isFirstTime = false;
-            }
+            this._optionsHeight = this.optionsElement.element.offsetHeight;
+            this._setOptionsHeight();
         }
     },
 
