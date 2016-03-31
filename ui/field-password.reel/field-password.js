@@ -16,12 +16,12 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
 
     password: {
         get: function () {
-            return this._passwordMatch ? this.__password1 : null;
+            return this._passwordMatch ? this._password1 : null;
         }
     },
 
     _passwordMatch: {
-        value: false
+        value: true
     },
 
     passwordMatch: {
@@ -38,47 +38,74 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
         }
     },
 
-    __password1: {
-        value: null
-    },
-
     _password1: {
-        set: function (password) {
-            if (password !== this.__password1) {
-                this.__password1 = password;
-                this._checkPasswords();
-            }
-        },
-        get: function () {
-            return this.__password1;
-        }
-    },
-
-    __password2: {
         value: null
     },
 
     _password2: {
-        set: function (password) {
-            if (password !== this.__password2) {
-                this.__password2 = password;
-                this._checkPasswords();
-            }
-        },
-        get: function () {
-            return this.__password2;
-        }
+        value: null
     },
 
     enterDocument: {
         value: function () {
+            if (this.preparedForActivationEvents) {
+                this._addEventListeners();
+            }
+        }
+    },
+
+    prepareForActivationEvents: {
+        value: function () {
+            this._addEventListeners();
+        }
+    },
+
+    exitDocument: {
+        value: function () {
             this.reset();
+
+            if (this.preparedForActivationEvents) {
+                this.passwordFieldInput2.element.removeEventListener("blur", this, true);
+                this.passwordFieldInput2.element.removeEventListener("focus", this, true);
+            }
+        }
+    },
+
+    _addEventListeners: {
+        value: function () {
+            this.passwordFieldInput2.element.addEventListener("blur", this, true);
+            this.element.addEventListener("focus", this, true);
+        }
+    },
+
+    shouldAcceptValue: {
+        value: function () {
+            return true;
+        }
+    },
+
+    captureBlur: {
+        value: function () {
+            if (this._password2) {
+                this._checkPasswords();
+            }
+        }
+    },
+
+    captureFocus: {
+        value: function (event) {
+            var target = event.target;
+
+            if (target === this.passwordFieldInput1.element || target === this.passwordFieldInput2.element) {
+                this._password2 = null;
+                this.passwordMatch = true;
+            }
         }
     },
 
     reset: {
         value: function () {
-            this.__password2 = this.__password1 = null;
+            this._password2 = this._password1 = null;
             this._passwordMatch = true;
 
             this.dispatchOwnPropertyChange("_password1", null, false);
@@ -91,8 +118,8 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
         value: function () {
             var passwordMatch = true;
 
-            if (this.__password1 !== null && this.__password2 !== null) {
-                passwordMatch = this.__password1 === this.__password2;
+            if (this._password1 !== null && this._password2 !== null) {
+                passwordMatch = this._password1 === this._password2;
             }
 
             this.passwordMatch = passwordMatch;
