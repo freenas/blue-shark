@@ -3,6 +3,11 @@
     display: flex;
     flex-wrap: wrap;
     background: none;
+    margin: .1em;
+}
+
+.MultipleSelectValue:nth-child(even) {
+    background: rgba(255,255,255,.02);
 }
 
 .MultipleSelectValue-label.blueShark-TextField {
@@ -20,10 +25,12 @@
     overflow: hidden;
     text-overflow: ellipsis;
     cursor: pointer;
+    border-radius: 0;
 }
 
 .MultipleSelectValue-label.blueShark-TextField:hover {
     background: rgba(255,255,255,.1);
+    cursor: text;
 }
 
 .MultipleSelectValue-label.blueShark-TextField:focus {
@@ -89,31 +96,18 @@
 
 .MultipleSelect-values:empty {
     display: none;
-    /*min-height: 4em;*/
 }
-
-/*
-.MultipleSelect-values:empty:before {
-    content: 'no items have been added';
-    color: #aaa;
-    padding: .4em;
-    font-size: .8em;
-    font-style: italic;
-}
-*/
 
 .MultipleSelectValue-handler {
     cursor: move;
     padding: 0 0.5em;
-    margin: 1px 0;
-    background: rgba(255,255,255,.1);
+    background: #333;
     display: none;
 }
 
 .MultipleSelectValue.draggable .MultipleSelectValue-handler {
     display: block;
 }
-
 
 .MultipleSelectValue.dragged {
     opacity: 0.5;
@@ -124,9 +118,46 @@
 }
 
 .MultipleSelectValue.dragOver {
-    border-top: solid 3px rgba(255,255,255,.1);
+    /*transform: translateY(2em);*/
+    border-top: 5px solid #2B9CD8;
     -moz-user-select: none;
     -khtml-user-select: none;
     -webkit-user-select: none;
     user-select: none;
+    /*transition: transform .1s ease-in-out;*/
+
 }
+
+/*.MultipleSelectValue:before,
+.MultipleSelectValue:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+}*/
+
+/*.MultipleSelectValue.dragOver:after {
+    top: 0;
+    bottom: 0;
+    background: rgba(255,0,0,.5);
+}*/
+
+/*.MultipleSelectValue:before {
+    height: 1.5em;
+    top: calc(-1.85em);
+    border: 1px dashed rgba(43,156,216,0.5);
+    background-image: repeating-linear-gradient(-45deg, rgba(43,156,216,0.25), rgba(43,156,216,0.25) 1px, transparent 1px, transparent 10px);
+    background-size: 28px 28px;
+    background-repeat: repeat;
+    border-radius: 4px;
+    opacity: 0;
+    visibility: hidden;
+    transition: none;
+}*/
+
+/*.MultipleSelectValue.dragOver:before {
+    opacity: 1;
+    visibility: visible;
+    transition: all .1s .1s ease-in-out;
+}*/
