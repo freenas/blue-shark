@@ -51,8 +51,8 @@
 
 .Button--block { display: block; width: 100%; }
 
-.Button--primary { background-color: #0095d5; }
-.Button--alert  { background-color: #FF0000; }
+.Button--primary { background-color: #0378AA; }
+.Button--alert  { background-color: #5A5A5A; }
 
 .Button--small {
     font-size: .75em;
