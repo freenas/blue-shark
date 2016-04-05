@@ -14,7 +14,7 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
     },
 
 
-    password: {
+    value: {
         get: function () {
             return this._passwordMatch ? this._password1 : null;
         }
@@ -30,7 +30,7 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
 
             if (passwordMatch !== this._passwordMatch) {
                 this._passwordMatch = passwordMatch;
-                this.dispatchOwnPropertyChange("password", this.password, false);
+                this.dispatchOwnPropertyChange("value", this.password, false);
             }
         },
         get: function () {
@@ -109,7 +109,7 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
             this._password2 = this._password1 = null;
             this._passwordMatch = null;
 
-            this.dispatchOwnPropertyChange("password", null, false);
+            this.dispatchOwnPropertyChange("value", null, false);
             this.dispatchOwnPropertyChange("passwordMatch", null, false);
         }
     },
