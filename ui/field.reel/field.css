@@ -149,6 +149,11 @@
     border-bottom-right-radius: 0;
 }
 
+.Field.is-validated .Field-control input,
+.Field.is-validated .Field-control textarea {
+    border-color: #149640;
+}
+
 /* option border around field on error */
 
 /*.Field.has-error:before {

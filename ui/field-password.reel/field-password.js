@@ -98,7 +98,8 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
 
             if (target === this.passwordFieldInput1.element || target === this.passwordFieldInput2.element) {
                 this._password2 = null;
-                this.passwordMatch = true;
+                this._passwordMatch = null;
+                this.dispatchOwnPropertyChange("passwordMatch", null, false);
             }
         }
     },

@@ -17,6 +17,7 @@
             ],
             "bindings": {
                 "classList.has('has-error')": {"<-": "@owner.hasError"},
+                "classList.has('is-validated')": {"<-": "@owner.isValidated"},
                 "classList.has('disabled')": {"<-": "@owner.enabled.defined() ? !@owner.enabled : false"}
             }
         },
