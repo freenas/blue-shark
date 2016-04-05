@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="progress.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"},
+                "bar": {"#": "bar"}
+            }
+        },
+        "bar": {
+            "prototype": "montage/ui/component",
+            "properties": {
+                "element": {"#": "bar"},
+                "hasTemplate": false
+            },
+            "bindings": {
+                "percentageComplete": {"<-": "@owner.percentageComplete"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Progress">
+        <div data-montage-id="bar" class="Progress-bar"></div>
+    </div>
+</body>
+</html>
