@@ -21,7 +21,7 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
     },
 
     _passwordMatch: {
-        value: true
+        value: null
     },
 
     passwordMatch: {
@@ -106,11 +106,10 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
     reset: {
         value: function () {
             this._password2 = this._password1 = null;
-            this._passwordMatch = true;
+            this._passwordMatch = null;
 
-            this.dispatchOwnPropertyChange("_password1", null, false);
-            this.dispatchOwnPropertyChange("_password2", null, false);
-            this.dispatchOwnPropertyChange("passwordMatch", true, false);
+            this.dispatchOwnPropertyChange("password", null, false);
+            this.dispatchOwnPropertyChange("passwordMatch", null, false);
         }
     },
 
