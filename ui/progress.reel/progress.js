@@ -25,7 +25,7 @@ exports.Progress = Component.specialize(/** @lends Progress# */ {
 
     draw: {
         value: function () {
-            this.bar.style.width = this._percentageComplete + "%";
+            this.bar.style.transform = "translateX(" + (this._percentageComplete - 100) + "%)";
         }
     }
 });
