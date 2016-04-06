@@ -20,7 +20,6 @@
 
 .Checkbox label {
     position: relative;
-    text-align: middle;
     cursor: pointer;
     transition: opacity .5s;
 }
@@ -43,19 +42,24 @@
     transition-duration: .25s;
 }
 
-.Checkbox input:checked + label:after {
+.Checkbox label:after {
+    opacity: 0;
     content: "\63";
     font-family: "freenas";
     font-size: 1.3em;
     color: #2B9CD8;
     position: absolute;
-    top:    0;
+    top:    .05em;
     left:   .025em;
     right:  0;
     width: 1.1em;
     height: 1em;
     text-align: center;
     transition: color .25s;
+}
+
+.Checkbox input:checked + label:after {
+    opacity: 1;
 }
 
 /* $fix - what should the focus state be? */
