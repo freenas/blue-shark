@@ -21,6 +21,8 @@
         inset 0 1px rgba(255, 255, 255, .15),
         inset 0 -1px rgba(0, 0, 0, .3),
         0 1px 2px rgba(0, 0, 0, .4);
+    transition-property: opacity, text-shadow, background-color, background-image, box-shadow;
+    transition-duration: .25s;
 }
 
 .blueShark-Button:hover  {
@@ -43,6 +45,17 @@
 
 .blueShark-Button:focus {
     outline: 0;
+}
+
+.blueShark-Button.montage--disabled {
+    opacity: .5;
+    background-color: #666;
+    box-shadow:
+        inset 0 1px rgba(255, 255, 255, 0),
+        inset 0 -1px rgba(0, 0, 0, 0),
+        0 1px 2px rgba(0, 0, 0, 0);
+    background-image: linear-gradient(transparent, transparent);
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0);
 }
 
 .Button-group .blueShark-Button + .blueShark-Button {
