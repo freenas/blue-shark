@@ -11,8 +11,19 @@ var Component = require("montage/ui/component").Component,
  */
 exports.Select = Component.specialize({
 
-    _maxHeight: {
+    _optionsMaxHeight: {
         value: 144
+    },
+
+    optionsMaxHeight: {
+        get: function () {
+            return this._optionsMaxHeight;
+        },
+        set: function (value) {
+            if(value) {
+                this._optionsMaxHeight = value;
+            }
+        }
     },
 
     _optionsHeight: {
@@ -21,11 +32,10 @@ exports.Select = Component.specialize({
 
     _setOptionsHeight: {
         value: function () {
-            console.log("setOptionsHeight");
-            if (this._optionsHeight < this._maxHeight) {
+            if (this._optionsHeight < this._optionsMaxHeight) {
                 this.scrollView.element.style.height = this._optionsHeight + "px";
             } else {
-                this.scrollView.element.style.height = this._maxHeight + "px";
+                this.scrollView.element.style.height = this._optionsMaxHeight + "px";
             }
         }
     },
