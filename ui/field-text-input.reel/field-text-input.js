@@ -14,5 +14,20 @@ exports.FieldTextInput = Field.specialize({
 
     enabled: {
         value: true
+    },
+
+    prepareForActivationEvents: {
+        value: function () {
+            if (this.validator) {
+                this.textInput.element.addEventListener('blur', this, true);
+            }
+        }
+    },
+
+
+    captureBlur: {
+        value: function(event) {
+            this.hasError = !this.validator.validate(this.value);
+        }
     }
 });
