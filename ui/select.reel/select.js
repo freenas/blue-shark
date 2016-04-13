@@ -67,7 +67,9 @@ exports.Select = Component.specialize({
 
     draw: {
         value: function () {
-            this._optionsHeight = this.optionsElement.element.offsetHeight;
+            if (this.optionsElement.element.offsetHeight) {
+                this._optionsHeight = this.optionsElement.element.offsetHeight;
+            }
             this._setOptionsHeight();
         }
     },
