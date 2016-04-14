@@ -2,7 +2,7 @@
     "name": "blue-shark",
     "version": "0.1.0",
     "dependencies": {
-        "montage": "montagejs/montage#f08073367cfe4fa9e5a501ee0ae98d27c5afe240"
+        "montage": "montagejs/montage#ab15531315ce73e4068356f24905c5fd599c9bb8"
     },
     "devDependencies": {
         "montage-testing": "~0.4.3"
