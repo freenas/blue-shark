@@ -19,8 +19,8 @@
             "bindings": {
                 "label": {"<-": "@owner.label"},
                 "documentationReference": {"<-": "@owner.documentationReference"},
-                "errorMessage": {"<-": "@owner.errorMessage"},
-                "hasError": {"<-": "@owner.hasError"}
+                "errorMessage": {"<-": "@owner.errorMessage || @textInput.errorMessage"},
+                "hasError": {"<-": "@owner.hasError || !!@textInput.errorMessage"}
             }
         },
         "textInput": {
