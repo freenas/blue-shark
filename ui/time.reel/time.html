@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="time.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"},
+                "options": [
+                    {"value": "12:00 AM"},
+                    {"value": "12:30 AM"},
+                    {"value": "1:00 AM"},
+                    {"value": "1:30 AM"},
+                    {"value": "2:00 AM"},
+                    {"value": "2:30 AM"},
+                    {"value": "3:00 AM"},
+                    {"value": "3:30 AM"},
+                    {"value": "4:00 AM"}
+                ],
+                "_inputField": {"@": "input"},
+                "_optionsController": {"@": "optionsController"},
+                "_optionsList": {"@": "options"},
+                "_selectedOption": {"value": "12:00 AM"}
+            },
+            "listeners": [
+                {
+                    "type": "action",
+                    "listener": {"@": "owner"}
+                }
+            ]
+        },
+        "input": {
+            "prototype": "ui/text-field.reel",
+            "properties": {
+                "element": {"#": "input"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner._selectedOption.value"}
+            }
+        },
+        "optionsController": {
+            "prototype": "montage/core/range-controller",
+            "bindings": {
+                "content": {"<-": "@owner.options"}
+            }
+        },
+        "options": {
+            "prototype": "montage/ui/repetition.reel",
+            "properties": {
+                "element": {"#": "options"},
+                "isSelectionEnabled": true,
+                "contentController": {"@": "optionsController"}
+            }
+        },
+        "option": {
+            "prototype": "./time-option.reel",
+            "properties": {
+                "element": {"#": "option"}
+            },
+            "bindings": {
+                "selected": {"<->": "@owner._selectedOption"},
+                "option": {"<-": "@options:iteration.object"}
+            }
+        },
+        "optionsScroll": {
+            "prototype": "ui/scrollview.reel",
+            "properties": {
+                "element": {"#": "optionsScroll"},
+                "overflow": "scrollY"
+            }
+        },
+        "increment": {
+            "prototype": "montage/ui/button.reel",
+            "properties": {
+                "element": {"#": "increment"}
+            }
+        },
+        "decrement": {
+            "prototype": "montage/ui/button.reel",
+            "properties": {
+                "element": {"#": "decrement"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Time">
+        <div data-montage-id="inputContainer" class="Time-container">
+            <div class="Time-controls">
+                <svg data-montage-id="decrement" class="Time-input-decrement">
+                    <use xlink:href="#i-arrow"/>
+                </svg>
+                <svg data-montage-id="increment" class="Time-input-increment">
+                    <use xlink:href="#i-arrow"/>
+                </svg>
+            </div>
+            <div data-montage-id="input" class="Time-input-field"></div>
+            <div data-montage-id="optionsScroll" class="Time-optionsContainer">
+                <div data-montage-id="options" class="Time-options">
+                    <div data-montage-id="option" class="Time-option"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
