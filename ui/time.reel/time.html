@@ -21,8 +21,7 @@
                 ],
                 "_inputField": {"@": "input"},
                 "_optionsController": {"@": "optionsController"},
-                "_optionsList": {"@": "options"},
-                "_selectedOption": {"value": "12:00 AM"}
+                "_optionsList": {"@": "options"}
             },
             "listeners": [
                 {
@@ -37,7 +36,8 @@
                 "element": {"#": "input"}
             },
             "bindings": {
-                "value": {"<-": "@owner._selectedOption.value"}
+                "value": {"<-": "@owner._selectedOption.value"},
+                "enabled": {"<-": "@owner.enabled"}
             }
         },
         "optionsController": {

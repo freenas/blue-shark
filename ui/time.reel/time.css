@@ -1,9 +1,10 @@
-.Time {
-
-}
+.Time {}
 
 .Time-container {
     position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+
 }
 
 /* Time Controls ---------------------------------- */

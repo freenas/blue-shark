@@ -41,7 +41,6 @@ exports.Time = Component.specialize(/** @lends Time# */ {
 
     handleInputAction: {
         value: function() {
-            console.log(this._inputField);
             if (this._inputField.value) {
                 this._selectedOption = this._inputField.value;
                 this._blurInputField();
@@ -130,14 +129,12 @@ exports.Time = Component.specialize(/** @lends Time# */ {
     handleIncrementAction: {
         value: function (e) {
             this._navigateInOptions(1);
-            e.preventDefault();
         }
     },
 
     handleDecrementAction: {
         value: function (e) {
             this._navigateInOptions(-1);
-            e.preventDefault();
         }
     }
 });

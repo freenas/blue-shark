@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="field-date.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+        "field": {
+            "prototype": "ui/field.reel",
+            "properties": {
+                "element": {"#": "field"}
+            },
+            "bindings": {
+                "label": {"<-": "@owner.label"},
+                "documentationReference": {"<-": "@owner.documentationReference"},
+                "enabled": {"<-": "@owner.enabled"}
+            }
+        },
+        "date": {
+            "prototype": "ui/date.reel",
+            "properties": {
+                "element": {"#": "date"}
+            },
+            "bindings": {
+                "value": {"<->": "@owner.value"},
+                "enabled": {"<-": "@owner.enabled"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="FieldDate">
+        <div data-montage-id="field">
+            <div data-montage-id="date"></div>
+        </div>
+    </div>
+</body>
+</html>
