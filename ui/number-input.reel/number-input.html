@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="number-input.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"},
+                "_numberFieldTextFieldComponent": {"@": "input"},
+                "_numberFieldMinusComponent": {"@": "minus"},
+                "_numberFieldPlusComponent": {"@": "plus"}
+            }
+        },
+        "input": {
+            "prototype": "ui/text-field.reel",
+            "properties": {
+                "element": {"#": "input"}
+            },
+            "bindings" : {
+                "value": {"<->": "@owner.value"},
+                "enabled": {"<-": "@owner.enabled"}
+            }
+        },
+        "plus": {
+            "prototype": "montage/ui/button.reel",
+            "properties": {
+                "element": {"#": "buttonPlus"}
+            }
+        },
+        "minus": {
+            "prototype": "montage/ui/button.reel",
+            "properties": {
+                "element": {"#": "buttonMinus"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="NumberInput">
+        <button data-montage-id="buttonMinus" class="NumberInput-control" tabindex="-1">&minus;</button>
+        <input data-montage-id="input" class="NumberInput-input" type="text">
+        <button data-montage-id="buttonPlus" class="NumberInput-control" tabindex="-1">+</button>
+    </div>
+</body>
+</html>
