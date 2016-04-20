@@ -29,6 +29,10 @@ exports.Time = Component.specialize(/** @lends Time# */ {
         }
     },
 
+    enabled: {
+        value: true
+    },
+
     options: {
         value: null
     },
