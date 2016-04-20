@@ -10,5 +10,20 @@ var Component = require("montage/ui/component").Component;
 exports.FieldCheckbox = Component.specialize(/** @lends FieldCheckbox# */ {
     enabled: {
         value: true
+    },
+
+
+    _checked: {
+        value: false
+    },
+
+    checked: {
+        set: function (checked) {
+            this._checked = !!checked;
+        },
+        get: function () {
+            return this._checked;
+        }
     }
+
 });

@@ -13,19 +13,28 @@ exports.Checkbox = Component.specialize({
         value: true
     },
 
-    _uuid: {
-        value: null
+
+    _checked: {
+        value: false
     },
 
-    constructor: {
-        value: function() {
-            this._uuid = Uuid.generate();
+    checked: {
+        set: function (checked) {
+            this._checked = !!checked;
+        },
+        get: function () {
+            return this._checked;
         }
+    },
+
+    _uuid: {
+        value: null
     },
 
     enterDocument: {
         value: function (isFirstTime) {
             if (isFirstTime) {
+                this._uuid = Uuid.generate();
                 this.checkboxComponent.element.setAttribute("id", this._uuid);
                 this.labelComponent.element.setAttribute("for", this._uuid);
             }
