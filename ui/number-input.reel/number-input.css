@@ -1,10 +1,12 @@
-.NumberInput { display: flex; }
+.NumberInput { display: flex; max-width: 8em;}
 
 .NumberInput.montage--disabled { pointer-events: none; }
 
 .NumberInput-input {
     border-radius: 0;
     text-align: center;
+    padding-left:   0;
+    padding-right: 0;
 }
 
 .NumberInput-control {
