@@ -27,5 +27,17 @@ exports.Main = Component.specialize(/** @lends Main# */ {
             {"value": "Fri"},
             {"value": "Sat"}
         ]
+    },
+
+    selection: {
+        value: null
+    },
+
+    enterDocument: {
+        value: function (firstTime) {
+            if (firstTime) {
+                this.selection = [this.daysContent[2], this.daysContent[4]];
+            }
+        }
     }
 });
