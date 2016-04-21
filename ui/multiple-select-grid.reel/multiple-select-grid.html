@@ -7,31 +7,21 @@
     {
         "owner": {
             "properties": {
-                "element": {"#": "owner"},
-                "controller": {"@": "optionsController"}
-            },
-            "listeners": [
-                {
-                    "type": "action",
-                    "listener": {"@": "optionsController"}
-                }
-            ]
-        },
-        "optionsController": {
-            "prototype": "montage/core/range-controller",
-            "multiSelect": true,
-            "bindings": {
-                "content": {"<-": "@owner.content"}
+                "element": {"#": "owner"}
             }
         },
+
         "options": {
             "prototype": "montage/ui/repetition.reel",
             "properties": {
                 "element": {"#": "options"},
-                "isSelectionEnabled": true,
-                "contentController": {"@": "optionsController"}
+                "multiSelect": true
+            },
+            "bindings": {
+                "content": {"<-": "@owner.content"}
             }
         },
+
         "option": {
             "prototype": "montage/ui/text.reel",
             "properties": {
