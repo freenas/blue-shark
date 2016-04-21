@@ -2,7 +2,8 @@
  * @module ui/time.reel
  */
 var Component = require("montage/ui/component").Component,
-    KeyComposer = require("montage/composer/key-composer").KeyComposer;
+    KeyComposer = require("montage/composer/key-composer").KeyComposer,
+    Time = require('./model/time').Time;
 
 /**
  * @class Time
@@ -13,7 +14,20 @@ exports.Time = Component.specialize(/** @lends Time# */ {
         value: function() {
             if (!this.options) {
                 this.options = [];
+                if (this.intervalInSeconds) {
+                    var maxValue = Time.create(23, 59, 59),
+                        nextOption = Time.create(),
+                        delta = Time.create(0, 0, this.intervalInSeconds);
+                    while (nextOption.isLowerOrEqualThan(maxValue)) {
+                        this.options.push(nextOption);
+                        nextOption = Time.createFromTimeAndDelta(nextOption, delta);
+                    }
+                }
             }
+            if (this.isDefaultNow) {
+                this.options.unshift({});
+            }
+            this._selectedOption = this.options[0];
         }
     },
 
@@ -46,7 +60,8 @@ exports.Time = Component.specialize(/** @lends Time# */ {
     handleInputAction: {
         value: function() {
             if (this._inputField.value) {
-                this._selectedOption = this._inputField.value;
+                this.value = this._stringToTimeConverter.convert(this._inputField.value);
+                this._selectedOption = this._findMatchingOption();
                 this._blurInputField();
             }
         }
@@ -77,6 +92,18 @@ exports.Time = Component.specialize(/** @lends Time# */ {
         }
     },
 
+    _findMatchingOption: {
+        value: function() {
+            var i, length, option;
+            for (i = 0, length = this.options.length; i < length; i++) {
+                option = this.options[i];
+                if (option.isEqualTo(this.value)) {
+                    return option;
+                }
+            }
+        }
+    },
+
     _stopScrollingOptions: {
         value: function () {
             this._optionsController.clearSelection();
@@ -91,26 +118,10 @@ exports.Time = Component.specialize(/** @lends Time# */ {
             var currentIndex = this._optionsController.organizedContent.indexOf(this._optionsController.selection[0]),
                 newIndex = currentIndex + distance,
                 contentLength = this._optionsController.organizedContent.length;
-            if (newIndex < -1) {
+            if (newIndex < 0) {
                 newIndex = contentLength -1;
             }
-            if (newIndex == -1 || newIndex == contentLength) {
-                this._inputField.value = this._typedValue;
-                this._stopScrollingOptions();
-            } else {
-                this._selectOption(this._optionsController.organizedContent[newIndex % contentLength]);
-            }
-        }
-    },
-
-    _selectOption: {
-        value: function (option) {
-            if (!this._typedValue) {
-                this._typedValue = this._inputField.value;
-            }
-            this._optionsController.select(option);
-            this._inputField.value = this._optionsController.selection[0].value;
-            this._selectedOption = option;
+            this._selectedOption = this._optionsController.organizedContent[newIndex % contentLength];
         }
     },
 
@@ -125,7 +136,8 @@ exports.Time = Component.specialize(/** @lends Time# */ {
         set: function(option) {
             if (option && this.__selectedOption != option) {
                 this.__selectedOption = option;
-                this._selectOption(option);
+                this._optionsController.select(option);
+                this.value = this._timeToStringConverter.convert(option);
             }
         }
     },
@@ -142,3 +154,4 @@ exports.Time = Component.specialize(/** @lends Time# */ {
         }
     }
 });
+

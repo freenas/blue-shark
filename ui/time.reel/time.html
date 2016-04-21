@@ -8,20 +8,11 @@
         "owner": {
             "properties": {
                 "element": {"#": "owner"},
-                "options": [
-                    {"value": "12:00 AM"},
-                    {"value": "12:30 AM"},
-                    {"value": "1:00 AM"},
-                    {"value": "1:30 AM"},
-                    {"value": "2:00 AM"},
-                    {"value": "2:30 AM"},
-                    {"value": "3:00 AM"},
-                    {"value": "3:30 AM"},
-                    {"value": "4:00 AM"}
-                ],
                 "_inputField": {"@": "input"},
                 "_optionsController": {"@": "optionsController"},
-                "_optionsList": {"@": "options"}
+                "_optionsList": {"@": "options"},
+                "_stringToTimeConverter": {"@": "stringToTimeConverter"},
+                "_timeToStringConverter": {"@": "timeToStringConverter"}
             },
             "listeners": [
                 {
@@ -30,14 +21,25 @@
                 }
             ]
         },
+        "timeToStringConverter": {
+            "prototype": "./converters/time-to-string-converter",
+            "bindings": {
+                "format": {"<-": "@owner.format"}
+            }
+        },
+        "stringToTimeConverter": {
+            "prototype": "./converters/string-to-time-converter",
+            "bindings": {
+                "format": {"<-": "@owner.format"}
+            }
+        },
         "input": {
             "prototype": "ui/text-field.reel",
             "properties": {
                 "element": {"#": "input"}
             },
             "bindings": {
-                "value": {"<-": "@owner._selectedOption.value"},
-                "enabled": {"<-": "@owner.enabled"}
+                "value": {"<->": "@owner.value"}
             }
         },
         "optionsController": {
@@ -57,7 +59,8 @@
         "option": {
             "prototype": "./time-option.reel",
             "properties": {
-                "element": {"#": "option"}
+                "element": {"#": "option"},
+                "converter": {"@": "timeToStringConverter"}
             },
             "bindings": {
                 "selected": {"<->": "@owner._selectedOption"},
