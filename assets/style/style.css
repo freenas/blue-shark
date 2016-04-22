@@ -3,6 +3,38 @@
  * This file is reserved for your global style rules.
  */
 
+/*
+
+FreeNas Color Palette
+
+Dark Blue BG:                   #0B1E29 - Global Sections
+Dark Blue Accent:               #093A51 - Selected Item on Global Sections
+
+Selection Primary Blue:         #0C5688 - Selection
+Selection Secondary Blue:       #0D65A0
+Selection Tertiary Blue:        #2089D3 - Selection mos
+
+Orange Primary:                 #D95B1B - Interior Accents
+Orange Secondary:               #DE7225
+Orange Tertiary:                #D78F2A
+
+Green:                          #1E963F - Success & Creation
+
+Dark Black:                     #0F1213 - Column Headers, Shadows @ 40%
+Medium Black:                   #16171A - Main BG & Text on light BG
+
+Dark Cool Grey:                 #242628 - Backgrounds, buttons, secondary section headers
+Medium Cool Grey:               #2A2E33
+Body Grey:                      #2F3233
+
+Light Grey:                     #939E9F -
+Lighter Grey:                   #B1BCBE -
+Lightest Grey:                  #E0E5E5 -
+
+Red:                            #E0003A - Error / Warning
+
+*/
+
 html {
     font-family: sans-serif;
     color: #FFF;
