@@ -41,19 +41,20 @@
 
 .MultipleSelectValue-delete {
     align-self: center;
-    height: 1.4em;
-    width:  1.4em;
+    height: 1.2rem;
+    width:  1.2rem;
     padding: .25em;
-    color: red;
+    color: #E0003A;
     transform: rotate(45deg);
     cursor: pointer;
+    border: 1px solid #E0003A;
     border-radius: 50%;
     outline: none;
     margin-right: .25em;
 }
 
 .MultipleSelectValue-delete:hover {
-    background: red;
+    background: #E0003A;
     color: #fff;
 }
 
@@ -71,7 +72,7 @@
 /* States */
 
 .MultipleSelectValue.has-error .MultipleSelectValue-label {
-    border-color: red !important;
+    border-color: #E0003A !important;
     border-bottom: none !important;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
@@ -88,7 +89,7 @@
     left: -.25em;
     right: -.25em;
     bottom: 0;
-    background: red;
+    background: #E0003A;
     z-index: -1;
 }
 
@@ -100,8 +101,9 @@
 
 .MultipleSelectValue-handler {
     cursor: move;
+    cursor: grab;
     padding: 0 0.5em;
-    background: #333;
+    background: #2F3233;
     display: none;
 }
 
