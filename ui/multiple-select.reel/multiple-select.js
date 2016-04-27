@@ -196,15 +196,15 @@ exports.MultipleSelect = Component.specialize(/** @lends MultipleSelect# */ {
             var isValid = true;
 
             if (this.converter) {
-                if (this.converter.validator && typeof this.converter.validator.validate === 'function') {
+                if (!isFromOptions && this.converter.validator && typeof this.converter.validator.validate === 'function') {
                     isValid = this.converter.validator.validate(value);
                 }
+
                 if (isValid) {
                     this.invalidValue = null;
-                    if (!isFromOptions) {
-                        if (typeof this.converter.revert === 'function') {
-                            value = this.converter.revert(value);
-                        }
+
+                    if (!isFromOptions && typeof this.converter.revert === 'function') {
+                        value = this.converter.revert(value);
                     }
                 } else {
                     this.invalidValue = value;
