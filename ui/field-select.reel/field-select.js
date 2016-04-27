@@ -16,16 +16,21 @@ exports.FieldSelect = Component.specialize(/** @lends FieldSelect# */ {
         get: function() {
             return this._options;
         },
-        set: function(options) {
-            this._options = options.map(function(x) {
-                if (typeof x === "string") {
-                    return {
-                        label: x,
-                        value: x
-                    };
-                }
-                return x;
-            })
+        set: function (options) {
+            if (Array.isArray(options)) {
+                //Fixme: mapping probably useless with a converter, need to investigate.
+                this._options = options.map(function(x) {
+                    if (typeof x === "string") {
+                        return {
+                            label: x,
+                            value: x
+                        };
+                    }
+                    return x;
+                });
+            } else {
+                this._options = null;
+            }
         }
     }
 });
