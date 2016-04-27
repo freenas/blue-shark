@@ -19,10 +19,8 @@
     background-image: linear-gradient(transparent, rgba(0,0,0,.2));
     box-shadow:
         inset 0 1px rgba(255, 255, 255, .15),
-        inset 0 -1px rgba(0, 0, 0, .3),
+        inset 0 -1px rgba(0, 0, 0, .2),
         0 1px 2px rgba(0, 0, 0, .4);
-    transition-property: opacity, text-shadow, background-color, background-image, box-shadow;
-    transition-duration: .25s;
 }
 
 .blueShark-Button:hover  {
@@ -37,11 +35,12 @@
 .blueShark-Button:active {
     background-image: linear-gradient(rgba(0,0,0,.2), transparent);
     box-shadow:
-        inset 0 -1px rgba(255, 255, 255, .15),
+        inset 0 -1px rgba(255, 255, 255, .1),
         inset 0 1px rgba(0, 0, 0, .3);
     outline: none;
     text-shadow: none;
 }
+
 
 .blueShark-Button:focus {
     outline: 0;
@@ -58,9 +57,17 @@
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0);
 }
 
+
+/* Label */
+
+.blueShark-Button-label { display: block; }
+
+.blueShark-Button:active .blueShark-Button-label { transform: translateY(.05em); }
+
 .Button-group .blueShark-Button + .blueShark-Button {
     margin-left: .5em;
 }
+
 
 .Button--block { display: block; width: 100%; }
 
