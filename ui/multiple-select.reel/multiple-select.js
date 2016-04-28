@@ -193,26 +193,26 @@ exports.MultipleSelect = Component.specialize(/** @lends MultipleSelect# */ {
 
     _addValueToContent: {
         value: function(value, isFromOptions) {
-            var isValid = true;
+            var shouldMultipleSelectAcceptValue = this.callDelegateMethod("shouldMultipleSelectAcceptValue", this, value),
+                isValid = typeof shouldMultipleSelectAcceptValue === "boolean" ? shouldMultipleSelectAcceptValue : true;
 
-            if (this.converter) {
+            if (isValid && this.converter) {
                 if (!isFromOptions && this.converter.validator && typeof this.converter.validator.validate === 'function') {
                     isValid = this.converter.validator.validate(value);
                 }
 
-                if (isValid) {
-                    this.invalidValue = null;
-
-                    if (!isFromOptions && typeof this.converter.revert === 'function') {
-                        value = this.converter.revert(value);
-                    }
-                } else {
-                    this.invalidValue = value;
+                if (isValid && !isFromOptions && typeof this.converter.revert === 'function') {
+                    value = this.converter.revert(value);
                 }
             }
+
             if (isValid) {
+                this.invalidValue = null;
                 this.values.push(value);
+            } else {
+                this.invalidValue = value;
             }
+
             return isValid;
         }
     }
