@@ -30,7 +30,7 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
 
             if (passwordMatch !== this._passwordMatch) {
                 this._passwordMatch = passwordMatch;
-                this.dispatchOwnPropertyChange("value", this.password, false);
+                this.dispatchOwnPropertyChange("value", this._password1, false);
             }
         },
         get: function () {
