@@ -1,3 +1,20 @@
 .SelectMultiple {
+    position: relative;
     width: 100%;
+    height: 7.75em;
+    font-size: 1em;
+    border-radius: 4px;
+    outline: none;
+    background: #242628;
+    border-radius: 4px;
+    border:         1px solid transparent;
+    border-top:     1px solid rgba(0, 0, 0, .23);
+    border-bottom:  1px solid rgba(255, 255, 255, .15);
+}
+
+.SelectMultiple option {
+    font-family: 'lato';
+    font-weight: 300;
+    color: #E0E5E5;
+    padding: .25em .5em;
 }
