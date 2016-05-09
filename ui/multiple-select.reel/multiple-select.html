@@ -65,7 +65,7 @@
         "optionsController": {
             "prototype": "montage/core/range-controller",
             "bindings": {
-                "content": {"<-": "@owner.options.filter{path(@owner.labelPath).startsWith(@owner._optionsPrefix)}"}
+                "content": {"<-": "!!@owner.labelPath ? @owner.options.filter{path(@owner.labelPath).startsWith(@owner._optionsPrefix)} : @owner.options"}
             }
         },
         "options": {

@@ -28,7 +28,7 @@
                 "element": {"#": "label"}
             },
             "bindings": {
-                "value": {"<-": "@owner.object.path(@owner.labelPath)"}
+                "value": {"<-": "!!@owner.labelPath ? @owner.object.path(@owner.labelPath) : @owner.object"}
             }
         },
         "deleteButton": {

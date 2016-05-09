@@ -22,7 +22,7 @@
                 "element": {"#": "label"}
             },
             "bindings": {
-                "value": {"<-": "@owner.option.path(@owner.labelPath)"}
+                "value": {"<-": "!!@owner.labelPath ? @owner.option.path(@owner.labelPath) : @owner.option"}
             }
         }
     }
