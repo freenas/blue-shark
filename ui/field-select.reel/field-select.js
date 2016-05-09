@@ -18,16 +18,7 @@ exports.FieldSelect = Component.specialize(/** @lends FieldSelect# */ {
         },
         set: function (options) {
             if (Array.isArray(options)) {
-                //Fixme: mapping probably useless with a converter, need to investigate.
-                this._options = options.map(function(x) {
-                    if (typeof x === "string") {
-                        return {
-                            label: x,
-                            value: x
-                        };
-                    }
-                    return x;
-                });
+                this._options = options;
             } else {
                 this._options = null;
             }

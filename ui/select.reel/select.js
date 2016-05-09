@@ -44,6 +44,7 @@ exports.Select = Component.specialize({
         value: function (isFirstTime) {
             if (isFirstTime) {
                 this._mutationObserver = new MutationObserver(this.handleMutations.bind(this));
+                this.addRangeAtPathChangeListener("_originalContent", this, "handleOriginalContentChange");
             }
 
             this._mutationObserver.observe(this.element, {
@@ -56,6 +57,31 @@ exports.Select = Component.specialize({
     handleMutations: {
         value: function (event) {
             this.needsDraw =  true;
+        }
+    },
+
+    handleOriginalContentChange: {
+        value: function() {
+            var options = null;
+
+            if (this._originalContent) {
+                if (this.converter) {
+                    options = this.converter.convert(this._originalContent);
+                } else {
+                    options = this._originalContent;
+                }
+
+                var indexNoneOption = options.indexOf(NONE_SELECT_OPTION);
+
+                if (this._hasOptionalValue && indexNoneOption === -1) { // missing
+                    options.unshift(NONE_SELECT_OPTION)
+
+                } else if (!this._hasOptionalValue && indexNoneOption > -1) { //
+                    options.splice(indexNoneOption, 1)
+                }
+            }
+
+            this._options = options;
         }
     },
 
@@ -84,26 +110,6 @@ exports.Select = Component.specialize({
 
     options: {
         set: function (content) {
-            var options = null;
-
-            if (content) {
-                if (this.converter) {
-                    options = this.converter.convert(content);
-                } else {
-                    options = content;
-                }
-
-                var indexNoneOption = options.indexOf(NONE_SELECT_OPTION);
-
-                if (this._hasOptionalValue && indexNoneOption === -1) { // missing
-                    options.unshift(NONE_SELECT_OPTION)
-
-                } else if (!this._hasOptionalValue && indexNoneOption > -1) { //
-                    options.splice(indexNoneOption, 1)
-                }
-            }
-
-            this._options = options;
             this._originalContent = content;
         },
         get: function () {
