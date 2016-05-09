@@ -128,10 +128,11 @@
     display: none;
     position: relative;
     width: 100%;
-    background: rgba(210,0,0,.8);
+    background: #E0003A;
     padding: .5em;
     padding-top: .2em;
     font-weight: 300;
+    color: #fff;
     border-bottom-left-radius:  4px;
     border-bottom-right-radius: 4px;
 }
@@ -144,29 +145,15 @@
 
 .Field.has-error .Field-control input,
 .Field.has-error .Field-control textarea {
-    border-color: rgba(210,0,0,.8);
+    border-color: #E0003A;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
 
 .Field.is-validated .Field-control input,
 .Field.is-validated .Field-control textarea {
-    border-color: #149640;
+    border-color: #1E963F;
 }
-
-/* option border around field on error */
-
-/*.Field.has-error:before {
-    content: '';
-    position: absolute;
-    top: -.5em;
-    right: -.5em;
-    left: -.5em;
-    bottom: -.5em;
-    border-radius: 4px;
-    border: 1px solid rgba(210,0,0,.8);
-    pointer-events: none;
-}*/
 
 .Field-info:hover {
     color: #fff;

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="field-multiple-select.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+        "field": {
+            "prototype": "ui/field.reel",
+            "properties": {
+                "element": {"#": "field"}
+            },
+            "bindings": {
+                "label": {"<-": "@owner.label"},
+                "enabled": {"<-": "@owner.enabled"}
+            }
+        },
+        "multipleSelect": {
+            "prototype": "ui/multiple-select.reel",
+            "properties": {
+                "element": {"#": "multipleSelect"}
+            },
+            "bindings": {
+                "options": {"<-": "@owner.options"},
+                "labelPath": {"<-": "@owner.labelPath"},
+                "placeholderValue": {"<-": "@owner.placeholderValue"},
+                "inputErrorMessage": {"<-": "@owner.inputErrorMessage"},
+                "valueErrorMessage": {"<-": "@owner.valueErrorMessage"},
+                "values": {"<->": "@owner.values"},
+                "enabled": {"<-": "@owner.enabled"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="FieldMultipleSelect">
+        <div data-montage-id="field">
+            <div data-montage-id="multipleSelect"></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -10,14 +10,12 @@
                 "element": {"#": "owner"}
             }
         },
-        "converter": {
-            "prototype": "montage/core/converter/number-converter"
-        },
         "default": {
-            "prototype": "blue-shark/ui/multiple-select.reel",
+            "prototype": "blue-shark/ui/field-multiple-select.reel",
             "properties": {
                 "element": {"#": "default"},
-                    "options": [
+                "label": "Multiple Select Label",
+                "options": [
                     {"name": "foo", "myProperty": "blah 1"},
                     {"name": "aaoption2", "myProperty": "blah 2"},
                     {"name": "aaaoption3", "myProperty": "blah 3"},
@@ -31,9 +29,7 @@
                 "placeholderValue": "enter info here",
                 "inputErrorMessage": "This is my custom error message",
                 "valueErrorMessage": "This is an error message for values edition"
-            },
-            "bindings": {
-                "converter": {"<-": "@owner.fakeConverter"}
+
             }
         }
     }
@@ -50,7 +46,8 @@
         </svg>
         <!-- end -->
         <div class="container">
-            <h1>Multiple Select</h1>
+            <h1>Field Date</h1>
+            <h3>Default</h3>
             <div data-montage-id="default"></div>
         </div>
     </div>
