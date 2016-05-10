@@ -68,7 +68,20 @@ exports.Select = Component.specialize({
                 if (this.converter) {
                     options = this.converter.convert(this._originalContent);
                 } else {
-                    options = this._originalContent;
+                    var isConverterMissing = false;
+                    options = this._originalContent.map(function(x) {
+                        if (typeof x === 'string') {
+                            isConverterMissing = true;
+                            return {
+                                label: x,
+                                value: x
+                            };
+                        }
+                        return x;
+                    });
+                    if (isConverterMissing) {
+                        console.warn('Usage of strings array in select component is deprecated, please use a converter instead.');
+                    }
                 }
 
                 var indexNoneOption = options.indexOf(NONE_SELECT_OPTION);
