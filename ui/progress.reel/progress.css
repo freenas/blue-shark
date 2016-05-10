@@ -8,8 +8,8 @@
 .Progress-bar {
     position: absolute;
     top:    0;
-    left:   0;
-    right:  0;
+    left:   -1px;
+    right:  -1px;
     bottom: 0;
     background-color: #1F88D2;
     transition: transform .25s ease-in-out;
