@@ -13,7 +13,7 @@
             "bindings": {
                 "_inputError": {"<-": "!!@owner.invalidValue && @owner.invalidValue == @value.value"},
                 "classList.has('has-error')": {"<-": "@owner._inputError"},
-                "classList.has('draggable')": {"<-": "@owner.draggable"}
+                "classList.has('draggable')": {"<-": "@owner.enabled"}
             },
             "listeners": [
                 {
