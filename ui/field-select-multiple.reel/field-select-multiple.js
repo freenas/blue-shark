@@ -7,10 +7,4 @@ var Component = require("montage/ui/component").Component;
  * @class FieldSelectMultiple
  * @extends Component
  */
-exports.FieldSelectMultiple = Component.specialize(/** @lends FieldSelectMultiple# */ {
-    constructor: {
-        value: function FieldSelectMultiple() {
-            this.super();
-        }
-    }
-});
+exports.FieldSelectMultiple = Component.specialize();

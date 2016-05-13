@@ -26,6 +26,10 @@ exports.MultipleSelect = AbstractDropZoneComponent.specialize(/** @lends Multipl
         value: null
     },
 
+    isDraggable: {
+        value: false
+    },
+
     __inputError: {
         value: null
     },
