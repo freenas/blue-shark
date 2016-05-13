@@ -1,14 +1,15 @@
 /**
  * @module ui/multiple-select.reel
  */
-var Component = require("montage/ui/component").Component,
+var AbstractDropZoneComponent = require("core/drag-drop/abstract-dropzone-component").AbstractDropZoneComponent,
+    MultipleSelectValue = require("./multiple-select-value.reel").MultipleSelectValue,
     KeyComposer = require("montage/composer/key-composer").KeyComposer;
 
 /**
  * @class MultipleSelect
  * @extends Component
  */
-exports.MultipleSelect = Component.specialize(/** @lends MultipleSelect# */ {
+exports.MultipleSelect = AbstractDropZoneComponent.specialize(/** @lends MultipleSelect# */ {
     enabled: {
         value:  true
     },
@@ -75,7 +76,9 @@ exports.MultipleSelect = Component.specialize(/** @lends MultipleSelect# */ {
     },
 
     enterDocument: {
-        value: function() {
+        value: function (firstTime) {
+            AbstractDropZoneComponent.prototype.enterDocument.call(this, firstTime);
+
             if (!this.values) {
                 this.values = [];
             }
@@ -97,9 +100,99 @@ exports.MultipleSelect = Component.specialize(/** @lends MultipleSelect# */ {
         }
     },
 
+    _shouldAcceptComponent: {
+        value: function (draggableComponent) {
+            return this.element.contains(draggableComponent.element);
+        }
+    },
+
+    handleComponentDragOver: {
+        value: function (draggableComponent, dragEvent) {
+            var pointerPositionX = dragEvent.startPositionX + dragEvent.translateX,
+                pointerPositionY = dragEvent.startPositionY + dragEvent.translateY,
+                multipleSelectValue = this._findMultipleSelectValueComponentFromPoint(pointerPositionX, pointerPositionY);
+
+            if (multipleSelectValue) {
+                if (draggableComponent !== multipleSelectValue && multipleSelectValue !== this._previousOverMultipleSelectValue) {
+                    this._clearPreviousOverMultipleSelectValueIfNeeded();
+                    this._previousOverMultipleSelectValue = multipleSelectValue;
+                    multipleSelectValue.classList.add("dragOver");
+                }
+            } else if (this._previousOverMultipleSelectValue) {
+                this._clearPreviousOverMultipleSelectValueIfNeeded();
+            }
+        }
+    },
+
+    didComponentDrop: {
+        value: function (draggableComponent) {
+            var draggedObject;
+
+            if (this._previousOverMultipleSelectValue) {
+                draggedObject = this._valuesController.content[draggableComponent.index];
+                this._valuesController.splice(this._previousOverMultipleSelectValue.index, 0, draggedObject);
+                this._valuesController.splice(draggableComponent.index, 1);
+            } else {
+                this._valuesController.push(this._valuesController.splice(draggableComponent.index, 1)[0]);
+            }
+        }
+    },
+
+    didComponentDragEnd: {
+        value: function () {
+            this._clearPreviousOverMultipleSelectValueIfNeeded();
+        }
+    },
+
     handleClearButtonAction: {
         value: function () {
             this._clearInput();
+        }
+    },
+
+    _clearPreviousOverMultipleSelectValueIfNeeded: {
+        value: function () {
+            if (this._previousOverMultipleSelectValue) {
+                this._previousOverMultipleSelectValue.classList.remove("dragOver");
+                this._previousOverMultipleSelectValue = null;
+            }
+        }
+    },
+
+    _findMultipleSelectValueComponentFromPoint: {
+        value: function (pointerPositionX, pointerPositionY) {
+            var element = document.elementFromPoint(pointerPositionX, pointerPositionY);
+            return element ? this._findMultipleSelectValueComponentFromElement(element) : null;
+        }
+    },
+
+
+    _findMultipleSelectValueComponentFromElement: {
+        value: function (element) {
+            var component = this._findCloserComponentFromElement(element),
+                multipleSelectValueComponent;
+
+            while (component && !multipleSelectValueComponent && component !== this) {
+                if (component instanceof MultipleSelectValue) {
+                    multipleSelectValueComponent = component;
+                } else {
+                    component = component.parentComponent;
+                }
+            }
+
+            return multipleSelectValueComponent;
+        }
+    },
+
+    _findCloserComponentFromElement: {
+        value: function _findCloserComponentFromElement (element) {
+            var component;
+
+            while (element && !(component = element.component) && element !== this.element) {
+                element = element.parentNode;
+            }
+
+            return component;
         }
     },
 
