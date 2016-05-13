@@ -295,10 +295,11 @@ var Scrollview = exports.Scrollview = Component.specialize({
 
             if (this.footerWrapperElement.children.length) {
                 footerElement = this.footerWrapperElement.children[0];
-            }
-            if (this.contentElement.children.length > 1) {
+
+            } else if (this.contentElement.children.length > 1) {
                 footerElement = this.contentElement.children[this.contentElement.children.length - 1];
             }
+
             if (footerElement) {
                 if (!this._footerComponent) {
                     this._footerComponent = footerElement.component;
@@ -311,10 +312,9 @@ var Scrollview = exports.Scrollview = Component.specialize({
                         }
                     }
                 }
-                return footerElement;
-            } else {
-                return null;
             }
+
+            return footerElement;
         }
     },
 
