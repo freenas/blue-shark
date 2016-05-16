@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+        "default": {
+            "prototype": "blue-shark/ui/tabs.reel",
+            "properties": {
+                "element": {"#": "default"},
+                "options": [
+                    {"value": "day"},
+                    {"value": "week"},
+                    {"value": "month"},
+                    {"value": "year"}
+                ],
+                "currentSelection": {"value": "week"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Main">
+        <div class="container">
+            <h1>Tabs</h1>
+            <h3>Default </h3>
+            <div data-montage-id="default"></div>
+        </div>
+    </div>
+</body>
+</html>

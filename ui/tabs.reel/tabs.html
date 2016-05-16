@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="tabs.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+        "tabs": {
+            "prototype": "montage/ui/repetition.reel",
+            "properties": {
+                "element": {"#": "tabs"},
+                "isSelectionEnabled": true
+            },
+            "bindings": {
+                "content": {"<-": "@owner.options"}
+            }
+        },
+        "tab": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "tab"}
+            },
+            "bindings": {
+                "value": {"<-": "@tabs:iteration.object.value"},
+                "enabled": {"<-": "@owner.enabled"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Tabs">
+        <div data-montage-id="tabs" class="Tabs-group">
+            <button data-montage-id="tab" class="Tabs-tab"></button>
+        </div>
+    </div>
+</body>
+</html>
