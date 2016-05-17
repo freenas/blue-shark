@@ -1,7 +1,7 @@
 .blueShark-Button {
     box-sizing: border-box;
     font-family: "Lato", Helvetica, Arial, sans-serif;
-    font-size: 1em;
+    font-size: .75em;
     line-height: 2.9;
     font-weight: 300;
     min-width: 7em;
@@ -74,7 +74,3 @@
 .Button--primary    { background-color: #0378AA; }
 .Button--alert      { background-color: #E0003A; }
 .Button--create     { background-color: #1E963F; }
-
-.Button--small {
-    font-size: .75em;
-}
