@@ -41,7 +41,6 @@
     text-shadow: none;
 }
 
-
 .blueShark-Button:focus {
     outline: 0;
 }
@@ -70,6 +69,8 @@
 
 
 .Button--block { display: block; width: 100%; }
+
+.Button--large { font-size: 1em; }
 
 .Button--primary    { background-color: #0378AA; }
 .Button--alert      { background-color: #E0003A; }
