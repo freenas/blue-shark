@@ -15,6 +15,9 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
 
 
     value: {
+        set: function (value) {
+            this.reset();
+        },
         get: function () {
             return this._passwordMatch ? this._password1 : null;
         }
