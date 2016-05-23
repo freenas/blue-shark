@@ -30,6 +30,7 @@
     -webkit-appearance: none;
     cursor: pointer;
     text-overflow: ellipsis;
+    white-space: nowrap;
     overflow: hidden;
 }
 
@@ -110,7 +111,6 @@
 .Select-option.selected {
     background: #0095d5;
     cursor: default;
-    order: -1;
 }
 
 /* Disabled State */
