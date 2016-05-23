@@ -228,11 +228,18 @@ var Scrollview = exports.Scrollview = Component.specialize({
 
     handleWheel: {
         value: function (event) {
+            console.log(event);
             var previousScrollLeft = this.scrollLeft,
                 previousScrollTop = this.scrollTop;
 
-            this.scrollLeft += event.deltaX;
-            this.scrollTop += event.deltaY;
+            if (this.overflow === "scrollX") {
+                this.scrollLeft += event.deltaX;
+            } else if (this.overflow === "scrollY") {
+                this.scrollTop += event.deltaY;
+            } else {
+                this.scrollLeft += event.deltaX;
+                this.scrollTop += event.deltaY;
+            }
 
             if (this.scrollLeft !== previousScrollLeft || this.scrollTop !== previousScrollTop) {
                 this._setScrolling();
