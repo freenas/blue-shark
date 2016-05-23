@@ -228,7 +228,6 @@ var Scrollview = exports.Scrollview = Component.specialize({
 
     handleWheel: {
         value: function (event) {
-            console.log(event);
             var previousScrollLeft = this.scrollLeft,
                 previousScrollTop = this.scrollTop;
 
