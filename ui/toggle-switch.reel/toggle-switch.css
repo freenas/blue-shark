@@ -1,13 +1,10 @@
 .blueShark-ToggleSwitch {
     font-size: 0.8em;
     position: relative;
-    display: inline-block;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    width:      4em;
-    max-width:  4em;
+    display: block;
+    width:  4em;
     height: 2em;
-    border-radius: 1em;
+    border-radius: 2em;
     vertical-align: middle;
     border: 1px solid #ccc;
     color: #ccc;
@@ -41,6 +38,7 @@
     border: 4px solid transparent;
     background-clip: content-box;
     background-color: currentColor;
+    will-change: transform;
     -webkit-transition: -webkit-transform .2s cubic-bezier(.5,.15,.2,1);
     -moz-transition: -moz-transform .2s cubic-bezier(.5,.15,.2,1);
     -ms-transition: -ms-transform .2s cubic-bezier(.5,.15,.2,1);
@@ -53,12 +51,14 @@
 .blueShark-ToggleSwitch:after {
     content: 'off';
     position: absolute;
-    font-family: 'lato';
-    right: .6em;
-    top: 50%;
-    margin-top: -1.05em;
-    height: 2em;
-    line-height: 2em;
+    display: block;
+    font-family: 'helvetica-neue', arial;
+    right: .7em;
+    top: 0;
+    bottom: 0;
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.8em;
 }
 
 
