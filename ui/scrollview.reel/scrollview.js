@@ -178,7 +178,6 @@ var Scrollview = exports.Scrollview = Component.specialize({
                 this._mutationObserver = new MutationObserver(this.handleMutations.bind(this));
             }
 
-            this._getFooter();
             this._addEventListenerIfNeeded();
             window.addEventListener("resize", this, false);
 
