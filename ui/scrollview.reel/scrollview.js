@@ -332,12 +332,34 @@ var Scrollview = exports.Scrollview = Component.specialize({
         value: 0
     },
 
+    __contentWidth: {
+        value: 0
+    },
+
     _contentWidth: {
+        set: function (contentWidth) {
+            if (this.horizontalScrollbar && this.__contentWidth !== contentWidth) {
+                this.horizontalScrollbar.length = this.__contentWidth = contentWidth;
+            }
+        },
+        get: function () {
+            return this.__contentWidth;
+        }
+    },
+
+    __contentHeight: {
         value: 0
     },
 
     _contentHeight: {
-        value: 0
+        set: function (contentHeight) {
+            if (this.verticalScrollbar && this.__contentHeight !== contentHeight) {
+                this.verticalScrollbar.length = this.__contentHeight = contentHeight;
+            }
+        },
+        get: function () {
+            return this.__contentHeight;
+        }
     },
 
     _scrollbarPadding: {
