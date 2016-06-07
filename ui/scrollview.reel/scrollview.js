@@ -1,4 +1,6 @@
-var Component = require("montage/ui/component").Component;
+var Component = require("montage/ui/component").Component,
+    TranslateComposer = require("montage/composer/translate-composer").TranslateComposer;
+
 
 var Scrollview = exports.Scrollview = Component.specialize({
 
@@ -6,19 +8,19 @@ var Scrollview = exports.Scrollview = Component.specialize({
         get: function() {
             return this.parentComponent.selectedObject;
         },
-        set: function(selectedObject) {
-            if (this.parentComponent.selectedObject != selectedObject) {
+        set: function (selectedObject) {
+            if (this.parentComponent.selectedObject !== selectedObject) {
                 this.parentComponent.selectedObject = selectedObject
             }
         }
     },
 
     _hasHorizontalScrollbar: {
-        value: true
+        value: false
     },
 
     _hasVerticalScrollbar: {
-        value: true
+        value: false
     },
 
     _overflow: {
@@ -26,7 +28,7 @@ var Scrollview = exports.Scrollview = Component.specialize({
     },
 
     _needsUpdateScrollbars: {
-        value: true
+        value: false
     },
 
     overflow: {
@@ -35,38 +37,36 @@ var Scrollview = exports.Scrollview = Component.specialize({
         },
         set: function (value) {
             if (this._overflow !== value) {
-                 switch (value) {
+                this._overflow = value;
+
+                switch (value) {
                     case "scrollX":
-                        this._overflow = "scrollX";
                         this._hasHorizontalScrollbar = true;
                         this._hasVerticalScrollbar = false;
-                        this._needsUpdateScrollbars = true;
-                        this.needsDraw = true;
+                        this._translateComposer.axis = "horizontal";
                         break;
                     case "scrollY":
-                        this._overflow = "scrollY";
+                        this._translateComposer.axis = "vertical";
                         this._hasHorizontalScrollbar = false;
                         this._hasVerticalScrollbar = true;
-                        this._needsUpdateScrollbars = true;
-                        this.needsDraw = true;
                         break;
                     case "hidden":
-                        this._overflow = "hidden";
                         this._hasHorizontalScrollbar = false;
                         this._hasVerticalScrollbar = false;
-                        this._needsUpdateScrollbars = true;
-                        this.needsDraw = true;
                         break;
                     default:
                         if (this._overflow !== "scroll") {
                             this._overflow = "scroll";
-                            this._hasHorizontalScrollbar = true;
-                            this._hasVerticalScrollbar = true;
-                            this._needsUpdateScrollbars = true;
-                            this.needsDraw = true;
                         }
+
+                        this._translateComposer.axis = "both";
+                        this._hasHorizontalScrollbar = true;
+                        this._hasVerticalScrollbar = true;
                         break;
                  }
+
+                this._needsUpdateScrollbars = true;
+                this.needsDraw = true;
             }
         }
     },
@@ -82,6 +82,7 @@ var Scrollview = exports.Scrollview = Component.specialize({
         set: function (value) {
             if (this._scrollbarsSize !== value) {
                 this._scrollbarsSize = value;
+
                 this._needsUpdateScrollbars = true;
                 this.needsDraw = true;
             }
@@ -103,12 +104,12 @@ var Scrollview = exports.Scrollview = Component.specialize({
         set: function (value) {
             value = Math.max(0, value | 0);
 
-            if (value > this._maxScrollTop) {
-                value = this._maxScrollTop;
+            if (value > this._maxTranslateY) {
+                value = this._maxTranslateY;
             }
 
             if (this._scrollTop !== value) {
-                this._scrollTop = value;
+                this._translateComposer.translateY = this._scrollTop = value;
                 this._needsUpdateScroll = true;
                 this.needsDraw = true;
             }
@@ -125,31 +126,52 @@ var Scrollview = exports.Scrollview = Component.specialize({
         },
         set: function (value) {
             value = Math.max(0, value | 0);
-            if (value > this._maxScrollLeft) {
-                value = this._maxScrollLeft;
+            if (value > this._maxTranslateX) {
+                value = this._maxTranslateX;
             }
             if (this._scrollLeft !== value) {
-                this._scrollLeft = value;
+                this._translateComposer.translateX = this._scrollLeft = value;
                 this._needsUpdateScroll = true;
                 this.needsDraw = true;
             }
         }
     },
 
+
+    __translateComposer: {
+        value: null
+    },
+
+
+    _translateComposer: {
+        get: function () {
+            if (!this.__translateComposer) {
+                this.__translateComposer = new TranslateComposer();
+                this.__translateComposer.listenToWheelEvent = true;
+                this.__translateComposer.minTranslateX = 0;
+                this.__translateComposer.minTranslateY = 0;
+                this.__translateComposer.invertAxis = true;
+            }
+
+            return this.__translateComposer;
+        }
+    },
+
+
     enterDocument: {
         value: function (firstTime) {
             if (firstTime) {
-                if (!Scrollview.transform) {
+                if (!this.constructor.transform) {
                     if("webkitTransform" in this.element.style) {
-                        Scrollview.transform = "webkitTransform";
+                        this.constructor.transform = "webkitTransform";
                     } else if("MozTransform" in this.element.style) {
-                        Scrollview.transform = "MozTransform";
+                        this.constructor.transform = "MozTransform";
                     } else if("msTransform" in this.element.style) {
-                        Scrollview.transform = "msTransform";
+                        this.constructor.transform = "msTransform";
                     } else if("OTransform" in this.element.style) {
-                        Scrollview.transform = "OTransform";
+                        this.constructor.transform = "OTransform";
                     } else {
-                        Scrollview.transform = "transform";
+                        this.constructor.transform = "transform";
                     }
                 }
 
@@ -157,15 +179,8 @@ var Scrollview = exports.Scrollview = Component.specialize({
             }
 
             this._getFooter();
+            this._addEventListenerIfNeeded();
             window.addEventListener("resize", this, false);
-            this._element.addEventListener("wheel", this, false);
-            this._element.addEventListener("transitionend", this, false);
-
-            if (typeof WebKitAnimationEvent !== "undefined") {
-                this._element.addEventListener("webkitAnimationEnd", this, false);
-            } else {
-                this._element.addEventListener("animationend", this, false);
-            }
 
             this._mutationObserver.observe(this.element, {
                 subtree: true,
@@ -174,19 +189,46 @@ var Scrollview = exports.Scrollview = Component.specialize({
         }
     },
 
+
+    prepareForActivationEvents: {
+        value: function () {
+            this.addComposerForElement(this.__translateComposer, this.element);
+            this._addEventListenerIfNeeded(true);
+        }
+    },
+
+
     exitDocument: {
         value: function () {
             window.removeEventListener("resize", this, false);
-            this._element.removeEventListener("wheel", this, false);
-            this._element.removeEventListener("transitionend", this, false);
-
-            if (typeof WebKitAnimationEvent !== "undefined") {
-                this._element.removeEventListener("webkitAnimationEnd", this, false);
-            } else {
-                this._element.removeEventListener("animationend", this, false);
-            }
-
+            this._removeEventListenersIfNeeded();
             this._mutationObserver.disconnect();
+        }
+    },
+
+
+    _addEventListenerIfNeeded: {
+        value: function (force) {
+            if (this.preparedForActivationEvents || force) {
+                this._translateComposer.addEventListener("translate", this, false);
+                this._element.addEventListener("transitionend", this, false);
+                this._element.addEventListener(
+                    typeof WebKitAnimationEvent !== "undefined" ? "webkitAnimationEnd" : "animationend", this, false
+                );
+            }
+        }
+    },
+
+
+    _removeEventListenersIfNeeded: {
+        value: function () {
+            if (this.preparedForActivationEvents) {
+                this._translateComposer.removeEventListener("translate", this, false);
+                this._element.removeEventListener("transitionend", this, false);
+                this._element.removeEventListener(
+                    typeof WebKitAnimationEvent !== "undefined" ? "webkitAnimationEnd" : "animationend", this, false
+                );
+            }
         }
     },
 
@@ -213,37 +255,28 @@ var Scrollview = exports.Scrollview = Component.specialize({
         }
     },
 
-
-    handleMutations: {
-        value: function (event) {
-            this.needsDraw = true;
-        }
-    },
-
     handleResize: {
         value: function () {
             this.needsDraw = true;
         }
     },
 
-    handleWheel: {
+    handleTranslate: {
         value: function (event) {
             var previousScrollLeft = this.scrollLeft,
                 previousScrollTop = this.scrollTop;
 
-            if (this.overflow === "scrollX") {
-                this.scrollLeft += event.deltaX;
-            } else if (this.overflow === "scrollY") {
-                this.scrollTop += event.deltaY;
-            } else {
-                this.scrollLeft += event.deltaX;
-                this.scrollTop += event.deltaY;
+            if (this.overflow !== "scrollX") {
+                this.scrollTop = event.translateY;
+            }
+
+            if (this.overflow !== "scrollY") {
+                this.scrollLeft = event.translateX;
             }
 
             if (this.scrollLeft !== previousScrollLeft || this.scrollTop !== previousScrollTop) {
                 this._setScrolling();
                 event.stopImmediatePropagation();
-                event.preventDefault();
             }
         }
     },
@@ -262,12 +295,34 @@ var Scrollview = exports.Scrollview = Component.specialize({
         }
     },
 
-    _maxScrollLeft: {
+
+    __maxTranslateX: {
         value: 0
     },
 
-    _maxScrollTop: {
+
+    _maxTranslateX: {
+        set: function (value) {
+            this._translateComposer._maxTranslateX = this.__maxTranslateX = value;
+        },
+        get: function () {
+            return this.__maxTranslateX;
+        }
+    },
+
+
+    __maxTranslateY: {
         value: 0
+    },
+
+
+    _maxTranslateY: {
+        set: function (value) {
+            this._translateComposer._maxTranslateY = this.__maxTranslateY = value;
+        },
+        get: function () {
+            return this.__maxTranslateY;
+        }
     },
 
     _visibleWidth: {
@@ -336,42 +391,6 @@ var Scrollview = exports.Scrollview = Component.specialize({
         }
     },
 
-    _drawAfterDelay: {
-        value: function (miliseconds) {
-            var self = this;
-
-            if (!miliseconds) {
-                miliseconds = 450;
-            }
-
-            if (this.__drawAfterDelayTiemout) {
-                clearTimeout(this.__drawAfterDelayTiemout);
-            }
-
-            this.__drawAfterDelayTiemout = setTimeout(function () {
-                self.needsDraw = true;
-            }, miliseconds);
-        }
-    },
-
-    handleLength: {
-        get: function () {
-            return this._handleLength;
-        },
-        set: function (value) {
-            var self = this;
-
-            if (this._handleLength !== value) {
-                this._handleLength = value;
-                this.classList.add("isAnimating");
-                clearTimeout(this._animationTimeout);
-                this._animationTimeout = setTimeout(function () {
-                    self.classList.remove("isAnimating");
-                }, 330);
-                this.needsDraw = true;
-            }
-        }
-    },
 
     draw: {
         value: function () {
@@ -391,26 +410,26 @@ var Scrollview = exports.Scrollview = Component.specialize({
                 }
             }
 
-            this._maxScrollLeft = Math.max(0, this._contentWidth - this._visibleWidth);
-            this._maxScrollTop = Math.max(0, this._contentHeight - this._visibleHeight);
+            this._maxTranslateX = Math.max(0, this._contentWidth - this._visibleWidth);
+            this._maxTranslateY = Math.max(0, this._contentHeight - this._visibleHeight);
 
             if (this._needsAlignWithTop === true || this._needsAlignWithTop === false) {
                 if (this.overflow === "scrollX") {
-                    this.scrollLeft = this._needsAlignWithTop ? 0 : this._maxScrollLeft;
+                    this.scrollLeft = this._needsAlignWithTop ? 0 : this._maxTranslateX;
 
                 } else if (this.overflow === "scrollY") {
-                    this.scrollTop = this._needsAlignWithTop ? 0 : this._maxScrollTop;
+                    this.scrollTop = this._needsAlignWithTop ? 0 : this._maxTranslateY;
                 }
 
                 this._needsAlignWithTop = null;
             }
 
-            if (this.scrollLeft > this._maxScrollLeft) {
-                this.scrollLeft = this._maxScrollLeft;
+            if (this.scrollLeft > this._maxTranslateX) {
+                this.scrollLeft = this._maxTranslateX;
             }
 
-            if (this.scrollTop > this._maxScrollTop) {
-                this.scrollTop = this._maxScrollTop;
+            if (this.scrollTop > this._maxTranslateY) {
+                this.scrollTop = this._maxTranslateY;
             }
 
             if (this._needsUpdateScrollbars) {
@@ -458,3 +477,4 @@ var Scrollview = exports.Scrollview = Component.specialize({
 });
 
 Scrollview.prototype.handleWebkitAnimationEnd = Scrollview.prototype.handleAnimationend;
+Scrollview.prototype.handleMutations = Scrollview.prototype.handleResize;
