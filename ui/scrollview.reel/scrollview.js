@@ -466,7 +466,6 @@ var Scrollview = exports.Scrollview = Component.specialize({
                     this.verticalScrollbar.element.style.display = "block";
                     this.verticalScrollbar.needsDraw = true;
                 } else {
-                    this.contentWrapperElement.style.right = "0";
                     this.verticalScrollbar.element.style.display = "none";
                 }
                 if (this._hasHorizontalScrollbar) {
@@ -481,7 +480,6 @@ var Scrollview = exports.Scrollview = Component.specialize({
                     this.horizontalScrollbar.element.style.display = "block";
                     this.horizontalScrollbar.needsDraw = true;
                 } else {
-                    this.contentWrapperElement.style.bottom = "0";
                     this.horizontalScrollbar.element.style.display = "none";
                 }
                 this._needsUpdateScrollbars = false;
