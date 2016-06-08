@@ -262,20 +262,22 @@ var Scrollview = exports.Scrollview = Component.specialize({
 
     handleTranslate: {
         value: function (event) {
-            var previousScrollLeft = this.scrollLeft,
-                previousScrollTop = this.scrollTop;
+            if (event.pointer && event.pointer !== this._translateComposer._MOUSE_POINTER) {
+                var previousScrollLeft = this.scrollLeft,
+                    previousScrollTop = this.scrollTop;
 
-            if (this.overflow !== "scrollX") {
-                this.scrollTop = event.translateY;
-            }
+                if (this.overflow !== "scrollX") {
+                    this.scrollTop = event.translateY;
+                }
 
-            if (this.overflow !== "scrollY") {
-                this.scrollLeft = event.translateX;
-            }
+                if (this.overflow !== "scrollY") {
+                    this.scrollLeft = event.translateX;
+                }
 
-            if (this.scrollLeft !== previousScrollLeft || this.scrollTop !== previousScrollTop) {
-                this._setScrolling();
-                event.stopImmediatePropagation();
+                if (this.scrollLeft !== previousScrollLeft || this.scrollTop !== previousScrollTop) {
+                    this._setScrolling();
+                    event.stopImmediatePropagation();
+                }
             }
         }
     },
