@@ -4,6 +4,14 @@ var Component = require("montage/ui/component").Component,
 
 var Scrollview = exports.Scrollview = Component.specialize({
 
+    templateDidLoad: {
+        value: function () {
+            if (this._scrollbarsSize === null) {
+                this._scrollbarsSize = 8;
+            }
+        }
+    },
+
     selectedObject: {
         get: function() {
             return this.parentComponent.selectedObject;
@@ -72,7 +80,7 @@ var Scrollview = exports.Scrollview = Component.specialize({
     },
 
     _scrollbarsSize: {
-        value: 8
+        value: null
     },
 
     scrollbarsSize: {
@@ -81,7 +89,7 @@ var Scrollview = exports.Scrollview = Component.specialize({
         },
         set: function (value) {
             if (this._scrollbarsSize !== value) {
-                this._scrollbarsSize = value;
+                this.horizontalScrollbar.minHandlePixelSize = this.verticalScrollbar.minHandlePixelSize = this._scrollbarsSize = value;
 
                 this._needsUpdateScrollbars = true;
                 this.needsDraw = true;
@@ -326,12 +334,34 @@ var Scrollview = exports.Scrollview = Component.specialize({
         }
     },
 
+    __visibleWidth: {
+        value: 0
+    },
+
     _visibleWidth: {
+        set: function (visibleWidth) {
+            if (this.horizontalScrollbar && this.__visibleWidth !== visibleWidth) {
+                this.horizontalScrollbar.handleLength = this.__visibleWidth = visibleWidth;
+            }
+        },
+        get: function () {
+            return this.__visibleWidth;
+        }
+    },
+
+    __visibleHeight: {
         value: 0
     },
 
     _visibleHeight: {
-        value: 0
+        set: function (visibleHeight) {
+            if (this.verticalScrollbar && this.__visibleHeight !== visibleHeight) {
+                this.verticalScrollbar.handleLength = this.__visibleHeight = visibleHeight;
+            }
+        },
+        get: function () {
+            return this.__visibleHeight;
+        }
     },
 
     __contentWidth: {
