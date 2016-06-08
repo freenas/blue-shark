@@ -421,12 +421,10 @@ var Scrollview = exports.Scrollview = Component.specialize({
                 if (this._contentHeight > this._visibleHeight) {
                     if (footer.parentNode !== this.footerWrapperElement) {
                         this.footerWrapperElement.appendChild(footer);
+                        this.spacerElement.style.bottom = footer.offsetHeight + "px";
                     }
-                    this.spacerElement.style.bottom = footer.offsetHeight + "px";
-                } else {
-                    if (footer.parentNode === this.footerWrapperElement) {
-                        this.contentElement.appendChild(footer);
-                    }
+                } else if (footer.parentNode === this.footerWrapperElement) {
+                    this.contentElement.appendChild(footer);
                     this.spacerElement.style.bottom = "0";
                 }
             }
@@ -454,39 +452,38 @@ var Scrollview = exports.Scrollview = Component.specialize({
             }
 
             if (this._needsUpdateScrollbars) {
+                var verticalScrollBarElementStyle = this.verticalScrollbar.element.style,
+                    horizontalScrollBarElementStyle = this.horizontalScrollbar.element.style;
+
                 if (this._hasVerticalScrollbar) {
-                    // adds space for scrollbar
-                    // this.contentWrapperElement.style.right = this._scrollbarsSize + this._scrollbarPadding + "px";
-                    this.verticalScrollbar.element.style.width = this._scrollbarsSize + "px";
-                    if (this._hasHorizontalScrollbar) {
-                        this.verticalScrollbar.element.style.bottom = this._scrollbarsSize + this._scrollbarPadding + "px";
-                    } else {
-                        this.verticalScrollbar.element.style.bottom = this._scrollbarPadding + "px";
-                    }
-                    this.verticalScrollbar.element.style.display = "block";
+                    verticalScrollBarElementStyle.width = this._scrollbarsSize + "px";
+                    verticalScrollBarElementStyle.bottom = (this._hasHorizontalScrollbar ?
+                        this._scrollbarsSize + this._scrollbarPadding : this._scrollbarPadding) + "px";
+
+                    verticalScrollBarElementStyle.display = "block";
                     this.verticalScrollbar.needsDraw = true;
                 } else {
-                    this.verticalScrollbar.element.style.display = "none";
+                    verticalScrollBarElementStyle.display = "none";
                 }
+
                 if (this._hasHorizontalScrollbar) {
-                    // adds space for scrollbar
-                    // this.contentWrapperElement.style.bottom = this._scrollbarsSize + this._scrollbarPadding + "px";
-                    this.horizontalScrollbar.element.style.height = this._scrollbarsSize + "px";
-                    if (this._hasVerticalScrollbar) {
-                        this.horizontalScrollbar.element.style.right = this._scrollbarsSize + this._scrollbarPadding + "px";
-                    } else {
-                        this.horizontalScrollbar.element.style.right = this._scrollbarPadding + "px";
-                    }
-                    this.horizontalScrollbar.element.style.display = "block";
+                    horizontalScrollBarElementStyle.height = this._scrollbarsSize + "px";
+                    horizontalScrollBarElementStyle.right = (this._hasVerticalScrollbar ?
+                        this._scrollbarsSize + this._scrollbarPadding : this._scrollbarPadding) + "px";
+
+                    horizontalScrollBarElementStyle.display = "block";
                     this.horizontalScrollbar.needsDraw = true;
                 } else {
-                    this.horizontalScrollbar.element.style.display = "none";
+                    horizontalScrollBarElementStyle.display = "none";
                 }
+
                 this._needsUpdateScrollbars = false;
                 this.needsDraw = true;
             } else {
                 if (this._needsUpdateScroll) {
-                    this.contentElement.style[Scrollview.transform] = "translate3d(" + (-this._scrollLeft) + "px," + (-this._scrollTop) + "px,0)";
+                    this.contentElement.style[Scrollview.transform] = "translate3d(" + (-this._scrollLeft) + "px," +
+                        (-this._scrollTop) + "px,0)";
+
                     this._needsUpdateScroll = false;
                 }
             }
