@@ -85,12 +85,78 @@ exports.Scrollbar = Component.specialize({
     enterDocument: {
         value: function () {
             window.addEventListener("resize", this, false);
+            this._addEventListenerIfNeeded();
+        }
+    },
+
+    prepareForActivationEvents: {
+        value: function () {
+            this._addEventListener();
         }
     },
 
     exitDocument: {
         value: function () {
             window.removeEventListener("resize", this, false);
+            this._removeEventListenerIfNeeded();
+        }
+    },
+
+    handleMouseenter: {
+        value: function () {
+            this.classList.add("isAnimating");
+        }
+    },
+
+    handleMouseleave: {
+        value: function (event) {
+            if (event.target === this.element) {
+                this.classList.remove("isAnimating");
+            }
+        }
+    },
+
+    _addEventListenerIfNeeded: {
+        value: function () {
+            if (this.preparedForActivationEvents) {
+                this._addEventListener();
+            }
+        }
+    },
+
+    _addEventListener: {
+        value: function () {
+            if (window.PointerEvent) {
+                this._element.addEventListener("pointerenter", this, false);
+                this._element.addEventListener("pointerleave", this, false);
+
+            } else if (window.MSPointerEvent && window.navigator.msPointerEnabled) {
+                this._element.addEventListener("MSPointerEnter", this, false);
+                this._element.addEventListener("MSPointerLeave", this, false);
+
+            } else {
+                this._element.addEventListener("mouseenter", this, false);
+                this._element.addEventListener("mouseleave", this, false);
+            }
+        }
+    },
+
+    _removeEventListenerIfNeeded: {
+        value: function () {
+            if (this.preparedForActivationEvents) {
+                if (window.PointerEvent) {
+                    this._element.removeEventListener("pointerenter", this, false);
+                    this._element.removeEventListener("pointerleave", this, false);
+
+                } else if (window.MSPointerEvent && window.navigator.msPointerEnabled) {
+                    this._element.removeEventListener("MSPointerEnter", this, false);
+                    this._element.removeEventListener("MSPointerLeave", this, false);
+
+                } else {
+                    this._element.removeEventListener("mouseenter", this, false);
+                    this._element.removeEventListener("mouseleave", this, false);
+                }
+            }
         }
     },
 
