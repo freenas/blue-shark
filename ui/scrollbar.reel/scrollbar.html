@@ -8,17 +8,7 @@
         "owner": {
             "properties": {
                 "element": {"#": "owner"},
-                "handle": {"@": "handle"}
-            }
-        },
-        "handle": {
-            "prototype": "ui/draggable.reel",
-            "properties": {
-                "element": {"#": "handle"}
-            },
-            "bindings": {
-                "drag": {"<->": "@owner.offset"},
-                "isRounding": {"<-": "@owner.isRounding"}
+                "_handleElement": {"#": "handle"}
             }
         }
     }
