@@ -306,10 +306,16 @@ exports.Scrollbar = Component.specialize({
         }
     },
 
+    handleTranslateStart: {
+        value: function () {
+            this._isDragging = true;
+            this.classList.add("isAnimating");
+        }
+    },
+
     handleTranslate: {
         value: function (event) {
             this._isOwnUpdate = true;
-            this._isDragging = true;
 
             if (this.type === "horizontal") {
                 this.dragX = event.translateX * this.dragXMultiplier;
@@ -336,6 +342,7 @@ exports.Scrollbar = Component.specialize({
 
     _addEventListener: {
         value: function () {
+            this._translateComposer.addEventListener("translateStart", this, false);
             this._translateComposer.addEventListener("translate", this, false);
             this._translateComposer.addEventListener("translateEnd", this, false);
 
@@ -357,6 +364,7 @@ exports.Scrollbar = Component.specialize({
     _removeEventListenerIfNeeded: {
         value: function () {
             if (this.preparedForActivationEvents) {
+                this._translateComposer.removeEventListener("translateStart", this, false);
                 this._translateComposer.removeEventListener("translate", this, false);
                 this._translateComposer.removeEventListener("translateEnd", this, false);
 
