@@ -11,8 +11,10 @@
                 "_inputField": {"@": "input"},
                 "_optionsController": {"@": "optionsController"},
                 "_optionsList": {"@": "options"},
-                "_stringToTimeConverter": {"@": "stringToTimeConverter"},
-                "_timeToStringConverter": {"@": "timeToStringConverter"}
+                "_dateConverter": {"@": "dateConverter"}
+            },
+            "bindings": {
+                "classList.has('has-options')": {"<-": "!!@owner.options && !!@owner.options.length"}
             },
             "listeners": [
                 {
@@ -21,22 +23,17 @@
                 }
             ]
         },
-        "timeToStringConverter": {
-            "prototype": "./converters/time-to-string-converter",
+        "dateConverter": {
+            "prototype": "montage/core/converter/date-converter",
             "bindings": {
-                "format": {"<-": "@owner.format"}
-            }
-        },
-        "stringToTimeConverter": {
-            "prototype": "./converters/string-to-time-converter",
-            "bindings": {
-                "format": {"<-": "@owner.format"}
+                "pattern": {"<-": "!!@owner.pattern ? @owner.pattern : 'hh:mm tt'"}
             }
         },
         "input": {
             "prototype": "ui/text-field.reel",
             "properties": {
-                "element": {"#": "input"}
+                "element": {"#": "input"},
+                "converter": {"@": "dateConverter"}
             },
             "bindings": {
                 "value": {"<->": "@owner.value"}
@@ -60,7 +57,7 @@
             "prototype": "./time-option.reel",
             "properties": {
                 "element": {"#": "option"},
-                "converter": {"@": "timeToStringConverter"}
+                "converter": {"@": "dateConverter"}
             },
             "bindings": {
                 "selected": {"<->": "@owner._selectedOption"},

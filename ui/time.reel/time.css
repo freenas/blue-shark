@@ -73,7 +73,7 @@
     overflow: hidden;
 }
 
-.Time-input-field:focus + .Time-optionsContainer,
+.Time.has-options .Time-input-field:focus + .Time-optionsContainer,
 .Time-optionsContainer:active {
     visibility: visible;
     opacity: 1;

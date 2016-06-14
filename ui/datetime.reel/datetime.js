@@ -14,19 +14,73 @@ exports.Datetime = Component.specialize(/** @lends Datetime# */ {
 
     value: {
         get: function() {
-            if (this._date && this._time) {
-                return new Date(this._date + 'T' + this._time);
-            }
+            return this._value;
         },
         set: function(value) {
-            if (this._value != value) {
+            if (this._value != value && !this._areDatesEqual(this._value, value)) {
                 this._value = value;
-                if (typeof value === 'object' && typeof value.toISOString === 'function') {
-                    var parts = value.toISOString().split('T');
-                    this._date = parts[0];
-                    this._time = parts[1].substr(0,5);
+                if (typeof value === 'object') {
+                    this._date = new Date(value);
+                    this._time = new Date(value);
                 }
             }
+        }
+    },
+
+    __date: {
+        value: null
+    },
+
+    _date: {
+        get: function() {
+            return this.__date;
+        },
+        set: function(date) {
+            if (this.__date != date) {
+                this.__date = date;
+                this.value = this._getValue();
+            }
+        }
+    },
+
+    __time: {
+        value: null
+    },
+
+    _time: {
+        get: function() {
+            return this.__time;
+        },
+        set: function(time) {
+            if (this.__time != time) {
+                this.__time = time;
+                this.value = this._getValue();
+            }
+        }
+    },
+
+    _getValue: {
+        value: function() {
+            if (this._date && this._time) {
+                var date = new Date(this._date);
+                date.setHours(this._time.getHours());
+                date.setMinutes(this._time.getMinutes());
+                return date;
+            }
+        }
+    },
+
+    _areDatesEqual: {
+        value: function(dateA, dateB) {
+            var result = false;
+            if (dateA) {
+                if (dateB) {
+                    result = dateA.toISOString() == dateB.toISOString();
+                }
+            } else {
+                result = !dateB;
+            }
+            return result;
         }
     }
 });

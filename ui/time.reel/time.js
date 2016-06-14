@@ -2,8 +2,7 @@
  * @module ui/time.reel
  */
 var Component = require("montage/ui/component").Component,
-    KeyComposer = require("montage/composer/key-composer").KeyComposer,
-    Time = require('./model/time').Time;
+    KeyComposer = require("montage/composer/key-composer").KeyComposer;
 
 /**
  * @class Time
@@ -15,19 +14,22 @@ exports.Time = Component.specialize(/** @lends Time# */ {
             if (!this.options) {
                 this.options = [];
                 if (this.intervalInSeconds) {
-                    var maxValue = Time.create(23, 59, 59),
-                        nextOption = Time.create(),
-                        delta = Time.create(0, 0, this.intervalInSeconds);
-                    while (nextOption.isLowerOrEqualThan(maxValue)) {
+                    var maxValue = new Date(0, 0, 0, 23, 59, 59),
+                        seconds = 0,
+                        nextOption = new Date(0, 0, 0, 0, 0, seconds);
+                    while (nextOption <= maxValue) {
                         this.options.push(nextOption);
-                        nextOption = Time.createFromTimeAndDelta(nextOption, delta);
+                        seconds += this.intervalInSeconds;
+                        nextOption = new Date(0, 0, 0, 0, 0, seconds);
                     }
                 }
             }
             if (this.isDefaultNow) {
-                this.options.unshift({});
+                this.options.unshift(new Date());
             }
-            this._selectedOption = this.options[0];
+            if (!this.allowEmpty) {
+                this._selectedOption = this.options[0];
+            }
         }
     },
 
@@ -60,7 +62,7 @@ exports.Time = Component.specialize(/** @lends Time# */ {
     handleInputAction: {
         value: function() {
             if (this._inputField.value) {
-                this.value = this._stringToTimeConverter.convert(this._inputField.value);
+                this.value = this._inputField.value;
                 this._selectedOption = this._findMatchingOption();
                 this._blurInputField();
             }
@@ -84,7 +86,6 @@ exports.Time = Component.specialize(/** @lends Time# */ {
             switch (event.target.component) {
                 case this._inputField:
                     if (this.options && this.options.length > 0) {
-
                         this._navigateInOptions(-1);
                     }
                     break;
@@ -137,7 +138,7 @@ exports.Time = Component.specialize(/** @lends Time# */ {
             if (option && this.__selectedOption != option) {
                 this.__selectedOption = option;
                 this._optionsController.select(option);
-                this.value = this._timeToStringConverter.convert(option);
+                this.value = option;
             }
         }
     },

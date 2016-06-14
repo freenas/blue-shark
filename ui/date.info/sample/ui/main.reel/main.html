@@ -7,13 +7,17 @@
     {
         "owner": {
             "properties": {
-                "element": {"#": "owner"}
+                "element": {"#": "owner"},
+                "value": "1/27/2010"
             }
         },
         "default": {
             "prototype": "blue-shark/ui/date.reel",
             "properties": {
                 "element": {"#": "default"}
+            },
+            "bindings": {
+                "value": {"<->": "@owner.value"}
             }
         }
     }
