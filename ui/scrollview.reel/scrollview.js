@@ -191,7 +191,8 @@ var Scrollview = exports.Scrollview = Component.specialize({
 
             this._mutationObserver.observe(this.element, {
                 subtree: true,
-                childList: true
+                childList: true,
+                attributes: true
             });
         }
     },
@@ -261,6 +262,18 @@ var Scrollview = exports.Scrollview = Component.specialize({
             }
         }
     },
+
+
+    handleMutations: {
+        value: function (event) {
+            if (event.type === "attributes" && event.attributeName !== "style") {
+                return void 0;
+            }
+
+            this.needsDraw = true;
+        }
+    },
+
 
     handleResize: {
         value: function () {
@@ -525,4 +538,3 @@ var Scrollview = exports.Scrollview = Component.specialize({
 });
 
 Scrollview.prototype.handleWebkitAnimationEnd = Scrollview.prototype.handleAnimationend;
-Scrollview.prototype.handleMutations = Scrollview.prototype.handleResize;
