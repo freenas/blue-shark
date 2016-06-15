@@ -36,9 +36,11 @@ exports.Datetime = Component.specialize(/** @lends Datetime# */ {
             return this.__date;
         },
         set: function(date) {
-            if (this.__date != date) {
+            if (this.__date != date && !this._areDatesEqual(this.__date, date)) {
                 this.__date = date;
-                this.value = this._getValue();
+                if (date) {
+                    this.value = this._getValue();
+                }
             }
         }
     },
@@ -52,10 +54,18 @@ exports.Datetime = Component.specialize(/** @lends Datetime# */ {
             return this.__time;
         },
         set: function(time) {
-            if (this.__time != time) {
+            if (this.__time != time && !this._areDatesEqual(this.__time, time)) {
                 this.__time = time;
-                this.value = this._getValue();
+                if (time) {
+                    this.value = this._getValue();
+                }
             }
+        }
+    },
+
+    exitDocument: {
+        value: function() {
+            this._value = this._date = this._time = null;
         }
     },
 
