@@ -12,17 +12,6 @@ var Scrollview = exports.Scrollview = Component.specialize({
         }
     },
 
-    selectedObject: {
-        get: function() {
-            return this.parentComponent.selectedObject;
-        },
-        set: function (selectedObject) {
-            if (this.parentComponent.selectedObject !== selectedObject) {
-                this.parentComponent.selectedObject = selectedObject
-            }
-        }
-    },
-
     _hasHorizontalScrollbar: {
         value: false
     },
