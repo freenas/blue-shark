@@ -272,7 +272,7 @@ var Scrollview = exports.Scrollview = Component.specialize({
 
     handleTranslate: {
         value: function (event) {
-            if (event.pointer && event.pointer !== this._translateComposer._MOUSE_POINTER) {
+            if (event.pointer !== null && event.pointer !== this._translateComposer._MOUSE_POINTER) {
                 var previousScrollLeft = this.scrollLeft,
                     previousScrollTop = this.scrollTop;
 
