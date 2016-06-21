@@ -1,0 +1,73 @@
+:root {
+    --red:          #E0003A;
+
+    --green:        #1E963F;
+
+    --blue:             #0C5688;
+    --blue-darken-1:    #093A51;
+    --blue-darken-2:    #0B1E29;
+    --blue-lighten-1:   #0D65A0;
+    --blue-lighten-2:   #2089D3;
+
+    --orange:               #D95B1B;
+    --orange-lighten-1:     #DE7225;
+    --orange-lighten-2:     #D78F2A;
+    --orange-darken-1:      color(var(--orange) l(- 5%));
+    --orange-darken-2:      color(var(--orange) l(- 10%));
+
+    --black:        #0F1213;
+    --black-1:      #0F1213;
+
+    --grey:         #2F3233;
+    --grey-1:       #939E9F;
+    --grey-2:       #B1BCBE;
+    --grey-3:       #E0E5E5;
+
+    --grey-blue:    #242628;
+    --grey-blue-1:  #2A2E33;
+    --grey-blue-2:  #2F3233;
+
+
+    --main-bg-color: #16171A;
+    --main-text-color: #e6e6e6;
+
+    --color-success: var(--green);
+    --color-create:  var(--green);
+    --color-alert: color(red alpha(-10%));
+
+    --color-text-dark: #16171A;
+
+    --space:        1em;
+    --space-dbl:    calc(var(--space) * 2);
+    --space-half:   calc(var(--space) / 2);
+}
+
+/*
+FreeNas Color Palette
+
+Dark Blue BG:                   #0B1E29 - Global Sections
+Dark Blue Accent:               #093A51 - Selected Item on Global Sections
+
+Selection Primary Blue:         #0C5688 - Selection
+Selection Secondary Blue:       #0D65A0
+Selection Tertiary Blue:        #2089D3 - Selection mos
+
+Orange Primary:                 #D95B1B - Interior Accents
+Orange Secondary:               #DE7225
+Orange Tertiary:                #D78F2A
+
+Green:                          #1E963F - Success & Creation
+
+Dark Black:                     #0F1213 - Column Headers, Shadows @ 40%
+Medium Black:                   #16171A - Main BG & Text on light BG
+
+Dark Cool Grey:                 #242628 - Backgrounds, buttons, secondary section headers
+Medium Cool Grey:               #2A2E33
+Body Grey:                      #2F3233
+
+Light Grey:                     #939E9F -
+Lighter Grey:                   #B1BCBE -
+Lightest Grey:                  #E0E5E5 -
+
+Red:                            #E0003A - Error / Warning
+*/

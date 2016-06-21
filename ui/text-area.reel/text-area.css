@@ -1,39 +1,37 @@
-.blueShark-TextArea {
-    box-sizing: border-box;
-    display: block;
-    outline: none;
-    font-family: 'lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 100%; /* Override UA style. */
-    font-weight: 300;
-    width: 100%;
-    height: 5em;
-    padding: 0.25em .5em;
-    resize: vertical;
-    color: inherit;
-    background-color: rgba(0, 0, 0, .25);
-    border:         1px solid transparent;
-    border-top:     1px solid rgba(0, 0, 0, .23);
-    border-bottom:  1px solid rgba(255, 255, 255, .15);
-    border-radius: 4px;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-appearance: none; /* Removes inner shadow on iOS. */
+.blueShark-TextArea{
+    box-sizing:border-box;
+    display:block;
+    outline:none;
+    font-family:'lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size:100%;
+    font-weight:300;
+    width:100%;
+    height:5em;
+    padding:0.25em .5em;
+    resize:vertical;
+    color:inherit;
+    background-color:rgba(0, 0, 0, .25);
+    border:1px solid transparent;
+    border-top:1px solid rgba(0, 0, 0, .23);
+    border-bottom:1px solid rgba(255, 255, 255, .15);
+    border-radius:4px;
+    -webkit-tap-highlight-color:transparent;
+    -webkit-appearance:none;
 }
 
-/* States --------------------- */
-
-.blueShark-TextArea:focus {
-    border-color: #2B9CD8;
+.blueShark-TextArea:focus{
+    border-color:#2B9CD8;
 }
 
-.blueShark-TextArea.montage--disabled {
-    background: rgba(0, 0, 0, .1);
-    border-color: transparent;
-    opacity: .5;
-    pointer-events: none;
+.blueShark-TextArea.montage--disabled{
+    background:rgba(0, 0, 0, .1);
+    border-color:transparent;
+    opacity:.5;
+    pointer-events:none;
 }
 
-/* Placeholder --------------------- */
+.blueShark-TextArea::-webkit-input-placeholder{color:inherit; opacity:.5; }
 
-.blueShark-TextArea::-webkit-input-placeholder {color: inherit; opacity: .5; }
-.blueShark-TextArea::-moz-placeholder { color: inherit; opacity: .5; }
-.blueShark-TextArea:-ms-input-placeholder { color: inherit; opacity: .5; }
+.blueShark-TextArea::-moz-placeholder{ color:inherit; opacity:.5; }
+
+.blueShark-TextArea:-ms-input-placeholder{ color:inherit; opacity:.5; }
