@@ -1,15 +1,25 @@
 {
-    "name": "blue-shark",
-    "version": "0.1.0",
-    "dependencies": {
-        "montage": "montagejs/montage#74ff354859063ad590ab2ca4866b1b9dc3e01d1d"
-    },
-    "devDependencies": {
-        "montage-testing": "~0.4.3"
-    },
-    "exclude": [
-        "run-tests.html",
-        "test"
-    ],
-    "bundle": [ "ui/main.reel" ]
+  "name": "blue-shark",
+  "version": "0.1.0",
+  "dependencies": {
+    "montage": "montagejs/montage#74ff354859063ad590ab2ca4866b1b9dc3e01d1d"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.13.0",
+    "gulp": "^3.9.1",
+    "gulp-header": "^1.8.5",
+    "gulp-postcss": "^6.1.1",
+    "gulp-rename": "^1.2.2",
+    "montage-testing": "~0.4.3",
+    "postcss-cssnext": "^2.6.0",
+    "postcss-discard-comments": "^2.0.4",
+    "postcss-import": "^8.1.2"
+  },
+  "exclude": [
+    "run-tests.html",
+    "test"
+  ],
+  "bundle": [
+    "ui/main.reel"
+  ]
 }

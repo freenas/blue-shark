@@ -1,7 +1,9 @@
 .TimeOption {
     line-height: 1em;
     padding: .25em .5em;
-    user-select: none;
+    -moz-user-select: none;
+     -ms-user-select: none;
+         user-select: none;
     -webkit-user-select: none;
 }
 
