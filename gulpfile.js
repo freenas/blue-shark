@@ -1,15 +1,16 @@
 var path                    = require('path');
-var gulp                    = require('gulp');
-var postcss                 = require('gulp-postcss');
-var header                  = require('gulp-header');
-var rename                  = require('gulp-rename');
-var cssnext                 = require('postcss-cssnext');
-var postcssImport           = require('postcss-import');
-var postcssDiscardComments  = require('postcss-discard-comments');
-var browserSync             = require('browser-sync');
+    gulp                    = require('gulp'),
+    postcss                 = require('gulp-postcss'),
+    header                  = require('gulp-header'),
+    rename                  = require('gulp-rename'),
+    cssnext                 = require('postcss-cssnext'),
+    postcssImport           = require('postcss-import'),
+    postcssDiscardComments  = require('postcss-discard-comments'),
+    browserSync             = require('browser-sync'),
+    cssnano                 = require('cssnano');
+
 
 gulp.task('serve', ['css'], function() {
-
     browserSync.init({
         server: "./"
     });
@@ -23,7 +24,8 @@ gulp.task('css', function() {
     var processors = [
         postcssImport,
         cssnext,
-        postcssDiscardComments
+        postcssDiscardComments,
+        cssnano()
     ];
 
     return gulp.src('ui/**.reel/_*.css')
