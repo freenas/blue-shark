@@ -2,7 +2,7 @@
 
 .NumberInput.montage--disabled { pointer-events: none; }
 
-.NumberInput-input {
+.NumberInput-input.blueShark-TextField {
     border-radius: 0;
     text-align: center;
     padding-left:   0;
