@@ -6,7 +6,8 @@
     border-radius: 0;
     text-align: center;
     padding-left:   0;
-    padding-right: 0;
+    padding-right:  0;
+    border-color: transparent;
 }
 
 .NumberInput-control {
@@ -19,12 +20,13 @@
     text-align: center;
     background: none;
     border: none;
-    color: #fff;
+    color: #939E9F;
     border-bottom: 1px solid rgba(0, 0, 0, .4);
     border-top: 1px solid rgba(255, 255, 255, .05);
     background: rgba(255,255,255,.1);
     outline: none;
     transition: opacity .25s ease-in-out;
+    cursor: pointer;
 }
 
 .NumberInput-control:first-child {
@@ -39,4 +41,7 @@
 
 .NumberInput.montage--disabled .NumberInput-control { opacity: .3; }
 
-.NumberInput-control:hover { background: rgba(255,255,255,.2); }
+.NumberInput-control:hover {
+    background: rgba(255,255,255,.2);
+    color: #fff;
+}
