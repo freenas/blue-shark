@@ -9,6 +9,7 @@
     "cssnano": "^3.7.1",
     "gulp": "^3.9.1",
     "gulp-header": "^1.8.5",
+    "gulp-newer": "^1.2.0",
     "gulp-postcss": "^6.1.1",
     "gulp-rename": "^1.2.2",
     "montage-testing": "~0.4.3",
