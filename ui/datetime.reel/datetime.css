@@ -17,4 +17,8 @@
     outline: none;
 }
 
+.Datetime > :not(:last-child) {
+    margin-bottom: .25em;
+}
+
 .Datetime:focus { border: 1px solid #2B9CD8; }
