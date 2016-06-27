@@ -74,5 +74,17 @@
 .Button--large { font-size: 1em; }
 
 .Button--primary    { background-color: #0378AA; }
-.Button--alert      { background-color: #E0003A; }
 .Button--create     { background-color: #1E963F; }
+
+.Button--alert  {
+    color: #E0003A;
+    background: rgba(150, 36, 36,.1);
+    border: 1px solid #E0003A;
+    box-shadow: none;
+}
+
+.Button--alert:hover {
+    color: #FFF;
+    background: #E0003A;
+    box-shadow: none;
+}
