@@ -11,7 +11,7 @@ var path                    = require('path');
     cssnano                 = require('cssnano');
 
 
-gulp.task('serve', ['css'], function() {
+gulp.task('serve', ['allCss'], function() {
     browserSync.init({
         server: "./"
     });
