@@ -73,5 +73,5 @@
 .Button--large { font-size: 1em; }
 
 .Button--primary    { background-color: #0378AA; }
-.Button--alert      { background-color: #E0003A; }
+.Button--alert      { background-color: var(--color-alert); }
 .Button--create     { background-color: #1E963F; }
