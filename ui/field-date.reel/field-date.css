@@ -1,8 +1,1 @@
-.FieldDate {
-
-}
-
-/* disabled state on input */
-.FieldDate .disabled input[type="date"] {
-    opacity: .5;
-}
+.FieldDate .disabled input[type=date]{opacity:.5}

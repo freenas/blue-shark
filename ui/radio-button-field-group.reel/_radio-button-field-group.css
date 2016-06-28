@@ -1,0 +1,9 @@
+.RadioButtonFieldGroup {}
+
+.RadioButtonFieldGroup.RadioButtonFieldGroup--block {
+    margin-top: 0;
+}
+
+.Field.disabled .RadioButtonFieldGroup {
+    opacity: .5;
+}

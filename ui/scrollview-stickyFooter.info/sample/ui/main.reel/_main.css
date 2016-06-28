@@ -1,0 +1,36 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.Main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.Main .container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 300px;
+}
+
+.inner {
+    flex: 1;
+    overflow: auto;
+    padding-bottom: 1em;
+}
+
+.ExampleFooter {
+    transition: all 1s ;
+}
+
+.ScrollviewFooterWrapper .ExampleFooter {
+    background-color: orange;
+}

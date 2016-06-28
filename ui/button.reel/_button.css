@@ -1,0 +1,89 @@
+.blueShark-Button {
+    box-sizing: border-box;
+    font-family: "Lato", Helvetica, Arial, sans-serif;
+    font-size: .75em;
+    line-height: 2.9;
+    font-weight: 300;
+    min-width: 7em;
+    padding: 0 1.8em;
+    text-align: center;
+    color: var(--main-text-color);
+    background: white;
+    border-radius: .3em;
+    border: 0;
+    margin: 0;
+    cursor: pointer;
+    -webkit-appearance: none;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, .5);
+    outline: none;
+    background-color: #666;
+    background-image: linear-gradient(transparent, rgba(0,0,0,.2));
+    box-shadow:
+        inset 0 1px rgba(255, 255, 255, .15),
+        inset 0 -1px rgba(0, 0, 0, .2),
+        0 1px 2px rgba(0, 0, 0, .4);
+}
+
+.blueShark-Button:hover  {
+    background-image: linear-gradient(transparent, transparent);
+    box-shadow:
+        inset 0 1px rgba(255, 255, 255, .15),
+        inset 0 -1px rgba(0, 0, 0, .3),
+        0 2px 6px 1px rgba(0, 0, 0, .4);
+}
+
+.blueShark-Button:active {
+    background-image: linear-gradient(rgba(0,0,0,.2), transparent);
+    box-shadow:
+        inset 0 -1px rgba(255, 255, 255, .1),
+        inset 0 1px rgba(0, 0, 0, .3);
+    outline: none;
+    text-shadow: none;
+}
+
+.blueShark-Button:focus {
+    outline: 0;
+}
+
+.blueShark-Button.montage--disabled {
+    opacity: .5;
+    background-color: #666;
+    box-shadow:
+        inset 0 1px rgba(255, 255, 255, 0),
+        inset 0 -1px rgba(0, 0, 0, 0),
+        0 1px 2px rgba(0, 0, 0, 0);
+    background-image: linear-gradient(transparent, transparent);
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0);
+}
+
+
+/* Label */
+
+.blueShark-Button-label { display: block; }
+
+.blueShark-Button:active .blueShark-Button-label { transform: translateY(.05em); }
+
+.Button-group .blueShark-Button + .blueShark-Button {
+    margin-left: .5em;
+}
+
+
+.Button--block { display: block; width: 100%; }
+
+.Button--large { font-size: 1em; }
+
+.Button--primary    { background-color: #0378AA; }
+.Button--create     { background-color: #1E963F; }
+
+.Button--alert  {
+    color: #E0003A;
+    background: rgba(150, 36, 36,.1);
+    border: 1px solid #E0003A;
+    box-shadow: none;
+}
+
+.Button--alert:hover {
+    color: #FFF;
+    background: #E0003A;
+    box-shadow: none;
+}

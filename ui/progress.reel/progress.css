@@ -1,17 +1,1 @@
-.Progress {
-    position: relative;
-    height: .5em;
-    background-color: #DFE4E4;
-    overflow: hidden;
-}
-
-.Progress-bar {
-    position: absolute;
-    top:    0;
-    left:   -1px;
-    right:  -1px;
-    bottom: 0;
-    background-color: #1F88D2;
-    transition: transform .25s ease-in-out;
-}
-
+.Progress{position:relative;height:.5em;background-color:#dfe4e4;overflow:hidden}.Progress-bar{position:absolute;top:0;left:-1px;right:-1px;bottom:0;background-color:#1f88d2;-webkit-transition:-webkit-transform .25s ease-in-out;transition:-webkit-transform .25s ease-in-out;transition:transform .25s ease-in-out;transition:transform .25s ease-in-out,-webkit-transform .25s ease-in-out}
