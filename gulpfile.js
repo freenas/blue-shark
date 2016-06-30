@@ -27,7 +27,7 @@ gulp.task('css', function() {
         postcssImport,
         cssnext,
         postcssDiscardComments,
-        cssnano({autoprefixer: false})
+        cssnano({autoprefixer: false, safe: true})
     ];
 
     return gulp.src('ui/**.reel/_*.css')
@@ -47,7 +47,7 @@ gulp.task('allCss', function() {
         postcssImport,
         cssnext,
         postcssDiscardComments,
-        cssnano({autoprefixer: false})
+        cssnano({autoprefixer: false, safe: true})
     ];
 
     return gulp.src('ui/**.reel/_*.css')
