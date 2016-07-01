@@ -51,8 +51,13 @@ exports.Duration = Component.specialize(/** @lends Duration# */ {
         set: function(value) {
             if (this._value !== value) {
                 this._value = value;
-                if (value && this.units && !this._unit && !this._count) {
-                    this._splitValue();
+                if (value) { 
+                    if (this.units && !this._unit && !this._count) {
+                        this._splitValue();
+                    }
+                } else {
+                    this.unit = null;
+                    this.count = null;
                 }
             }
         }
