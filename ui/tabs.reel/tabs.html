@@ -8,16 +8,23 @@
         "owner": {
             "properties": {
                 "element": {"#": "owner"}
+            },
+            "bindings": {
+                "selectedTab": {"<->": "@contentController.selection.0"}
+            }
+        },
+        "contentController": {
+            "prototype": "montage/core/range-controller",
+            "bindings": {
+                "content": {"<-": "@owner.options"}
             }
         },
         "tabs": {
             "prototype": "montage/ui/repetition.reel",
             "properties": {
                 "element": {"#": "tabs"},
+                "contentController": {"@": "contentController"},
                 "isSelectionEnabled": true
-            },
-            "bindings": {
-                "content": {"<-": "@owner.options"}
             }
         },
         "tab": {
@@ -26,7 +33,7 @@
                 "element": {"#": "tab"}
             },
             "bindings": {
-                "value": {"<-": "@tabs:iteration.object.value"},
+                "value": {"<-": "@tabs:iteration.object.label"},
                 "enabled": {"<-": "@owner.enabled"}
             }
         }
