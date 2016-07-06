@@ -1,4 +1,4 @@
-.blueShark-TextField {
+.TextField {
     font-family: "Lato", Helvetica, Arial, sans-serif;
     box-sizing: border-box;
     font-weight: 300;
@@ -19,9 +19,9 @@
     transition-duration: .25s;
 }
 
-.blueShark-TextField:focus { border: 1px solid #2B9CD8; }
+.TextField:focus { border: 1px solid #2B9CD8; }
 
-.blueShark-TextField.montage--disabled {
+.TextField.montage--disabled {
     background: rgba(0, 0, 0, .1);
     border-color: transparent;
     opacity: .5;

@@ -1,6 +1,6 @@
 var AbstractRadioButton = require("montage/ui/base/abstract-radio-button").AbstractRadioButton;
 
-CLASS_PREFIX = "blueShark-RadioButton";
+CLASS_PREFIX = "RadioButton";
 /**
  * @class RadioButton
  * @extends Component

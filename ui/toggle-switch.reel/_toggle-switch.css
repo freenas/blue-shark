@@ -2,7 +2,7 @@ body {
     background: green;
 }
 
-.blueShark-ToggleSwitch {
+.ToggleSwitch {
     font-size: 0.8em;
     position: relative;
     display: block;
@@ -23,7 +23,7 @@ body {
 
 /* Thumb --------------------- */
 
-.blueShark-ToggleSwitch:before {
+.ToggleSwitch:before {
     content: '';
     position: absolute;
     box-sizing: border-box;
@@ -43,7 +43,7 @@ body {
 
 /* Text --------------------- */
 
-.blueShark-ToggleSwitch:after {
+.ToggleSwitch:after {
     content: 'off';
     position: absolute;
     display: block;
@@ -76,7 +76,7 @@ body {
     color: #FFF;
 }
 
-.blueShark-ToggleSwitch.montage--disabled {
+.ToggleSwitch.montage--disabled {
     opacity: .5;
     background: transparent;
     border-color: #666;

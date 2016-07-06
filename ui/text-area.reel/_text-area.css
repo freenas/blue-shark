@@ -1,4 +1,4 @@
-.blueShark-TextArea {
+.TextArea {
     box-sizing: border-box;
     display: block;
     outline: none;
@@ -21,11 +21,11 @@
 
 /* States --------------------- */
 
-.blueShark-TextArea:focus {
+.TextArea:focus {
     border-color: #2B9CD8;
 }
 
-.blueShark-TextArea.montage--disabled {
+.TextArea.montage--disabled {
     background: rgba(0, 0, 0, .1);
     border-color: transparent;
     opacity: .5;
@@ -34,6 +34,6 @@
 
 /* Placeholder --------------------- */
 
-.blueShark-TextArea::-webkit-input-placeholder {color: inherit; opacity: .5; }
-.blueShark-TextArea::-moz-placeholder { color: inherit; opacity: .5; }
-.blueShark-TextArea:-ms-input-placeholder { color: inherit; opacity: .5; }
+.TextArea::-webkit-input-placeholder    { color: inherit; opacity: .5; }
+.TextArea::-moz-placeholder             { color: inherit; opacity: .5; }
+.TextArea:-ms-input-placeholder         { color: inherit; opacity: .5; }
