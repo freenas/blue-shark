@@ -1,4 +1,4 @@
-.blueShark-RadioButton {
+.RadioButton {
     position: relative;
     display: inline-block;
     box-sizing: border-box;
@@ -17,7 +17,7 @@
 
 /* Hit Area */
 
-/*.blueShark-RadioButton:after {
+/*.RadioButton:after {
     content: '';
     position: absolute;
     padding: 1em;
@@ -32,13 +32,13 @@
 
 /* States */
 
-.blueShark-RadioButton.montage--disabled {
+.RadioButton.montage--disabled {
     pointer-events: none;
     border-color: transparent;
 }
 
-.blueShark-RadioButton.montage--active:before,
-.blueShark-RadioButton.montage-RadioButton--checked:before {
+.RadioButton.montage--active:before,
+.RadioButton.montage-RadioButton--checked:before {
     content: '';
     position: absolute;
     background: green;
@@ -54,7 +54,7 @@
     transition: background-color.25s;
 }
 
-.blueShark-RadioButton.montage-RadioButton--checked.montage--disabled:before {
+.RadioButton.montage-RadioButton--checked.montage--disabled:before {
     background-color: transparent;
     box-shadow: none;
 }
