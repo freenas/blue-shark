@@ -28,8 +28,7 @@
             "prototype": "blue-shark/ui/button.reel",
             "properties": {
                 "element": {"#": "buttonPrimary"},
-                "value": "button",
-                "enabled": false
+                "value": "button"
             }
         },
         "buttonCreate": {
@@ -57,14 +56,14 @@
             "prototype": "blue-shark/ui/button.reel",
             "properties": {
                 "element": {"#": "buttonSmallPrimary"},
-                "value": "button"
+                "value": "Button"
             }
         },
         "buttonLargeIcon": {
             "prototype": "blue-shark/ui/button.reel",
             "properties": {
                 "element": {"#": "buttonLargeIcon"},
-                "value": "button with icon"
+                "value": "Button with icon"
             }
         }
     }
@@ -78,7 +77,9 @@
             <h3>Default Button</h3>
             <div data-montage-id="button"></div>
             <h3>Primary Button</h3>
-            <div data-montage-id="buttonPrimary" class="Button--primary"></div>
+            <div data-montage-id="buttonPrimary" class="Button--primary">
+                <svg><use xlink:href="#i-arrow"/></svg>
+            </div>
             <h3>Create Button</h3>
             <div data-montage-id="buttonCreate" class="Button--create"></div>
             <h3>Alert Button</h3>
@@ -87,10 +88,10 @@
             <div data-montage-id="buttonSmall" class="Button--large"></div>
             <h3>Large Primary Button</h3>
             <div data-montage-id="buttonSmallPrimary" class="Button--large Button--primary"></div>
-            <h3>Large Primary Button with Icon</h3>
             <div data-montage-id="buttonLargeIcon" class="Button--large Button--primary">
                 <svg><use xlink:href="#i-arrow"/></svg>
             </div>
+
         </div>
     </div>
 </body>
