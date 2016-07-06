@@ -18,7 +18,8 @@
                 "element": {"#": "selected"}
             },
             "bindings": {
-                "label": {"<-": "@options.selection.0.label.defined() ? @options.selection.0.label : @options.content.0.label" }
+                "enabled": {"<-": "@owner._options.length > 0"},
+                "label": {"<-": "@owner._options.length == 0 ? '' : @options.selection.0.label.defined() ? @options.selection.0.label : @options.content.0.label" }
             },
             "listeners": [
                 {
