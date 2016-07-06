@@ -69,16 +69,12 @@
 
 /* image */
 
-.Button > :not(:first-child) {
-    margin-right: -.5em;
-    max-height: 1.25em;
-    max-width:  1.25em;
+.Button > :not(.Button-label) {
+    margin-top: -1px;
+    margin-right: .25em;
+    max-height: 1.4em;
+    max-width:  1.4em;
     vertical-align: middle;
-}
-
-.Button.Button--large > :not(:first-child) {
-    max-height: 1.5em;
-    max-width:  1.5em;
 }
 
 .Button-group .Button + .Button {
