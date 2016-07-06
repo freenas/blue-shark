@@ -1,11 +1,14 @@
-.blueShark-Button {
+.Button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     box-sizing: border-box;
     font-family: "Lato", Helvetica, Arial, sans-serif;
     font-size: .75em;
     line-height: 2.9;
     font-weight: 300;
-    min-width: 7em;
-    padding: 0 1.8em;
+    min-width: 6em;
+    padding: 0 1em;
     text-align: center;
     color: var(--main-text-color);
     background: white;
@@ -24,7 +27,7 @@
         0 1px 2px rgba(0, 0, 0, .4);
 }
 
-.blueShark-Button:hover  {
+.Button:hover  {
     background-image: linear-gradient(transparent, transparent);
     box-shadow:
         inset 0 1px rgba(255, 255, 255, .15),
@@ -32,7 +35,7 @@
         0 2px 6px 1px rgba(0, 0, 0, .4);
 }
 
-.blueShark-Button:active {
+.Button:active {
     background-image: linear-gradient(rgba(0,0,0,.2), transparent);
     box-shadow:
         inset 0 -1px rgba(255, 255, 255, .1),
@@ -41,11 +44,11 @@
     text-shadow: none;
 }
 
-.blueShark-Button:focus {
+.Button:focus {
     outline: 0;
 }
 
-.blueShark-Button.montage--disabled {
+.Button.montage--disabled {
     opacity: .5;
     background-color: #666;
     box-shadow:
@@ -56,17 +59,22 @@
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0);
 }
 
+.Button > :not(:first-child) {
+    margin-left: .25em;
+    margin-right: -.5em;
+    max-height: 1.4em;
+    max-width: 1.4em;
+    /* outline: 1px solid red; */
+}
+
 
 /* Label */
 
-.blueShark-Button-label { display: block; }
+.Button:active .Button-label { transform: translateY(.05em); }
 
-.blueShark-Button:active .blueShark-Button-label { transform: translateY(.05em); }
-
-.Button-group .blueShark-Button + .blueShark-Button {
+.Button-group .Button + .Button {
     margin-left: .5em;
 }
-
 
 .Button--block { display: block; width: 100%; }
 
