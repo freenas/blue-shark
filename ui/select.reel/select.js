@@ -11,6 +11,10 @@ var Component = require("montage/ui/component").Component,
  */
 exports.Select = Component.specialize({
 
+    isExpanded: {
+        value: false
+    },
+
     _optionsMaxHeight: {
         value: 144
     },
@@ -42,10 +46,17 @@ exports.Select = Component.specialize({
 
     _setOptionsPosition: {
         value: function () {
+            this.classList.remove('is-at-bottom');
             if (this.element.getBoundingClientRect().top + this._optionsHeight > document.documentElement.clientHeight) {
                 this.classList.add('is-at-bottom');
-            } else {
-                this.classList.remove('is-at-bottom');
+            }
+        }
+    },
+
+    _checkTarget: {
+        value: function (event) {
+            if (event.target != this.element && event.target.parentNode != this.element){
+                this.isExpanded = false;
             }
         }
     },
@@ -53,7 +64,6 @@ exports.Select = Component.specialize({
     enterDocument: {
         value: function (isFirstTime) {
             if (isFirstTime) {
-                this.element.addEventListener('mousedown', this._setOptionsPosition.bind(this), false);
                 this._mutationObserver = new MutationObserver(this.handleMutations.bind(this));
                 this.addRangeAtPathChangeListener("_originalContent", this, "handleOriginalContentChange");
             }
@@ -62,6 +72,20 @@ exports.Select = Component.specialize({
                 subtree: true,
                 childList: true
             });
+
+            window.addEventListener('click', this._checkTarget.bind(this), false);
+        }
+    },
+
+    _toggleOptions: {
+        value: function () {
+            this.isExpanded = !this.isExpanded;
+        }
+    },
+
+    handleSelectButtonAction: {
+        value: function () {
+            this._toggleOptions();
         }
     },
 
@@ -112,14 +136,15 @@ exports.Select = Component.specialize({
     exitDocument: {
         value: function () {
             this._mutationObserver.disconnect();
+            window.removeEventListener('click', this._checkTarget.bind(this), false);
         }
     },
 
     draw: {
         value: function () {
             if (this.optionsElement.element.offsetHeight) {
+                this._setOptionsPosition();
                 this._optionsHeight = this.optionsElement.element.offsetHeight;
-                console.log('optionsHeight: ' + this._optionsHeight);
             }
             this._setOptionsHeight();
         }
@@ -154,6 +179,7 @@ exports.Select = Component.specialize({
         set: function (_selectedValue) {
             this.__selectedValue = _selectedValue;
             this.dispatchOwnPropertyChange("selectedValue", this.selectedValue, false);
+            this.isExpanded = false;
         },
         get: function () {
             return this.__selectedValue;

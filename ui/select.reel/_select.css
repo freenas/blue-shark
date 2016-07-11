@@ -84,6 +84,11 @@
         top: auto;
         bottom: 0;
     }
+
+    @nest .Select.is-expanded & {
+        visibility: visible;
+        opacity: 1;
+    }
 }
 
 .Select-options {
@@ -94,12 +99,7 @@
     font-size: inherit;
     line-height: inherit;
     cursor: pointer;
-}
 
-.Select-currentOption:focus + .Select-options-scrollview,
-.Select-options-scrollview:active {
-    visibility: visible;
-    opacity: 1;
 }
 
 .Select-option {
