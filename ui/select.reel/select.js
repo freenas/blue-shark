@@ -40,9 +40,20 @@ exports.Select = Component.specialize({
         }
     },
 
+    _setOptionsPosition: {
+        value: function () {
+            if (this.element.getBoundingClientRect().top + this._optionsHeight > document.documentElement.clientHeight) {
+                this.classList.add('is-at-bottom');
+            } else {
+                this.classList.remove('is-at-bottom');
+            }
+        }
+    },
+
     enterDocument: {
         value: function (isFirstTime) {
             if (isFirstTime) {
+                this.element.addEventListener('mousedown', this._setOptionsPosition.bind(this), false);
                 this._mutationObserver = new MutationObserver(this.handleMutations.bind(this));
                 this.addRangeAtPathChangeListener("_originalContent", this, "handleOriginalContentChange");
             }
@@ -108,6 +119,7 @@ exports.Select = Component.specialize({
         value: function () {
             if (this.optionsElement.element.offsetHeight) {
                 this._optionsHeight = this.optionsElement.element.offsetHeight;
+                console.log('optionsHeight: ' + this._optionsHeight);
             }
             this._setOptionsHeight();
         }
