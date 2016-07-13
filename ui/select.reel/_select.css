@@ -80,10 +80,7 @@
     background: rgba(90, 90, 90, 1);
     box-shadow: 0 0 6px rgba(0, 0, 0, .5);
 
-    @nest .Select.is-at-bottom & {
-        top: auto;
-        bottom: 0;
-    }
+    /* options position settings also set in select.js based on viewport*/
 
     @nest .Select.is-expanded & {
         visibility: visible;

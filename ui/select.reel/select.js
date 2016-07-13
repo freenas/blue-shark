@@ -44,16 +44,28 @@ exports.Select = Component.specialize({
         }
     },
 
+    _findAncestor: {
+        value: function (el, cls) {
+            while ((el = el.parentElement) && !el.classList.contains(cls));
+            return el;
+        }
+    },
+
     _setOptionsPosition: {
         value: function () {
-            this.classList.remove('is-at-bottom');
-            if (this.element.getBoundingClientRect().top + this._optionsHeight > document.documentElement.clientHeight) {
-                this.classList.add('is-at-bottom');
+            var elementBounds = this.element.getBoundingClientRect();
+            if (elementBounds.top + this._optionsHeight > document.documentElement.clientHeight ||
+                this._findAncestor(this.element,'ScrollviewSpacer').contains(document.elementFromPoint(elementBounds.left, elementBounds.bottom))) {
+                this.scrollView.element.style.bottom = '0px';
+                this.scrollView.element.style.top = 'auto';
+            } else {
+                this.scrollView.element.style.bottom = 'auto';
+                this.scrollView.element.style.top = '0px';
             }
         }
     },
 
-    _checkTarget: {
+    _checkClickTarget: {
         value: function (event) {
             if (event.target != this.element && event.target.parentNode != this.element){
                 this.isExpanded = false;
@@ -72,8 +84,8 @@ exports.Select = Component.specialize({
                 subtree: true,
                 childList: true
             });
-
-            window.addEventListener('click', this._checkTarget.bind(this), false);
+            window.addEventListener('click', this._checkClickTarget.bind(this), false);
+            window.addEventListener("resize", this, false);
         }
     },
 
@@ -86,6 +98,12 @@ exports.Select = Component.specialize({
     handleSelectButtonAction: {
         value: function () {
             this._toggleOptions();
+        }
+    },
+
+    handleResize: {
+        value: function () {
+            this.needsDraw = true;
         }
     },
 
@@ -136,15 +154,16 @@ exports.Select = Component.specialize({
     exitDocument: {
         value: function () {
             this._mutationObserver.disconnect();
-            window.removeEventListener('click', this._checkTarget.bind(this), false);
+            window.removeEventListener('click', this._checkClickTarget.bind(this), false);
+            window.removeEventListener("resize", this, false);
         }
     },
 
     draw: {
         value: function () {
             if (this.optionsElement.element.offsetHeight) {
-                this._setOptionsPosition();
                 this._optionsHeight = this.optionsElement.element.offsetHeight;
+                this._setOptionsPosition();
             }
             this._setOptionsHeight();
         }
