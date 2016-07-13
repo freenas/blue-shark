@@ -55,7 +55,7 @@ exports.Select = Component.specialize({
         value: function () {
             var elementBounds = this.element.getBoundingClientRect();
             if (elementBounds.top + this._optionsHeight > document.documentElement.clientHeight ||
-                this._findAncestor(this.element,'ScrollviewSpacer').contains(document.elementFromPoint(elementBounds.left, elementBounds.bottom))) {
+                !this._findAncestor(this.element,'ScrollviewSpacer').contains(document.elementFromPoint(elementBounds.left, elementBounds.top + this._optionsHeight))) {
                 this.scrollView.element.style.bottom = '0px';
                 this.scrollView.element.style.top = 'auto';
             } else {
