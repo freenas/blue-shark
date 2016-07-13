@@ -44,18 +44,9 @@ exports.Select = Component.specialize({
         }
     },
 
-    _findAncestor: {
-        value: function (el, cls) {
-            while ((el = el.parentElement) && !el.classList.contains(cls));
-            return el;
-        }
-    },
-
     _setOptionsPosition: {
         value: function () {
-            var elementBounds = this.element.getBoundingClientRect();
-            if (elementBounds.top + this._optionsHeight > document.documentElement.clientHeight ||
-                !this._findAncestor(this.element,'ScrollviewSpacer').contains(document.elementFromPoint(elementBounds.left, elementBounds.top + this._optionsHeight))) {
+            if (this.element.getBoundingClientRect().top + this._optionsHeight > document.documentElement.clientHeight) {
                 this.scrollView.element.style.bottom = '0px';
                 this.scrollView.element.style.top = 'auto';
             } else {
