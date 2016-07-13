@@ -10,6 +10,7 @@
                 "element": {"#": "owner"}
             },
             "bindings": {
+                "tabLabelPath": {"<-": "@owner.labelPath.defined() ? @owner.labelPath : 'label'"},
                 "selectedTab": {"<->": "@contentController.selection.0"}
             }
         },
@@ -33,7 +34,7 @@
                 "element": {"#": "tab"}
             },
             "bindings": {
-                "value": {"<-": "@tabs:iteration.object.label"},
+                "value": {"<-": "@tabs:iteration.object[@owner.tabLabelPath]"},
                 "enabled": {"<-": "@owner.enabled"}
             }
         }
