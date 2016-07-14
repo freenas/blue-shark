@@ -56,7 +56,7 @@ exports.Select = Component.specialize({
         }
     },
 
-    _checkClickTarget: {
+    handleClick: {
         value: function (event) {
             if (event.target != this.element && event.target.parentNode != this.element){
                 this.isExpanded = false;
@@ -75,7 +75,7 @@ exports.Select = Component.specialize({
                 subtree: true,
                 childList: true
             });
-            window.addEventListener('click', this._checkClickTarget.bind(this), false);
+            window.addEventListener('click', this, false);
             window.addEventListener("resize", this, false);
         }
     },
@@ -145,7 +145,7 @@ exports.Select = Component.specialize({
     exitDocument: {
         value: function () {
             this._mutationObserver.disconnect();
-            window.removeEventListener('click', this._checkClickTarget.bind(this), false);
+            window.removeEventListener('click', this, false);
             window.removeEventListener("resize", this, false);
         }
     },
