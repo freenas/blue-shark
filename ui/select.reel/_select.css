@@ -81,11 +81,6 @@
     box-shadow: 0 0 6px rgba(0, 0, 0, .5);
 
     /* options position settings also set in select.js based on viewport*/
-
-    @nest .Select.is-expanded & {
-        visibility: visible;
-        opacity: 1;
-    }
 }
 
 .Select-options {

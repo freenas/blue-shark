@@ -1,26 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
     <link rel="stylesheet" type="text/css" href="select.css">
     <script type="text/montage-serialization">
     {
         "owner": {
             "properties": {
                 "element": {"#": "owner"},
-                "optionsElement": {"@": "options"},
-                "scrollView": {"@": "scrollView"}
+                "optionsOverlayComponent": {"@": "optionsOverlay"}
             },
             "listeners": [
                 {
                     "type": "action",
                     "listener": {"@": "owner"}
                 }
-            ],
-            "bindings": {
-                "classList.has('is-expanded')": {"<-": "@owner.isExpanded"}
-            }
+            ]
         },
+
         "selectButton": {
             "prototype": "montage/ui/button.reel",
             "properties": {
@@ -28,48 +24,29 @@
             },
             "bindings": {
                 "enabled": {"<-": "@owner._options.length > 0"},
-                "label": {"<-": "@owner._options.length == 0 ? '' : @options.selection.0.label.defined() ? @options.selection.0.label : @options.content.0.label" }
+                "label": {"<-": "!enabled ? '' : (@optionsOverlay.optionsRepetition.selection.0.label || @owner._options.0.label)" }
             }
         },
-        "options": {
-            "prototype": "montage/ui/repetition.reel",
+
+        "optionsOverlay": {
+            "prototype": "./select-options.reel",
             "properties": {
-                "element": {"#": "options"},
-                "isSelectionEnabled": true
+                "element": {"#": "optionsOverlay"},
+                "anchor": {"#": "selectButton"}
             },
             "bindings": {
-                "content": {"<-": "@owner._options"}
-            }
-        },
-        "option": {
-            "prototype": "montage/ui/text.reel",
-            "properties": {
-                "element": {"#": "option"}
-            },
-            "bindings": {
-                "iteration": {"<-": "@options:iteration"},
-                "iteration.selected": {"<->": "@owner._selectedValue == iteration.object.value"},
-                "value": {"<-": "iteration.object.label"}
-            }
-        },
-        "scrollView": {
-            "prototype": "ui/scrollview.reel",
-            "properties": {
-                "element": {"#": "scrollView"},
-                "overflow": "scrollY"
+                "options": {"<-": "@owner._options"},
+                "selectedValue": {"<->": "@owner._selectedValue"}
             }
         }
+
     }
     </script>
 </head>
 <body>
     <div data-montage-id="owner" class="Select">
         <button data-montage-id="selectButton" class="Select-currentOption"></button>
-        <div data-montage-id="scrollView" class="Select-options-scrollview">
-            <div data-montage-id="options" class="Select-options">
-                <div data-montage-id="option" class="Select-option"></div>
-            </div>
-        </div>
+        <div data-montage-id="optionsOverlay"></div>
     </div>
 </body>
 </html>
