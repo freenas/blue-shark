@@ -23,6 +23,10 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
         value: 144
     },
 
+    _needsComputeBoundaries: {
+        value: false
+    },
+
     optionsMaxHeight: {
         get: function () {
             return this._optionsMaxHeight;
@@ -65,6 +69,7 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
             if (!this.isShown) {
                 this.element.ownerDocument.defaultView.addEventListener("wheel", this, true);
                 this._saveInitialCenterPosition();
+                this._needsComputeBoundaries = true;
             }
 
             Overlay.prototype.show.call(this);
@@ -154,29 +159,60 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
         value: function () {
             Overlay.prototype.willDraw.call(this);
 
-            this._anchorWidth = this.anchor.getBoundingClientRect().width;
-            this._optionsHeight = this.optionsRepetition.element.getBoundingClientRect().height;
+            if (this.isShown) {
+                var optionsRepetitionBoundingClientRect = this.optionsRepetition.element.getBoundingClientRect();
 
-            // Wait for the scrollview's placeholder to load the options' repetition.
-            if (this.options && this.options.length > 0 && this._optionsHeight === 0) {
-                this.needsDraw = true;
+                this._optionsHeight = optionsRepetitionBoundingClientRect.height;
+                this._anchorWidth = this.anchor.getBoundingClientRect().width;
             }
         }
     },
 
+    //@override super draw overlay method.
     draw: {
         value: function () {
-            Overlay.prototype.draw.call(this);
+            var overlayElementStyle = this.element.style;
 
-            // set options Height
-            if (this._optionsHeight < this._optionsMaxHeight) {
-                this.element.style.height = this._optionsHeight + "px";
+            if (this.isShown) {
+                var position = this._drawPosition;
+
+                overlayElementStyle.top = position.top + "px";
+                overlayElementStyle.left = position.left + "px";
+
+                // set options Height
+                if (this._optionsHeight < this._optionsMaxHeight) {
+                    overlayElementStyle.height = this._optionsHeight + "px";
+                } else {
+                    overlayElementStyle.height = this._optionsMaxHeight + "px";
+                }
+
+                // set options width
+                overlayElementStyle.width = this._anchorWidth + "px";
+
+                if (this._needsComputeBoundaries) {
+                    this.scrollView.element.style.visibility = overlayElementStyle.visibility =
+                        this.constructor.STYLE_VISIBILITY.hidden;
+
+                    this._needsComputeBoundaries = false;
+                    this.needsDraw = true;
+
+                } else {
+                    this.scrollView.element.style.visibility = overlayElementStyle.visibility =
+                        this.constructor.STYLE_VISIBILITY.visible;
+                }
             } else {
-                this.element.style.height = this._optionsMaxHeight + "px";
+                this.scrollView.element.style.visibility = overlayElementStyle.visibility =
+                    this.constructor.STYLE_VISIBILITY.hidden;
             }
+        }
+    }
 
-            // set options width
-            this.element.style.width = this._anchorWidth + "px";
+}, {
+
+    STYLE_VISIBILITY: {
+        value: {
+            hidden: "hidden",
+            visible: "visible"
         }
     }
 
