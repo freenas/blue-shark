@@ -164,6 +164,16 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
 
                 this._optionsHeight = optionsRepetitionBoundingClientRect.height;
                 this._anchorWidth = this.anchor.getBoundingClientRect().width;
+
+                if (!this._needsComputeBoundaries) {
+                    var documentHeight = this.element.ownerDocument.documentElement.clientHeight;
+
+                    if (optionsRepetitionBoundingClientRect.top + this._optionsHeight > documentHeight) {
+                        this.classList.add("is-outside-document");
+                    } else {
+                        this.classList.remove("is-outside-document");
+                    }
+                }
             }
         }
     },
