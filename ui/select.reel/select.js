@@ -66,10 +66,8 @@ exports.Select = Component.specialize({
     hasOptionalValue: {
         set: function (hasOptionalValue) {
             hasOptionalValue = !!hasOptionalValue;
-
             if (hasOptionalValue !== this._hasOptionalValue) {
                 this._hasOptionalValue = hasOptionalValue;
-
                 this._updateOptionsIfNeeeded();
             }
         },
@@ -78,18 +76,10 @@ exports.Select = Component.specialize({
         }
     },
 
-    _updateOptionsIfNeeeded: {
-        value: function () {
-            if (this._options) {
-                this.options = this._originalContent; // trigger setter.
-            }
-        }
-    },
-
     enterDocument: {
         value: function (isFirstTime) {
             if (isFirstTime) {
-                this.addRangeAtPathChangeListener("_originalContent", this, "handleOriginalContentChange");
+                this.addRangeAtPathChangeListener("_originalContent", this, "_handleOriginalContentChange");
             }
         }
     },
@@ -105,11 +95,11 @@ exports.Select = Component.specialize({
     handleSelectButtonAction: {
         value: function () {
             this.optionsOverlayComponent.isShown ? this.optionsOverlayComponent.hide() :
-                this.optionsOverlayComponent.show();
+                this._showOptions();
         }
     },
 
-    handleOriginalContentChange: {
+    _handleOriginalContentChange: {
         value: function() {
             var options = null;
 
@@ -144,6 +134,23 @@ exports.Select = Component.specialize({
             }
 
             this._options = options;
+        }
+    },
+
+    _updateOptionsIfNeeeded: {
+        value: function () {
+            if (this._options) {
+                this.options = this._originalContent; // trigger setter.
+            }
+        }
+    },
+
+    _showOptions: {
+        value: function() {
+            if (defaultEventManager.activeTarget.templateModuleId == this.optionsOverlayComponent.templateModuleId) {
+                defaultEventManager.activeTarget.hide();
+            }
+            this.optionsOverlayComponent.show()
         }
     }
 
