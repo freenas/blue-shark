@@ -93,7 +93,15 @@ exports.Select = Component.specialize({
             }
         }
     },
-    
+
+    exitDocument: {
+        value: function() {
+            if (this.optionsOverlayComponent.isShown) {
+                this.optionsOverlayComponent.hide();
+            }
+        }
+    },
+
     handleSelectButtonAction: {
         value: function () {
             this.optionsOverlayComponent.isShown ? this.optionsOverlayComponent.hide() :
