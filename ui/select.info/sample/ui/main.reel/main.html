@@ -37,6 +37,34 @@
             "bindings": {
                 "options": {"<-": "@owner.options"}
             }
+        },
+
+        "scrollView": {
+            "prototype": "blue-shark/ui/scrollview.reel",
+            "properties": {
+                "element": {"#": "scrollView"},
+                "overflow": "scrollY"
+            }
+        },
+
+        "selectThree": {
+            "prototype": "blue-shark/ui/select.reel",
+            "properties": {
+                "element": {"#": "selectThree"}
+            },
+            "bindings": {
+                "options": {"<-": "@owner.options"}
+            }
+        },
+
+        "selectFour": {
+            "prototype": "blue-shark/ui/select.reel",
+            "properties": {
+                "element": {"#": "selectFour"}
+            },
+            "bindings": {
+                "options": {"<-": "@owner.options"}
+            }
         }
     }
     </script>
@@ -51,6 +79,12 @@
             <h3>Default Select</h3>
             <div data-montage-id="select"></div>
             <div data-montage-id="selectTwo"></div>
+            <div class="scrollView-container">
+                <div data-montage-id="scrollView">
+                    <div data-montage-id="selectThree"></div>
+                    <div data-montage-id="selectFour"></div>
+                </div>
+            </div>
         </div>
     </div>
 </body>

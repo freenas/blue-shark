@@ -1,3 +1,6 @@
-.Main {
-
+.scrollView-container {
+    position: relative;
+    min-width: 10em;
+    height: 20em;
+    outline: 1px solid red;
 }
