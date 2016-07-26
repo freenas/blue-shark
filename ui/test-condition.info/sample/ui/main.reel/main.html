@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"},
+                "testVal": true
+            }
+        },
+        "condition1": {
+            "prototype": "montage/ui/condition.reel",
+            "properties": {
+                "element": {"#": "condition1"}
+            },
+            "bindings": {
+                "condition": {"<-": "@owner.testVal"}
+            }
+        },
+        "button1": {
+            "prototype": "blue-shark/ui/button.reel",
+            "properties": {
+                "element": {"#": "button1"},
+                "value": "button"
+            }
+        },
+
+        "condition2": {
+            "prototype": "montage/ui/condition.reel",
+            "properties": {
+                "element": {"#": "condition2"}
+            },
+            "bindings": {
+                "condition": {"<-": "!@owner.testVal"}
+            }
+        },
+        "button2": {
+            "prototype": "blue-shark/ui/button.reel",
+            "properties": {
+                "element": {"#": "button2"},
+                "value": "button"
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Main">
+        <p>starts true</p>
+        <div data-montage-id="condition1">
+            <button data-montage-id="button1"></button>
+        </div>
+        <p>starts false</p>
+        <div data-montage-id="condition2">
+            <button data-montage-id="button2"></button>
+        </div>
+    </div>
+</body>
+</html>
