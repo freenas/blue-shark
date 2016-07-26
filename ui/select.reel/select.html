@@ -23,8 +23,17 @@
                 "element": {"#": "selectButton"}
             },
             "bindings": {
-                "enabled": {"<-": "@owner._options.length > 0"},
-                "label": {"<-": "!enabled ? '' : (@optionsOverlay.optionsRepetition.selection.0.label || @owner._options.0.label)" }
+                "enabled": {"<-": "@owner._options.length > 0"}
+            }
+        },
+
+        "currentSelection": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "currentSelection"}
+            },
+            "bindings": {
+                "value": {"<-": "!@selectButton.enabled ? '' : (@optionsOverlay.optionsRepetition.selection.0.label || @owner._options.0.label)" }
             }
         },
 
@@ -45,7 +54,12 @@
 </head>
 <body>
     <div data-montage-id="owner" class="Select">
-        <button data-montage-id="selectButton" class="Select-currentOption"></button>
+        <button data-montage-id="selectButton">
+            <span data-montage-id="currentSelection" class="Select-currentOption"></span>
+            <div class="Select-icon">
+                <svg><use xlink:href="#i-triangle-down"/></svg>
+            </div>
+        </button>
         <div data-montage-id="optionsOverlay"></div>
     </div>
 </body>

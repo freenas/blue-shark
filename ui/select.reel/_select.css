@@ -1,66 +1,73 @@
 .Select {
     position: relative;
-    display: inline-block;
-    font-size: 1em;
-    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    height: 2em;
     font-weight: 300;
     -webkit-user-select: none;
     width: 100%;
     font-family: 'Lato', 'helvetica neue', 'helvetica', 'sans-serif';
-}
-
-.Select-currentOption {
-    box-sizing: border-box;
-    position: relative;
-    border: none;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    font-weight: inherit;
-    height: 2em;
-    width: 100%;
-    text-align: left;
-    padding: 0 2.5em .2em .5em;
     border-radius: 4px;
     background: rgba(0, 0, 0, .25);
     border-top:     1px solid rgba(0, 0, 0, .23);
     border-bottom:  1px solid rgba(255, 255, 255, .15);
-    outline: none;
-    color: white;
-    -webkit-appearance: none;
+}
+
+.Select button {
+    display: flex;
+    justify-content: space-between;
     cursor: pointer;
+    box-sizing: border-box;
+    position: relative;
+    border: none;
+    font-size: 1em;
+    line-height: 1.2;
+    height: 2em;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    font-weight: inherit;
+    width: 100%;
+    text-align: left;
+    background: none;
+    outline: none;
+    padding: 0;
+    padding: 0 .25em 0 .5em;
+    color: #e6e6e6;
+    -webkit-appearance: none;
+}
+
+.Select-currentOption {
+    flex: 1;
+    min-width: 0;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
 }
 
-/* arrow icon */
-
-.Select-currentOption:after {
-    content: "\76";
-    box-sizing: border-box;
-    font-family: "freenas";
-    font-size: 1.3em;
-    position: absolute;
-    text-align: center;
-    width:  1.2em;
-    height: 1.2em;
-    right:  .125em;
-    top:    50%;
-    margin-top: -.625em;
-    background: #FFF;
+.Select-icon {
+    width:  1.4rem;
+    height: 1.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
     border-radius: 3px;
     text-shadow: 0 1px 0 rgba(0, 0, 0, .5);
     background-color: #666;
     background-image: linear-gradient(to bottom, #666, #505050);
     border-bottom:  1px solid rgba(0, 0, 0, .36);
     border-top:     1px solid rgba(255, 255, 255, .21);
+
+    & svg {
+        display: inline-block;
+        width:  .9em;
+        height: .9em;
+    }
 }
 
-.Select-currentOption:hover { background: rgba(0, 0, 0, .15); }
-.Select-currentOption:hover:after { background-image: linear-gradient(to bottom, #777, #606060); }
-.Select-currentOption:hover .select { background-color: rgba(0, 0, 0, .17); }
-.Select-currentOption.expanded:after { background-image: linear-gradient(to bottom, #0095d5, #0076a9); }
+.Select:hover { background: rgba(0, 0, 0, .15); }
+.Select:hover .select { background-color: rgba(0, 0, 0, .17); }
 
 /* Options Drop Down */
 
