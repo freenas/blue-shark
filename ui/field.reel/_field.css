@@ -1,33 +1,34 @@
+:root {
+    --fieldtitleWidth: 7rem;
+}
+
 .Field {
     position: relative;
-    box-sizing: border-box;
-    align-items: flex-start;
-    display: flex;
     margin-bottom: 1em;
     min-height: 2em;
 }
 
-.Field.disabled {
-    pointer-events: none;
-}
+.Field.disabled { pointer-events: none; }
 
-.Field + .Field {
-    margin-top: 0;
-}
+.Field + .Field { margin-top: 0; }
 
 .Field > * {
     font-family: "Lato";
     font-size: 1em;
 }
 
+.Field-title,
+.Field-control {
+    display: inline-block;
+}
+
 /* Title */
 
 .Field-title {
-    flex-shrink: 0;
     font-weight: 300;
     line-height: 1.25em;
-    flex-basis: 7em;
-    margin-right: 1.5em;
+    width: var(--fieldtitleWidth);
+    padding-right: 1.5em;
     margin-top: .3em;
     color: rgba(255,255,255,.8);
     transition: opacity .25s;
@@ -38,8 +39,8 @@
 /* Control */
 
 .Field-control {
-    flex: 1;
-    min-width: 0;
+    width: calc(100% - var(--fieldtitleWidth));
+    margin-left: -.285rem;
     max-width: 15em;
 }
 
