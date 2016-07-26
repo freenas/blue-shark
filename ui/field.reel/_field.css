@@ -23,7 +23,7 @@
 /* Title */
 
 .Field-title {
-    flex: 0;
+    flex-shrink: 0;
     font-weight: 300;
     line-height: 1.25em;
     flex-basis: 7em;
@@ -39,6 +39,7 @@
 
 .Field-control {
     flex: 1;
+    min-width: 0;
     max-width: 15em;
 }
 
