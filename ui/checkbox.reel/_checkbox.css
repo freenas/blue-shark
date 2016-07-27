@@ -16,8 +16,6 @@
     position: absolute;
 }
 
-.Checkbox input:focus { outline: none; }
-
 .Checkbox label {
     position: relative;
     cursor: pointer;
@@ -48,7 +46,7 @@
     content: "\63";
     font-family: "freenas";
     font-size: 1.3em;
-    color: #2B9CD8;
+    color: var(--blue-lighten-2);
     position: absolute;
     top:    .05em;
     left:   .025em;
@@ -61,11 +59,7 @@
 
 .Checkbox input:checked + label:after { opacity: 1; }
 
-/* $fix - what should the focus state be? */
-
-/*.Checkbox input:focus + label:before {
-    border: 1px solid #2B9CD8;
-}*/
+.Checkbox input:focus + label:before  { @apply --input-focus; }
 
 /* Disabled State */
 
