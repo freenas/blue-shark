@@ -1,5 +1,21 @@
 /*global require, exports, document, Error*/
 
+/**
+ * Inject needed css Rule.
+ */
+var sheet = (document.styleSheets[0] || (function() {
+
+    // Create the <style> tag
+    var style = document.createElement("style");
+
+    // Add the <style> element to the page
+    document.head.appendChild(style);
+
+    return style.sheet;
+})());
+
+sheet.insertRule(".montage--Draggable.isDragging * { pointer-events: none; }");
+
 
 /**
  * @class DragDropComponentManager
