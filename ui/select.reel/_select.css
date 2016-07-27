@@ -11,6 +11,10 @@
     background: rgba(0, 0, 0, .25);
     border-top:     1px solid rgba(0, 0, 0, .23);
     border-bottom:  1px solid rgba(255, 255, 255, .15);
+
+    &:focus {
+        @apply --input-focus;
+    }
 }
 
 .Select button {
