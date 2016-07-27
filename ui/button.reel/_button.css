@@ -1,7 +1,5 @@
 .Button {
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
+    position: relative;
     box-sizing: border-box;
     font-family: "Lato", Helvetica, Arial, sans-serif;
     font-size: .75em;
@@ -17,7 +15,6 @@
     cursor: pointer;
     -webkit-appearance: none;
     text-shadow: 0 1px 0 rgba(0, 0, 0, .5);
-    outline: none;
     background-color: #666;
     background-image: linear-gradient(transparent, rgba(0,0,0,.2));
     box-shadow:
@@ -43,7 +40,9 @@
     text-shadow: none;
 }
 
-.Button:focus { outline: 0; }
+.Button:focus {
+    @apply --input-focus;
+}
 
 .Button.montage--disabled {
     opacity: .5;
