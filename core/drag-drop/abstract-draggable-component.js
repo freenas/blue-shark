@@ -313,19 +313,6 @@ var AbstractDraggableComponent = exports.AbstractDraggableComponent = Component.
     },
 
 
-    _applyStyleToCloneElement: {
-        value: function (positionTop, positionLeft) {
-            this._cloneElement.style.zIndex = this.zIndexDragElement;
-            this._cloneElement.style.visibility = "visible";
-            this._cloneElement.style.position = "absolute";
-            this._cloneElement.style.margin = "0px";
-            this._cloneElement.style.top = positionTop + "px";
-            this._cloneElement.style.left = positionLeft + "px";
-            this._cloneElement.style.pointerEvents = "none";
-        }
-    },
-
-
     _resetIfNeeded: {
         value: function () {
             if (this._cloneElement && !this._isDragging) {
@@ -348,26 +335,25 @@ var AbstractDraggableComponent = exports.AbstractDraggableComponent = Component.
     willDraw: {
         value: function () {
             if (this._isDragging) {
-                if (!this._boundingRect) {
-                    if (this.ghostImageElement instanceof HTMLElement) {
-                        var shouldRemoveGhostImageElement = false;
+                if (!this._cloneElement && this.ghostImageElement instanceof HTMLElement) {
+                    var shouldRemoveGhostImageElement = false;
 
-                        if (!this.ghostImageElement.parentNode) {
-                            this.ghostImageElement.style.position = "absolute";
-                            this.ghostImageElement.style.zIndex = "-1";
+                    if (this.ghostImageElement.parentNode) {
+                        this.ghostImageElement.style.position = "absolute";
+                        this.ghostImageElement.style.zIndex = "-1";
 
-                            document.body.appendChild(this.ghostImageElement);
-                            shouldRemoveGhostImageElement = true;
-                        }
-
-                        this._boundingRect = this.ghostImageElement.getBoundingClientRect();
-
-                        if (shouldRemoveGhostImageElement) {
-                            document.body.removeChild(this.ghostImageElement);
-                        }
-                    } else {
-                        this._boundingRect = this._element.getBoundingClientRect();
+                        document.body.appendChild(this.ghostImageElement);
+                        shouldRemoveGhostImageElement = true;
                     }
+
+                    this._boundingRect = this.ghostImageElement.getBoundingClientRect();
+
+                    if (shouldRemoveGhostImageElement) {
+                        document.body.removeChild(this.ghostImageElement);
+                    }
+                } else if (this._cloneElement) {
+                    this._boundingRect = this._element.getBoundingClientRect();
+                    this._boundingCloneElementRect = this._cloneElement.getBoundingClientRect();
                 }
 
                 if (this.parentContainer && !this._containerBoundingRect) {
@@ -388,21 +374,35 @@ var AbstractDraggableComponent = exports.AbstractDraggableComponent = Component.
 
             if (this._isDragging) {
                 if (!this._cloneElement) {
+                    this._cloneElement = this.ghostImageElement instanceof HTMLElement ?
+                        this.ghostImageElement.cloneNode(true) : this._element.cloneNode(true);
+
+                    this._cloneElement.style.visibility = "hidden";
+                    this._cloneElement.style.pointerEvents = "none";
+                    this._cloneElement.style.zIndex = this.zIndexDragElement;
+                    this._cloneElement.style.position = "absolute";
+                    this._cloneElement.style.margin = "0px";
+                    this._cloneElement.classList.add("isDragging");
+
+                    document.body.appendChild(this._cloneElement);
+
+                    this._needToWaitforBoundaries = true;
+                    this.needsDraw = true;
+
+                    return void 0;
+                }
+
+                if (this._needToWaitforBoundaries) {
                     var positionTop,
                         positionLeft;
 
                     if (this.isGhostImageCenter) {
-                        positionTop = this._startPositionY - this._boundingRect.height/2;
-                        positionLeft = this._startPositionX - this._boundingRect.width/2;
+                        positionTop = this._startPositionY - this._boundingCloneElementRect.height/2;
+                        positionLeft = this._startPositionX - this._boundingCloneElementRect.width/2;
                     } else {
                         positionTop = this._boundingRect.top;
                         positionLeft = this._boundingRect.left;
                     }
-
-                    this._cloneElement = this.ghostImageElement instanceof HTMLElement ?
-                        this.ghostImageElement.cloneNode(true) : this._element.cloneNode(true);
-
-                    this._cloneElement.classList.add("isDragging");
 
                     // Needs to call the placeHolderStrategy's getter at least once.
                     if (this.placeHolderStrategy === AbstractDraggableComponent.PLACE_HOLDER_STRATEGY.hidden) {
@@ -413,7 +413,11 @@ var AbstractDraggableComponent = exports.AbstractDraggableComponent = Component.
                         this._element.style.display = "none";
                     }
 
-                    this._applyStyleToCloneElement(positionTop, positionLeft);
+                    this._cloneElement.style.top = positionTop + "px";
+                    this._cloneElement.style.left = positionLeft + "px";
+                    this._cloneElement.style.visibility = "visible";
+
+                    this._needToWaitforBoundaries = false;
                 }
 
                 if (this.parentContainer && this._containerBoundingRect) {
@@ -431,10 +435,6 @@ var AbstractDraggableComponent = exports.AbstractDraggableComponent = Component.
                         this._cloneElement.classList.remove("isOutside");
                         this._isOutsideParentContainer = false;
                     }
-                }
-
-                if (!this._cloneElement.parentNode) {
-                    document.body.appendChild(this._cloneElement);
                 }
 
                 this._cloneElement.style[AbstractDraggableComponent.cssTransform] = "translate3d(" + this._translateX + "px," + this._translateY + "px,0)";
