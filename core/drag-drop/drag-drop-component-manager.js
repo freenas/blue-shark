@@ -14,7 +14,7 @@ var sheet = (document.styleSheets[0] || (function() {
     return style.sheet;
 })());
 
-sheet.insertRule(".montage--Draggable.isDragging * { pointer-events: none; }");
+sheet.insertRule(".montage--Draggable.isDragging * { pointer-events: none; }", 0);
 
 
 /**
