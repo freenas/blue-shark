@@ -61,7 +61,6 @@ exports.Date = Component.specialize(/** @lends Date# */ {
 
     handleDecrementAction: {
         value: function() {
-            var self = this;
             this.currentMonth = new Date(this.currentMonth.getFullYear(), this.currentMonth.getMonth()-1, 1);
             // FIXME: Hacky
             this.dateValue.element.focus();
@@ -78,8 +77,8 @@ exports.Date = Component.specialize(/** @lends Date# */ {
 
     _getDaysInMonth: {
         value: function(date) {
-            var days = [],
-                newDay;
+            var days = [];
+            
             for (var i = 1, daysInMonth = this._getLastDayOfMonth(date); i < daysInMonth; i++) {
                 days.push(new Date(date.getFullYear(), date.getMonth(), i));
             }

@@ -9,7 +9,7 @@ var Overlay = require("montage/ui/overlay.reel").Overlay,
  * @extends Overlay
  * @fixme: need to update the presscompoer in order to overpass the surrender rules.
  */
-var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends SelectOptions# */ {
+exports.SelectOptions = Overlay.specialize(/** @lends SelectOptions# */ {
 
     optionsRepetition: {
         value: null
@@ -135,8 +135,7 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
                     newCenterPositionY = boundingClientRect.top + (boundingClientRect.height / 2);
 
                 if (this._initialCenterPositionX !== newCenterPositionX || this._initialCenterPositionY !== newCenterPositionY) {
-                    var type = event.type,
-                        deltaX = Math.abs(this._initialCenterPositionX - newCenterPositionX),
+                    var deltaX = Math.abs(this._initialCenterPositionX - newCenterPositionX),
                         deltaY = Math.abs(this._initialCenterPositionY - newCenterPositionY),
                         radius = 1; // todo implement touchmove + pointermove
 
