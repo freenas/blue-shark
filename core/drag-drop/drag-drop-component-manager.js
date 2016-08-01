@@ -30,7 +30,7 @@ var DragDropComponentManager = function DragDropComponentManager () {
 
 DragDropComponentManager.prototype.registerDraggableComponent = function (component) {
     if (component && typeof component === "object") { //todo: instanceof
-        this._draggableComponentRegistry[component.uuid] = component;
+        this._draggableComponentRegistry[component.uid] = component;
 
         return true;
     }
@@ -41,7 +41,7 @@ DragDropComponentManager.prototype.registerDraggableComponent = function (compon
 
 DragDropComponentManager.prototype.registerDropZoneComponent = function (component) {
     if (component && typeof component === "object") { //todo: instanceof
-        this._dropZoneComponentRegistry[component.uuid] = component;
+        this._dropZoneComponentRegistry[component.uid] = component;
 
         return true;
     }
@@ -51,8 +51,8 @@ DragDropComponentManager.prototype.registerDropZoneComponent = function (compone
 
 
 DragDropComponentManager.prototype.releaseDropZoneComponent = function (component) {
-    if (component && typeof component === "object" && this._dropZoneComponentRegistry[component.uuid]) {
-        delete this._dropZoneComponentRegistry[component.uuid];
+    if (component && typeof component === "object" && this._dropZoneComponentRegistry[component.uid]) {
+        delete this._dropZoneComponentRegistry[component.uid];
 
         return true;
     }
@@ -61,9 +61,9 @@ DragDropComponentManager.prototype.releaseDropZoneComponent = function (componen
 };
 
 
-DragDropComponentManager.prototype.releaseDraggableComponentWithUUID = function (uuid) {
-    if (typeof uuid === "string" && this._draggableComponentRegistry[uuid]) {
-        delete this._draggableComponentRegistry[uuid];
+DragDropComponentManager.prototype.releaseDraggableComponentWithUUID = function (id) {
+    if (typeof id === "string" && this._draggableComponentRegistry[id]) {
+        delete this._draggableComponentRegistry[id];
 
         return true;
     }
@@ -178,6 +178,14 @@ DragDropComponentManager.prototype.dispatchFilesDragStart = function (dragStartE
 
 DragDropComponentManager.prototype.dispatchFilesDragEnd = function (event) {
     this._dispatchEventToComponent("handleFilesDragEnd", event);
+};
+
+
+DragDropComponentManager._lastUID = Date.now();
+
+
+DragDropComponentManager.generateUID = function () {
+    return ++this._lastUID;
 };
 
 

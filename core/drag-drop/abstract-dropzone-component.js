@@ -1,8 +1,8 @@
 /*global require, exports, document, Error*/
 
 var Component = require("montage/ui/component").Component,
-    UUID = require("montage/core/uuid").Uuid,
     DragDropComponentManager = require('core/drag-drop/drag-drop-component-manager').defaultDragDropComponentManager;
+
 /**
  * @class AbstractDropZoneComponent
  * @abstract
@@ -37,14 +37,14 @@ exports.AbstractDropZoneComponent = Component.specialize( /** @lends AbstractDro
     },
 
 
-    _uuid: {
+    _uid: {
         value: null
     },
 
 
-    uuid: {
+    uid: {
         get: function () {
-            return this._uuid || (this._uuid = UUID.generate());
+            return this._uid || (this._uid = DragDropComponentManager.constructor.generateUID());
         }
     },
 

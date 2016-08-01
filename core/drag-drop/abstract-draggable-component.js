@@ -1,7 +1,6 @@
 var Component = require("montage/ui/component").Component,
     DragDropComponentManager = require('core/drag-drop/drag-drop-component-manager').defaultDragDropComponentManager,
-    TranslateComposer = require("montage/composer/translate-composer").TranslateComposer,
-    UUID = require("montage/core/uuid").Uuid;
+    TranslateComposer = require("montage/composer/translate-composer").TranslateComposer;
 
 /**
  * @class AbstractDraggableComponent
@@ -152,14 +151,14 @@ var AbstractDraggableComponent = exports.AbstractDraggableComponent = Component.
         value: null
     },
 
-    _uuid: {
+    _uid: {
         value: null
     },
 
 
-    uuid: {
+    uid: {
         get: function () {
-            return this._uuid || (this._uuid = UUID.generate());
+            return this._uid || (this._uid = DragDropComponentManager.constructor.generateUID());
         }
     },
 
@@ -268,7 +267,7 @@ var AbstractDraggableComponent = exports.AbstractDraggableComponent = Component.
             this.dropZoneDropped = null;
             this.shouldCancelDrop = false;
 
-            DragDropComponentManager.releaseDraggableComponentWithUUID(this.uuid);
+            DragDropComponentManager.releaseDraggableComponentWithUUID(this.uid);
 
             this._translateComposer.removeEventListener('translate', this, false);
             this._translateComposer.removeEventListener('translateEnd', this, false);
