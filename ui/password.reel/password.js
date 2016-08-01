@@ -9,6 +9,6 @@ var Component = require("montage/ui/component").Component;
  */
 exports.Password = Component.specialize(/** @lends Password# */ {
     enabled: {
-        value: true;
+        value: true
     }
 });
