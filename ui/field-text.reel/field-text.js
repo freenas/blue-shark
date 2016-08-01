@@ -7,10 +7,4 @@ var Component = require("montage/ui/component").Component;
  * @class FieldText
  * @extends Component
  */
-exports.FieldText = Component.specialize(/** @lends FieldText# */ {
-    constructor: {
-        value: function FieldText() {
-            this.super();
-        }
-    }
-});
+exports.FieldText = Component.specialize();

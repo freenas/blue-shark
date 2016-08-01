@@ -7,10 +7,4 @@ var Component = require("montage/ui/component").Component;
  * @class FieldRadioGroup
  * @extends Component
  */
-exports.FieldRadioGroup = Component.specialize(/** @lends FieldRadioGroup# */ {
-    constructor: {
-        value: function FieldRadioGroup() {
-            this.super();
-        }
-    }
-});
+exports.FieldRadioGroup = Component.specialize();

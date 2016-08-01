@@ -7,10 +7,4 @@ var Component = require("montage/ui/component").Component;
  * @class FieldDate
  * @extends Component
  */
-exports.FieldDate = Component.specialize(/** @lends FieldDate# */ {
-    constructor: {
-        value: function FieldDate() {
-            this.super();
-        }
-    }
-});
+exports.FieldDate = Component.specialize();
