@@ -7,7 +7,6 @@ var Overlay = require("montage/ui/overlay.reel").Overlay,
 /**
  * @class SelectOptions
  * @extends Overlay
- * @fixme: need to update the presscompoer in order to overpass the surrender rules.
  */
 exports.SelectOptions = Overlay.specialize(/** @lends SelectOptions# */ {
 
