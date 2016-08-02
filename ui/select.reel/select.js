@@ -1,7 +1,8 @@
 /**
  * @module ui/select.reel
  */
-var Component = require("montage/ui/component").Component;
+var Component = require("montage/ui/component").Component,
+    KeyComposer = require("montage/composer/key-composer").KeyComposer;
 
 
 /**
@@ -89,6 +90,18 @@ exports.Select = Component.specialize({
             if (this.optionsOverlayComponent.isShown) {
                 this.optionsOverlayComponent.hide();
             }
+        }
+    },
+
+    prepareForActivationEvents: {
+        value: function() {
+                KeyComposer.createKey(this, "space", "space").addEventListener("keyPress", this);
+        }
+    },
+
+    handleSpaceKeyPress: {
+        value: function(event) {
+            this.handleSelectButtonAction();
         }
     },
 

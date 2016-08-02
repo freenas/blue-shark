@@ -16,7 +16,15 @@
             "prototype": "montage/ui/repetition.reel",
             "properties": {
                 "element": {"#": "options"},
-                "isSelectionEnabled": true
+                "isSelectionEnabled": true,
+                "contentController": {"@": "optionsController"}
+            }
+        },
+
+        "optionsController": {
+            "prototype": "montage/core/range-controller",
+            "properties": {
+                "avoidsEmptySelection": true
             },
             "bindings": {
                 "content": {"<-": "@owner.options"}

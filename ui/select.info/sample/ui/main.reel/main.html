@@ -9,8 +9,8 @@
                 "element": {"#": "owner"},
                 "options": [
                     "true", "test", "another", "checkAreallylongstringONtheSelect"
-
-                ]
+                ],
+                "selectedValue": "another"
             }
         },
         "icons": {
@@ -25,7 +25,8 @@
                 "element": {"#": "select"}
             },
             "bindings": {
-                "options": {"<-": "@owner.options"}
+                "options": {"<-": "@owner.options"},
+                "selectedValue": {"<-": "@owner.selectedValue"}
             }
         },
         "selectTwo": {
