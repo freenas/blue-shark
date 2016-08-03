@@ -13,12 +13,7 @@
                     "type": "action",
                     "listener": {"@": "owner"}
                 }
-            ],
-            "bindings": {
-                "classList.has('has-error')": {"<-": "@owner.hasError"},
-                "classList.has('is-validated')": {"<-": "@owner.isValidated"},
-                "classList.has('disabled')": {"<-": "@owner.enabled.defined() ? !@owner.enabled : false"}
-            }
+            ]
         },
         "fieldTitle": {
             "prototype": "montage/ui/text.reel",
@@ -68,7 +63,6 @@
             <div data-param="*"></div>
             <div data-montage-id="error" class="Field-error"></div>
         </div>
-
     </div>
 </body>
 </html>

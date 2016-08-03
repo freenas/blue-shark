@@ -1,13 +1,14 @@
 /**
  * @module ui/field.reel
  */
-var Component = require("montage/ui/component").Component;
+var Component = require("montage/ui/component").Component,
+    bindPropertyToClassName = require("core/core").bindPropertyToClassName;
 
 /**
  * @class Field
  * @extends Component
  */
-exports.Field = Component.specialize(/** @lends Field# */ {
+var Field = exports.Field = Component.specialize(/** @lends Field# */ {
 
     handleFieldInfoButtonAction: {
         value: function () {
@@ -15,3 +16,7 @@ exports.Field = Component.specialize(/** @lends Field# */ {
         }
     }
 });
+
+bindPropertyToClassName(Field, "hasError", "has-error");
+bindPropertyToClassName(Field, "isValidated", "is-validated");
+bindPropertyToClassName(Field, "enabled", "disabled", true);
