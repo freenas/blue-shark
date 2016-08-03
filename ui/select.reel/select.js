@@ -2,14 +2,15 @@
  * @module ui/select.reel
  */
 var Component = require("montage/ui/component").Component,
-    KeyComposer = require("montage/composer/key-composer").KeyComposer;
+    KeyComposer = require("montage/composer/key-composer").KeyComposer,
+    SelectOptions = require("ui/select.reel/select-options.reel").SelectOptions;
 
 
 /**
  * @class Select
  * @extends Component
  */
-exports.Select = Component.specialize({
+var Select = exports.Select = Component.specialize({
 
     converter: {
         value: null
@@ -85,30 +86,54 @@ exports.Select = Component.specialize({
         }
     },
 
-    exitDocument: {
-        value: function() {
-            if (this.optionsOverlayComponent.isShown) {
-                this.optionsOverlayComponent.hide();
+    prepareForActivationEvents: {
+        value: function () {
+            var keyIdentifiers = this.constructor.KEY_IDENTIFIERS;
+
+            this._keyComposerMap = new Map();
+
+            this._keyComposerMap.set(
+                keyIdentifiers.space,
+                KeyComposer.createKey(this, keyIdentifiers.space, keyIdentifiers.space)
+            );
+
+            this._keyComposerMap.get(keyIdentifiers.space).addEventListener("keyPress", this);
+        }
+    },
+
+    overlayShouldDismissOnSurrenderActiveTarget: {
+        value: function (overlay, candidateActiveTarget, response) {
+            if (!response && candidateActiveTarget instanceof SelectOptions) {
+                // FIXME: an overlay should probably hide itself when surrender active target
+                // need to fix montage (maybe all overlay should become the active target when it is shown)
+                // FIXME: probably a bug with the press composer that can't perform an action
+                // if they loose the claimed pointer.
+                this._hideOptionsOverlay();
+
+                return true;
             }
         }
     },
 
-    prepareForActivationEvents: {
-        value: function() {
-                KeyComposer.createKey(this, "space", "space").addEventListener("keyPress", this);
-        }
-    },
-
-    handleSpaceKeyPress: {
-        value: function(event) {
-            this.handleSelectButtonAction();
-        }
-    },
-
-    handleSelectButtonAction: {
+    _toggleOptionsOverlay: {
         value: function () {
-            this.optionsOverlayComponent.isShown ? this.optionsOverlayComponent.hide() :
-                this._showOptions();
+            this.optionsOverlayComponent.isShown ? this._hideOptionsOverlay() : this._showOptionsOverlay();
+        }
+    },
+
+    _showOptionsOverlay: {
+        value: function () {
+            if (!this.optionsOverlayComponent.isShown) {
+                this.optionsOverlayComponent.show();
+            }
+        }
+    },
+
+    _hideOptionsOverlay: {
+        value: function () {
+            if (this.optionsOverlayComponent.isShown) {
+                this.optionsOverlayComponent.hide();
+            }
         }
     },
 
@@ -156,18 +181,21 @@ exports.Select = Component.specialize({
                 this.options = this._originalContent; // trigger setter.
             }
         }
-    },
-
-    _showOptions: {
-        value: function() {
-            if (defaultEventManager.activeTarget.templateModuleId == this.optionsOverlayComponent.templateModuleId) {
-                defaultEventManager.activeTarget.hide();
-            }
-            this.optionsOverlayComponent.show()
-        }
     }
 
+}, {
+
+    KEY_IDENTIFIERS: {
+        value: {
+            space: "space"
+        }
+    }
 });
+
+
+Select.prototype.handleSpaceKeyPress = Select.prototype._toggleOptionsOverlay;
+Select.prototype.handleSelectButtonAction = Select.prototype._toggleOptionsOverlay;
+Select.prototype.exitDocument = Select.prototype._hideOptionsOverlay;
 
 
 var NONE_OPTION_LABEL = "none",
