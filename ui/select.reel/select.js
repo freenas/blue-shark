@@ -70,7 +70,7 @@ var Select = exports.Select = Component.specialize({
             hasOptionalValue = !!hasOptionalValue;
             if (hasOptionalValue !== this._hasOptionalValue) {
                 this._hasOptionalValue = hasOptionalValue;
-                this._updateOptionsIfNeeeded();
+                this._updateOptionsIfNeeded();
             }
         },
         get: function () {
@@ -189,7 +189,7 @@ var Select = exports.Select = Component.specialize({
         }
     },
 
-    _updateOptionsIfNeeeded: {
+    _updateOptionsIfNeeded: {
         value: function () {
             if (this._options) {
                 this.options = this._originalContent; // trigger setter.
