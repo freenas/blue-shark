@@ -98,6 +98,20 @@ var Select = exports.Select = Component.specialize({
             );
 
             this._keyComposerMap.get(keyIdentifiers.space).addEventListener("keyPress", this);
+
+            // FIXME: not possible to manage the tab key with a key composer,
+            // prevent default is automatically called.
+            this.element.addEventListener("keydown", this);
+        }
+    },
+
+    handleKeydown: {
+        value: function (event) {
+            // 9 -> tab keyCode,
+            // FIXME: keyCode is deprecated
+            if ((event.key === "Tab" || event.keyCode === 9) && this.optionsOverlayComponent.isShown) {
+                event.preventDefault();
+            }
         }
     },
 
