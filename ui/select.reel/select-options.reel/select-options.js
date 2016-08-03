@@ -2,13 +2,14 @@
  * @module ui/select-options.reel
  */
 var Overlay = require("montage/ui/overlay.reel").Overlay,
+    KeyComposer = require("montage/composer/key-composer").KeyComposer,
     Composer = require("montage/composer/composer").Composer;
 
 /**
  * @class SelectOptions
  * @extends Overlay
  */
-exports.SelectOptions = Overlay.specialize(/** @lends SelectOptions# */ {
+var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends SelectOptions# */ {
 
     optionsRepetition: {
         value: null
@@ -43,6 +44,15 @@ exports.SelectOptions = Overlay.specialize(/** @lends SelectOptions# */ {
             if (isFirstTime) {
                 this._mutationObserver = new MutationObserver(this.handleMutations.bind(this));
                 this.addPathChangeListener("selectedValue", this, "handleSelectedValueChange");
+
+                var keyIdentifiers = this.constructor.KEY_IDENTIFIERS;
+
+                this._keyComposerMap = new Map();
+
+                this._keyComposerMap.set(
+                    keyIdentifiers.escape,
+                    KeyComposer.createKey(this, keyIdentifiers.escape, keyIdentifiers.escape)
+                );
             }
 
             this._mutationObserver.observe(this.element, {
@@ -66,6 +76,7 @@ exports.SelectOptions = Overlay.specialize(/** @lends SelectOptions# */ {
     show: {
         value: function () {
             if (!this.isShown) {
+                this._keyComposerMap.get(this.constructor.KEY_IDENTIFIERS.escape).addEventListener("keyPress", this);
                 this.element.ownerDocument.defaultView.addEventListener("wheel", this, true);
                 this._saveInitialCenterPosition();
                 this._needsComputeBoundaries = true;
@@ -78,16 +89,11 @@ exports.SelectOptions = Overlay.specialize(/** @lends SelectOptions# */ {
     hide: {
         value: function () {
             if (this.isShown) {
+                this._keyComposerMap.get(this.constructor.KEY_IDENTIFIERS.escape).removeEventListener("keyPress", this);
                 this.element.ownerDocument.defaultView.removeEventListener("wheel", this, true);
             }
 
             Overlay.prototype.hide.call(this);
-        }
-    },
-
-    handleSelectedValueChange: {
-        value: function () {
-            this.hide();
         }
     },
 
@@ -103,14 +109,6 @@ exports.SelectOptions = Overlay.specialize(/** @lends SelectOptions# */ {
         value: function () {
             if (this.isShown) {
                 this.needsDraw = true;
-            }
-        }
-    },
-
-    handleResize: {
-        value: function () {
-            if (this.isShown) {
-                this.hide();
             }
         }
     },
@@ -222,6 +220,17 @@ exports.SelectOptions = Overlay.specialize(/** @lends SelectOptions# */ {
             hidden: "hidden",
             visible: "visible"
         }
+    },
+
+    KEY_IDENTIFIERS: {
+        value: {
+            escape: "escape"
+        }
     }
 
 });
+
+
+SelectOptions.prototype.handleEscapeKeyPress = SelectOptions.prototype.hide;
+SelectOptions.prototype.handleSelectedValueChange = SelectOptions.prototype.hide;
+SelectOptions.prototype.handleResize = SelectOptions.prototype.hide;
