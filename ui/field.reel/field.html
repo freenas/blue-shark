@@ -35,8 +35,7 @@
                 "element": {"#": "condition"}
             },
             "bindings": {
-                "condition": {"<-": "@owner.documentationReference"},
-                "classList.has('is-visible')": {"<-": "@owner.documentationReference"}
+                "condition": {"<-": "!!@owner.documentationReference"}
             }
         },
         "fieldInfoButton": {
