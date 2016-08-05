@@ -45,10 +45,10 @@
     background: #1E963F;
     opacity: 1;
     pointer-events: none;
-}
 
-.MultipleSelect.disabled .MultipleSelect-input-add {
-    opacity: .5;
+    @nest .MultipleSelect.disabled & {
+        opacity: .5;
+    }
 }
 
 .MultipleSelect-input-options {
@@ -124,6 +124,10 @@
     top: 50%;
     text-align: center;
     margin-top: -.5em;
+
+    @nest .MultipleSelect.disabled & {
+        display: none;
+    }
 }
 
 /*
