@@ -17,9 +17,13 @@ exports.Datetime = Component.specialize(/** @lends Datetime# */ {
             return this._value;
         },
         set: function(value) {
-            if (this._value != value && !this._areDatesEqual(this._value, value)) {
+            if (value === null) {
+                this._time = null;
+                this._date = null;
+            }
+            if (this._value !== value && !this._areDatesEqual(this._value, value)) {
                 this._value = value;
-                if (typeof value === 'object') {
+                if (typeof value === 'object' && value) {
                     this._date = new Date(value);
                     this._time = new Date(value);
                 }
@@ -65,7 +69,9 @@ exports.Datetime = Component.specialize(/** @lends Datetime# */ {
 
     exitDocument: {
         value: function() {
-            this._value = this._date = this._time = null;
+            this._value = null;
+            this._date = null;
+            this._time = null;
         }
     },
 
@@ -83,8 +89,8 @@ exports.Datetime = Component.specialize(/** @lends Datetime# */ {
     _areDatesEqual: {
         value: function(dateA, dateB) {
             var result = false;
-            if (dateA) {
-                if (dateB) {
+            if (dateA && typeof dateA.toISOString === "function") {
+                if (dateB && typeof dateA.toISOString === "function") {
                     result = dateA.toISOString() == dateB.toISOString();
                 }
             } else {
