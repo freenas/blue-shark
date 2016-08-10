@@ -13,6 +13,9 @@ exports.bindPropertyToClassName = function bindPropertyToClassName (constructor,
                 } else {
                     this.classList.remove(className);
                 }
+            } else {
+                this.classList.remove(className);
+                this[privatePropertyName] = null;
             }
         },
         get: function () {
