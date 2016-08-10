@@ -2,7 +2,7 @@
   "name": "blue-shark",
   "version": "0.1.0",
   "dependencies": {
-    "montage": "freenas/montage#c68147d5a3093bf181b0213472c42510bbd4a26b"
+    "montage": "freenas/montage#2ed123ca813934beca18a13a517d5b27317c3994"
   },
   "devDependencies": {
     "browser-sync": "^2.13.0",
