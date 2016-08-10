@@ -247,7 +247,7 @@ var Scrollview = exports.Scrollview = Component.specialize({
             var target = event.target;
 
             if (event.target !== this.element || target !== this.contentWrapperElement) {
-                this.needsDraw = true;
+            this._scheduleComputingBoundaries();
             }
         }
     },
@@ -259,7 +259,7 @@ var Scrollview = exports.Scrollview = Component.specialize({
                 return void 0;
             }
 
-            this.needsDraw = true;
+            this._scheduleComputingBoundaries();
         }
     },
 
@@ -267,6 +267,16 @@ var Scrollview = exports.Scrollview = Component.specialize({
     handleResize: {
         value: function () {
             this.needsDraw = true;
+        }
+    },
+
+    _scheduleComputingBoundaries: {
+        value: function () {
+            var needsDraw = this.callDelegateMethod("shouldScrollViewComputeBoundaries", this, true);
+
+            if (needsDraw === void 0 || needsDraw) {
+                this.needsDraw = true;
+            }
         }
     },
 
