@@ -111,12 +111,14 @@ exports.AbstractDropZoneComponent = Component.specialize( /** @lends AbstractDro
                     draggableComponent.didLeaveDropZone(this);
                 }
 
-                if (isDraggableComponentOver && typeof draggableComponent.didOverDropZone === "function") {
-                    draggableComponent.didOverDropZone(this);
-                }
+                if (isDraggableComponentOver ) {
+                    if (typeof draggableComponent.didOverDropZone === "function") {
+                        draggableComponent.didOverDropZone(this);
+                    }
 
-                if (typeof this.handleComponentDragOver === "function") {
-                    this.handleComponentDragOver(draggableComponent, dragEvent);
+                    if (typeof this.handleComponentDragOver === "function") {
+                        this.handleComponentDragOver(draggableComponent, dragEvent);
+                    }
                 }
 
                 this.acceptDrop = isDraggableComponentOver;
