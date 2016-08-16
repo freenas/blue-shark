@@ -445,10 +445,15 @@ var Scrollview = exports.Scrollview = Component.specialize({
             var content = this.contentElement,
                 wrapper = this.contentWrapperElement;
 
-            this._contentWidth = content.offsetWidth;
-            this._contentHeight = content.offsetHeight;
-            this._visibleWidth = wrapper.offsetWidth;
-            this._visibleHeight = wrapper.offsetHeight;
+            if (this._hasVerticalScrollbar) {
+                this._visibleHeight = wrapper.offsetHeight;
+                this._contentHeight = content.offsetHeight;
+            }
+
+            if (this._hasHorizontalScrollbar) {
+                this._visibleWidth = wrapper.offsetWidth;
+                this._contentWidth = content.offsetWidth;
+            }
         }
     },
 
