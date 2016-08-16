@@ -178,7 +178,7 @@ var Scrollview = exports.Scrollview = Component.specialize({
             this._addEventListenerIfNeeded();
             window.addEventListener("resize", this, false);
 
-            this._mutationObserver.observe(this.element, {
+            this._mutationObserver.observe(this.contentElement, {
                 subtree: true,
                 childList: true,
                 attributes: true
@@ -247,18 +247,14 @@ var Scrollview = exports.Scrollview = Component.specialize({
             var target = event.target;
 
             if (event.target !== this.element || target !== this.contentWrapperElement) {
-            this._scheduleComputingBoundaries();
+                this._scheduleComputingBoundaries();
             }
         }
     },
 
 
     handleMutations: {
-        value: function (event) {
-            if (event.type === "attributes" && event.attributeName !== "style") {
-                return void 0;
-            }
-
+        value: function (mutations) {
             this._scheduleComputingBoundaries();
         }
     },
