@@ -48,6 +48,9 @@ exports.AbstractDropZoneComponent = Component.specialize( /** @lends AbstractDro
         }
     },
 
+    scrollThreshold: {
+        value: 20
+    },
 
     _willAcceptDrop: {
         value: false
@@ -112,6 +115,14 @@ exports.AbstractDropZoneComponent = Component.specialize( /** @lends AbstractDro
                 }
 
                 if (isDraggableComponentOver ) {
+                    if (this.scrollView) {
+                        this.scrollViewPointerPositionX = dragEvent.startPositionX + dragEvent.translateX;
+                        this.scrollViewPointerPositionY = dragEvent.startPositionY + dragEvent.translateY;
+
+                        this.autoScrollView = true;
+                        this.needsDraw = true;
+                    }
+                    
                     if (typeof draggableComponent.didOverDropZone === "function") {
                         draggableComponent.didOverDropZone(this);
                     }
@@ -180,12 +191,12 @@ exports.AbstractDropZoneComponent = Component.specialize( /** @lends AbstractDro
 
                     this._element.addEventListener("dragleave", this, false);
                     this._element.addEventListener("drop", this, false);
-
                 } else {
                     dataTransfer.dropEffect = "none";
                 }
             } else { // Component is already accepting drop.
                 event.preventDefault();
+                
             }
         }
     },
@@ -311,6 +322,10 @@ exports.AbstractDropZoneComponent = Component.specialize( /** @lends AbstractDro
             if (this._willAcceptDrop && !this._boundingRect) {
                 this._boundingRect = this._element.getBoundingClientRect();
             }
+
+            if (this.acceptDrop && this.autoScrollView) {
+                this.spacerElementBoundingRect = this.scrollView.spacerElement.getBoundingClientRect();
+            }
         }
     },
 
@@ -329,8 +344,77 @@ exports.AbstractDropZoneComponent = Component.specialize( /** @lends AbstractDro
                 this._element.classList.remove("acceptDrop");
                 this._element.classList.remove("willAcceptDrop");
             }
+
+            if (this.acceptDrop) {
+                var spacerElementBoundingRect = this.spacerElementBoundingRect,
+                    scrollThreshold = this.scrollThreshold;
+
+                if (this.autoScrollView) {
+                    if (this.scrollView._hasVerticalScrollbar) {
+                        this.multiplierY = 0;
+
+                        if (spacerElementBoundingRect.top <= this.scrollViewPointerPositionY && 
+                            spacerElementBoundingRect.top + scrollThreshold > this.scrollViewPointerPositionY) {
+
+                            this.multiplierY = scrollThreshold / (this.scrollViewPointerPositionY - spacerElementBoundingRect.top);
+
+                        } else if (spacerElementBoundingRect.bottom >= this.scrollViewPointerPositionY && 
+                            this.scrollViewPointerPositionY >= spacerElementBoundingRect.bottom - scrollThreshold ) {
+                            
+                            this.multiplierY = scrollThreshold / (spacerElementBoundingRect.bottom - this.scrollViewPointerPositionY);
+                        }
+                    }
+
+                    if (this.scrollView._hasHorizontalScrollbar) {
+                        this.multiplierX = 0;
+
+                        if (spacerElementBoundingRect.left <= this.scrollViewPointerPositionX && 
+                            spacerElementBoundingRect.left + scrollThreshold > this.scrollViewPointerPositionX) {
+
+                            this.multiplierX = scrollThreshold / (this.scrollViewPointerPositionX - spacerElementBoundingRect.left);
+
+                        } else if (spacerElementBoundingRect.right >= this.scrollViewPointerPositionY && 
+                            this.scrollViewPointerPositionX >= spacerElementBoundingRect.right - scrollThreshold ) {
+
+                            this.multiplierX = scrollThreshold / (spacerElementBoundingRect.right - this.scrollViewPointerPositionX);
+                        }
+                    }
+
+                    this.autoScrollView = false;
+                    this.needsUpdateScrollView = !!this.multiplierY || !!this.multiplierX;
+                }
+
+                if (this.needsUpdateScrollView) {
+                    if (this.scrollView._hasVerticalScrollbar) {
+                        this.needsUpdateScrollView = false;
+
+                        if (spacerElementBoundingRect.top + scrollThreshold > this.scrollViewPointerPositionY) {
+                            this.scrollView.scrollTop = this.scrollView.scrollTop - (1 * this.multiplierY);
+                            this.needsUpdateScrollView = this.scrollView.scrollTop !== 0;
+                        } else if (this.scrollViewPointerPositionY >= spacerElementBoundingRect.bottom - scrollThreshold ) {
+                            this.scrollView.scrollTop = this.scrollView.scrollTop + (1 * this.multiplierY);
+                            this.needsUpdateScrollView = this.scrollView.scrollTop !== this.scrollView._maxTranslateY;
+                        }
+                    }
+
+                    if (this.scrollView._hasHorizontalScrollbar) {
+                        this.needsUpdateScrollView = this.needsUpdateScrollView || false;
+
+                        if (spacerElementBoundingRect.left + scrollThreshold > this.scrollViewPointerPositionX) {
+                            this.scrollView.scrollLeft = this.scrollView.scrollLeft - (1 * multiplier);
+                            this.needsUpdateScrollView = this.scrollView.scrollLeft !== 0;
+                        } else if (this.scrollViewPointerPositionX >= spacerElementBoundingRect.right - scrollThreshold ) {
+                            this.scrollView.scrollLeft = this.scrollView.scrollLeft + (1 * multiplier);
+                            this.needsUpdateScrollView = this.scrollView.scrollLeft !== this.scrollView._maxTranslateX;
+                        }
+                    }
+                }
+
+                if (this.needsUpdateScrollView ) {
+                    this.needsDraw = true;
+                }
+            }
         }
     }
-
 
 });
