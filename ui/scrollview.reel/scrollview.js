@@ -208,8 +208,8 @@ var Scrollview = exports.Scrollview = Component.specialize({
         value: function (force) {
             if (this.preparedForActivationEvents || force) {
                 this._translateComposer.addEventListener("translate", this, false);
-                this._element.addEventListener("transitionend", this, false);
-                this._element.addEventListener(
+                this.contentElement.addEventListener("transitionend", this, false);
+                this.contentElement.addEventListener(
                     typeof WebKitAnimationEvent !== "undefined" ? "webkitAnimationEnd" : "animationend", this, false
                 );
             }
@@ -221,8 +221,8 @@ var Scrollview = exports.Scrollview = Component.specialize({
         value: function () {
             if (this.preparedForActivationEvents) {
                 this._translateComposer.removeEventListener("translate", this, false);
-                this._element.removeEventListener("transitionend", this, false);
-                this._element.removeEventListener(
+                this.contentElement.removeEventListener("transitionend", this, false);
+                this.contentElement.removeEventListener(
                     typeof WebKitAnimationEvent !== "undefined" ? "webkitAnimationEnd" : "animationend", this, false
                 );
             }
