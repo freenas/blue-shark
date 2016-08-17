@@ -49,7 +49,7 @@ exports.AbstractDropZoneComponent = Component.specialize( /** @lends AbstractDro
     },
 
     scrollThreshold: {
-        value: 20
+        value: 40
     },
 
     _willAcceptDrop: {
@@ -122,7 +122,7 @@ exports.AbstractDropZoneComponent = Component.specialize( /** @lends AbstractDro
                         this.autoScrollView = true;
                         this.needsDraw = true;
                     }
-                    
+
                     if (typeof draggableComponent.didOverDropZone === "function") {
                         draggableComponent.didOverDropZone(this);
                     }
@@ -196,7 +196,7 @@ exports.AbstractDropZoneComponent = Component.specialize( /** @lends AbstractDro
                 }
             } else { // Component is already accepting drop.
                 event.preventDefault();
-                
+
             }
         }
     },
@@ -353,14 +353,14 @@ exports.AbstractDropZoneComponent = Component.specialize( /** @lends AbstractDro
                     if (this.scrollView._hasVerticalScrollbar) {
                         this.multiplierY = 0;
 
-                        if (spacerElementBoundingRect.top <= this.scrollViewPointerPositionY && 
+                        if (spacerElementBoundingRect.top <= this.scrollViewPointerPositionY &&
                             spacerElementBoundingRect.top + scrollThreshold > this.scrollViewPointerPositionY) {
 
                             this.multiplierY = scrollThreshold / (this.scrollViewPointerPositionY - spacerElementBoundingRect.top);
 
-                        } else if (spacerElementBoundingRect.bottom >= this.scrollViewPointerPositionY && 
+                        } else if (spacerElementBoundingRect.bottom >= this.scrollViewPointerPositionY &&
                             this.scrollViewPointerPositionY >= spacerElementBoundingRect.bottom - scrollThreshold ) {
-                            
+
                             this.multiplierY = scrollThreshold / (spacerElementBoundingRect.bottom - this.scrollViewPointerPositionY);
                         }
                     }
@@ -368,12 +368,12 @@ exports.AbstractDropZoneComponent = Component.specialize( /** @lends AbstractDro
                     if (this.scrollView._hasHorizontalScrollbar) {
                         this.multiplierX = 0;
 
-                        if (spacerElementBoundingRect.left <= this.scrollViewPointerPositionX && 
+                        if (spacerElementBoundingRect.left <= this.scrollViewPointerPositionX &&
                             spacerElementBoundingRect.left + scrollThreshold > this.scrollViewPointerPositionX) {
 
                             this.multiplierX = scrollThreshold / (this.scrollViewPointerPositionX - spacerElementBoundingRect.left);
 
-                        } else if (spacerElementBoundingRect.right >= this.scrollViewPointerPositionY && 
+                        } else if (spacerElementBoundingRect.right >= this.scrollViewPointerPositionY &&
                             this.scrollViewPointerPositionX >= spacerElementBoundingRect.right - scrollThreshold ) {
 
                             this.multiplierX = scrollThreshold / (spacerElementBoundingRect.right - this.scrollViewPointerPositionX);
