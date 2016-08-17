@@ -255,10 +255,12 @@ var Scrollview = exports.Scrollview = Component.specialize({
 
     handleMutations: {
         value: function (mutations) {
-            var needsDraw = this.callDelegateMethod("shouldScrollViewComputeBoundaries", this, true, mutations);
+            if (!this.scrollTimeout) {
+                var needsDraw = this.callDelegateMethod("shouldScrollViewComputeBoundaries", this, true, mutations);
 
-            if (needsDraw === void 0 || needsDraw) {
-                this.needsDraw = true;
+                if (needsDraw === void 0 || needsDraw) {
+                    this.needsDraw = true;
+                }
             }
         }
     },
