@@ -32,11 +32,6 @@ exports.AbstractDropZoneComponent = Component.specialize( /** @lends AbstractDro
     },
 
 
-    priorityDrop: {
-        value: 0 //todo: nested drop-zones should always have the higher priority?
-    },
-
-
     _uid: {
         value: null
     },

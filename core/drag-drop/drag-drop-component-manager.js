@@ -111,7 +111,7 @@ DragDropComponentManager.prototype._findDropZoneActive = function () {
         if (tmpDropZoneComponent.acceptDrop) {
             if (!candidateDropZone) {
                 candidateDropZone = tmpDropZoneComponent;
-            } else if (tmpDropZoneComponent.priorityDrop > candidateDropZone.priorityDrop) {
+            } else if (candidateDropZone.element.contains(tmpDropZoneComponent.element)) {
                 candidateDropZone = tmpDropZoneComponent;
             }
         }
