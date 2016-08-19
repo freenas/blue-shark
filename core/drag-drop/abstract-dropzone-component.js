@@ -157,6 +157,7 @@ exports.AbstractDropZoneComponent = Component.specialize( /** @lends AbstractDro
                 this.willAcceptDrop = false;
                 this.acceptDrop = false;
                 this._boundingRect = null;
+                this._spacerElementBoundingRect = null;
             }
         }
     },
@@ -318,8 +319,8 @@ exports.AbstractDropZoneComponent = Component.specialize( /** @lends AbstractDro
                 this._boundingRect = this._element.getBoundingClientRect();
             }
 
-            if (this.acceptDrop && this.autoScrollView) {
-                this.spacerElementBoundingRect = this.scrollView.spacerElement.getBoundingClientRect();
+            if (this.acceptDrop && this.autoScrollView && !this._spacerElementBoundingRect) {
+                this._spacerElementBoundingRect = this.scrollView.spacerElement.getBoundingClientRect();
             }
         }
     },
@@ -341,7 +342,7 @@ exports.AbstractDropZoneComponent = Component.specialize( /** @lends AbstractDro
             }
 
             if (this.acceptDrop) {
-                var spacerElementBoundingRect = this.spacerElementBoundingRect,
+                var spacerElementBoundingRect = this._spacerElementBoundingRect,
                     scrollThreshold = this.scrollThreshold;
 
                 if (this.autoScrollView) {
