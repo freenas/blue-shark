@@ -21,6 +21,38 @@ exports.MultipleSelectGrid = Component.specialize(/** @lends MultipleSelectGrid#
         value: null
     },
 
+    _selectedValues: {
+        value: null
+    },
+
+    selectedValues: {
+        get: function() {
+            return this.selection ? this.selection.map(function(x) { return x.value; }) : [];
+        },
+        set: function(selectedValues) {
+            if (this._selectedValue !== selectedValues) {
+                this._selectedValues = selectedValues;
+                var selection = [];
+                if (this.options && selectedValues) {
+                    var options = this.options.content,
+                        optionsLength = options.length,
+                        j, entry, value;
+                    for (var i = 0, length = selectedValues.length; i < length; i++) {
+                        value = selectedValues[i];
+                        for (j = 0; j < optionsLength; j++) {
+                            entry = options[j];
+                            if (entry.value === value) {
+                                selection.push(entry);
+                                break;
+                            }
+                        }
+                    }
+                }
+                this.selection = selection;
+            }
+        }
+    },
+
     _selection: {
         value: null
     },
@@ -50,7 +82,6 @@ exports.MultipleSelectGrid = Component.specialize(/** @lends MultipleSelectGrid#
                 } else {
                     this._cancelSelectionRangeChangeListener = null;
                 }
-
             }
         },
         get: function () {
@@ -73,6 +104,13 @@ exports.MultipleSelectGrid = Component.specialize(/** @lends MultipleSelectGrid#
     handleOptionSelectionChange: {
         value: function () {
             this.dispatchOwnPropertyChange("selection", this.selection);
+            this.dispatchOwnPropertyChange("selectedValues", this.selectedValues);
+        }
+    },
+
+    enterDocument: {
+        value: function() {
+            this.selectedValues = this._selectedValues;
         }
     }
 
