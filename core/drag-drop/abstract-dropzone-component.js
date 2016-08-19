@@ -359,6 +359,8 @@ exports.AbstractDropZoneComponent = Component.specialize( /** @lends AbstractDro
 
                             this.multiplierY = scrollThreshold / (spacerElementBoundingRect.bottom - this.scrollViewPointerPositionY);
                         }
+                        // Change the algorithm for speed scrolling.
+                        this.multiplierY = this.multiplierY * 2;
                     }
 
                     if (this.scrollView._hasHorizontalScrollbar) {
@@ -374,6 +376,8 @@ exports.AbstractDropZoneComponent = Component.specialize( /** @lends AbstractDro
 
                             this.multiplierX = scrollThreshold / (spacerElementBoundingRect.right - this.scrollViewPointerPositionX);
                         }
+
+                        this.multiplierX = this.multiplierX * 2;
                     }
 
                     this.autoScrollView = false;
