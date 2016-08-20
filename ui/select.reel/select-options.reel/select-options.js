@@ -192,8 +192,8 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
                     overlayElementStyle.height = this._optionsMaxHeight + "px";
                 }
 
-                // set options width
-                overlayElementStyle.width = this._anchorWidth + "px";
+                // set options minWidth
+                overlayElementStyle.minWidth = this._anchorWidth + "px";
 
                 if (this._needsComputeBoundaries) {
                     this.scrollView.element.style.visibility = overlayElementStyle.visibility =
