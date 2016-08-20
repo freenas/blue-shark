@@ -95,44 +95,6 @@ exports.AbstractDropZoneComponent = Component.specialize( /** @lends AbstractDro
         }
     },
 
-
-    handleComponentDrag: {
-        value: function (draggableComponent, dragEvent) {
-            // Doesn't need to compute the position of the DraggableComponent
-            // if this DropZoneComponent doesn't accept a drop for this component.
-            if (this._willAcceptDrop) {
-                var isDraggableComponentOver = this._isDraggableComponentOver(dragEvent);
-
-                if (isDraggableComponentOver && !this.acceptDrop && typeof draggableComponent.didEnterDropZone === "function") {
-                    draggableComponent.didEnterDropZone(this);
-                } else if (!isDraggableComponentOver && this.acceptDrop && typeof draggableComponent.didLeaveDropZone === "function") {
-                    draggableComponent.didLeaveDropZone(this);
-                }
-
-                if (isDraggableComponentOver ) {
-                    if (this.scrollView) {
-                        this.scrollViewPointerPositionX = dragEvent.startPositionX + dragEvent.translateX;
-                        this.scrollViewPointerPositionY = dragEvent.startPositionY + dragEvent.translateY;
-
-                        this.autoScrollView = true;
-                        this.needsDraw = true;
-                    }
-
-                    if (typeof draggableComponent.didOverDropZone === "function") {
-                        draggableComponent.didOverDropZone(this);
-                    }
-
-                    if (typeof this.handleComponentDragOver === "function") {
-                        this.handleComponentDragOver(draggableComponent, dragEvent);
-                    }
-                }
-
-                this.acceptDrop = isDraggableComponentOver;
-            }
-        }
-    },
-
-
     handleComponentDrop: {
         value: function (draggableComponent) {
             if (this._acceptDrop) {
@@ -289,28 +251,7 @@ exports.AbstractDropZoneComponent = Component.specialize( /** @lends AbstractDro
     },
 
 
-    _isDraggableComponentOver: {
-        value: function (dragEvent) {
-            var response = false;
-
-            if (this._willAcceptDrop) {
-                if (this._boundingRect !== null) {
-                    var pointerPositionX = dragEvent.startPositionX + dragEvent.translateX,
-                        pointerPositionY = dragEvent.startPositionY + dragEvent.translateY,
-                        dropZoneTop = this._boundingRect.top,
-                        dropZoneLeft = this._boundingRect.left;
-
-                    response = pointerPositionY > dropZoneTop && pointerPositionY < dropZoneTop + this._boundingRect.height && // top && bottom
-                    pointerPositionX > dropZoneLeft && pointerPositionX < dropZoneLeft + this._boundingRect.width; // left && right
-
-                } else {
-                    this.needsDraw = true;
-                }
-            }
-
-            return response;
-        }
-    },
+    
 
 
     willDraw: {

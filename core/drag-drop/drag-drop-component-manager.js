@@ -21,11 +21,14 @@ sheet.insertRule(".montage--Draggable.isDragging * { pointer-events: none; }", 0
  * @class DragDropComponentManager
  */
 var DragDropComponentManager = function DragDropComponentManager () {
-    this._draggableComponentRegistry = Object.create(null);
-    this._dropZoneComponentRegistry = Object.create(null);
+        this._draggableComponentRegistry = Object.create(null);
+        this._dropZoneComponentRegistry = Object.create(null);
 
-    this.listenFilesDragDrop();
-};
+        this.listenFilesDragDrop();
+    },
+
+    //FIXME: Bug in MR can't require AbstractDropZoneComponent
+    AbstractDropZoneComponentModule = require('core/drag-drop/abstract-dropzone-component');
 
 
 DragDropComponentManager.prototype.registerDraggableComponent = function (component) {
@@ -78,12 +81,71 @@ DragDropComponentManager.prototype.dispatchComponentDragStart = function (dragga
 
 
 DragDropComponentManager.prototype.dispatchComponentDrag = function (draggableComponent, dragEvent) {
-    this._dispatchEventToComponent("handleComponentDrag", draggableComponent, dragEvent);
+    var dropZoneComponent = this.findActiveDropZone(dragEvent);
+
+    if (dropZoneComponent && dropZoneComponent.willAcceptDrop) {
+        if (this.activeDropZone !== dropZoneComponent) {
+            if (this.activeDropZone) {
+                if (this.activeDropZone.acceptDrop && typeof draggableComponent.didLeaveDropZone === "function") {
+                    draggableComponent.didLeaveDropZone(activeDropZone);
+                }
+
+                this.activeDropZone.acceptDrop = false;
+            }
+
+            if (!dropZoneComponent.acceptDrop && typeof draggableComponent.didEnterDropZone === "function") {
+                draggableComponent.didEnterDropZone(dropZoneComponent);
+            }
+        }
+        
+        if (typeof draggableComponent.didOverDropZone === "function") {
+            draggableComponent.didOverDropZone(dropZoneComponent);
+        }
+
+        if (typeof dropZoneComponent.handleComponentDragOver === "function") {
+            dropZoneComponent.handleComponentDragOver(draggableComponent, dragEvent);
+        }
+
+        if (dropZoneComponent.scrollView) {
+            dropZoneComponent.scrollViewPointerPositionX = dragEvent.startPositionX + dragEvent.translateX;
+            dropZoneComponent.scrollViewPointerPositionY = dragEvent.startPositionY + dragEvent.translateY;
+            dropZoneComponent.autoScrollView = true;
+            dropZoneComponent.needsDraw = true;
+        }
+
+        dropZoneComponent.acceptDrop = true;
+        this.activeDropZone = dropZoneComponent;
+    } else if (this.activeDropZone) {
+        this.activeDropZone.acceptDrop = false;
+        this.activeDropZone = null;
+    }
 };
 
+DragDropComponentManager.prototype.findActiveDropZone = function (dragEvent) {
+    var pointerPositionX = dragEvent.startPositionX + dragEvent.translateX,
+        pointerPositionY = dragEvent.startPositionY + dragEvent.translateY,
+        dragOverElement = document.elementFromPoint(pointerPositionX, pointerPositionY),
+        AbstractDropZoneComponent = AbstractDropZoneComponentModule.AbstractDropZoneComponent,
+        candidateComponent = null;
+
+    if (dragOverElement) {
+        var candidateElement = dragOverElement,
+            foundCandidateComponent = false;
+
+        while (candidateElement && !(candidateComponent = candidateElement.component) && candidateElement) {
+            candidateElement = candidateElement.parentNode;
+        }
+
+        while (candidateComponent && !(foundCandidateComponent = candidateComponent instanceof AbstractDropZoneComponent)) {
+            candidateComponent = candidateComponent.parentComponent;
+        }
+    }
+
+    return candidateComponent;
+};
 
 DragDropComponentManager.prototype.dispatchComponentDragEnd = function (draggableComponent, dragEndEvent) {
-    var dropZoneComponent = this._findDropZoneActive();
+    var dropZoneComponent = this.activeDropZone;
 
     if (dropZoneComponent) {
         if (typeof draggableComponent.willDrop === "function") {
@@ -97,29 +159,6 @@ DragDropComponentManager.prototype.dispatchComponentDragEnd = function (draggabl
 
     this._dispatchEventToComponent("handleComponentDragEnd", draggableComponent, dragEndEvent);
 };
-
-
-DragDropComponentManager.prototype._findDropZoneActive = function () {
-    var dropZoneComponents = this._dropZoneComponentRegistry,
-        dropZoneComponentKeys = Object.keys(dropZoneComponents),
-        tmpDropZoneComponent,
-        candidateDropZone;
-
-    for (var i = 0, length = dropZoneComponentKeys.length; i < length; i++) {
-        tmpDropZoneComponent = dropZoneComponents[dropZoneComponentKeys[i]];
-
-        if (tmpDropZoneComponent.acceptDrop) {
-            if (!candidateDropZone) {
-                candidateDropZone = tmpDropZoneComponent;
-            } else if (candidateDropZone.element.contains(tmpDropZoneComponent.element)) {
-                candidateDropZone = tmpDropZoneComponent;
-            }
-        }
-    }
-
-    return candidateDropZone;
-};
-
 
 DragDropComponentManager.prototype._dispatchEventToComponent = function () {
     if (arguments.length > 0) {
