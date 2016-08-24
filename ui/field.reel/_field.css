@@ -6,6 +6,7 @@
     position: relative;
     margin-bottom: 1em;
     min-height: 2em;
+    display: flex;
 }
 
 .Field.disabled { pointer-events: none; }
@@ -40,10 +41,7 @@
 /* Control */
 
 .Field-control {
-    width: calc(100% - var(--fieldtitleWidth));
-    /* makes up for inline block space */
-    margin-left: -.285rem;
-    max-width: 16em;
+    flex: 1;
 }
 
 /* Field-info */
