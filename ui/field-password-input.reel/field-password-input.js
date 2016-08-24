@@ -7,4 +7,11 @@ var Component = require("montage/ui/component").Component;
  * @class FieldPasswordInput
  * @extends Component
  */
-exports.FieldPasswordInput = Component.specialize();
+exports.FieldPasswordInput = Component.specialize({
+
+    //FIXME: workaround
+    enabled: {
+        value: true
+    }
+
+});
