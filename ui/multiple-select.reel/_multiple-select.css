@@ -1,4 +1,7 @@
-.MultipleSelect { margin-bottom: 1em; }
+.MultipleSelect {
+    min-width: 16em;
+    margin-bottom: 1em;
+}
 
 .MultipleSelect-input {
     position: relative;
