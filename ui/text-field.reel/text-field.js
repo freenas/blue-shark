@@ -1,13 +1,13 @@
 /**
  * @module ui/text-field.reel
  */
-var MontageTextField = require("montage/ui/text-field.reel/text-field.js").TextField;
+var AbstractTextField = require("montage/ui/base/abstract-text-field").AbstractTextField;
 
 /**
  * @class TextField
  * @extends Component
  */
-exports.TextField = MontageTextField.specialize({
+exports.TextField = AbstractTextField.specialize({
 
     hasTemplate: {
         value: true
