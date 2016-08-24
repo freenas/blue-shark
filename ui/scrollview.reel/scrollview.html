@@ -6,20 +6,15 @@
         /* Style added here to workaround a problem with Montage/Firefox not */
         /* loading or parsing the css file on time for width/height measurement */
 
-        .Scrollview {}
+        .Scrollview { display: flex; flex: 1; flex-direction: column;}
         .ScrollviewContentWrapper {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
             overflow: hidden;
+            flex: 1;
+            display: flex;
         }
         .ScrollviewContent {
-            position: absolute;
-            min-width: 100%;
-            min-height: 100%;
             display: flex;
+            flex: 1;
             flex-direction: column;
         }
         .ScrollviewHorizontalScrollbar {
@@ -33,18 +28,17 @@
             top: 2px;
         }
         .ScrollviewSpacer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
+            display: flex;
+            flex: 1;
         }
-        .ScrollviewFooterWrapper {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
+
+        .Scrollview-transform {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
+
+        .Scrollview-is-horizontal .ScrollviewTransform { flex-direction: row;}
     </style>
     <script type="text/montage-serialization">
     {
@@ -57,6 +51,9 @@
                 "verticalScrollbar": {"@": "verticalScrollbar"},
                 "footerWrapperElement": {"#": "footerWrapper"},
                 "spacerElement": {"#": "spacer"}
+            },
+            "bindings": {
+                "classList.has('Scrollview-is-horizontal')": {"<-": "@owner.overflow == 'scrollX'"}
             }
         },
         "horizontalScrollbar": {
@@ -87,8 +84,10 @@
             <div data-montage-id="verticalScrollbar" class="ScrollviewVerticalScrollbar"></div>
             <div data-montage-id="horizontalScrollbar" class="ScrollviewHorizontalScrollbar"></div>
             <div data-montage-id="contentWrapper" class="ScrollviewContentWrapper">
-                <div data-montage-id="content" class="ScrollviewContent">
-                    <div data-param="*"></div>
+                <div  class="ScrollviewContent">
+                    <div data-montage-id="content" class="Scrollview-transform">
+                        <div data-param="*"></div>
+                    </div>
                 </div>
             </div>
         </div>
