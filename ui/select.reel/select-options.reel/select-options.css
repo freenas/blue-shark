@@ -1,14 +1,21 @@
 .SelectOptions {
     position: absolute;
-}
-
-.SelectOptions.montage-Overlay--visible .Select-options-scrollview {
-    height: 100%;
-    width: 100%;
+    display: flex;
 }
 
 
 .SelectOptions.montage-Overlay--visible .Select-options-scrollview {
     visibility: visible;
     opacity: 1;
+}
+
+
+/* scrollview override */
+.SelectOptions .Scrollview-transform {
+    flex: none;
+    display: block;
+}
+
+.SelectOptions .ScrollviewContent {
+    width: 100%;
 }

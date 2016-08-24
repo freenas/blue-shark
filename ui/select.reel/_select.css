@@ -76,13 +76,6 @@
 /* Options Drop Down */
 
 .Select-options-scrollview {
-    display: flex;
-    flex-direction: column;
-    position: absolute !important;
-    top:    0;
-    bottom: auto;
-    left:   0;
-    right:  1px;
     visibility: hidden;
     overflow: hidden;
     opacity: 0;
@@ -102,16 +95,18 @@
     font-size: inherit;
     line-height: inherit;
     cursor: pointer;
-
 }
 
 .Select-option {
-    padding: 0 2.5em 0 .5em;
+    padding: .25em .5em;
     font-weight: inherit;
     font-size: inherit;
-    line-height: 2em;
+    line-height: 1.25em;
     color: white;
     margin-top: -.05em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .Select-option:hover  { background: rgba(105, 105, 105, 1);}
