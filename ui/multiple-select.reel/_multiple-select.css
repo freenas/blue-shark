@@ -57,6 +57,7 @@
 .MultipleSelect-input-options {
     /* Fix - should I have to do this? */
     position: absolute;
+    display: flex;
     top: 2em;
     left: 0;
     right: 0;
@@ -74,6 +75,10 @@
     opacity: 0;
     transition-property: visibility, opacity;
     transition-duration: .2s;
+
+    & .Scrollview-transform {
+        display: block;
+    }
 }
 
 .MultipleSelect-input-error {
