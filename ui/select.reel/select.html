@@ -23,7 +23,7 @@
                 "element": {"#": "selectButton"}
             },
             "bindings": {
-                "enabled": {"<-": "@owner._options.length > 0"}
+                "disabled": {"<-": "@owner._options.length == 0"}
             }
         },
 
@@ -33,7 +33,7 @@
                 "element": {"#": "currentSelection"}
             },
             "bindings": {
-                "value": {"<-": "!@selectButton.enabled ? '' : (@optionsOverlay.optionsRepetition.selection.0.label || @owner._selectedValue.label || @owner._options.0.label)" }
+                "value": {"<-": "@selectButton.disabled ? '' : (@optionsOverlay.optionsRepetition.selection.0.label || @owner._selectedValue.label || @owner._options.0.label)" }
             }
         },
 
