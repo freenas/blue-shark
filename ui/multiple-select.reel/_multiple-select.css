@@ -57,6 +57,7 @@
 .MultipleSelect-input-options {
     /* Fix - should I have to do this? */
     position: absolute;
+    display: flex;
     top: 2em;
     left: 0;
     right: 0;
@@ -74,6 +75,10 @@
     opacity: 0;
     transition-property: visibility, opacity;
     transition-duration: .2s;
+
+    & .Scrollview-transform {
+        display: block;
+    }
 }
 
 .MultipleSelect-input-error {
@@ -98,6 +103,7 @@
 .MultipleSelect-valuesContainer {
     position: relative;
     box-sizing: border-box;
+    display: flex;
     color: #FFF;
     height: 7.25em;
     padding: .25em;
@@ -110,6 +116,10 @@
     border-bottom: 1px solid rgba(255, 255, 255, .15);
     transition-property: border-color, background-color, opacity;
     transition-duration: .25s;
+
+    & .Scrollview-transform {
+        display: block;
+    }
 }
 
 /* Empty State */
