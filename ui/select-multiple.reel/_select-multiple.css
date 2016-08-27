@@ -18,3 +18,7 @@
     color: #E0E5E5;
     padding: .25em .5em;
 }
+
+.SelectMultiple.is-disabled {
+    pointer-events: none;
+}
