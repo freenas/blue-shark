@@ -460,11 +460,9 @@ var Scrollview = exports.Scrollview = Component.specialize({
                 if (this._contentHeight > this._visibleHeight) {
                     if (footer.parentNode !== this.footerWrapperElement) {
                         this.footerWrapperElement.appendChild(footer);
-                        this.spacerElement.style.bottom = footer.offsetHeight + "px";
                     }
                 } else if (footer.parentNode === this.footerWrapperElement) {
                     this.contentElement.appendChild(footer);
-                    this.spacerElement.style.bottom = "0";
                 }
             }
 
