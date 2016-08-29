@@ -98,7 +98,7 @@
 }
 
 .Select-option {
-    padding: .25em .5em;
+    padding: .25em .5em .25em 2em;
     font-weight: inherit;
     font-size: inherit;
     line-height: 1.25em;
@@ -107,14 +107,21 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-}
 
-.Select-option:hover  { background: rgba(105, 105, 105, 1);}
-.Select-option:active { background: #0095d5; }
+    &:active { background: #0095d5; }
 
-.Select-option.selected {
-    background: #0095d5;
+    &.highlighted { background: #0095d5; }
+
+    &.selected {
     cursor: default;
+    position: relative;
+    padding-left: .7em;
+
+        &:before {
+            content: "\2713 ";
+            margin-right: .5em;
+        }
+    }
 }
 
 /* Disabled State */

@@ -24,6 +24,26 @@ var Select = exports.Select = Component.specialize({
         value: null
     },
 
+    _highlightedOption: {
+        value: null
+    },
+
+    __highlightedOption: {
+        get: function () {
+            return this._highlightedOption;
+        },
+        set: function (option) {
+            var self = this;
+            this.optionsOverlayComponent.templateObjects.options.iterations.forEach(function(element){
+                element._childComponents[0].classList.remove("highlighted");
+                if(element == option) {
+                    element._childComponents[0].classList.add("highlighted");
+                    self._highlightedOption = option;
+                }
+            });
+        }
+    },
+
     options: {
         set: function (content) {
             this._originalContent = content;
@@ -78,9 +98,15 @@ var Select = exports.Select = Component.specialize({
         }
     },
 
+    _optionsController: {
+        value: null
+    },
+
     enterDocument: {
         value: function (isFirstTime) {
             if (isFirstTime) {
+                // is this correct?
+                this._optionsController = this.optionsOverlayComponent.templateObjects.optionsController;
                 this.addRangeAtPathChangeListener("_originalContent", this, "_handleOriginalContentChange");
             }
         }
@@ -96,12 +122,29 @@ var Select = exports.Select = Component.specialize({
                 keyIdentifiers.space,
                 KeyComposer.createKey(this, keyIdentifiers.space, keyIdentifiers.space)
             );
+            this._keyComposerMap.set(
+                keyIdentifiers.enter,
+                KeyComposer.createKey(this, keyIdentifiers.enter, keyIdentifiers.enter)
+            );
+            this._keyComposerMap.set(
+                keyIdentifiers.up,
+                KeyComposer.createKey(this, keyIdentifiers.up, keyIdentifiers.up)
+            );
+            this._keyComposerMap.set(
+                keyIdentifiers.down,
+                KeyComposer.createKey(this, keyIdentifiers.down, keyIdentifiers.down)
+            );
 
             this._keyComposerMap.get(keyIdentifiers.space).addEventListener("keyPress", this);
+            this._keyComposerMap.get(keyIdentifiers.enter).addEventListener("keyPress", this);
+            this._keyComposerMap.get(keyIdentifiers.up).addEventListener("keyPress", this);
+            this._keyComposerMap.get(keyIdentifiers.down).addEventListener("keyPress", this);
 
             // FIXME: not possible to manage the tab key with a key composer,
             // prevent default is automatically called.
             this.element.addEventListener("keydown", this);
+
+            this.optionsOverlayComponent.element.addEventListener("mousemove", this);
         }
     },
 
@@ -137,8 +180,10 @@ var Select = exports.Select = Component.specialize({
 
     _showOptionsOverlay: {
         value: function () {
+            var self = this;
             if (!this.optionsOverlayComponent.isShown) {
                 this.optionsOverlayComponent.show();
+                this.__highlightedOption = this.optionsOverlayComponent.templateObjects.options.selectedIterations[0];
             }
         }
     },
@@ -195,19 +240,101 @@ var Select = exports.Select = Component.specialize({
                 this.options = this._originalContent; // trigger setter.
             }
         }
+    },
+
+    _nextOption: {
+        value: function (event) {
+            if (this._options && this._options.length > 0) {
+                this._navigateInOptions(1);
+            }
+        }
+    },
+
+    _previousOption: {
+        value: function () {
+            if (this._options && this._options.length > 0) {
+                this._navigateInOptions(-1);
+            }
+        }
+    },
+
+    _selectOption: {
+        value: function () {
+            this.optionsOverlayComponent.templateObjects.options.selection = [this.__highlightedOption.object];
+        }
+    },
+
+    _navigateInOptions: {
+        value: function(distance) {
+            var currentIndex = this.optionsOverlayComponent.templateObjects.options.iterations.indexOf(this.__highlightedOption),
+                newIndex = currentIndex + distance,
+                contentLength = this.optionsOverlayComponent.templateObjects.options.iterations.length;
+
+            if (newIndex < -1) {
+                newIndex = contentLength -1;
+            }
+            if (newIndex != -1 && newIndex != contentLength) {
+                this.__highlightedOption = this.optionsOverlayComponent.templateObjects.options.iterations[newIndex % contentLength];
+            }
+        }
+    },
+
+    _handledUpKeyPress: {
+        value: function () {
+            if (!this.optionsOverlayComponent.isShown) {
+                this._showOptionsOverlay();
+            } else {
+                this._previousOption();
+            }
+        }
+    },
+
+    _handleDownKeyPress: {
+        value: function () {
+            if (!this.optionsOverlayComponent.isShown) {
+                this._showOptionsOverlay();
+            } else {
+                this._nextOption();
+            }
+        }
+    },
+
+    _handleSpaceKeyPress: {
+        value: function () {
+            if (!this.optionsOverlayComponent.isShown) {
+                this._showOptionsOverlay();
+            } else {
+                this._selectOption();
+            }
+        }
+    },
+
+    handleMousemove: {
+        value: function(event) {
+            var target = event.target.component.iteration;
+            if (target != this.__highlightedOption) {
+                this.__highlightedOption = target;
+            }
+        }
     }
 
 }, {
 
     KEY_IDENTIFIERS: {
         value: {
-            space: "space"
+            space: "space",
+            enter: "enter",
+            up: "up",
+            down: "down"
         }
     }
 });
 
 
-Select.prototype.handleSpaceKeyPress = Select.prototype._toggleOptionsOverlay;
+Select.prototype.handleSpaceKeyPress = Select.prototype._handleSpaceKeyPress;
+Select.prototype.handleEnterKeyPress = Select.prototype._selectOption;
+Select.prototype.handleUpKeyPress = Select.prototype._handledUpKeyPress;
+Select.prototype.handleDownKeyPress = Select.prototype._handleDownKeyPress;
 Select.prototype.handleSelectButtonAction = Select.prototype._toggleOptionsOverlay;
 Select.prototype.exitDocument = Select.prototype._hideOptionsOverlay;
 
