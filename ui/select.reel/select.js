@@ -65,6 +65,10 @@ var Select = exports.Select = Component.specialize({
         set: function (_selectedValue) {
             this.__selectedValue = _selectedValue;
             this.dispatchOwnPropertyChange("selectedValue", this.selectedValue, false);
+            // keeps focus after mouse selection
+            if(document.activeElement != this.element) {
+                this.element.focus();
+            }
         },
         get: function () {
             return this.__selectedValue;
@@ -174,11 +178,11 @@ var Select = exports.Select = Component.specialize({
 
     _toggleOptionsOverlay: {
         value: function () {
+            this.optionsOverlayComponent.isShown ? this._hideOptionsOverlay() : this._showOptionsOverlay();
             // focus the element on click
             if(document.activeElement != this.element) {
                 this.element.focus();
             }
-            this.optionsOverlayComponent.isShown ? this._hideOptionsOverlay() : this._showOptionsOverlay();
         }
     },
 
