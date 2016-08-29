@@ -144,7 +144,7 @@ var Select = exports.Select = Component.specialize({
             // prevent default is automatically called.
             this.element.addEventListener("keydown", this);
 
-            this.optionsOverlayComponent.element.addEventListener("mousemove", this);
+            this.optionsOverlayComponent.element.addEventListener("mouseover", this);
         }
     },
 
@@ -174,6 +174,10 @@ var Select = exports.Select = Component.specialize({
 
     _toggleOptionsOverlay: {
         value: function () {
+            // focus the element on click
+            if(document.activeElement != this.element) {
+                this.element.focus();
+            }
             this.optionsOverlayComponent.isShown ? this._hideOptionsOverlay() : this._showOptionsOverlay();
         }
     },
@@ -309,10 +313,10 @@ var Select = exports.Select = Component.specialize({
         }
     },
 
-    handleMousemove: {
+    handleMouseover: {
         value: function(event) {
             var target = event.target.component.iteration;
-            if (target != this.__highlightedOption) {
+            if (target !== this.__highlightedOption) {
                 this.__highlightedOption = target;
             }
         }
