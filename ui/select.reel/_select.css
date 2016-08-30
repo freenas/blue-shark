@@ -17,7 +17,7 @@
     }
 }
 
-.Select button {
+.Select > button {
     display: flex;
     justify-content: space-between;
     cursor: pointer;
@@ -113,9 +113,7 @@
     &.highlighted { background: #0095d5; }
 
     &.selected {
-    cursor: default;
-    position: relative;
-    padding-left: .7em;
+        padding-left: .7em;
 
         &:before {
             content: "\2713 ";

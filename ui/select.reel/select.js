@@ -66,9 +66,9 @@ var Select = exports.Select = Component.specialize({
             this.__selectedValue = _selectedValue;
             this.dispatchOwnPropertyChange("selectedValue", this.selectedValue, false);
             // keeps focus after mouse selection
-            if(document.activeElement != this.element) {
-                this.element.focus();
-            }
+            // if(document.activeElement != this.element) {
+            //     this.element.focus();
+            // }
         },
         get: function () {
             return this.__selectedValue;
@@ -102,15 +102,9 @@ var Select = exports.Select = Component.specialize({
         }
     },
 
-    _optionsController: {
-        value: null
-    },
-
     enterDocument: {
         value: function (isFirstTime) {
             if (isFirstTime) {
-                // is this correct?
-                this._optionsController = this.optionsOverlayComponent.templateObjects.optionsController;
                 this.addRangeAtPathChangeListener("_originalContent", this, "_handleOriginalContentChange");
             }
         }
@@ -147,8 +141,6 @@ var Select = exports.Select = Component.specialize({
             // FIXME: not possible to manage the tab key with a key composer,
             // prevent default is automatically called.
             this.element.addEventListener("keydown", this);
-
-            this.optionsOverlayComponent.element.addEventListener("mouseover", this);
         }
     },
 
@@ -178,20 +170,28 @@ var Select = exports.Select = Component.specialize({
 
     _toggleOptionsOverlay: {
         value: function () {
+            this.element.focus();
             this.optionsOverlayComponent.isShown ? this._hideOptionsOverlay() : this._showOptionsOverlay();
-            // focus the element on click
-            if(document.activeElement != this.element) {
-                this.element.focus();
-            }
         }
     },
 
     _showOptionsOverlay: {
         value: function () {
             var self = this;
+            this.optionsOverlayComponent.element.focus();
             if (!this.optionsOverlayComponent.isShown) {
                 this.optionsOverlayComponent.show();
                 this.__highlightedOption = this.optionsOverlayComponent.templateObjects.options.selectedIterations[0];
+            }
+            this.optionsOverlayComponent.element.addEventListener("mouseover", this);
+            this.optionsOverlayComponent.element.addEventListener("mousedown", this);
+        }
+    },
+
+    handleMousedown: {
+        value: function(e) {
+            if (e.target.component.iteration == this.optionsOverlayComponent.templateObjects.options.selectedIterations[0]) {
+                this._toggleOptionsOverlay();
             }
         }
     },
@@ -201,6 +201,8 @@ var Select = exports.Select = Component.specialize({
             if (this.optionsOverlayComponent.isShown) {
                 this.optionsOverlayComponent.hide();
             }
+            this.optionsOverlayComponent.element.removeEventListener("mouseover", this);
+            this.optionsOverlayComponent.element.removeEventListener("mousedown", this);
         }
     },
 
@@ -267,8 +269,10 @@ var Select = exports.Select = Component.specialize({
     },
 
     _selectOption: {
-        value: function () {
-            this.optionsOverlayComponent.templateObjects.options.selection = [this.__highlightedOption.object];
+        value: function (e) {
+            if(this.optionsOverlayComponent.isShown) {
+                this.optionsOverlayComponent.templateObjects.options.selection = [this.__highlightedOption.object];
+            }
         }
     },
 
@@ -290,7 +294,7 @@ var Select = exports.Select = Component.specialize({
     _handledUpKeyPress: {
         value: function () {
             if (!this.optionsOverlayComponent.isShown) {
-                this._showOptionsOverlay();
+                this._toggleOptionsOverlay();
             } else {
                 this._previousOption();
             }
@@ -300,7 +304,7 @@ var Select = exports.Select = Component.specialize({
     _handleDownKeyPress: {
         value: function () {
             if (!this.optionsOverlayComponent.isShown) {
-                this._showOptionsOverlay();
+                this._toggleOptionsOverlay();
             } else {
                 this._nextOption();
             }
@@ -310,7 +314,7 @@ var Select = exports.Select = Component.specialize({
     _handleSpaceKeyPress: {
         value: function () {
             if (!this.optionsOverlayComponent.isShown) {
-                this._showOptionsOverlay();
+                this._toggleOptionsOverlay();
             } else {
                 this._selectOption();
             }
@@ -322,6 +326,16 @@ var Select = exports.Select = Component.specialize({
             var target = event.target.component.iteration;
             if (target !== this.__highlightedOption) {
                 this.__highlightedOption = target;
+            }
+        }
+    },
+
+    _handleEnterKeyPress: {
+        value: function () {
+            if (this.__highlightedOption == this.optionsOverlayComponent.templateObjects.options.selectedIterations[0]) {
+                this._toggleOptionsOverlay();
+            } else {
+                this._selectOption();
             }
         }
     }
@@ -340,10 +354,10 @@ var Select = exports.Select = Component.specialize({
 
 
 Select.prototype.handleSpaceKeyPress = Select.prototype._handleSpaceKeyPress;
-Select.prototype.handleEnterKeyPress = Select.prototype._selectOption;
 Select.prototype.handleUpKeyPress = Select.prototype._handledUpKeyPress;
 Select.prototype.handleDownKeyPress = Select.prototype._handleDownKeyPress;
 Select.prototype.handleSelectButtonAction = Select.prototype._toggleOptionsOverlay;
+Select.prototype.handleEnterKeyPress = Select.prototype._handleEnterKeyPress;
 Select.prototype.exitDocument = Select.prototype._hideOptionsOverlay;
 
 
