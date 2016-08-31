@@ -19,8 +19,22 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
         value: null
     },
 
+    __optionsHeight: {
+        get: function () {
+            return this._optionsHeight;
+        },
+        set: function (height) {
+            if (height < this._optionsMaxHeight) {
+                this._optionsHeight = height;
+            } else {
+                this._optionsHeight = this._optionsMaxHeight;
+            }
+            return this._optionsHeight;
+        }
+    },
+
     _optionsMaxHeight: {
-        value: 144
+        value: 176
     },
 
     _needsComputeBoundaries: {
@@ -156,9 +170,9 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
             Overlay.prototype.willDraw.call(this);
 
             if (this.isShown) {
-                var optionsRepetitionBoundingClientRect = this.optionsRepetition.element.getBoundingClientRect();
+                var optionsRepetitionBoundingClientRect = this.element.getBoundingClientRect();
 
-                this._optionsHeight = optionsRepetitionBoundingClientRect.height;
+                this.__optionsHeight = optionsRepetitionBoundingClientRect.height;
                 this._anchorWidth = this.anchor.getBoundingClientRect().width;
 
                 if (!this._needsComputeBoundaries) {
@@ -197,19 +211,9 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
                 overlayElementStyle.maxWidth = this._anchorWidth > 600 ? this._anchorWidth + "px" : 600 + "px";
 
                 if (this._needsComputeBoundaries) {
-                    // this.scrollView.element.style.visibility = overlayElementStyle.visibility =
-                    //     this.constructor.STYLE_VISIBILITY.hidden;
-
                     this._needsComputeBoundaries = false;
                     this.needsDraw = true;
-
-                } else {
-                    // this.scrollView.element.style.visibility = overlayElementStyle.visibility =
-                    //     this.constructor.STYLE_VISIBILITY.visible;
                 }
-            } else {
-                // this.scrollView.element.style.visibility = overlayElementStyle.visibility =
-                //     this.constructor.STYLE_VISIBILITY.hidden;
             }
         }
     }
