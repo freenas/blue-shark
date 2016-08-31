@@ -332,6 +332,7 @@ var Select = exports.Select = Component.specialize({
 
     _handleEnterKeyPress: {
         value: function () {
+            console.log("select enter key");
             if (this.__highlightedOption == this.optionsOverlayComponent.templateObjects.options.selectedIterations[0]) {
                 this._toggleOptionsOverlay();
             } else {

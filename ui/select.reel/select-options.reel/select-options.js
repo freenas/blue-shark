@@ -197,19 +197,19 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
                 overlayElementStyle.maxWidth = this._anchorWidth > 600 ? this._anchorWidth + "px" : 600 + "px";
 
                 if (this._needsComputeBoundaries) {
-                    this.scrollView.element.style.visibility = overlayElementStyle.visibility =
-                        this.constructor.STYLE_VISIBILITY.hidden;
+                    // this.scrollView.element.style.visibility = overlayElementStyle.visibility =
+                    //     this.constructor.STYLE_VISIBILITY.hidden;
 
                     this._needsComputeBoundaries = false;
                     this.needsDraw = true;
 
                 } else {
-                    this.scrollView.element.style.visibility = overlayElementStyle.visibility =
-                        this.constructor.STYLE_VISIBILITY.visible;
+                    // this.scrollView.element.style.visibility = overlayElementStyle.visibility =
+                    //     this.constructor.STYLE_VISIBILITY.visible;
                 }
             } else {
-                this.scrollView.element.style.visibility = overlayElementStyle.visibility =
-                    this.constructor.STYLE_VISIBILITY.hidden;
+                // this.scrollView.element.style.visibility = overlayElementStyle.visibility =
+                //     this.constructor.STYLE_VISIBILITY.hidden;
             }
         }
     }
