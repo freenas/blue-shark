@@ -9,7 +9,7 @@
     height: 5em;
     padding: 0.25em .5em;
     resize: vertical;
-    color: inherit;
+    color: #FFF;
     background-color: rgba(0, 0, 0, .25);
     border:         1px solid transparent;
     border-top:     1px solid rgba(0, 0, 0, .23);
