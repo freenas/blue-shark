@@ -74,7 +74,7 @@ exports.Duration = Component.specialize(/** @lends Duration# */ {
     _getSeconds: {
         value: function() {
             if (!this._unit || !this._count) {
-                return this._value;
+                return 0;
             }
             return this._unit * this._count;
         }
