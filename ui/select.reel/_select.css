@@ -75,6 +75,10 @@
 
 /* Options Drop Down */
 
+.Select-options {
+    background: rgba(90, 90, 90, 1);
+}
+
 .Select-option {
     padding: .25em .5em .25em 2em;
     font-weight: inherit;

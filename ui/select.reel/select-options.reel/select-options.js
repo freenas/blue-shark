@@ -24,21 +24,23 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
             return this._optionsHeight;
         },
         set: function (height) {
-            if (height < this._optionsMaxHeight) {
-                this._optionsHeight = height;
-            } else {
-                this._optionsHeight = this._optionsMaxHeight;
-            }
+            this._optionsHeight = height;
             return this._optionsHeight;
         }
     },
 
-    _optionsMaxHeight: {
-        value: 176
+    __optionsMaxHeight: {
+        value: null
     },
 
-    _needsComputeBoundaries: {
-        value: false
+    _optionsMaxHeight: {
+        get: function () {
+            return this.__optionsMaxHeight;
+        },
+        set: function (maxHeight) {
+            this.__optionsMaxHeight = maxHeight;
+            this.element.style.height = maxHeight - 16 + "px";
+        }
     },
 
     optionsMaxHeight: {
@@ -51,6 +53,10 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
                 this.needsDraw = true;
             }
         }
+    },
+
+    _needsComputeBoundaries: {
+        value: false
     },
 
     enterDocument: {
@@ -93,7 +99,10 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
                 this._keyComposerMap.get(this.constructor.KEY_IDENTIFIERS.escape).addEventListener("keyPress", this);
                 this.element.ownerDocument.defaultView.addEventListener("wheel", this, true);
                 this._saveInitialCenterPosition();
+                // remove class each time to calculate position from same spot
+                this.classList.remove("is-below-middle");
                 this._needsComputeBoundaries = true;
+
             }
 
             Overlay.prototype.show.call(this);
@@ -170,19 +179,39 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
             Overlay.prototype.willDraw.call(this);
 
             if (this.isShown) {
-                var optionsRepetitionBoundingClientRect = this.element.getBoundingClientRect();
+                var optionsRepetitionBoundingClientRect = this.optionsRepetition.element.getBoundingClientRect();
 
                 this.__optionsHeight = optionsRepetitionBoundingClientRect.height;
-                this._anchorWidth = this.anchor.getBoundingClientRect().width;
+                this._anchorRect = this.anchor.getBoundingClientRect();
+                this._anchorWidth = this._anchorRect.width;
 
                 if (!this._needsComputeBoundaries) {
+
                     var documentHeight = this.element.ownerDocument.documentElement.clientHeight;
 
-                    if (optionsRepetitionBoundingClientRect.top + this._optionsHeight > documentHeight) {
-                        this.classList.add("is-outside-document");
-                    } else {
-                        this.classList.remove("is-outside-document");
+                    // check if the options would go outside the viewport
+                    // if the bottom of the options is greater than document height
+                    if (optionsRepetitionBoundingClientRect.bottom > documentHeight) {
+
+                        // will the options fit above select?
+                        if (this._anchorRect.top - this.__optionsHeight < 0) {
+                            // is there more room above or below?
+                            // check the middle point of the anchor to see if it's above or below the middle of documentHeight
+                            if(documentHeight - (this._anchorRect.top - this._anchorRect.height / 2) > (documentHeight / 2)) {
+                                // more room below
+                                this._optionsMaxHeight = documentHeight - optionsRepetitionBoundingClientRect.top;
+                            } else {
+                                // more room above
+                                this._optionsMaxHeight = this._anchorRect.top;
+                                this.classList.add("is-below-middle");
+                            }
+                        } else {
+                            // the options fit
+                            this.classList.add("is-below-middle");
+                        }
+
                     }
+
                 }
             }
         }
@@ -198,13 +227,6 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
 
                 overlayElementStyle.top = position.top + "px";
                 overlayElementStyle.left = position.left + "px";
-
-                // set options Height
-                if (this._optionsHeight < this._optionsMaxHeight) {
-                    overlayElementStyle.height = this._optionsHeight + "px";
-                } else {
-                    overlayElementStyle.height = this._optionsMaxHeight + "px";
-                }
 
                 // set options minWidth
                 overlayElementStyle.minWidth = this._anchorWidth + "px";

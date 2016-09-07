@@ -24,21 +24,21 @@ var Select = exports.Select = Component.specialize({
         value: null
     },
 
-    _highlightedOption: {
+    __highlightedOption: {
         value: null
     },
 
-    __highlightedOption: {
+    _highlightedOption: {
         get: function () {
-            return this._highlightedOption;
+            return this.__highlightedOption;
         },
         set: function (option) {
             var self = this;
-            this.optionsOverlayComponent.templateObjects.options.iterations.forEach(function(element){
-                element._childComponents[0].classList.remove("highlighted");
-                if(element == option) {
-                    element._childComponents[0].classList.add("highlighted");
-                    self._highlightedOption = option;
+            this.optionsOverlayComponent.templateObjects.options.iterations.forEach(function(iteration){
+                iteration._childComponents[0].classList.remove("highlighted");
+                if(iteration == option) {
+                    iteration._childComponents[0].classList.add("highlighted");
+                    self.__highlightedOption = option;
                 }
             });
         }
@@ -65,10 +65,6 @@ var Select = exports.Select = Component.specialize({
         set: function (_selectedValue) {
             this.__selectedValue = _selectedValue;
             this.dispatchOwnPropertyChange("selectedValue", this.selectedValue, false);
-            // keeps focus after mouse selection
-            // if(document.activeElement != this.element) {
-            //     this.element.focus();
-            // }
         },
         get: function () {
             return this.__selectedValue;
@@ -177,11 +173,10 @@ var Select = exports.Select = Component.specialize({
 
     _showOptionsOverlay: {
         value: function () {
-            var self = this;
             this.optionsOverlayComponent.element.focus();
             if (!this.optionsOverlayComponent.isShown) {
                 this.optionsOverlayComponent.show();
-                this.__highlightedOption = this.optionsOverlayComponent.templateObjects.options.selectedIterations[0];
+                this._highlightedOption = this.optionsOverlayComponent.templateObjects.options.selectedIterations[0];
             }
             this.optionsOverlayComponent.element.addEventListener("mouseover", this);
             this.optionsOverlayComponent.element.addEventListener("mousedown", this);
@@ -271,14 +266,14 @@ var Select = exports.Select = Component.specialize({
     _selectOption: {
         value: function (e) {
             if(this.optionsOverlayComponent.isShown) {
-                this.optionsOverlayComponent.templateObjects.options.selection = [this.__highlightedOption.object];
+                this.optionsOverlayComponent.templateObjects.options.selection = [this._highlightedOption.object];
             }
         }
     },
 
     _navigateInOptions: {
         value: function(distance) {
-            var currentIndex = this.optionsOverlayComponent.templateObjects.options.iterations.indexOf(this.__highlightedOption),
+            var currentIndex = this.optionsOverlayComponent.templateObjects.options.iterations.indexOf(this._highlightedOption),
                 newIndex = currentIndex + distance,
                 contentLength = this.optionsOverlayComponent.templateObjects.options.iterations.length;
 
@@ -286,7 +281,7 @@ var Select = exports.Select = Component.specialize({
                 newIndex = contentLength -1;
             }
             if (newIndex != -1 && newIndex != contentLength) {
-                this.__highlightedOption = this.optionsOverlayComponent.templateObjects.options.iterations[newIndex % contentLength];
+                this._highlightedOption = this.optionsOverlayComponent.templateObjects.options.iterations[newIndex % contentLength];
             }
         }
     },
@@ -313,7 +308,7 @@ var Select = exports.Select = Component.specialize({
 
     _handleSpaceKeyPress: {
         value: function () {
-            if (!this.optionsOverlayComponent.isShown) {
+            if (!this.optionsOverlayComponent.isShown || this._highlightedOption == this.optionsOverlayComponent.templateObjects.options.selectedIterations[0]) {
                 this._toggleOptionsOverlay();
             } else {
                 this._selectOption();
@@ -323,17 +318,19 @@ var Select = exports.Select = Component.specialize({
 
     handleMouseover: {
         value: function(event) {
-            var target = event.target.component.iteration;
-            if (target !== this.__highlightedOption) {
-                this.__highlightedOption = target;
+            if (event.target.component) {
+                var target = event.target.component.iteration;
+
+                if (target !== this._highlightedOption) {
+                    this._highlightedOption = target;
+                }
             }
         }
     },
 
     _handleEnterKeyPress: {
         value: function () {
-            console.log("select enter key");
-            if (this.__highlightedOption == this.optionsOverlayComponent.templateObjects.options.selectedIterations[0]) {
+            if (this.optionsOverlayComponent.isShown && this._highlightedOption == this.optionsOverlayComponent.templateObjects.options.selectedIterations[0]) {
                 this._toggleOptionsOverlay();
             } else {
                 this._selectOption();
