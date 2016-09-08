@@ -1,7 +1,10 @@
 .FieldRadioGroup {
 
-}
+    & .RadioButtonFieldGroup {
+        margin-top: -.2em;
+    }
 
-.FieldRadioGroup .RadioButtonFieldGroup {
-    margin-top: -.2em;
+    &.FieldRadioGroup .RadioButtonFieldGroup {
+        margin-top: 0.35em;
+    }
 }

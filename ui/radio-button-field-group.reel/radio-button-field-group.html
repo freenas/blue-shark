@@ -12,8 +12,7 @@
         "options": {
             "prototype": "montage/ui/repetition.reel",
             "properties": {
-                "element": {"#": "options"},
-                "isSelectionEnabled": true
+                "element": {"#": "options"}
             },
             "bindings": {
                 "content": {"<-": "@owner.options"}
@@ -29,11 +28,11 @@
             "prototype": "./radio-button-field.reel",
             "properties": {
                 "element": {"#": "option"},
-                "radioButtonController": {"@": "radioButtonController"}
+                "radioButtonController": {"@": "radioButtonController"},
+                "value": "test"
             },
             "bindings": {
-                "label": {"<-": "@options:iteration.object.label"},
-                "value": {"<-": "@options:iteration.object.value"},
+                "label": {"<-": "@options:iteration.object.label || @options:iteration.object"},
                 "enabled": {"<-": "@owner.enabled"}
             }
         }

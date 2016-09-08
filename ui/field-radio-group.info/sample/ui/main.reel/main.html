@@ -14,13 +14,12 @@
             "properties": {
                 "element": {"#": "fieldRadioGroup"},
                 "label": "test label",
-                "enabled": false,
                 "options": [
-                    {"label": "option1", "value": "option1"},
-                    {"label": "option2", "value": "option2"},
-                    {"label": "option3", "value": "option3"},
-                    {"label": "option4", "value": "option4"}
+                    "one", "two", "three"
                 ]
+            },
+            "bindings": {
+                "selectedValue": {"<-": "'one'"}
             }
         }
     }
@@ -31,7 +30,7 @@
         <div class="container">
             <h1>Field Text Area</h1>
             <h3>Default</h3>
-            <div data-montage-id="fieldRadioGroup"></div>
+            <div data-montage-id="fieldRadioGroup" class="FieldRadioGroup--block"></div>
         </div>
     </div>
 </body>

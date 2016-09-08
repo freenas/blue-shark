@@ -32,6 +32,6 @@
 
 /* Block Modifier */
 
-.RadioButtonFieldGroup--block .RadioButtonField {
+.FieldRadioGroup--block .RadioButtonField {
     display: block;
 }
