@@ -173,13 +173,15 @@ var Select = exports.Select = Component.specialize({
 
     _showOptionsOverlay: {
         value: function () {
-            this.optionsOverlayComponent.element.focus();
-            if (!this.optionsOverlayComponent.isShown) {
-                this.optionsOverlayComponent.show();
-                this._highlightedOption = this.optionsOverlayComponent.templateObjects.options.selectedIterations[0];
+            if (!this.disabled) {
+                this.optionsOverlayComponent.element.focus();
+                if (!this.optionsOverlayComponent.isShown) {
+                    this.optionsOverlayComponent.show();
+                    this._highlightedOption = this.optionsOverlayComponent.templateObjects.options.selectedIterations[0];
+                }
+                this.optionsOverlayComponent.element.addEventListener("mouseover", this);
+                this.optionsOverlayComponent.element.addEventListener("mousedown", this);
             }
-            this.optionsOverlayComponent.element.addEventListener("mouseover", this);
-            this.optionsOverlayComponent.element.addEventListener("mousedown", this);
         }
     },
 
