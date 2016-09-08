@@ -15,7 +15,10 @@
                     "type": "action",
                     "listener": {"@": "owner"}
                 }
-            ]
+            ],
+            "bindings": {
+                "classList.has('disabled')": {"<-": "@owner.disabled"}
+            }
         },
 
         "selectButton": {
@@ -24,7 +27,7 @@
                 "element": {"#": "selectButton"}
             },
             "bindings": {
-                "disabled": {"<-": "@owner._options.length == 0"}
+                "disabled": {"<-": "@owner.disabled || @owner._options.length == 0"}
             }
         },
 
@@ -34,7 +37,7 @@
                 "element": {"#": "currentSelection"}
             },
             "bindings": {
-                "value": {"<-": "@selectButton.disabled ? '' : (@optionsOverlay.optionsRepetition.selection.0.label || @owner._selectedValue.label || @owner._options.0.label)" }
+                "value": {"<-": "(@optionsOverlay.optionsRepetition.selection.0.label || @owner._selectedValue.label || @owner._options.0.label)" }
             }
         },
 
