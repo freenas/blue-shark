@@ -199,10 +199,10 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
                             // check the middle point of the anchor to see if it's above or below the middle of documentHeight
                             if(documentHeight - (this._anchorRect.top - this._anchorRect.height / 2) > (documentHeight / 2)) {
                                 // more room below
-                                this._optionsMaxHeight = documentHeight - optionsRepetitionBoundingClientRect.top;
+                                this._optionsMaxHeight = Math.abs(documentHeight - optionsRepetitionBoundingClientRect.top);
                             } else {
                                 // more room above
-                                this._optionsMaxHeight = this._anchorRect.top;
+                                this._optionsMaxHeight = Math.abs(this._anchorRect.top);
                                 this.classList.add("is-below-middle");
                             }
                         } else {
@@ -225,7 +225,7 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
             if (this.isShown) {
                 var position = this._drawPosition;
 
-                overlayElementStyle.top = position.top + "px";
+                overlayElementStyle.top = Math.round(position.top) + "px";
                 overlayElementStyle.left = position.left + "px";
 
                 // set options minWidth
