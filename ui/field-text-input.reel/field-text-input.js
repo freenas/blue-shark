@@ -16,6 +16,10 @@ exports.FieldTextInput = Field.specialize({
         value: true
     },
 
+    hasError: {
+        value: false
+    },
+
     prepareForActivationEvents: {
         value: function () {
             if (this.validator) {
@@ -23,7 +27,6 @@ exports.FieldTextInput = Field.specialize({
             }
         }
     },
-
 
     captureBlur: {
         value: function(event) {
