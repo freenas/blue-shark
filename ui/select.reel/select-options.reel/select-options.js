@@ -167,13 +167,6 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
         }
     },
 
-    //@todo fixme: in montage
-    _getElementPosition: {
-        value: function (element) {
-            return element.getBoundingClientRect();
-        }
-    },
-
     willDraw: {
         value: function () {
             Overlay.prototype.willDraw.call(this);
