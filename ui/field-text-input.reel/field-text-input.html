@@ -19,7 +19,8 @@
                 "label": {"<-": "@owner.label"},
                 "documentationReference": {"<-": "@owner.documentationReference"},
                 "errorMessage": {"<-": "@owner.errorMessage || @textInput.errorMessage"},
-                "hasError": {"<-": "@owner.hasError || !!@textInput.errorMessage"}
+                "hasError": {"<-": "@owner.hasError || !!@textInput.errorMessage"},
+                "isMandatory": {"<-": "@owner.isMandatory"}
             }
         },
         "textInput": {

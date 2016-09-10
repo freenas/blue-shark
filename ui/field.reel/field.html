@@ -8,6 +8,9 @@
             "properties": {
                 "element": {"#": "owner"}
             },
+            "bindings": {
+                "classList.has('is-mandatory')": {"<-": "!!@owner.isMandatory"}
+            },
             "listeners": [
                 {
                     "type": "action",

@@ -36,6 +36,11 @@
     transition: opacity .25s;
 }
 
+.Field.is-mandatory .Field-title:after {
+    content: "*";
+    padding-left: 0.5em;
+}
+
 .Field.disabled .Field-title { opacity: .5; }
 
 /* Control */
