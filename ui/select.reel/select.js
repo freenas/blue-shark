@@ -173,13 +173,15 @@ var Select = exports.Select = Component.specialize({
 
     _showOptionsOverlay: {
         value: function () {
-            this.optionsOverlayComponent.element.focus();
-            if (!this.optionsOverlayComponent.isShown) {
-                this.optionsOverlayComponent.show();
-                this._highlightedOption = this.optionsOverlayComponent.templateObjects.options.selectedIterations[0];
+            if (!this.disabled) {
+                this.optionsOverlayComponent.element.focus();
+                if (!this.optionsOverlayComponent.isShown) {
+                    this.optionsOverlayComponent.show();
+                    this._highlightedOption = this.optionsOverlayComponent.templateObjects.options.selectedIterations[0];
+                }
+                this.optionsOverlayComponent.element.addEventListener("mouseover", this);
+                this.optionsOverlayComponent.element.addEventListener("mousedown", this);
             }
-            this.optionsOverlayComponent.element.addEventListener("mouseover", this);
-            this.optionsOverlayComponent.element.addEventListener("mousedown", this);
         }
     },
 
@@ -282,6 +284,20 @@ var Select = exports.Select = Component.specialize({
             }
             if (newIndex != -1 && newIndex != contentLength) {
                 this._highlightedOption = this.optionsOverlayComponent.templateObjects.options.iterations[newIndex % contentLength];
+
+                var hightlightedOptionBoundaries = this._highlightedOption._childComponents[0]._element.getBoundingClientRect(),
+                    overlayBoundaries = this.optionsOverlayComponent.element.getBoundingClientRect();
+
+                // checks to see if highlighted option is above or below of overlay boundaries
+                if(hightlightedOptionBoundaries.bottom > overlayBoundaries.bottom) {
+
+                    // if highlighted option is below the overlay boundaries set the scrolltop to equal the amount it is past
+                    // rounding the values to keep it from using subpixels
+                    this.optionsOverlayComponent.scrollView.scrollTop += Math.round(hightlightedOptionBoundaries.bottom - overlayBoundaries.bottom);
+                } else if (hightlightedOptionBoundaries.top < overlayBoundaries.top) {
+                    // if highlighted option is above the overlay boundaries set the scrolltop to equal the amount it is past
+                    this.optionsOverlayComponent.scrollView.scrollTop -= Math.round(overlayBoundaries.top - hightlightedOptionBoundaries.top);
+                }
             }
         }
     },
