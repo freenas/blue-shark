@@ -12,8 +12,8 @@ exports.FieldTextInput = Field.specialize({
         value: true
     },
 
-    enabled: {
-        value: true
+    disabled: {
+        value: false
     },
 
     hasError: {
@@ -23,7 +23,7 @@ exports.FieldTextInput = Field.specialize({
     prepareForActivationEvents: {
         value: function () {
             if (this.validator) {
-                this.textInput.element.addEventListener('blur', this, true);
+                this.control.element.addEventListener('blur', this, true);
             }
         }
     },

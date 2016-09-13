@@ -7,7 +7,7 @@
         "owner": {
             "properties": {
                 "element": {"#": "owner"},
-                "textInput": {"@": "textInput"}
+                "control": {"@": "control"}
             }
         },
         "field": {
@@ -18,21 +18,22 @@
             "bindings": {
                 "label": {"<-": "@owner.label"},
                 "documentationReference": {"<-": "@owner.documentationReference"},
-                "errorMessage": {"<-": "@owner.errorMessage || @textInput.errorMessage"},
-                "hasError": {"<-": "@owner.hasError || !!@textInput.errorMessage"},
+                "disabled": {"<-": "@owner.disabled"},
+                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
+                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"},
                 "isMandatory": {"<-": "@owner.isMandatory"}
             }
         },
-        "textInput": {
+        "control": {
             "prototype": "ui/text-field.reel",
             "properties": {
-                "element": {"#": "textInput"}
+                "element": {"#": "control"}
             },
             "bindings": {
                 "placeholderValue": {"<-": "@owner.placeholderValue"},
                 "converter": {"<-": "@owner.converter"},
                 "value": {"<->": "@owner.value"},
-                "enabled": {"<-": "@owner.enabled"}
+                "enabled": {"<-": "!@owner.disabled"}
             }
         }
     }
@@ -41,7 +42,7 @@
 <body>
     <div data-montage-id="owner" class="FieldTextInput">
         <div data-montage-id="field">
-            <div data-montage-id="textInput"></div>
+            <div data-montage-id="control"></div>
         </div>
     </div>
 </body>

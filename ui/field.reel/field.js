@@ -19,4 +19,4 @@ var Field = exports.Field = Component.specialize(/** @lends Field# */ {
 
 bindPropertyToClassName(Field, "hasError", "has-error");
 bindPropertyToClassName(Field, "isValidated", "is-validated");
-bindPropertyToClassName(Field, "enabled", "disabled", true);
+bindPropertyToClassName(Field, "disabled", "is-disabled");

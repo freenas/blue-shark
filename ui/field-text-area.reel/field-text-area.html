@@ -17,19 +17,21 @@
             "bindings": {
                 "label": {"<-": "@owner.label"},
                 "documentationReference": {"<-": "@owner.documentationReference"},
-                "errorMessage": {"<-": "@owner.errorMessage"},
-                "hasError": {"<-": "@owner.hasError"}
+                "disabled": {"<-": "@owner.disabled"},
+                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
+                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"},
+                "isMandatory": {"<-": "@owner.isMandatory"}
             }
         },
-        "textArea": {
+        "control": {
             "prototype": "ui/text-area.reel",
             "properties": {
-                "element": {"#": "textArea"}
+                "element": {"#": "control"}
             },
             "bindings": {
                 "placeholderValue": {"<-": "@owner.placeholderValue"},
                 "value": {"<->": "@owner.value"},
-                "enabled": {"<-": "@owner.enabled"}
+                "enabled": {"<-": "!@owner.disabled"}
             }
         }
     }
@@ -38,7 +40,7 @@
 <body>
     <div data-montage-id="owner" class="FieldTextArea">
         <div data-montage-id="field">
-            <div data-montage-id="textArea"></div>
+            <div data-montage-id="control"></div>
         </div>
     </div>
 </body>

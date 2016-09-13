@@ -9,7 +9,7 @@
     display: flex;
 }
 
-.Field.disabled { pointer-events: none; }
+.Field.is-disabled { pointer-events: none; }
 
 .Field + .Field { margin-top: 0; }
 
@@ -41,7 +41,7 @@
     padding-left: 0.5em;
 }
 
-.Field.disabled .Field-title { opacity: .5; }
+.Field.is-disabled .Field-title { opacity: .5; }
 
 /* Control */
 

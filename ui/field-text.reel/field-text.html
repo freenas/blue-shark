@@ -16,13 +16,17 @@
             },
             "bindings": {
                 "label": {"<-": "@owner.label"},
-                "documentationReference": {"<-": "@owner.documentationReference"}
+                "documentationReference": {"<-": "@owner.documentationReference"},
+                "disabled": {"<-": "@owner.disabled"},
+                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
+                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"},
+                "isMandatory": {"<-": "@owner.isMandatory"}
             }
         },
-        "text": {
+        "control": {
             "prototype": "montage/ui/text.reel",
             "properties": {
-                "element": {"#": "text"}
+                "element": {"#": "control"}
             },
             "bindings": {
                 "value": {"<->": "@owner.value"},
@@ -35,7 +39,7 @@
 <body>
     <div data-montage-id="owner" class="FieldText">
         <div data-montage-id="field">
-            <div data-montage-id="text" class="FieldText-text"></div>
+            <div data-montage-id="control" class="FieldText-text"></div>
         </div>
     </div>
 </body>

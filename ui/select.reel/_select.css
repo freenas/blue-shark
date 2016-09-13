@@ -106,7 +106,7 @@
 
 /* Disabled State */
 
-.Field.disabled .Select {
+.Field.is-disabled .Select {
     background: rgba(0, 0, 0, .1);
     border-color: transparent;
     opacity: .5;
