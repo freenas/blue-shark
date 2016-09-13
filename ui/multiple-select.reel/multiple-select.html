@@ -17,7 +17,7 @@
                 "_inputErrorMessage": {"<-": "@owner.inputErrorMessage || 'The input is invalid'"},
                 "_optionsPrefix": {"<-": "@owner._typedValue || @input.value || ''"},
                 "_inputError": {"<-": "!!@owner.invalidValue && @owner.invalidValue == @input.value"},
-                "classList.has('disabled')": {"<-": "!@owner.enabled"}
+                "classList.has('disabled')": {"<-": "@owner.disabled"}
             },
             "listeners": [
                 {

@@ -16,13 +16,17 @@
             },
             "bindings": {
                 "label": {"<-": "@owner.label"},
-                "documentationReference": {"<-": "@owner.documentationReference"}
+                "documentationReference": {"<-": "@owner.documentationReference"},
+                "disabled": {"<-": "@owner.disabled"},
+                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
+                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"},
+                "isMandatory": {"<-": "@owner.isMandatory"}
             }
         },
-        "selectMultiple": {
+        "control": {
             "prototype": "ui/select-multiple.reel",
             "properties": {
-                "element": {"#": "selectMultiple"}
+                "element": {"#": "control"}
             },
             "bindings": {
                 "options": {"<-": "@owner.options"},
@@ -38,7 +42,7 @@
 <body>
     <div data-montage-id="owner" class="FieldSelectMultiple">
         <div data-montage-id="field">
-            <div data-montage-id="selectMultiple"></div>
+            <div data-montage-id="control"></div>
         </div>
     </div>
 </body>

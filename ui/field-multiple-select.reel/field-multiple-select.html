@@ -16,13 +16,17 @@
             },
             "bindings": {
                 "label": {"<-": "@owner.label"},
-                "enabled": {"<-": "@owner.enabled"}
+                "documentationReference": {"<-": "@owner.documentationReference"},
+                "disabled": {"<-": "@owner.disabled"},
+                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
+                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"},
+                "isMandatory": {"<-": "@owner.isMandatory"}
             }
         },
-        "multipleSelect": {
+        "control": {
             "prototype": "ui/multiple-select.reel",
             "properties": {
-                "element": {"#": "multipleSelect"}
+                "element": {"#": "control"}
             },
             "bindings": {
                 "isDraggable": {"<-": "@owner.isDraggable"},
@@ -33,7 +37,7 @@
                 "inputErrorMessage": {"<-": "@owner.inputErrorMessage"},
                 "valueErrorMessage": {"<-": "@owner.valueErrorMessage"},
                 "values": {"<->": "@owner.values"},
-                "enabled": {"<-": "@owner.enabled"}
+                "disabled": {"<-": "@owner.disabled"}
             }
         }
     }
@@ -42,7 +46,7 @@
 <body>
     <div data-montage-id="owner" class="FieldMultipleSelect">
         <div data-montage-id="field">
-            <div data-montage-id="multipleSelect"></div>
+            <div data-montage-id="control"></div>
         </div>
     </div>
 </body>

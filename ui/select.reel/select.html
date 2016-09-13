@@ -24,7 +24,7 @@
                 "element": {"#": "selectButton"}
             },
             "bindings": {
-                "disabled": {"<-": "@owner._options.length == 0"}
+                "disabled": {"<-": "@owner.disabled || @owner._options.length == 0"}
             }
         },
 

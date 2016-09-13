@@ -17,13 +17,16 @@
             "bindings": {
                 "label": {"<-": "@owner.label"},
                 "documentationReference": {"<-": "@owner.documentationReference"},
-                "enabled": {"<-": "!@owner.disabled"}
+                "disabled": {"<-": "@owner.disabled"},
+                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
+                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"},
+                "isMandatory": {"<-": "@owner.isMandatory"}
             }
         },
-        "checkbox": {
+        "control": {
             "prototype": "ui/checkbox.reel",
             "properties": {
-                "element": {"#": "checkbox"}
+                "element": {"#": "control"}
             },
             "bindings": {
                 "checked": {"<->": "@owner.checked"},
@@ -36,7 +39,7 @@
 <body>
     <div data-montage-id="owner" class="FieldCheckbox">
         <div data-montage-id="field">
-            <div data-montage-id="checkbox"></div>
+            <div data-montage-id="control"></div>
         </div>
     </div>
 </body>

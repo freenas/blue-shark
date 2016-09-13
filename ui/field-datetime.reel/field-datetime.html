@@ -17,13 +17,16 @@
             "bindings": {
                 "label": {"<-": "@owner.label"},
                 "documentationReference": {"<-": "@owner.documentationReference"},
-                "enabled": {"<-": "@owner.enabled"}
+                "disabled": {"<-": "@owner.disabled"},
+                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
+                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"},
+                "isMandatory": {"<-": "@owner.isMandatory"}
             }
         },
-        "datetime": {
+        "control": {
             "prototype": "ui/datetime.reel",
             "properties": {
-                "element": {"#": "datetime"}
+                "element": {"#": "control"}
             },
             "bindings": {
                 "value": {"<->": "@owner.value"},
@@ -38,7 +41,7 @@
 <body>
     <div data-montage-id="owner" class="FieldDatetime">
         <div data-montage-id="field">
-            <div data-montage-id="datetime"></div>
+            <div data-montage-id="control"></div>
         </div>
     </div>
 </body>
