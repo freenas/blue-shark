@@ -150,20 +150,6 @@ var Select = exports.Select = Component.specialize({
         }
     },
 
-    overlayShouldDismissOnSurrenderActiveTarget: {
-        value: function (overlay, candidateActiveTarget, response) {
-            if (!response && candidateActiveTarget instanceof SelectOptions) {
-                // FIXME: an overlay should probably hide itself when surrender active target
-                // need to fix montage (maybe all overlay should become the active target when it is shown)
-                // FIXME: probably a bug with the press composer that can't perform an action
-                // if they loose the claimed pointer.
-                this._hideOptionsOverlay();
-
-                return true;
-            }
-        }
-    },
-
     _toggleOptionsOverlay: {
         value: function () {
             this.element.focus();
