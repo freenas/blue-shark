@@ -50,6 +50,7 @@
         background-image: linear-gradient(transparent, transparent);
         text-shadow: 0 1px 0 rgba(0, 0, 0, 0);
         cursor: default;
+        cursor: not-allowed;
     }
 }
 
@@ -59,12 +60,8 @@
     vertical-align: middle;
     line-height: 2.5em;
 
-    @nest .Button:active & {
+    @nest .Button:not(.montage--disabled):active & {
         transform: translateY(.05em);
-    }
-
-    @nest .Button.montage--disabled:active & {
-        transform: translateY(0);
     }
 }
 
@@ -82,16 +79,17 @@
     }
 }
 
-.Button:active > :not(.Button-label) {
+.Button:not(.montage--disabled):active > :not(.Button-label) {
     transform: translateY(.05em);
 }
 
-.Button-group .Button + .Button {
-    margin-left: .5em;
-}
+/* Button Group */
+
+.Button-group .Button + .Button { margin-left: .5em;}
+
+/* Button Types */
 
 .Button--block { display: block; width: 100%; }
-
 .Button--large { font-size: 1em; }
 
 .Button--primary    { background-color: #0378AA; }
