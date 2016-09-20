@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="field-time.css">
     <script type="text/montage-serialization">
     {
         "owner": {
@@ -30,7 +29,10 @@
             },
             "bindings": {
                 "__selectedOption": {"<->": "@owner.selectedOption"},
-                "enabled": {"<-": "@owner.enabled"}
+                "enabled": {"<-": "@owner.enabled"},
+                "intervalInSeconds": {"<-": "@owner.intervalInSeconds"},
+                "pattern": {"<-": "@owner.pattern"},
+                "isDefaultNow": {"<-": "@owner.isDefaultNow"}
             }
         }
     }

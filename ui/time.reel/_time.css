@@ -1,11 +1,15 @@
-.Time {}
-
 .Time-container {
     position: relative;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+.Time-input-field.TextField:focus {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
 }
 
 /* Time Controls ---------------------------------- */
