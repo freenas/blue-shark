@@ -1,4 +1,9 @@
+.FieldText .Field-error {
+    @apply --input-error;
+}
+
 .FieldText-text {
     margin-top: .2em;
     line-height: 1.5;
 }
+

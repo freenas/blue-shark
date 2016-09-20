@@ -7,15 +7,27 @@
     margin-bottom: 1em;
     min-height: 2em;
     display: flex;
-}
+    flex-wrap: wrap;
 
-.Field.is-disabled { pointer-events: none; }
+    &.is-disabled { pointer-events: none; }
 
-.Field + .Field { margin-top: 0; }
+    & + .Field { margin-top: 0; }
 
-.Field > * {
-    font-family: "Lato";
-    font-size: 1em;
+    & > * {
+        font-family: "Lato";
+        font-size: 1em;
+    }
+
+    &.has-error:before {
+        position: absolute;
+        content: '';
+        top: -.5em;
+        left:  -.5em;
+        right: -.5em;
+        bottom: 0;
+        border: 1px solid #E0003A;
+        border-radius: 4px;
+    }
 }
 
 .Field-title,
@@ -30,18 +42,26 @@
     font-weight: 300;
     line-height: 1.25em;
     width: var(--fieldtitleWidth);
+    font-weight: 400;
+    margin-bottom: .5em;
     padding-right: 1.5rem;
     padding-top: .35rem;
     color: rgba(255,255,255,.8);
     transition: opacity .25s;
-}
 
-.Field.is-mandatory .Field-title:after {
-    content: "*";
-    padding-left: 0.5em;
-}
+    @nest .Field.has-error & {
+        /* color: #e0003a; */
+    }
 
-.Field.is-disabled .Field-title { opacity: .5; }
+    @nest .Field.is-disabled & {
+        opacity: .5;
+    }
+
+    @nest .Field.is-mandatory &:after {
+        content: "*";
+        padding-left: 0.5em;
+    }
+}
 
 /* Control */
 
@@ -59,7 +79,7 @@
     margin-left: -1em;
 }
 
-.Field-info-condition:not(montage-invisible) { display: inline-block; }
+.Field-info-condition:not(.montage-invisible) { display: inline-block; }
 
 /* Icon Background */
 
@@ -77,6 +97,22 @@
     cursor: pointer;
     transition: all .2s ease-in-out;
     outline: none;
+
+    &:hover {
+        color: #fff;
+        border-color: #FFF;
+    }
+
+    &.is-expanded {
+        background: #2B9CD8;
+        color: #fff;
+    }
+
+    &.is-expanded .Field-info-description {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
 }
 
 /* Icon Symbol */
@@ -135,47 +171,46 @@
 
 .Field-error {
     display: none;
-    position: relative;
     width: 100%;
-    background: #E0003A;
-    padding: .5em;
-    padding-top: .2em;
+    position: relative;
+    padding: .5em 0;
+    line-height: 1em;
     font-weight: 300;
     color: #fff;
-    border-bottom-left-radius:  4px;
-    border-bottom-right-radius: 4px;
-}
+    margin-top: .5em;
 
-.Field.has-error .Field-error {
-    display: block;
+    &:before {
+        position: absolute;
+        content: '';
+        top: 0;
+        left:  -.5em;
+        right:  -.5em;
+        bottom: 0;
+        background: #E0003A;
+        border-bottom-left-radius:  4px;
+        border-bottom-right-radius: 4px;
+        z-index: -1;
+        box-shadow: 0 2px 2px rgba(0,0,0,.3);
+    }
+
+    @nest .Field.has-error & {
+        display: block;
+    }
 }
 
 /* States */
 
-.Field.has-error .Field-control input,
-.Field.has-error .Field-control textarea {
+/* .Field.has-error .Field-control > input, */
+/* .Field.has-error .Field-control > div > input, */
+/* .Field.has-error .Field-control > textarea {
     border-color: #E0003A;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-}
+} */
 
-.Field.is-validated .Field-control input,
-.Field.is-validated .Field-control textarea {
+.Field.is-validated .Field-control > input,
+.Field.is-validated .Field-control > div > input,
+.Field.is-validated .Field-control > textarea {
     border-color: #1E963F;
 }
 
-.Field-info:hover {
-    color: #fff;
-    border-color: #FFF;
-}
-
-.Field-info.is-expanded {
-    background: #2B9CD8;
-    color: #fff;
-}
-
-.Field-info.is-expanded .Field-info-description {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}

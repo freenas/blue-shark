@@ -1,3 +1,11 @@
 .Duration {
     display: flex;
 }
+
+.Duration-count {
+    margin-right: .125em;
+}
+
+.Duration-unit {
+    margin-left: .125em;
+}

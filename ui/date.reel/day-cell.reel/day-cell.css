@@ -1,7 +1,7 @@
 .DayCell {
-    width: calc(100% / 7); 
+    width: calc(100% / 7);
     cursor: pointer;
-} 
+}
 
 .DayCell:hover {
     color: #fff;
@@ -14,6 +14,8 @@
 
 .DayCell.is-selected {
     background: #0095d5;
+    color: #fff;
+    font-weight: 400;
 }
 
 .DayCell.is-filler {
