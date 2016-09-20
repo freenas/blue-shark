@@ -108,43 +108,30 @@ var Select = exports.Select = Component.specialize({
 
     prepareForActivationEvents: {
         value: function () {
-            var keyIdentifiers = this.constructor.KEY_IDENTIFIERS;
+            var keyboardIdentifiers = this.constructor.KEY_IDENTIFIERS,
+                keyboardIdentifiersKeys = Object.keys(keyboardIdentifiers),
+                keyboardIdentifier;
 
             this._keyComposerMap = new Map();
 
-            this._keyComposerMap.set(
-                keyIdentifiers.space,
-                KeyComposer.createKey(this, keyIdentifiers.space, keyIdentifiers.space)
-            );
-            this._keyComposerMap.set(
-                keyIdentifiers.enter,
-                KeyComposer.createKey(this, keyIdentifiers.enter, keyIdentifiers.enter)
-            );
-            this._keyComposerMap.set(
-                keyIdentifiers.up,
-                KeyComposer.createKey(this, keyIdentifiers.up, keyIdentifiers.up)
-            );
-            this._keyComposerMap.set(
-                keyIdentifiers.down,
-                KeyComposer.createKey(this, keyIdentifiers.down, keyIdentifiers.down)
-            );
+            for (var i = 0, length = keyboardIdentifiersKeys.length; i < length; i++) {
+                keyboardIdentifier = keyboardIdentifiers[keyboardIdentifiersKeys[i]];
 
-            this._keyComposerMap.get(keyIdentifiers.space).addEventListener("keyPress", this);
-            this._keyComposerMap.get(keyIdentifiers.enter).addEventListener("keyPress", this);
-            this._keyComposerMap.get(keyIdentifiers.up).addEventListener("keyPress", this);
-            this._keyComposerMap.get(keyIdentifiers.down).addEventListener("keyPress", this);
+                this._keyComposerMap.set(
+                    keyboardIdentifier,
+                    KeyComposer.createKey(this, keyboardIdentifier, keyboardIdentifier)
+                );
 
-            // FIXME: not possible to manage the tab key with a key composer,
-            // prevent default is automatically called.
-            this.element.addEventListener("keydown", this);
+                this._keyComposerMap.get(keyboardIdentifier).addEventListener("keyPress", this);
+            }
         }
     },
 
-    handleKeydown: {
+    handleKeyPress: {
         value: function (event) {
-            // 9 -> tab keyCode,
-            // FIXME: keyCode is deprecated
-            if ((event.key === "Tab" || event.keyCode === 9) && this.optionsOverlayComponent.isShown) {
+            var keyIdentifiers = this.constructor.KEY_IDENTIFIERS;
+
+            if (event.identifier ===  keyIdentifiers.tab && this.optionsOverlayComponent.isShown) {
                 event.preventDefault();
             }
         }
@@ -331,7 +318,8 @@ var Select = exports.Select = Component.specialize({
             space: "space",
             enter: "enter",
             up: "up",
-            down: "down"
+            down: "down",
+            tab: "tab"
         }
     }
 });
