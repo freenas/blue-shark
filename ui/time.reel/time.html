@@ -13,7 +13,8 @@
                 "_dateConverter": {"@": "dateConverter"}
             },
             "bindings": {
-                "classList.has('has-options')": {"<-": "!!@owner.options && !!@owner.options.length"}
+                "classList.has('has-options')": {"<-": "!!@owner.options && !!@owner.options.length"},
+                "classList.has('is-disabled')": {"<-": "@owner.disabled"}
             },
             "listeners": [
                 {
@@ -35,7 +36,10 @@
                 "converter": {"@": "dateConverter"}
             },
             "bindings": {
-                "value": {"<->": "@owner.value"}
+                "value": {"<->": "@owner.value"},
+                "disabled": {"<-": "@owner.disabled"},
+                "hasError": {"<-": "@owner.hasError"},
+                "errorMessage": {"<-":"@owner.errorMessage"}
             }
         },
         "optionsController": {
