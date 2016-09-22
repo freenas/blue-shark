@@ -17,7 +17,7 @@
                 }
             ],
             "bindings": {
-                "classList.has('disabled')": {"<-": "@owner.disabled"}
+                "classList.has('has-error')": {"<-": "@owner.hasError"}
             }
         },
 
@@ -51,20 +51,30 @@
                 "options": {"<-": "@owner._options"},
                 "selectedValue": {"<->": "@owner._selectedValue"}
             }
+        },
+        "controlError": {
+            "prototype": "ui/control-error.reel",
+            "properties": {
+                "element": {"#": "controlError"}
+            },
+            "bindings": {
+                "errorMessage": {"<-": "@owner.errorMessage"}
+            }
         }
 
     }
     </script>
 </head>
 <body>
-    <div data-montage-id="owner" class="Select" tabindex="0" role="listbox">
-        <button data-montage-id="selectButton" tabindex="-1">
+    <div data-montage-id="owner" class="Select" role="listbox">
+        <button data-montage-id="selectButton" class="Select-button" tabindex="0">
             <span data-montage-id="currentSelection" class="Select-currentOption"></span>
             <div class="Select-icon">
                 <svg><use xlink:href="#i-triangle-down"/></svg>
             </div>
         </button>
         <div data-montage-id="optionsOverlay"></div>
+        <div data-montage-id="controlError"></div>
     </div>
 </body>
 </html>
