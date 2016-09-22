@@ -1,13 +1,14 @@
 /**
- * @module ui/text-field.reel
+ * @module ui/control-error.reel
  */
-var TextField = require("montage/ui/text-field.reel").TextField;
+var Component = require("montage/ui/component").Component;
 
 /**
- * @class TextField
+ * @class ControlError
  * @extends Component
  */
-exports.TextField = TextField.specialize({
+
+exports.TextField = Component.specialize({
 
     hasTemplate: {
         value: true
