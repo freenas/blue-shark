@@ -23,7 +23,10 @@
                 "element": {"#": "count"}
             },
             "bindings": {
-                "value": {"<->": "@owner.count"}
+                "value": {"<->": "@owner.count"},
+                "disabled": {"<-": "@owner.disabled"},
+                "hasError": {"<-": "@owner.hasError"},
+                "errorMessage": {"<-": "@owner.errorMessage"}
             }
         },
         "unit": {
@@ -33,7 +36,8 @@
             },
             "bindings": {
                 "options": {"<-": "@owner.units"},
-                "selectedValue": {"<->": "@owner.unit"}
+                "selectedValue": {"<->": "@owner.unit"},
+                "disabled": {"<-": "@owner.disabled"}
             }
         }
     }

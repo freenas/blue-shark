@@ -2,6 +2,11 @@
     display: flex;
 }
 
+.Duration-count,
+.Duration-unit {
+    flex: 1;
+}
+
 .Duration-count {
     margin-right: .125em;
 }
