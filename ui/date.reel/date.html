@@ -41,7 +41,10 @@
                 "converter": {"@": "dateToStringConverter"}
             },
             "bindings": {
-                "value": {"<->": "@owner.value"}
+                "value": {"<->": "@owner.value"},
+                "disabled": {"<-": "@owner.disabled"},
+                "hasError": {"<-": "@owner.hasError"},
+                "errorMessage": {"<-":"@owner.errorMessage"}
             }
         },
         "currentMonth": {

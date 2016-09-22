@@ -4,7 +4,7 @@
 }
 
 .Date-value.TextField:focus {
-    border-bottom-left-radius: 0;
+    border-bottom-left-radius:  0;
     border-bottom-right-radius: 0;
 }
 
@@ -41,20 +41,20 @@
     background: var(--black);
     color: var(--main-text-color);
     font-weight: 400;
-}
 
-.DateCalendar-header svg {
-    height: 100%;
-    width:  2em;
-    padding: .5em;
-    opacity: .5;
-    color: #fff;
-}
+    & svg {
+        height: 100%;
+        width:  2em;
+        padding: .5em;
+        opacity: .5;
+        color: #fff;
+    }
 
-.DateCalendar-header svg:hover {
-    background-color: rgba(255,255,255,.1);
-    opacity: 1;
-    cursor: pointer;
+    & svg:hover {
+        background-color: rgba(255,255,255,.1);
+        opacity: 1;
+        cursor: pointer;
+    }
 }
 
 .DateCalendarHeader-decrement,
@@ -66,9 +66,17 @@
     transform: rotate(180deg);
 }
 
-.DateCalendar-daysHeader  {
+.DateCalendar-daysHeader {
     background: rgba(0,0,0,.3);
     line-height: 1.5em;
+
+    & div {
+        width: calc(100% / 7);
+        padding: 0 0.5em;
+        text-align: center;
+        font-weight: 400;
+        color: #fff;
+    }
 }
 
 .DateCalendar-days,
@@ -85,12 +93,4 @@
     & > div {
         padding: .5em;
     }
-}
-
-.DateCalendar-daysHeader div {
-    width: calc(100% / 7);
-    padding: 0 0.5em;
-    text-align: center;
-    font-weight: 400;
-    color: #fff;
 }
