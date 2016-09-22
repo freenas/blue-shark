@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="control-error.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+        "errorMessage": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "errorMessage"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner.errorMessage"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="ControlError">
+        <div data-montage-id="errorMessage" class="ControlError-message"></div>
+    </div>
+</body>
+</html>
