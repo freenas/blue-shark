@@ -22,8 +22,6 @@
                 "label": {"<-": "@owner.label"},
                 "documentationReference": {"<-": "@owner.documentationReference"},
                 "disabled": {"<-": "@owner.disabled"},
-                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
-                "hasError": {"<-": "@owner.hasError"},
                 "isMandatory": {"<-": "@owner.isMandatory"}
             }
         },
@@ -36,8 +34,10 @@
                 "placeholder": {"<-": "@owner.placeholderValue"},
                 "converter": {"<-": "@owner.converter"},
                 "value": {"<->": "@owner.value"},
-                "disabled": {"<-": "@owner.disabled"},
                 "readonly": {"<-": "@owner.readonly"}
+                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
+                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"},
+                "disabled": {"<-": "@owner.disabled"}
             }
         }
     }
