@@ -1,16 +1,10 @@
 /**
- * @module ui/text-field.reel
+ * @module ui/control-error.reel
  */
-var AbstractTextField = require("montage/ui/base/abstract-text-field").AbstractTextField;
+var Component = require("montage/ui/component").Component;
 
 /**
- * @class TextField
+ * @class ControlError
  * @extends Component
  */
-exports.TextField = AbstractTextField.specialize({
-
-    hasTemplate: {
-        value: true
-    }
-
-});
+exports.TextField = Component.specialize();
