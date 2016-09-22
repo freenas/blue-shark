@@ -18,8 +18,6 @@
                 "label": {"<-": "@owner.label"},
                 "documentationReference": {"<-": "@owner.documentationReference"},
                 "disabled": {"<-": "@owner.disabled"},
-                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
-                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"},
                 "isMandatory": {"<-": "@owner.isMandatory"}
             }
         },
@@ -33,7 +31,10 @@
                 "selectedValue": {"<->": "@owner.selectedValue"},
                 "converter": {"<-": "@owner.converter"},
                 "options": {"<-": "@owner.options"},
-                "optionsMaxHeight": {"<-": "@owner.optionsMaxHeight"}
+                "optionsMaxHeight": {"<-": "@owner.optionsMaxHeight"},
+                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
+                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"},
+                "disabled": {"<-": "@owner.disabled"}
             }
         }
     }
