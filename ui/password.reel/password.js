@@ -7,11 +7,4 @@ var Component = require("montage/ui/component").Component;
  * @class Password
  * @extends Component
  */
-exports.Password = Component.specialize({
-
-    //FIXME: workaround
-    enabled: {
-        value: true
-    }
-
-});
+exports.Password = Component.specialize();
