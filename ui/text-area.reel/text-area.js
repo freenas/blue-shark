@@ -1,7 +1,10 @@
-var AbstractTextArea = require("montage/ui/base/abstract-text-area").AbstractTextArea;
+/**
+ * @module ui/control-error.reel
+ */
+var Component = require("montage/ui/component").Component;
 
-exports.TextArea = AbstractTextArea.specialize({
-    hasTemplate: {
-        value: true
-    }
-});
+/**
+ * @class ControlError
+ * @extends Component
+ */
+exports.TextArea = Component.specialize();
