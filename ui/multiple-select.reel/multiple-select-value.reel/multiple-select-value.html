@@ -21,22 +21,16 @@
                 "element": {"#": "label"}
             },
             "bindings": {
-                "value": {"<-": "!!@owner.labelPath ? @owner.object.path(@owner.labelPath) : @owner.object"}
+                "value": {"<-": "!!@owner.labelPath ? @owner.object.path(@owner.labelPath) : @owner.object"},
+                "errorMessage": {"<-": "@owner.errorMessage"},
+                "hasError": {"<-": "@owner.hasError"},
+                "disabled": {"<-": "@owner.disabled"}
             }
         },
         "deleteButton": {
             "prototype": "montage/ui/button.reel",
             "properties": {
                 "element": {"#": "deleteButton"}
-            }
-        },
-        "errorMessage": {
-            "prototype": "montage/ui/text.reel",
-            "properties": {
-                "element": {"#": "errorMessage"}
-            },
-            "bindings": {
-                "value": {"<-": "@owner.errorMessage"}
             }
         }
     }
@@ -47,9 +41,6 @@
         <div class="MultipleSelectValue-inputs">
             <div class="MultipleSelectValue-handler"></div>
             <div data-montage-id="label" class="MultipleSelectValue-label" tabindex="-1"></div>
-            <div class="MultipleSelectValue-error">
-                <div data-montage-id="errorMessage" class="MultipleSelectValue-error-message"></div>
-            </div>
         </div>
         <svg data-montage-id="deleteButton" class="MultipleSelectValue-delete">
             <use xlink:href="#i-plus"/>
