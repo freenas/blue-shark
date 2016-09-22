@@ -17,8 +17,6 @@
                 "label": {"<-": "@owner.label"},
                 "documentationReference": {"<-": "@owner.documentationReference"},
                 "disabled": {"<-": "@owner.disabled"},
-                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
-                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"},
                 "isMandatory": {"<-": "@owner.isMandatory"}
             }
         },
@@ -30,7 +28,9 @@
             "bindings": {
                 "placeholderValue": {"<-": "@owner.placeholderValue"},
                 "value": {"<->": "@owner.value"},
-                "enabled": {"<-": "!@owner.disabled"}
+                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
+                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"},
+                "disabled": {"<-": "@owner.disabled"}
             }
         }
     }
