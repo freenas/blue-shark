@@ -9,12 +9,21 @@
                 "element": {"#": "owner"}
             }
         },
+        "icons": {
+            "prototype": "blue-shark/ui/icons.reel",
+            "properties": {
+                "element": {"#": "icons"}
+            }
+        },
         "textField": {
             "prototype": "blue-shark/ui/field-text-input.reel",
             "properties": {
                 "element": {"#": "textField"},
                 "placeholderValue": "Enter text here",
-                "label": "Field Text Input"
+                "label": "Field Text Input",
+                "errorMessage": "This is the text input error message",
+                "hasError": true,
+                "disabled": true
             }
         },
         "textArea": {
@@ -22,29 +31,52 @@
             "properties": {
                 "element": {"#": "textArea"},
                 "placeholderValue": "Enter text here",
-                "label": "Field Text Input"
+                "label": "Field Text Area",
+                "errorMessage": "This is the error message that is really long to hopefully not break things, This is the error message that is really long to hopefully not break things",
+                "hasError": true,
+                "disabled": true
             }
         },
-        "longTitle": {
-            "prototype": "blue-shark/ui/field-text-input.reel",
+        "passwordInput": {
+            "prototype": "blue-shark/ui/field-password-input.reel",
             "properties": {
-                "element": {"#": "longTitle"},
-                "placeholderValue": "Enter text here",
-                "label": "Field Text Input with a long title that wraps"
+                "element": {"#": "passwordInput"},
+                "label": "Password Input",
+                "placeholderValue": "enter password...",
+                "errorMessage": "This is the password input error message",
+                "hasError": true,
+                "disabled": true
             }
         },
-        "enabled": {
+        "password": {
+            "prototype": "blue-shark/ui/field-password.reel",
+            "properties": {
+                "element": {"#": "password"},
+                "label": "Password",
+                "placeholderValue1": "Enter password...",
+                "placeholderValue2": "Confirm password...",
+                "errorMessage1": "This is the 1st error message",
+                "errorMessage2": "This is the 2nd error message",
+                "hasError1": true,
+                "hasError2": true,
+                "disabled": true
+            }
+        },
+        "toggleSwitch": {
             "prototype": "blue-shark/ui/field-toggle-switch.reel",
             "properties": {
-                "element": {"#": "enabled"},
-                "label": "Toggle Switch"
+                "element": {"#": "toggleSwitch"},
+                "label": "Toggle Switch",
+                "disabled": true
             }
         },
         "radioGroup": {
             "prototype": "blue-shark/ui/field-radio-group.reel",
             "properties": {
                 "element": {"#": "radioGroup"},
-                "label": "test label",
+                "label": "Radio Group",
+                "errorMessage": "This is the field-radio-group error message",
+                "disabled": true,
                 "options": [
                     {"label": "option1", "value": "option1"},
                     {"label": "option2", "value": "option2"},
@@ -57,8 +89,10 @@
             "prototype": "blue-shark/ui/field-select.reel",
             "properties": {
                 "element": {"#": "select"},
-                "label": "test label",
+                "label": "Select",
                 "selectedValue": "media",
+                "errorMessage": "This is field-select the error message",
+                "disabled": true,
                 "options": [
                     {
                         "value": "none",
@@ -103,30 +137,26 @@
             "prototype": "blue-shark/ui/field-checkbox.reel",
             "properties": {
                 "element": {"#": "checkbox"},
-                "label": "Checkbox"
-            }
-        },
-        "checkbox2": {
-            "prototype": "blue-shark/ui/field-checkbox.reel",
-            "properties": {
-                "element": {"#": "checkbox2"},
-                "label": "Checkbox"
-            }
-        },
-        "scrollView": {
-            "prototype": "blue-shark/ui/scrollview.reel",
-            "properties": {
-                "element": {"#": "scrollView"},
-                "overflow": "scrollY"
+                "label": "Checkbox",
+                "disabled": true,
+                "errorMessage": "This is the field-checkbox error message",
+                "hasError": true
             }
         },
         "converter": {
             "prototype": "montage/core/converter/number-converter"
         },
         "multiSelect": {
-            "prototype": "blue-shark/ui/multiple-select.reel",
+            "prototype": "blue-shark/ui/field-multiple-select.reel",
             "properties": {
                 "element": {"#": "multiSelect"},
+                "label": "Multiple Select",
+                "placeholderValue": "Enter name of item",
+                "errorMessage": "This is the overall error message",
+                "inputHasError": true,
+                "inputErrorMessage": "this is the input error message",
+                "valueErrorMessage": "this is the value error message",
+                "disabled": true,
                 "options": [
                     {"name": "foo", "myProperty": "blah 1"},
                     {"name": "aaoption2", "myProperty": "blah 2"},
@@ -148,28 +178,98 @@
             "bindings": {
                 "converter": {"<-": "@owner.fakeConverter"}
             }
+        },
+        "date": {
+            "prototype": "blue-shark/ui/field-date.reel",
+            "properties": {
+                "element": {"#": "date"},
+                "label": "Date",
+                "disabled": true,
+                "errorMessage": "This is the date error message",
+                "hasError": true
+            }
+        },
+        "time": {
+            "prototype": "blue-shark/ui/field-time.reel",
+            "properties": {
+                "element": {"#": "time"},
+                "label": "Time",
+                "errorMessage": "This is the date error message",
+                "hasError": true,
+                "intervalInSeconds": 1800,
+                "pattern": "hh:mm:ss",
+                "isDefaultNow": false,
+                "disabled": true
+            }
+        },
+        "dateTime": {
+            "prototype": "blue-shark/ui/field-datetime.reel",
+            "properties": {
+                "element": {"#": "dateTime"},
+                "label": "Date / Time",
+                "intervalInSeconds": 1800,
+                "pattern": "hh:mm:ss",
+                "isDefaultNow": false,
+                "dateErrorMessage": "This is the date error message",
+                "dateHasError": true,
+                "timeHasError": true,
+                "timeErrorMessage": "This is the time error message",
+                "disabled": true
+            }
+        },
+        "duration": {
+            "prototype": "blue-shark/ui/field-duration.reel",
+            "properties": {
+                "element": {"#": "duration"},
+                "label": "Duration",
+                "errorMessage": "This is the duration input error message",
+                "hasError": true,
+                "disabled": true
+            }
+        },
+        "selectMultiple": {
+            "prototype": "blue-shark/ui/field-select-multiple.reel",
+            "properties": {
+                "element": {"#": "selectMultiple"},
+                "label": "Select Multiple",
+                "options": [
+                    "one",
+                    "two",
+                    "three",
+                    "four",
+                    "five",
+                    "six"
+                ],
+                "errorMessage": "This is the select multiple error message",
+                "hasError": true,
+                "disabled": true
+            }
         }
-
     }
     </script>
 </head>
 <body>
     <div data-montage-id="owner" class="Main">
+        <div data-montage-id="icons" class="is-hidden"></div>
         <div class="container">
             <h1>Widget Examples</h1>
-            <div data-montage-id="textField"></div>
-            <div data-montage-id="textArea"></div>
-            <div data-montage-id="longTitle"></div>
-            <div data-montage-id="enabled"></div>
-            <div data-montage-id="radioGroup"></div>
-            <div data-montage-id="select"></div>
-            <div data-montage-id="checkbox"></div>
-            <div data-montage-id="checkbox2"></div>
-            <div class="scrollContainer">
-                <div data-montage-id="scrollView">
-                    <div data-montage-id="multiSelect"></div>
-                </div>
+            <div class="column">
+                <div data-montage-id="textField"></div>
+                <div data-montage-id="textArea"></div>
+                <div data-montage-id="passwordInput"></div>
+                <div data-montage-id="password"></div>
+                <div data-montage-id="toggleSwitch"></div>
+                <div data-montage-id="radioGroup"></div>
+                <div data-montage-id="select"></div>
+                <div data-montage-id="checkbox"></div>
+                <div data-montage-id="multiSelect"></div>
+                <div data-montage-id="date"></div>
+                <div data-montage-id="time"></div>
+                <div data-montage-id="dateTime"></div>
+                <div data-montage-id="duration"></div>
+                <div data-montage-id="selectMultiple"></div>
             </div>
+
         </div>
     </div>
 </body>

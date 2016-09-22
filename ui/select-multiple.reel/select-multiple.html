@@ -6,16 +6,37 @@
     {
         "owner": {
             "properties": {
-                "element": {"#": "owner"}
+                "element": {"#": "owner"},
+                "input": {"@": "input"}
             },
             "bindings": {
-                "classList.has('is-disabled')": {"<-": "!!@owner.disabled"}
+                "classList.has('is-disabled')": {"<-": "!!@owner.disabled"},
+                "classList.has('has-error')": {"<-": "@owner.hasError"}
+            }
+        },
+        "controlError": {
+            "prototype": "ui/control-error.reel",
+            "properties": {
+                "element": {"#": "controlError"}
+            },
+            "bindings": {
+                "errorMessage": {"<-": "@owner.errorMessage"}
+            }
+        },
+        "input": {
+            "prototype": "montage/ui/component",
+            "properties": {
+                "element": {"#": "input"},
+                "hasTemplate": false
             }
         }
     }
     </script>
 </head>
 <body>
-    <select data-montage-id="owner" multiple class="SelectMultiple"></select>
+    <div data-montage-id="owner" class="SelectMultiple">
+        <select data-montage-id="input" multiple class="SelectMultiple-input"></select>
+        <div data-montage-id="controlError"></div>
+    </div>
 </body>
 </html>

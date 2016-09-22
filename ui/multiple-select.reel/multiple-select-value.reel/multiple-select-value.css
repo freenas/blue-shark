@@ -1,47 +1,39 @@
 .MultipleSelectValue {
     position: relative;
     display: flex;
-    flex-wrap: wrap;
     background: none;
-    margin: .1em;
-    background-color: #242628;
+    margin: .25em 0;
 }
 
-.MultipleSelectValue:nth-child(even) {
-    background: rgba(255,255,255,.02);
-}
-
-.MultipleSelectValue-label.TextField {
+.MultipleSelectValue-inputs {
     flex: 1;
-    background: none;
-    border-color: transparent;
-    font-family: 'lato', sans-serif;
-    font-weight: 200;
-    font-size: 1em;
-    color: #ddd;
-    padding: .25em .5em .35em;
-    margin-right: .25em;
-    width: auto;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    cursor: pointer;
-    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    margin-right: .5em;
 }
 
-.MultipleSelectValue-label.TextField:hover {
-    background: rgba(255,255,255,.1);
+.MultipleSelectValue-label .TextField-input {
+    box-shadow: none;
+    border-color: transparent;
+}
+
+/* alternating background tints */
+.MultipleSelectValue:nth-child(even) .MultipleSelectValue-label .TextField-input {
+    background-color: #1c1c1c;
+}
+
+.MultipleSelectValue-label .TextField-input:hover {
+    background: #2b2b2b !important;
     cursor: text;
 }
 
-.MultipleSelectValue-label.TextField:focus {
+.MultipleSelectValue-label .TextField-input:focus {
     cursor: text;
     color: #FFF;
     background: none;
 }
 
 .MultipleSelectValue-delete {
-    align-self: center;
     height: 1.2rem;
     width:  1.2rem;
     padding: .25em;
@@ -52,6 +44,7 @@
     border-radius: 50%;
     outline: none;
     margin-right: .25em;
+    margin-top: 0.4em;
 }
 
 .MultipleSelectValue-delete:hover {
@@ -67,7 +60,9 @@
     font-family: 'lato';
     font-weight: 200;
     display: none;
-    margin-bottom: .5em;
+    background: #E0003A;
+    border-bottom-left-radius:  4px;
+    border-bottom-right-radius: 4px;
 }
 
 /* States */
@@ -75,26 +70,11 @@
 .MultipleSelectValue.has-error .MultipleSelectValue-label {
     border-color: #E0003A !important;
     border-bottom: none !important;
+    border-bottom-left-radius:  0;
     border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
 }
 
-.MultipleSelectValue.has-error .MultipleSelectValue-error {
-    display: block;
-}
-
-.MultipleSelectValue.has-error .MultipleSelectValue-error:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -.25em;
-    right: -.25em;
-    bottom: 0;
-    background: #E0003A;
-    z-index: -1;
-}
-
-/* $fix - Temporary Styles ---------------------------------- */
+.MultipleSelectValue.has-error .MultipleSelectValue-error { display: block; }
 
 .MultipleSelect-values:empty { display: none; }
 
@@ -105,6 +85,13 @@
     padding: 0 0.5em;
     background: #2F3233;
     display: none;
+}
+
+/* disabled state */
+
+.MultipleSelect.is-disabled .MultipleSelectValue-label,
+.MultipleSelect.is-disabled .MultipleSelectValue-delete {
+    pointer-events: none;
 }
 
 .MultipleSelectValue.draggable .MultipleSelectValue-handler {

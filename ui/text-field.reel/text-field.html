@@ -7,12 +7,38 @@
         "owner": {
             "properties": {
                 "element": {"#": "owner"}
+            },
+            "bindings": {
+                "classList.has('has-error')": {"<-": "@owner.hasError"}
+            }
+        },
+        "input": {
+            "prototype": "montage/ui/text-field.reel",
+            "properties": {
+                "element": {"#": "input"}
+            },
+            "bindings": {
+                "placeholder": {"<-": "@owner.placeholderValue"},
+                "disabled": {"<-": "@owner.disabled"},
+                "value": {"<->": "@owner.value"}
+            }
+        },
+        "controlError": {
+            "prototype": "ui/control-error.reel",
+            "properties": {
+                "element": {"#": "controlError"}
+            },
+            "bindings": {
+                "errorMessage": {"<-": "@owner.errorMessage"}
             }
         }
     }
     </script>
 </head>
-<body>
-    <input data-montage-id="owner" class="TextField" />
+<body >
+    <div data-montage-id="owner" class="TextField">
+        <input data-montage-id="input" class="TextField-input" />
+        <div data-montage-id="controlError"></div>
+    </div>
 </body>
 </html>

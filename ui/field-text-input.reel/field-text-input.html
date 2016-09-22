@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="field-text-input.css">
     <script type="text/montage-serialization">
     {
         "owner": {
@@ -19,8 +18,6 @@
                 "label": {"<-": "@owner.label"},
                 "documentationReference": {"<-": "@owner.documentationReference"},
                 "disabled": {"<-": "@owner.disabled"},
-                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
-                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"},
                 "isMandatory": {"<-": "@owner.isMandatory"}
             }
         },
@@ -33,7 +30,9 @@
                 "placeholderValue": {"<-": "@owner.placeholderValue"},
                 "converter": {"<-": "@owner.converter"},
                 "value": {"<->": "@owner.value"},
-                "enabled": {"<-": "!@owner.disabled"}
+                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
+                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"},
+                "disabled": {"<-": "@owner.disabled"}
             }
         }
     }

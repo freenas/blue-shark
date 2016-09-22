@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="field-select-multiple.css">
     <script type="text/montage-serialization">
     {
         "owner": {
@@ -18,8 +17,6 @@
                 "label": {"<-": "@owner.label"},
                 "documentationReference": {"<-": "@owner.documentationReference"},
                 "disabled": {"<-": "@owner.disabled"},
-                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
-                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"},
                 "isMandatory": {"<-": "@owner.isMandatory"}
             }
         },
@@ -33,7 +30,9 @@
                 "selectedValues": {"<->": "@owner.selectedValues"},
                 "valuePropertyName": {"<-": "@owner.valuePropertyName"},
                 "labelPropertyName": {"<-": "@owner.labelPropertyName"},
-                "disabled": {"<-": "@owner.disabled"}
+                "disabled": {"<-": "@owner.disabled"},
+                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
+                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"}
             }
         }
     }

@@ -1,9 +1,21 @@
-.RadioButtonFieldGroup {}
+.RadioButtonFieldGroup {
 
-.RadioButtonFieldGroup.RadioButtonFieldGroup--block {
-    margin-top: 0;
+    &.RadioButtonFieldGroup--block { margin-top: 0;}
+
+    &.has-error .ControlError {
+        display: block;
+    }
+
+    @nest .Field.disabled & {
+        opacity: .5;
+    }
+
+    &.is-disabled {
+        cursor: not-allowed;
+    }
 }
 
-.Field.disabled .RadioButtonFieldGroup {
-    opacity: .5;
+.RadioButtonFieldGroup-options {
+    /* offset button margin */
+    margin-top: -.5em
 }

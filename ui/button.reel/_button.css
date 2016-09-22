@@ -130,4 +130,27 @@
     }
 }
 
+.Button--icon {
+    min-width: 0;
+    padding: 0;
+    height: 2.5em;
+    width:  2.5em;
+    padding: .3em;
+
+    & > * {
+        margin: 0 !important;
+    }
+
+    & svg {
+        height: 100%;
+        width:  100%;
+        max-height: none !important;
+        max-width:  none !important;
+    }
+
+    & .Button-label {
+        display: none;
+    }
+}
+
 

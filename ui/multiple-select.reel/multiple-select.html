@@ -17,7 +17,7 @@
                 "_inputErrorMessage": {"<-": "@owner.inputErrorMessage || 'The input is invalid'"},
                 "_optionsPrefix": {"<-": "@owner._typedValue || @input.value || ''"},
                 "_inputError": {"<-": "!!@owner.invalidValue && @owner.invalidValue == @input.value"},
-                "classList.has('disabled')": {"<-": "@owner.disabled"}
+                "classList.has('is-disabled')": {"<-": "@owner.disabled"}
             },
             "listeners": [
                 {
@@ -45,18 +45,12 @@
             "bindings": {
                 "placeholderValue": {"<-": "@owner.placeholderValue"},
                 "classList.has('has-options')": {"<-": "!!@owner.options && @owner.options.length > 0"},
-                "enabled": {"<-": "@owner.enabled"}
+                "disabled": {"<-": "@owner.disabled"},
+                "errorMessage": {"<-": "@owner._inputErrorMessage"},
+                "hasError": {"<-": "@owner.inputHasError"}
             }
         },
-        "inputErrorMessage": {
-            "prototype": "montage/ui/text.reel",
-            "properties": {
-                "element": {"#": "inputErrorMessage"}
-            },
-            "bindings": {
-                "value": {"<-": "@owner._inputErrorMessage"}
-            }
-        },
+
         "clearButton": {
             "prototype": "montage/ui/button.reel",
             "properties": {
@@ -114,6 +108,7 @@
                 "converter": {"<-": "@owner.converter"},
                 "labelPath": {"<-": "@owner.labelPath"},
                 "enabled": {"<-": "@owner.isDraggable"},
+                "disabled": {"<-": "@owner.disabled"},
                 "errorMessage": {"<-": "@owner.valueErrorMessage || @owner._inputErrorMessage"}
             }
         },
@@ -137,14 +132,13 @@
                 "classList.has('is-empty')": {"<-": "@owner.values.length == 0"}
             }
         },
-        "addIcon": {
-            "prototype": "montage/ui/component",
+        "addButton": {
+            "prototype": "ui/button.reel",
             "properties": {
-                "element": {"#": "addIcon"},
-                "hasTemplate": false
+                "element": {"#": "addIcon"}
             },
             "bindings": {
-                "classList.has('is-visible')": {"<-": "@owner.values.length == 0"}
+                "disabled": {"<-": "!@input.value"}
             }
         }
     }
@@ -152,21 +146,21 @@
 </head>
 <body>
     <div data-montage-id="owner" class="MultipleSelect">
-        <div data-montage-id="inputContainer" class="MultipleSelect-input">
-            <svg data-montage-id="clearButton" class="MultipleSelect-input-clearButton">
-                <use xlink:href="#i-plus"/>
-            </svg>
-            <svg data-montage-id="addIcon" class="MultipleSelect-input-add">
-                <use xlink:href="#i-plus"/>
-            </svg>
-            <div data-montage-id="input" class="MultipleSelect-input-field"></div>
-            <div data-montage-id="inputScroll" class="MultipleSelect-input-options">
-                <div data-montage-id="options">
-                    <div data-montage-id="option" class="MultipleSelect-input-option"></div>
+        <div class="MultipleSelect-header">
+            <div data-montage-id="inputContainer" class="MultipleSelect-input">
+                <svg data-montage-id="clearButton" class="MultipleSelect-input-clearButton">
+                    <use xlink:href="#i-plus"/>
+                </svg>
+                <div data-montage-id="input" class="MultipleSelect-input-field"></div>
+                <div data-montage-id="inputScroll" class="MultipleSelect-input-options">
+                    <div data-montage-id="options">
+                        <div data-montage-id="option" class="MultipleSelect-input-option"></div>
+                    </div>
                 </div>
             </div>
-            <div class="MultipleSelect-input-error">
-                <div data-montage-id="inputErrorMessage" class="MultipleSelect-input-error-message"></div>
+
+            <div data-montage-id="addIcon" class="Button--create Button--icon MultipleSelect-input-add">
+                <svg><use xlink:href="#i-plus"/></svg>
             </div>
         </div>
         <div data-montage-id="valuesContainer" class="MultipleSelect-valuesContainer">

@@ -2,17 +2,18 @@ var Component = require("montage/ui/component").Component;
 
 exports.SelectMultiple = Component.specialize({
 
+
     enterDocument: {
         value: function (isFirstTime) {
             if (isFirstTime) {
-                this._element.addEventListener("change", this, false);
+                this.input.element.addEventListener("change", this, false);
             }
         }
     },
 
     handleChange: {
         value: function () {
-            var children = this._element.children,
+            var children = this.input.element.children,
                 selectedMap = new Map(),
                 i;
 
@@ -179,8 +180,8 @@ exports.SelectMultiple = Component.specialize({
                     }
                 }
 
-                this._element.innerHTML = "";
-                this._element.appendChild(optionsFragment);
+                this.input.element.innerHTML = "";
+                this.input.element.appendChild(optionsFragment);
                 this._needsUpdateOptions = false;
             }
         }
