@@ -17,8 +17,6 @@
                 "label": {"<-": "@owner.label"},
                 "documentationReference": {"<-": "@owner.documentationReference"},
                 "disabled": {"<-": "@owner.disabled"},
-                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
-                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"},
                 "isMandatory": {"<-": "@owner.isMandatory"}
             }
         },
@@ -29,10 +27,12 @@
             },
             "bindings": {
                 "__selectedOption": {"<->": "@owner.selectedOption"},
-                "enabled": {"<-": "@owner.enabled"},
+                "disabled": {"<-": "@owner.disabled"},
                 "intervalInSeconds": {"<-": "@owner.intervalInSeconds"},
                 "pattern": {"<-": "@owner.pattern"},
-                "isDefaultNow": {"<-": "@owner.isDefaultNow"}
+                "isDefaultNow": {"<-": "@owner.isDefaultNow"},
+                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
+                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"}
             }
         }
     }
