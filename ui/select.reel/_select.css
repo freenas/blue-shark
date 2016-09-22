@@ -1,26 +1,40 @@
 .Select {
     position: relative;
-    display: flex;
-    align-items: center;
-    height: 2em;
-    font-weight: 300;
-    -webkit-user-select: none;
-    width: 100%;
-    font-family: 'Lato', 'helvetica neue', 'helvetica', 'sans-serif';
-    border-radius: 4px;
-    background: rgba(0, 0, 0, .25);
-    border-top:     1px solid rgba(0, 0, 0, .23);
-    border-bottom:  1px solid rgba(255, 255, 255, .15);
-    outline: none;
 
-    &:not(.disabled):focus {
-        @apply --input-focus;
+    /* Disabled State */
+
+    &.montage--disabled {
+        border-color: transparent;
+        opacity: .5;
     }
+
+    &.has-error .ControlError { display: block; }
+
+    & .ControlError { @apply --control-error--input; }
+
 }
 
 /* Naked Select Style overrides */
 
-.Select--naked.Select {
+
+.Select-button {
+    @apply --input-field;
+
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 0 .25em .1em .5em;
+
+    &:focus {
+        @apply --input-focus;
+    }
+
+    @nest .Select.has-error & {
+        @apply --input-error;
+    }
+}
+
+.Select--naked .Select-button {
     background: none;
     border: none;
 
@@ -42,40 +56,14 @@
     }
 }
 
-.Select > button {
-    display: flex;
-    box-sizing: border-box;
-    position: relative;
-    border: none;
-    font-size: 1em;
-    line-height: 1.2;
-    height: 2em;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    font-weight: inherit;
-    width: 100%;
-    text-align: left;
-    background: none;
-    outline: none;
-    padding: 0;
-    padding: 0 .25em 0 .5em;
-    color: #e6e6e6;
-    -webkit-appearance: none;
-    border-radius: inherit;
-    cursor: initial;
-
-    &:not(.montage--disabled) {
-        cursor: pointer;
-    }
-}
-
 .Select-currentOption {
     flex: 1;
     min-width: 0;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    text-align: left;
+    align-self: baseline;
 }
 
 .Select-icon {
@@ -97,14 +85,10 @@
         height: .9em;
     }
 
-    @nest .montage--disabled & {
-        opacity: 0;
-        width:   0;
+    @nest .Select-button.montage--disabled & {
+        cursor: not-allowed;
     }
 }
-
-.Select:hover { background: rgba(0, 0, 0, .15); }
-.Select:hover .select { background-color: rgba(0, 0, 0, .17); }
 
 /* Options Drop Down */
 
@@ -135,13 +119,4 @@
             margin-right: .5em;
         }
     }
-}
-
-/* Disabled State */
-
-.Field.is-disabled .Select {
-    background: rgba(0, 0, 0, .1);
-    border-color: transparent;
-    opacity: .5;
-    pointer-events: none;
 }
