@@ -6,7 +6,6 @@
     width:  1.6em;
     height: 1.6em;
     border-radius: .8em;
-    cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     background: rgba(0, 0, 0, .25);
     border-top:     1px solid rgba(0, 0, 0, .23);
@@ -15,26 +14,16 @@
     transition-duration: .25s;
 }
 
-/* Hit Area */
-
-/*.RadioButton:after {
-    content: '';
-    position: absolute;
-    padding: 1em;
-    top:    50%;
-    bottom: 0;
-    right:  0;
-    left:   50%;
-    margin-top:  -1em;
-    margin-left: -1em;
-    outline: 1px solid red;
-}*/
+.RadioButton:not(montage--disabled) {
+    cursor: pointer;
+}
 
 /* States */
 
 .RadioButton.montage--disabled {
     pointer-events: none;
     border-color: transparent;
+    opacity: .5;
 }
 
 .RadioButton.montage--active:before,
@@ -57,4 +46,5 @@
 .RadioButton.montage-RadioButton--checked.montage--disabled:before {
     background-color: transparent;
     box-shadow: none;
+    cursor: not-allowed;
 }
