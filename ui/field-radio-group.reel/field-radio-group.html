@@ -18,8 +18,6 @@
                 "label": {"<-": "@owner.label"},
                 "documentationReference": {"<-": "@owner.documentationReference"},
                 "disabled": {"<-": "@owner.disabled"},
-                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
-                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"},
                 "isMandatory": {"<-": "@owner.isMandatory"}
             }
         },
@@ -31,7 +29,9 @@
             "bindings": {
                 "options": {"<->": "@owner.options"},
                 "disabled": {"<-": "@owner.disabled"},
-                "selectedValue": {"<->": "@owner.selectedValue"}
+                "selectedValue": {"<->": "@owner.selectedValue"},
+                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
+                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"}
             }
         }
     }
