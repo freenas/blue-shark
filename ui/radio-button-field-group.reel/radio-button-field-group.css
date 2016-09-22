@@ -1,1 +1,1 @@
-.RadioButtonFieldGroup.RadioButtonFieldGroup--block{margin-top:0}.Field.disabled .RadioButtonFieldGroup{opacity:.5}.RadioButtonFieldGroup-options{margin-top:-.5em}
+.RadioButtonFieldGroup.RadioButtonFieldGroup--block{margin-top:0}.RadioButtonFieldGroup.has-error .ControlError{display:block}.Field.disabled .RadioButtonFieldGroup{opacity:.5}.RadioButtonFieldGroup.is-disabled{cursor:not-allowed}.RadioButtonFieldGroup-options{margin-top:-.5em}
