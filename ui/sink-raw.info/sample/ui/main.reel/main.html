@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+        "icons": {
+            "prototype": "blue-shark/ui/icons.reel",
+            "properties": {
+                "element": {"#": "icons"}
+            }
+        },
+        "textField": {
+            "prototype": "blue-shark/ui/text-field.reel",
+            "properties": {
+                "element": {"#": "textField"},
+                "placeholderValue": "Enter text here",
+                "disabled": true
+            }
+        },
+        "textArea": {
+            "prototype": "blue-shark/ui/text-area.reel",
+            "properties": {
+                "element": {"#": "textArea"},
+                "placeholderValue": "Enter text here",
+                "value": "this is the initial value",
+                "disabled": true
+            }
+        },
+        "passwordInput": {
+            "prototype": "blue-shark/ui/password.reel",
+            "properties": {
+                "element": {"#": "passwordInput"},
+                "placeholderValue": "Enter password",
+                "value": "this is the initial value",
+                "hasError": true,
+                "errorMessage": "This is the error message",
+                "disabled": true
+            }
+        },
+        "toggleSwitch": {
+            "prototype": "blue-shark/ui/toggle-switch.reel",
+            "properties": {
+                "element": {"#": "toggleSwitch"},
+                "disabled": true
+            }
+        },
+        "radioGroup": {
+            "prototype": "blue-shark/ui/radio-button-field-group.reel",
+            "properties": {
+                "element": {"#": "radioGroup"},
+                "errorMessage": "This is the error message",
+                "hasError": true,
+                "disabled": true,
+                "options": [
+                    {"label": "option1", "value": "option1"},
+                    {"label": "option2", "value": "option2"},
+                    {"label": "option3", "value": "option3"},
+                    {"label": "option4", "value": "option4"}
+                ]
+            }
+        },
+        "select": {
+            "prototype": "blue-shark/ui/select.reel",
+            "properties": {
+                "element": {"#": "select"},
+                "selectedValue": "media",
+                "errorMessage": "This is the error message",
+                "hasError": true,
+                "disabled": true,
+                "options": [
+                    {
+                        "value": "none",
+                        "label": "None"
+                    },
+                    {
+                        "value": "optimal",
+                        "label": "Optimal"
+                    },
+                    {
+                        "value": "virtualization",
+                        "label": "Virtualization"
+                    },
+                    {
+                        "value": "backups",
+                        "label": "Backups"
+                    },
+                    {
+                        "value": "option1",
+                        "label": "Option1"
+                    },
+                    {
+                        "value": "option2",
+                        "label": "Option2"
+                    },
+                    {
+                        "value": "option3",
+                        "label": "Option3"
+                    },
+                    {
+                        "value": "option4",
+                        "label": "Option4"
+                    },
+                    {
+                        "value": "option5",
+                        "label": "Option5"
+                    }
+                ]
+            }
+        },
+        "checkbox": {
+            "prototype": "blue-shark/ui/checkbox.reel",
+            "properties": {
+                "element": {"#": "checkbox"},
+                "errorMessage": "This is the checkbox error message",
+                "hasError": true,
+                "label": "checkbox label",
+                "disabled": {"<-": "@owner.disabled"}
+            }
+        },
+        "converter": {
+            "prototype": "montage/core/converter/number-converter"
+        },
+        "multiSelect": {
+            "prototype": "blue-shark/ui/multiple-select.reel",
+            "properties": {
+                "element": {"#": "multiSelect"},
+                "placeholderValue": "Enter name of item to add",
+                "inputErrorMessage": "this is the input error message",
+                "valueErrorMessage": "this is the value error message",
+                "disabled": true,
+                "options": [
+                    {"name": "foo", "myProperty": "blah 1"},
+                    {"name": "aaoption2", "myProperty": "blah 2"},
+                    {"name": "aaaoption3", "myProperty": "blah 3"},
+                    {"name": "option4", "myProperty": "blah 4"},
+                    {"name": "option42", "myProperty": "blah 5"},
+                    {"name": "_option6", "myProperty": "blah 6"}
+                ],
+                "values": [
+                    {"name": "value1ThatisreallyLongandshouldcutoffatsomepoint", "myProperty": "Hello"},
+                    {"name": "value2", "myProperty": "world"},
+                    {"name": "value3", "myProperty": "state"},
+                    {"name": "value4", "myProperty": "city"},
+                    {"name": "value5", "myProperty": "region"}
+
+                ],
+                "labelPath": "name"
+            },
+            "bindings": {
+                "converter": {"<-": "@owner.fakeConverter"}
+            }
+        },
+        "date": {
+            "prototype": "blue-shark/ui/date.reel",
+            "properties": {
+                "element": {"#": "date"},
+                "errorMessage": "This is the date error message",
+                "hasError": true,
+                "disabled": true
+            }
+        },
+        "time": {
+            "prototype": "blue-shark/ui/time.reel",
+            "properties": {
+                "element": {"#": "time"},
+                "errorMessage": "This is the date error message",
+                "hasError": true,
+                "intervalInSeconds": 1800,
+                "pattern": "hh:mm:ss",
+                "isDefaultNow": false,
+                "disabled": true
+            }
+        },
+        "duration": {
+            "prototype": "blue-shark/ui/duration.reel",
+            "properties": {
+                "element": {"#": "duration"},
+                "errorMessage": "This is the duration error message",
+                "disabled": true
+            }
+        },
+        "selectMultiple": {
+            "prototype": "blue-shark/ui/select-multiple.reel",
+            "properties": {
+                "element": {"#": "selectMultiple"},
+                "options": [
+                    "one",
+                    "two",
+                    "three",
+                    "four",
+                    "five",
+                    "six"
+                ],
+                "errorMessage": "This is the select multiple error message",
+                "hasError": true,
+                "disabled": true
+            }
+        }
+
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Main">
+        <div data-montage-id="icons" class="is-hidden"></div>
+        <div class="container">
+            <h1>Widget Examples</h1>
+            <div class="column">
+                <h4>text field</h4>
+                <div data-montage-id="textField"></div>
+                <h4>text area</h4>
+                <div data-montage-id="textArea"></div>
+                <h4>Password Input</h4>
+                <div data-montage-id="passwordInput"></div>
+                <h4>Toggle Switch</h4>
+                <div data-montage-id="toggleSwitch"></div>
+                <h4>Radio Group</h4>
+                <div data-montage-id="radioGroup"></div>
+                <h4>Select</h4>
+                <div data-montage-id="select"></div>
+                <h4>Checkbox</h4>
+                <div data-montage-id="checkbox"></div>
+                <h4>Mulitple Select</h4>
+                <div data-montage-id="multiSelect"></div>
+                <h4>Date</h4>
+                <div data-montage-id="date"></div>
+                <h4>Time</h4>
+                <div data-montage-id="time"></div>
+                <h4>Duration</h4>
+                <div data-montage-id="duration"></div>
+                <h4>Select Multiple</h4>
+                <div data-montage-id="selectMultiple"></div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
