@@ -12,35 +12,22 @@
     margin-right: .5em;
 }
 
-.MultipleSelectValue-label.TextField {
-    flex: 1;
-    background: none;
+.MultipleSelectValue-label .TextField-input {
+    box-shadow: none;
     border-color: transparent;
-    font-family: 'lato', sans-serif;
-    font-weight: 200;
-    font-size: 1em;
-    background-color: rgba(255,255,255,.05);
-    color: #ddd;
-    padding: .25em .5em .35em;
-    width: auto;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    cursor: pointer;
-    border-radius: 4px;
 }
 
 /* alternating background tints */
-.MultipleSelectValue:nth-child(even) .MultipleSelectValue-label.TextField {
-    background: rgba(255,255,255,.02);
+.MultipleSelectValue:nth-child(even) .MultipleSelectValue-label .TextField-input {
+    background-color: #1c1c1c;
 }
 
-.MultipleSelectValue-label.TextField:hover {
-    background: rgba(255,255,255,.1) !important;
+.MultipleSelectValue-label .TextField-input:hover {
+    background: #2b2b2b !important;
     cursor: text;
 }
 
-.MultipleSelectValue-label.TextField:focus {
+.MultipleSelectValue-label .TextField-input:focus {
     cursor: text;
     color: #FFF;
     background: none;
@@ -87,22 +74,7 @@
     border-bottom-right-radius: 0;
 }
 
-.MultipleSelectValue.has-error .MultipleSelectValue-error {
-    display: block;
-}
-
-/* .MultipleSelectValue.has-error .MultipleSelectValue-error:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left:  -.25em;
-    right: -.25em;
-    bottom: 0;
-    background: #E0003A;
-    z-index: -1;
-} */
-
-/* $fix - Temporary Styles ---------------------------------- */
+.MultipleSelectValue.has-error .MultipleSelectValue-error { display: block; }
 
 .MultipleSelect-values:empty { display: none; }
 
@@ -113,6 +85,13 @@
     padding: 0 0.5em;
     background: #2F3233;
     display: none;
+}
+
+/* disabled state */
+
+.MultipleSelect.is-disabled .MultipleSelectValue-label,
+.MultipleSelect.is-disabled .MultipleSelectValue-delete {
+    pointer-events: none;
 }
 
 .MultipleSelectValue.draggable .MultipleSelectValue-handler {
