@@ -8,6 +8,10 @@
             "properties": {
                 "element": {"#": "owner"},
                 "labelElement": {"#": "label"}
+            },
+            "bindings": {
+                "checked": {"<-": "@radioButton.checked"},
+                "classList.has('checked')": {"<-": "@owner.checked"}
             }
         },
         "radioButton": {
@@ -16,7 +20,7 @@
                 "element": {"#": "radioButton"}
             },
             "bindings": {
-                "value": {"<-": "@owner.id"},
+                "value": {"<-": "@owner.value"},
                 "radioButtonController": {"<-": "@owner.radioButtonController"},
                 "enabled": {"<-": "@owner.enabled"}
             }

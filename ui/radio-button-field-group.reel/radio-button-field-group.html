@@ -21,18 +21,19 @@
         "radioButtonController": {
             "prototype": "montage/core/radio-button-controller",
             "bindings": {
-                "content": {"<-": "@owner.options"}
+                "content": {"<-": "@owner.options"},
+                "value": {"<-": "@owner.selectedValue"}
             }
         },
         "option": {
             "prototype": "./radio-button-field.reel",
             "properties": {
                 "element": {"#": "option"},
-                "radioButtonController": {"@": "radioButtonController"},
-                "value": "test"
+                "radioButtonController": {"@": "radioButtonController"}
             },
             "bindings": {
                 "label": {"<-": "@options:iteration.object.label || @options:iteration.object"},
+                "value": {"<-": "@options:iteration.object.value || @options:iteration.object"},
                 "enabled": {"<-": "@owner.enabled"}
             }
         }
