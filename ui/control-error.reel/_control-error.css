@@ -1,5 +1,4 @@
 .ControlError {
-    /* box-sizing: border-box; */
     display: none;
     background: var(--red);
     padding: .4em .5rem .5em .5em;
@@ -8,6 +7,7 @@
     font-family: 'lato';
     line-height: 1.15em;
     margin-top: .5em;
+    color: var(--white);
 
     &.is-visible {
         display: block;
