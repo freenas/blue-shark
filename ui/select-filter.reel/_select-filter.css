@@ -1,0 +1,45 @@
+.SelectFilter {
+    position: relative;
+    display: flex;
+}
+
+.SelectFilter-filter {
+    position: relative;
+}
+
+.SelectFilter-displayAll {
+    margin-right: .5rem;
+}
+
+.SelectFilter-filterButton {
+    display: flex;
+    align-items: center;
+    padding-right: .75em;
+
+    & svg {
+        order: 1;
+        margin-right: 0 !important;
+        max-height: 1.2em;
+        max-width: 1.1em;
+
+        @nest .SelectFilter.filters-are-visible & {
+            transform: rotate(180deg);
+        }
+    }
+
+    & .Button-label { margin-right: .5em; }
+}
+
+.SelectFilter-items {
+    display: none;
+    position: absolute;
+    top: calc(100% + .25rem);
+    right: 0;
+    background: grey;
+    padding: .5rem .75rem;
+    border-radius: var(--border-radius);
+
+    @nest .SelectFilter.filters-are-visible & {
+        display: block;
+    }
+}
