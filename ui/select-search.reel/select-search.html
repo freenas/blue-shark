@@ -40,9 +40,9 @@
                 "element": {"#": "input"}
             },
             "bindings": {
-                "placeholderValue": {"<-": "@owner.searchPlaceholderValue"},
+                "placeholder": {"<-": "@owner.searchPlaceholderValue"},
                 "classList.has('has-options')": {"<-": "!!@owner.options && @owner.options.length > 0"},
-                "enabled": {"<-": "@owner.enabled"}
+                "disabled": {"<-": "!@owner.enabled"}
             }
         },
         "clearButton": {

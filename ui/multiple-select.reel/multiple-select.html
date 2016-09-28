@@ -43,9 +43,9 @@
                 "element": {"#": "input"}
             },
             "bindings": {
-                "placeholderValue": {"<-": "@owner.placeholderValue"},
+                "placeholder": {"<-": "@owner.placeholderValue"},
                 "classList.has('has-options')": {"<-": "!!@owner.options && @owner.options.length > 0"},
-                "enabled": {"<-": "@owner.enabled"}
+                "disabled": {"<-": "!@owner.enabled"}
             }
         },
         "inputErrorMessage": {
