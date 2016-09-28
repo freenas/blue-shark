@@ -35,7 +35,6 @@
     & .Select-icon {
         background: none;
         border: none;
-        outline: 1px solid red;
     }
 
     & .Select-currentOption {
@@ -77,7 +76,6 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    outline: 1px solid green;
 }
 
 .Select-icon {
