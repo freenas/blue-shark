@@ -153,12 +153,12 @@ var Select = exports.Select = Component.specialize({
                     this._highlightedOption = this.optionsOverlayComponent.templateObjects.options.selectedIterations[0];
                 }
                 this.optionsOverlayComponent.element.addEventListener("mouseover", this);
-                this.optionsOverlayComponent.element.addEventListener("mousedown", this);
+                this.optionsOverlayComponent.element.addEventListener("mouseup", this);
             }
         }
     },
 
-    handleMousedown: {
+    handleMouseup: {
         value: function(e) {
             if (e.target.component.iteration == this.optionsOverlayComponent.templateObjects.options.selectedIterations[0]) {
                 this._toggleOptionsOverlay();
@@ -172,7 +172,7 @@ var Select = exports.Select = Component.specialize({
                 this.optionsOverlayComponent.hide();
             }
             this.optionsOverlayComponent.element.removeEventListener("mouseover", this);
-            this.optionsOverlayComponent.element.removeEventListener("mousedown", this);
+            this.optionsOverlayComponent.element.removeEventListener("mouseup", this);
         }
     },
 
