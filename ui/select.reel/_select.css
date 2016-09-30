@@ -8,10 +8,6 @@
         opacity: .5;
     }
 
-    &.has-error .ControlError { display: block; }
-
-    & .ControlError { @apply --control-error--input; }
-
 }
 
 /* Naked Select Style overrides */
