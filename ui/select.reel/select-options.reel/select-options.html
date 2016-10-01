@@ -39,7 +39,8 @@
             "bindings": {
                 "iteration": {"<-": "@options:iteration"},
                 "iteration.selected": {"<->": "@owner.selectedValue == iteration.object.value"},
-                "value": {"<-": "iteration.object.label"}
+                "expressionResult": {"<-": "iteration.object.path(iteration.object.label)"},
+                "value": {"<-": "expressionResult || iteration.object.label "}
             }
         },
 

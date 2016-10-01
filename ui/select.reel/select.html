@@ -37,7 +37,9 @@
                 "element": {"#": "currentSelection"}
             },
             "bindings": {
-                "value": {"<-": "(@optionsOverlay.optionsRepetition.selection.0.label || @owner._selectedValue.label || @owner._options.0.label)" }
+                "selectedObject": {"<-": "(@optionsOverlay.optionsRepetition.selection.0 || @owner._selectedValue || @owner._options.0)"},
+                "expressionResult": {"<-": "selectedObject.path(selectedObject.label)"},
+                "value": {"<-": "expressionResult || selectedObject.label"}
             }
         },
 
