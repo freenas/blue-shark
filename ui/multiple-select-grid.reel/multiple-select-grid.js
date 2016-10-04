@@ -197,7 +197,9 @@ exports.MultipleSelectGrid = Component.specialize(/** @lends MultipleSelectGrid#
             this.dispatchOwnPropertyChange("selection", this.selection);
             this.dispatchOwnPropertyChange("selectedValues", this.selectedValues);
 
-            this.checkForConsistentIteration();
+            if(this.hasIterator) {
+                this.checkForConsistentIteration();
+            }
         }
     },
 
