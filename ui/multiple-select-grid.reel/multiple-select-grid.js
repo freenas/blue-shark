@@ -17,6 +17,30 @@ exports.MultipleSelectGrid = Component.specialize(/** @lends MultipleSelectGrid#
         }
     },
 
+    _iteratorValue: {
+        value: null
+    },
+
+    iteratorValue: {
+        get: function () {
+            return this._iteratorValue;
+        },
+        set: function (value) {
+            if(this._iteratorValue !== value) {
+                // change to a loop
+                if (value !== 0){
+                    for(var i = 0; i < this.options.iterations.length; i++) {
+                        this.options.iterations[i].selected = false;
+                        if (i % value == 0) {
+                            this.options.iterations[i].selected = true;
+                        }
+                    }
+                }
+                this._iteratorValue = value;
+            }
+        }
+    },
+
     _cancelSelectionRangeChangeListener: {
         value: null
     },
@@ -27,10 +51,11 @@ exports.MultipleSelectGrid = Component.specialize(/** @lends MultipleSelectGrid#
 
     selectedValues: {
         get: function() {
+
             return this.selection ? this.selection.map(function(x) { return x.value; }) : [];
         },
         set: function(selectedValues) {
-            if (this._selectedValue !== selectedValues) {
+            if (this._selectedValues !== selectedValues) {
                 this._selectedValues = selectedValues;
                 var selection = [];
                 if (this.options && selectedValues) {
@@ -101,16 +126,99 @@ exports.MultipleSelectGrid = Component.specialize(/** @lends MultipleSelectGrid#
         }
     },
 
+    checkForConsistentIteration: {
+        value: function () {
+
+            // @FIXME - attempted to figure out iterationValue from sortedSelection
+
+            // if (this.rangeController && this.sortedSelection.length > 1) {
+            //     var iterationValue = this.sortedSelection[1].index - this.sortedSelection[0].index,
+            //         counter = 0;
+            //     console.log(iterationValue);
+
+            //     for (var i = 0; i < this.sortedSelection.length; i++) {
+
+            //         // take the two values and check that they equal the iterationValue
+
+            //         // if they don't then exit the loop
+
+            //         // check if there is an iteration at the current index plus the iterationValue
+            //         // if not then set the iteration value
+
+
+            //         if (this.sortedSelection[i+1]) {
+
+            //             if (this.sortedSelection[i].index + iterationValue !== this.sortedSelection[i+1].index) {
+            //                 console.log("exit");
+            //                 this.iteratorValue = 0;
+            //                 return false;
+            //             }
+
+            //         }
+            //         // check the last one if there are values after
+            //         if (this.options.iterations[this.sortedSelection[this.sortedSelection.length - 1].index + iterationValue]) {
+            //             console.log("values at end")
+            //             this.iteratorValue = 0;
+            //             return false;
+            //         } else {
+            //             this.iteratorValue = iterationValue;
+            //             console.log("past the end");
+            //         }
+
+            //     }
+            // }
+
+            if (this.rangeController && this.sortedSelection.length > 1 && this.sortedSelection[0].index == 0) {
+                var iterationValue = this.sortedSelection[1].index,
+                    counter = 0;
+
+                for (var i = iterationValue; i < this.options.iterations.length; i++) {
+                    if(this.options.iterations[i].selected && counter == 0) {
+                        // reset counter
+                        counter = iterationValue;
+
+                    } else if (counter == 0 || this.options.iterations[i].selected) {
+                        this.iteratorValue = 0;
+                        return false;
+                    }
+
+                    if (i == this.options.iterations.length - 1) {
+                        this.iteratorValue = iterationValue;
+                    }
+
+                    counter--;
+                }
+            }
+        }
+    },
+
     handleOptionSelectionChange: {
         value: function () {
             this.dispatchOwnPropertyChange("selection", this.selection);
             this.dispatchOwnPropertyChange("selectedValues", this.selectedValues);
+
+            this.checkForConsistentIteration();
         }
     },
 
     enterDocument: {
         value: function() {
             this.selectedValues = this._selectedValues;
+        }
+    },
+
+    _clearSelection: {
+        value: function () {
+            this.options.iterations.forEach(function(iteration){
+                iteration.selected = false;
+            });
+        }
+    },
+
+    handleClearSelectionButtonAction: {
+        value: function () {
+            this._clearSelection();
+            this.iteratorValue = 0;
         }
     }
 

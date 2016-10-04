@@ -19,13 +19,13 @@ exports.Main = Component.specialize(/** @lends Main# */ {
     },
     daysContent: {
         value: [
-            {"value": "Sun"},
-            {"value": "Mon"},
-            {"value": "Tues"},
-            {"value": "Wed"},
-            {"value": "Thurs"},
-            {"value": "Fri"},
-            {"value": "Sat"}
+            {"index": 1, "label": "M", "value": "monday"},
+            {"index": 0, "label": "S", "value": "sunday"},
+            {"index": 2, "label": "T", "value": "tuesday"},
+            {"index": 3, "label": "W", "value": "wednesday"},
+            {"index": 4, "label": "Th", "value": "thursday"},
+            {"index": 5, "label": "F", "value": "friday"},
+            {"index": 6, "label": "S", "value": "saturday"}
         ]
     },
 
@@ -34,9 +34,9 @@ exports.Main = Component.specialize(/** @lends Main# */ {
     },
 
     enterDocument: {
-        value: function (firstTime) {
-            if (firstTime) {
-                this.selection = [this.daysContent[2], this.daysContent[4]];
+        value: function (isFirstTime) {
+            if (isFirstTime) {
+                this.selectedValues = [this.daysContent[2], this.daysContent[4]];
             }
         }
     }
