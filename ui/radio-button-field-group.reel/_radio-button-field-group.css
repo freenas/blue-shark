@@ -2,6 +2,10 @@
 
 .RadioButtonFieldGroup.RadioButtonFieldGroup--block {
     margin-top: 0;
+
+    & .RadioButtonFieldGroup-option {
+        display: block;
+    }
 }
 
 .Field.disabled .RadioButtonFieldGroup {
