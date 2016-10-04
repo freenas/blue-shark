@@ -26,12 +26,18 @@
             "prototype": "montage/ui/button.reel",
             "properties": {
                 "element": {"#": "buttonPlus"}
+            },
+            "bindings": {
+                "disabled": {"<-": "@owner.value == @owner.max"}
             }
         },
         "minus": {
             "prototype": "montage/ui/button.reel",
             "properties": {
                 "element": {"#": "buttonMinus"}
+            },
+            "bindings": {
+                "disabled": {"<-": "@owner.value == @owner.min"}
             }
         }
     }
