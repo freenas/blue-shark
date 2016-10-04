@@ -9,21 +9,23 @@ var Component = require("montage/ui/component").Component;
  */
 exports.SelectFilter = Component.specialize(/** @lends SelectFilter# */ {
 
-    areFiltersVisible: {
-        value: false
-    },
-
     handleDisplayAllButtonAction: {
         value: function () {
-            this.items.iterations.forEach(function(filter){
-                filter.object.checked = true;
+            this.options.forEach(function(filter){
+                filter.checked = true;
             });
         }
     },
 
     handleFilterButtonAction: {
         value: function () {
-            this.areFiltersVisible = !this.areFiltersVisible;
+            this._toggleFilterOverlay();
+        }
+    },
+
+    _toggleFilterOverlay: {
+        value: function () {
+            this.filterOverlayComponent.isShown ? this.filterOverlayComponent.hide() : this.filterOverlayComponent.show();
         }
     }
 });

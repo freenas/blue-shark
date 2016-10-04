@@ -7,11 +7,11 @@
     position: relative;
 }
 
-.SelectFilter-displayAll {
+.SelectFilter-displayAll.Button {
     margin-right: .5rem;
 }
 
-.SelectFilter-filterButton {
+.SelectFilter-filterButton.Button {
     display: flex;
     align-items: center;
     padding-right: .75em;
@@ -31,13 +31,7 @@
 }
 
 .SelectFilter-items {
-    display: none;
-    position: absolute;
-    top: calc(100% + .25rem);
-    right: 0;
-    background: grey;
-    padding: .5rem .75rem;
-    border-radius: var(--border-radius);
+    /* display: none; */
 
     @nest .SelectFilter.filters-are-visible & {
         display: block;

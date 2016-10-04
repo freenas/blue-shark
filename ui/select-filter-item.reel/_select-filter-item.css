@@ -1,5 +1,4 @@
 .SelectFilterItem {
-
     &:not(:last-child) {
         margin-bottom: .5em;
     }
@@ -14,7 +13,8 @@
 
     & label {
         white-space: nowrap;
-        display: block
+        display: block;
+        color: var(--white);
     }
 }
 

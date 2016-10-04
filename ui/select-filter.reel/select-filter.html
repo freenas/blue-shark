@@ -8,7 +8,7 @@
         "owner": {
             "properties": {
                 "element": {"#": "owner"},
-                "items": {"@": "items"}
+                "filterOverlayComponent": {"@": "filterItems"}
             },
             "listeners": [
                 {
@@ -37,22 +37,14 @@
                 "value": "Display"
             }
         },
-        "items": {
-            "prototype": "montage/ui/repetition.reel",
+        "filterItems": {
+            "prototype": "ui/select-filter-items.reel",
             "properties": {
-                "element": {"#": "items"}
+                "element": {"#": "filterItems"},
+                "anchor": {"#": "selectFilterButtonWrapper"}
             },
             "bindings": {
-                "content": {"<-": "@owner.options"}
-            }
-        },
-        "item": {
-            "prototype": "ui/select-filter-item.reel",
-            "properties": {
-                "element": {"#": "item"}
-            },
-            "bindings": {
-                "data": {"<-": "@items:iteration.object"}
+                "options": {"<-": "@owner.options"}
             }
         }
     }
@@ -61,13 +53,11 @@
 <body>
     <div data-montage-id="owner" class="SelectFilter">
         <button data-montage-id="displayAllButton" class="SelectFilter-displayAll"></button>
-        <div class="SelectFilter-filter">
+        <div data-montage-id="selectFilterButtonWrapper" class="SelectFilter-filter">
             <button data-montage-id="filterButton" class="SelectFilter-filterButton">
                 <svg><use xlink:href="#i-triangle-down"/></svg>
             </button>
-            <div data-montage-id="items" class="SelectFilter-items">
-                <div data-montage-id="item" class="SelectFilter-item"></div>
-            </div>
+            <div data-montage-id="filterItems" class="SelectFilter-items"></div>
         </div>
     </div>
 </body>

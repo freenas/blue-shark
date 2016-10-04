@@ -19,7 +19,7 @@
                 "element": {"#": "checkbox"}
             },
             "bindings": {
-                "label": {"<-": "@owner.data.label"},
+                "label": {"<-": "@owner.data.label || @owner.data.name"},
                 "checked": {"<->": "@owner.data.checked"}
             }
         }
