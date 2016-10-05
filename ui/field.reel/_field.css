@@ -59,7 +59,7 @@
     margin-left: -1em;
 }
 
-.Field-info-condition:not(montage-invisible) { display: inline-block; }
+.Field-info-condition:not(.montage-invisible) { display: inline-block; }
 
 /* Icon Background */
 
