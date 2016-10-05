@@ -7,14 +7,12 @@
         "owner": {
             "properties": {
                 "element": {"#": "owner"},
-                "options": {"@": "options"},
-                "iteratorValue": 0,
-                "rangeController": {"@": "rangeController"},
-                "options": {"@": "options"}
+                "controller": {"@": "rangeController"}
             },
             "bindings": {
                 "classList.has('has-iterator')": {"<-": "@owner.hasIterator"},
-                "sortedSelection": {"<-": "@owner.selection.sorted{index}"}
+                "_selectedIndexes": {"<-": "@options.selectedIndexes"},
+                "_areOptionsIndexed": {"<-": "@owner.options.defined() && @owner.options.0.index.defined()"}
             },
             "listeners": [
                 {
@@ -39,8 +37,9 @@
                 "sortPath": "index"
             },
             "bindings": {
-                "content": {"<-": "@owner.content"},
-                "selection": {"<->": "@owner.selection"}
+                "sortPath": {"<-": "@owner.sortPath || @owner._areOptionsIndexed ? 'index' : 'value'"},
+                "content": {"<-": "@owner.options"},
+                "selection": {"<->": "@owner._selection"}
             }
         },
 
@@ -61,8 +60,8 @@
                 "min": 0
             },
             "bindings": {
-                "max": {"<-": "@owner.content.length"},
-                "value": {"<->": "@owner.iteratorValue"}
+                "max": {"<-": "@owner.options.length"},
+                "value": {"<->": "@owner.frequency"}
             }
         },
 
@@ -73,7 +72,7 @@
                 "label": "Clear Selection"
             },
             "bindings": {
-                "disabled": {"<-": "!@owner.selectedValues.length"}
+                "disabled": {"<-": "!@owner._selection || !@owner._selection.length"}
             }
         },
         "iteratorLabel": {

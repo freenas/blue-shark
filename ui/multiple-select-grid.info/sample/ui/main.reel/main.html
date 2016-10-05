@@ -26,8 +26,19 @@
                 "iteratorLabel": "Every"
             },
             "bindings": {
-                "content": {"<-": "@owner.daysContent"},
-                "selection": {"<->": "@owner.selectedValues"}
+                "options": {"<-": "@owner.daysContent"},
+                "selectedValues": {"<->": "@owner.selectedOnOpen"}
+            }
+        },
+        "default2": {
+            "prototype": "blue-shark/ui/multiple-select-grid.reel",
+            "properties": {
+                "element": {"#": "default2"},
+                "hasIterator": true,
+                "iteratorLabel": "Every"
+            },
+            "bindings": {
+                "options": {"<-": "@owner.minutesContent"}
             }
         }
     }
@@ -40,6 +51,7 @@
             <div data-montage-id="default"></div>
             <h4>Results:</h4>
             <div data-montage-id="results"></div>
+            <div data-montage-id="default2"></div>
         </div>
     </div>
 </body>
