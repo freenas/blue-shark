@@ -25,15 +25,7 @@ exports.Main = Component.specialize(/** @lends Main# */ {
             for (var i = 0; i < 60; i++) {
                 minutes.push({"label": ''+i, "value": i});
             }
-            this.minutesContent = minutes;/*[
-                {"index": 1, "label": "M", "value": "monday"},
-                {"index": 0, "label": "S", "value": "sunday"},
-                {"index": 2, "label": "T", "value": "tuesday"},
-                {"index": 3, "label": "W", "value": "wednesday"},
-                {"index": 4, "label": "Th", "value": "thursday"},
-                {"index": 5, "label": "F", "value": "friday"},
-                {"index": 6, "label": "S", "value": "saturday"}
-            ];*/
+            this.minutesContent = minutes;
 
             this.daysContent = [
                 {"index": 1, "label": "M", "value": "monday"},
@@ -45,11 +37,6 @@ exports.Main = Component.specialize(/** @lends Main# */ {
                 {"index": 6, "label": "S", "value": "saturday"}
             ];
             this.selectedOnOpen = ['monday', 'wednesday'];
-        }
-    },
-
-    enterDocument: {
-        value: function (isFirstTime) {
         }
     }
 });
