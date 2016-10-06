@@ -101,24 +101,25 @@ exports.MultipleSelectGrid = Component.specialize(/** @lends MultipleSelectGrid#
 
     _getSelectionFrequency: {
         value: function() {
-            if (this._selectedIndexes.length > 1) {
-                var i, length,
-                    referenceInterval = this._selectedIndexes[0] === 0 ? this._selectedIndexes[1] - this._selectedIndexes[0] : this._selectedIndexes[0] + 1;
-                for (i = 0, length = this._selectedIndexes.length-1; i < length; i++) {
-                    if (this._selectedIndexes[i+1] - this._selectedIndexes[i] !== referenceInterval) {
+            if (this._selectedIndexes.length > 0 && this._selectedIndexes[0] === 0) {
+                if (this._selectedIndexes.length === 1) {
+                    return this.options.length;
+                } else if (this._selectedIndexes.length > 1) {
+                    var i, length,
+                        referenceInterval = this._selectedIndexes[1] - this._selectedIndexes[0];
+                    for (i = 0, length = this._selectedIndexes.length-1; i < length; i++) {
+                        if (this._selectedIndexes[i+1] - this._selectedIndexes[i] !== referenceInterval) {
+                            return null;
+                        }
+                    }
+                    var intervalToEnd = this.options.length - this._selectedIndexes[length];
+                    if (intervalToEnd > 1 && intervalToEnd !== referenceInterval) {
                         return null;
                     }
+                    return referenceInterval;
                 }
-                var intervalToEnd = this.options.length - this._selectedIndexes[length];
-                if (intervalToEnd > 1 && intervalToEnd !== referenceInterval) {
-                    return null;
-                }
-                return referenceInterval;
-            } else if (this._selectedIndexes.length === 1) {
-                return this.options.length;
-            } else {
-                return null;
             }
+            return null;
         }
     }
         
