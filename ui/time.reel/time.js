@@ -27,8 +27,11 @@ exports.Time = Component.specialize(/** @lends Time# */ {
             if (this.isDefaultNow) {
                 this.options.unshift(new Date());
             }
-            if (!this.allowEmpty) {
+            if (!this.allowEmpty && !this.value) {
                 this._selectedOption = this.options[0];
+            }
+            if (this.value) {
+                this._selectedOption = this._findMatchingOption();
             }
         }
     },
@@ -98,7 +101,7 @@ exports.Time = Component.specialize(/** @lends Time# */ {
             var i, length, option;
             for (i = 0, length = this.options.length; i < length; i++) {
                 option = this.options[i];
-                if (option.isEqualTo(this.value)) {
+                if (option === this.value) {
                     return option;
                 }
             }
@@ -116,13 +119,51 @@ exports.Time = Component.specialize(/** @lends Time# */ {
 
     _navigateInOptions: {
         value: function(distance) {
-            var currentIndex = this._optionsController.organizedContent.indexOf(this._optionsController.selection[0]),
-                newIndex = currentIndex + distance,
-                contentLength = this._optionsController.organizedContent.length;
-            if (newIndex < 0) {
-                newIndex = contentLength -1;
+            if (this.value === this._optionsController.selection[0]) {
+                var currentIndex = this._optionsController.organizedContent.indexOf(this._optionsController.selection[0]),
+                    newIndex = currentIndex + distance,
+                    contentLength = this._optionsController.organizedContent.length;
+                if (newIndex < 0) {
+                    newIndex = contentLength -1;
+                }
+                this._selectedOption = this._optionsController.organizedContent[newIndex % contentLength];
+            } else {
+                if (distance > 0) {
+                    this._selectedOption = this._findNextOption();
+                } else {
+                    this._selectedOption = this._findPreviousOption();
+                }
             }
-            this._selectedOption = this._optionsController.organizedContent[newIndex % contentLength];
+        }
+    },
+
+    _findPreviousOption: {
+        value: function() {
+            var option;
+            for (var i = 0, length = this.options.length; i < length; i++) {
+                option = this.options[i];
+                if (this.value.getHours() === option.getHours() && this.value.getMinutes() === option.getMinutes()) {
+                    return option;
+                } else if (option.getHours() > this.value.getHours() || (option.getHours() === this.value.getHours() && option.getMinutes() > this.value.getMinutes())) {
+                    break;
+                }
+            }
+            return this.options[i-1];
+        }
+    },
+
+    _findNextOption: {
+        value: function() {
+            var option;
+            for (var i = this.options.length-1; i >= 0; i--) {
+                option = this.options[i];
+                if (this.value.getHours() === option.getHours() && this.value.getMinutes() === option.getMinutes()) {
+                    return option;
+                } else if (option.getHours() < this.value.getHours() || (option.getHours() === this.value.getHours() && option.getMinutes() < this.value.getMinutes())) {
+                    break;
+                }
+            }
+            return this.options[i+1];
         }
     },
 
