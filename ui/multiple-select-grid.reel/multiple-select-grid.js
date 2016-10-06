@@ -15,35 +15,50 @@ exports.MultipleSelectGrid = Component.specialize(/** @lends MultipleSelectGrid#
 
     _sortedSelection: {
         get: function() {
-            if (!this._sorter && this._selection && this._selection.length > 0) {
-                this._sorter = typeof this._selection[0].index !== 'undefined' ? this.constructor._indexSorter : this.constructor._valueSorter;
+            if (!this._sorter && this.controller && this.controller.selection && this.controller.selection.length > 0) {
+                this._sorter = typeof this.controller.selection[0].index !== 'undefined' ? this.constructor._indexSorter : this.constructor._valueSorter;
             }
-            return this._selection ? this._selection.slice().sort(this._sorter).map(function(x) { return x.value; }) : [];
+            return this.controller && this.controller.selection ? this.controller.selection.slice().sort(this._sorter).map(function(x) { return x.value; }) : [];
         }
+    },
+
+    _selectedValues: {
+        value: null
     },
 
     selectedValues: {
         get: function() {
             return this._sortedSelection;
         }, set: function(selectedValues) {
-            if (this.options) {
-                this._selection = this.options.filter(function(x) {
-                    return selectedValues.indexOf(x.value) != -1;
-                });
+            this._selectedValues = selectedValues;
+            if (selectedValues) {
+                if (this.options && this.controller) {
+                    this.controller.selection = this.options.filter(function(x) {
+                        return selectedValues.indexOf(x.value) != -1;
+                    });
+                } else {
+                    this._needsToSetData = true;
+                }
             }
         }
     },
 
     enterDocument: {
         value: function() {
+            if (this._needsToSetData) {
+                this.selectedValues = this._selectedValues;
+                this._needsToSetData = false;
+            }
             this.addPathChangeListener("frequency", this, "_handleFrequencyChange");
-            this._cancelSelectionListener = this.addRangeAtPathChangeListener("_selection", this, "_handleSelectionChange");
+            this._cancelSelectionListener = this.addRangeAtPathChangeListener("controller.selection", this, "_handleSelectionChange");
         }
     },
 
     exitDocument: {
         value: function() {
-            this.removePathChangeListener("frequency", this);
+            if (this.getPathChangeDescriptor("frequency", this)) {
+                this.removePathChangeListener("frequency", this);
+            }
             if (typeof this._cancelSelectionListener === 'function') {
                 this._cancelSelectionListener();
                 this._cancelSelectionListener = null;
@@ -60,7 +75,10 @@ exports.MultipleSelectGrid = Component.specialize(/** @lends MultipleSelectGrid#
 
     _handleSelectionChange: {
         value: function() {
-            this.frequency = this._getSelectionFrequency();
+            if (this.hasIterator) {
+                this.frequency = this._getSelectionFrequency();
+            }
+            this.dispatchOwnPropertyChange("selectedValues", this._sortedSelection);
         }
     },
 
@@ -73,7 +91,7 @@ exports.MultipleSelectGrid = Component.specialize(/** @lends MultipleSelectGrid#
                     for (var i = 0, length = options.length; i < length; i = i + this.frequency) {
                         selection.push(options[i]);
                     }
-                    this._selection = selection;
+                    this.controller.selection = selection;
                 }
             } else if (typeof this.frequency === 'number') {
                 this.frequency = null;
