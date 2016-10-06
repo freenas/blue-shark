@@ -44,3 +44,30 @@
     bottom: 0px;
     outline: 1px solid #888;
 }
+
+/* iterator */
+
+.MultipleSelectGrid-iterator {
+    display: none;
+    margin-top: 1rem;
+    justify-content: space-between;
+
+    @nest .MultipleSelectGrid.has-iterator & {
+        display: flex;
+    }
+
+}
+
+.MultipleSelectGrid-control {
+    display: flex;
+    align-items: center;
+
+    & .MultipleSelectGrid-label {
+        margin-right: 1em;
+        font-weight: 300;
+    }
+
+    & .MultipleSelectGrid-numberIterator {
+        max-width: 6.5em;
+    }
+}

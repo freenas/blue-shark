@@ -7,18 +7,39 @@
         "owner": {
             "properties": {
                 "element": {"#": "owner"},
-                "options": {"@": "options"}
-            }
+                "controller": {"@": "rangeController"}
+            },
+            "bindings": {
+                "classList.has('has-iterator')": {"<-": "@owner.hasIterator"},
+                "_selectedIndexes": {"<-": "@options.selectedIndexes"},
+                "_areOptionsIndexed": {"<-": "@owner.options.defined() && @owner.options.0.index.defined()"}
+            },
+            "listeners": [
+                {
+                    "listener": {"@": "owner"},
+                    "type": "action"
+                }
+            ]
         },
 
         "options": {
             "prototype": "montage/ui/repetition.reel",
             "properties": {
                 "element": {"#": "options"},
-                "allowsMultipleSelection": true
+                "contentController": {"@": "rangeController"}
+            }
+        },
+
+        "rangeController": {
+            "prototype": "montage/core/range-controller",
+            "properties": {
+                "allowsMultipleSelection": true,
+                "sortPath": "index"
             },
             "bindings": {
-                "content": {"<-": "@owner.content"}
+                "sortPath": {"<-": "@owner.sortPath || @owner._areOptionsIndexed ? 'index' : 'value'"},
+                "content": {"<-": "@owner.options"},
+                "selection": {"<->": "@owner._selection"}
             }
         },
 
@@ -30,6 +51,38 @@
             "bindings": {
                 "value": {"<-": "@options:iteration.object.label || @options:iteration.object.value"}
             }
+        },
+
+        "numberIterator": {
+            "prototype": "ui/number-input.reel",
+            "properties": {
+                "element": {"#": "numberIterator"},
+                "min": 0
+            },
+            "bindings": {
+                "max": {"<-": "@owner.options.length"},
+                "value": {"<->": "@owner.frequency"}
+            }
+        },
+
+        "clearSelectionButton": {
+            "prototype": "ui/button.reel",
+            "properties": {
+                "element": {"#": "clearSelectionButton"},
+                "label": "Clear Selection"
+            },
+            "bindings": {
+                "disabled": {"<-": "!@owner._selection || !@owner._selection.length"}
+            }
+        },
+        "iteratorLabel": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "iteratorLabel"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner.iteratorLabel"}
+            }
         }
     }
     </script>
@@ -38,6 +91,13 @@
     <div data-montage-id="owner" class="MultipleSelectGrid">
         <div data-montage-id="options" class="MultipleSelectGrid-options">
             <div data-montage-id="option" class="MultipleSelectGrid-option"></div>
+        </div>
+        <div class="MultipleSelectGrid-iterator">
+            <div data-montage-id="clearSelectionButton"></div>
+            <div class="MultipleSelectGrid-control">
+                <span data-montage-id="iteratorLabel" class="MultipleSelectGrid-label"></span>
+                <div data-montage-id="numberIterator" class="MultipleSelectGrid-numberIterator"></div>
+            </div>
         </div>
     </div>
 </body>

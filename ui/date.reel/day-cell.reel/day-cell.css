@@ -1,7 +1,7 @@
 .DayCell {
-    width: calc(100% / 7); 
+    width: calc(100% / 7);
     cursor: pointer;
-} 
+}
 
 .DayCell:hover {
     color: #fff;
@@ -26,4 +26,3 @@
     color: inherit;
     background-color: inherit;
 }
-

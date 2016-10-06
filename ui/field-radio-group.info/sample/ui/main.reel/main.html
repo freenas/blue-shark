@@ -19,6 +19,15 @@
                 ],
                 "selectedValue": "one"
             }
+        },
+        "results": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "results"}
+            },
+            "bindings": {
+                "value": {"<-": "@fieldRadioGroup.selectedValue"}
+            }
         }
     }
     </script>
@@ -29,6 +38,8 @@
             <h1>Field Text Area</h1>
             <h3>Default</h3>
             <div data-montage-id="fieldRadioGroup" class="FieldRadioGroup--block"></div>
+            <h4>Results</h4>
+            <div data-montage-id="results"></div>
         </div>
     </div>
 </body>
