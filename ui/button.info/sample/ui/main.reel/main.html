@@ -69,8 +69,14 @@
             "prototype": "blue-shark/ui/button.reel",
             "properties": {
                 "element": {"#": "buttonAlertDisabled"},
-                "enabled": false,
                 "value": "alert button"
+            }
+        },
+        "buttonNaked": {
+            "prototype": "blue-shark/ui/button.reel",
+            "properties": {
+                "element": {"#": "buttonNaked"},
+                "value": "naked button"
             }
         }
     }
@@ -99,6 +105,10 @@
             <h3>Large Primary Button</h3>
             <div data-montage-id="buttonSmallPrimary" class="Button--large Button--primary"></div>
             <div data-montage-id="buttonLargeIcon" class="Button--large Button--primary">
+                <svg><use xlink:href="#i-circle-plus"/></svg>
+            </div>
+            <h3>Naked Button</h3>
+            <div data-montage-id="buttonNaked" class=" Button--naked">
                 <svg><use xlink:href="#i-circle-plus"/></svg>
             </div>
 
