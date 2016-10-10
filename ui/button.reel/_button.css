@@ -60,7 +60,7 @@
     vertical-align: middle;
     line-height: 2.5em;
 
-    @nest .Button:not(.montage--disabled):active & {
+    @nest .Button:not(.montage--disabled, .Button--naked):active & {
         transform: translateY(.05em);
     }
 }
@@ -79,7 +79,7 @@
     }
 }
 
-.Button:not(.montage--disabled):active > :not(.Button-label) {
+.Button:not(.montage--disabled, .Button--naked):active > :not(.Button-label) {
     transform: translateY(.05em);
 }
 
@@ -137,6 +137,10 @@
 
     &:hover {
         box-shadow: none;
+    }
+
+    &:active {
+        background: none;
     }
 }
 
