@@ -33,7 +33,7 @@ exports.MultipleSelect = AbstractDropZoneComponent.specialize(/** @lends Multipl
     __inputError: {
         value: null
     },
-    
+
 
     _inputError: {
         get: function() {
@@ -312,6 +312,17 @@ exports.MultipleSelect = AbstractDropZoneComponent.specialize(/** @lends Multipl
             }
 
             return isValid;
+        }
+    },
+
+    handleAddButtonAction: {
+        value: function () {
+            if (this._inputField.value) {
+                if (this._addValueToContent(this._inputField.value)) {
+                    this._blurInputField();
+                    this._clearInput();
+                }
+            }
         }
     }
 });

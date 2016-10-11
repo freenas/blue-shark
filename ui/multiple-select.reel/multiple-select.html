@@ -138,14 +138,42 @@
                 "classList.has('is-empty')": {"<-": "@owner.values.length == 0"}
             }
         },
-        "addIcon": {
-            "prototype": "montage/ui/component",
+        "addButton": {
+            "prototype": "ui/button.reel",
             "properties": {
-                "element": {"#": "addIcon"},
-                "hasTemplate": false
+                "element": {"#": "addButton"},
+                "value": "add"
             },
             "bindings": {
-                "classList.has('is-visible')": {"<-": "@owner.values.length == 0"}
+                "disabled": {"<-": "!@input.value"}
+            }
+        },
+        "inputTitle": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "inputTitle"}
+            },
+            "bindings": {
+                "value": {"<-": "!!@owner.inputTitle ? @owner.inputTitle : 'Add Item'"}
+            }
+        },
+        "valuesTitle": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "valuesTitle"}
+            },
+            "bindings": {
+                "value": {"<-": "!!@owner.valuesTitle ? @owner.valuesTitle : 'Added Items'"}
+            }
+        },
+        "valuesEmptyState": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "valuesEmptyState"}
+            },
+            "bindings": {
+                "value": {"<-": "!!@owner.emptyMessage ? @owner.emptyMessage : 'no items added'"},
+                "classList.has('is-hidden')": {"<-": "@valuesController.content.length > 0"}
             }
         }
     }
@@ -153,30 +181,39 @@
 </head>
 <body>
     <div data-montage-id="owner" class="MultipleSelect">
-        <div data-montage-id="inputContainer" class="MultipleSelect-input">
-            <div data-param="*">
-                <svg data-montage-id="clearButton" class="MultipleSelect-input-clearButton">
-                    <use xlink:href="#i-plus"/>
-                </svg>
-                <svg data-montage-id="addIcon" class="MultipleSelect-input-add">
-                    <use xlink:href="#i-plus"/>
-                </svg>
-                <div data-montage-id="input" class="MultipleSelect-input-field"></div>
-                
-                <div data-montage-id="inputScroll" class="MultipleSelect-input-options">
-                    <div data-montage-id="options">
-                        <div data-montage-id="option" class="MultipleSelect-input-option"></div>
+        <div class="MultipleSelect-header">
+            <div data-montage-id="inputTitle" class="MultipleSelect-title"></div>
+            <div data-montage-id="inputContainer" class="MultipleSelect-input">
+                <div data-param="*">
+                    <svg data-montage-id="clearButton" class="MultipleSelect-input-clearButton">
+                        <use xlink:href="#i-plus"/>
+                    </svg>
+                    <div data-montage-id="input" class="MultipleSelect-input-field"></div>
+
+                    <div data-montage-id="inputScroll" class="MultipleSelect-input-options">
+                        <div data-montage-id="options">
+                            <div data-montage-id="option" class="MultipleSelect-input-option"></div>
+                        </div>
+                    </div>
+                    <div class="MultipleSelect-input-error">
+                        <div data-montage-id="inputErrorMessage" class="MultipleSelect-input-error-message"></div>
                     </div>
                 </div>
-                <div class="MultipleSelect-input-error">
-                    <div data-montage-id="inputErrorMessage" class="MultipleSelect-input-error-message"></div>
-                </div>
+                    <div class="MultipleSelect-input-controls">
+                        <div data-montage-id="addButton" class="Button--create MultipleSelect-input-add">
+                            <svg><use xlink:href="#i-plus"/></svg>
+                        </div>
+                    </div>
             </div>
         </div>
-        <div data-montage-id="valuesContainer" class="MultipleSelect-valuesContainer">
-            <div data-montage-id="valuesScroll" data-emptyMessage="no items currently added">
-                <div data-montage-id="values" class="MultipleSelect-values">
-                    <div data-montage-id="value"></div>
+        <div class="MultipleSelect-body">
+            <div data-montage-id="valuesTitle" class="MultipleSelect-title"></div>
+            <div data-montage-id="valuesContainer" class="MultipleSelect-valuesContainer">
+                <div data-montage-id="valuesEmptyState" class="MultipleSelect-values-emptyState"></div>
+                <div data-montage-id="valuesScroll">
+                    <div data-montage-id="values" class="MultipleSelect-values">
+                        <div data-montage-id="value"></div>
+                    </div>
                 </div>
             </div>
         </div>

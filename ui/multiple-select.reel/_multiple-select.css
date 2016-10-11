@@ -1,57 +1,64 @@
 .MultipleSelect {
     min-width: 16em;
     margin-bottom: 1em;
+    border: 2px solid var(--black);
+    border-radius: 4px;
+    background: #333;
+}
+
+.MultipleSelect-title {
+    padding: .25em .5em;
+    background: var(--black);
+    font-family: 'lato';
+    line-height: 1.5;
+    font-weight: 300;
 }
 
 .MultipleSelect-input {
     position: relative;
-    margin-bottom: .5em;
+    margin: .5em;
+
+    & input {
+        margin-bottom: .5em;
+    }
 }
 
-.MultipleSelect-input-field.has-options:focus {
+/* .MultipleSelect-input-field.has-options:focus {
     border-bottom-right-radius: 0;
     border-bottom-left-radius:  0;
-}
+} */
 
-.MultipleSelect-input-clearButton,
-.MultipleSelect-input-add {
+.MultipleSelect-input-clearButton {
     position: absolute;
-    transition-property: visibility, opacity;
-    transition-duration: .2s;
     padding: .25em;
     height: 1.2em;
     width:  1.2em;
-    top: 50%;
+    top: 1em;
     right: .5em;
     margin-top: -.6em;
     border-radius: 1em;
-}
-
-
-.MultipleSelect-input-clearButton {
-    color: #333;
+    color: #fff;
     transform: rotate(45deg);
-    background: #ddd;
+    background: #000;
     border-radius: 2em;
     cursor: pointer;
     outline: none;
     visibility: hidden;
     opacity: 0;
+    transition-property: visibility, opacity;
+    transition-duration: .2s;
+
+    @nest .MultipleSelect-input.has-value & {
+        visibility: visible;
+        opacity: 1;
+    }
 }
 
 /*  add icon */
 
-.MultipleSelect-input-add {
-    height: 1.2em;
-    width:  1.2em;
-    color: rgba(255,255,255,.8);
-    background: #1E963F;
-    opacity: 1;
-    pointer-events: none;
-
-    @nest .MultipleSelect.disabled & {
-        opacity: .5;
-    }
+.MultipleSelect-input-controls {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .MultipleSelect-input-options {
@@ -108,12 +115,6 @@
     height: 7.25em;
     padding: .25em;
     width: 100%;
-    background: rgba(0, 0, 0, .25);
-    background: #242628;
-    border-radius: .3em;
-    border: 1px solid transparent;
-    border-top: 1px solid rgba(0, 0, 0, .23);
-    border-bottom: 1px solid rgba(255, 255, 255, .15);
     transition-property: border-color, background-color, opacity;
     transition-duration: .25s;
 
@@ -124,8 +125,7 @@
 
 /* Empty State */
 
-.MultipleSelect-valuesContainer .Scrollview.is-empty:after {
-    content: attr(data-emptyMessage);
+.MultipleSelect-values-emptyState {
     position: absolute;
     color: rgba(255,255,255,.3);
     font-weight: 300;
@@ -151,14 +151,9 @@ States
 
 .MultipleSelect-input-field.has-options:focus + .MultipleSelect-input-options.has-content,
 .MultipleSelect-input-options:active,
-.MultipleSelect-input.has-value .MultipleSelect-input-clearButton,
 .MultipleSelect-input.has-error .MultipleSelect-input-error {
     visibility: visible;
     opacity: 1;
-}
-
-.MultipleSelect-input.has-value .MultipleSelect-input-clearButton {
-    z-index: 1;
 }
 
 .MultipleSelect-input.has-error .MultipleSelect-input-field {
