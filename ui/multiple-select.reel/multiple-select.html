@@ -8,9 +8,9 @@
             "properties": {
                 "element": {"#": "owner"},
                 "_inputField": {"@": "input"},
-                "_optionsController": {"@": "optionsController"},
+                "optionsController": {"@": "optionsController"},
                 "_optionsList": {"@": "options"},
-                "_valuesController": {"@": "valuesController"},
+                "valuesController": {"@": "valuesController"},
                 "scrollView": {"@": "valuesScroll"}
             },
             "bindings": {
@@ -34,7 +34,8 @@
             },
             "bindings": {
                 "classList.has('has-value')": {"<-": "@input.value"},
-                "classList.has('has-error')": {"<-": "@owner._inputError"}
+                "classList.has('has-error')": {"<-": "@owner._inputError"},
+                "classList.has('is-hidden')": {"<-": "@owner.disabled"}
             }
         },
         "input": {
@@ -153,20 +154,23 @@
 <body>
     <div data-montage-id="owner" class="MultipleSelect">
         <div data-montage-id="inputContainer" class="MultipleSelect-input">
-            <svg data-montage-id="clearButton" class="MultipleSelect-input-clearButton">
-                <use xlink:href="#i-plus"/>
-            </svg>
-            <svg data-montage-id="addIcon" class="MultipleSelect-input-add">
-                <use xlink:href="#i-plus"/>
-            </svg>
-            <div data-montage-id="input" class="MultipleSelect-input-field"></div>
-            <div data-montage-id="inputScroll" class="MultipleSelect-input-options">
-                <div data-montage-id="options">
-                    <div data-montage-id="option" class="MultipleSelect-input-option"></div>
+            <div data-param="*">
+                <svg data-montage-id="clearButton" class="MultipleSelect-input-clearButton">
+                    <use xlink:href="#i-plus"/>
+                </svg>
+                <svg data-montage-id="addIcon" class="MultipleSelect-input-add">
+                    <use xlink:href="#i-plus"/>
+                </svg>
+                <div data-montage-id="input" class="MultipleSelect-input-field"></div>
+                
+                <div data-montage-id="inputScroll" class="MultipleSelect-input-options">
+                    <div data-montage-id="options">
+                        <div data-montage-id="option" class="MultipleSelect-input-option"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="MultipleSelect-input-error">
-                <div data-montage-id="inputErrorMessage" class="MultipleSelect-input-error-message"></div>
+                <div class="MultipleSelect-input-error">
+                    <div data-montage-id="inputErrorMessage" class="MultipleSelect-input-error-message"></div>
+                </div>
             </div>
         </div>
         <div data-montage-id="valuesContainer" class="MultipleSelect-valuesContainer">

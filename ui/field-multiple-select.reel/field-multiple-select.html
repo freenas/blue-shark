@@ -7,6 +7,9 @@
         "owner": {
             "properties": {
                 "element": {"#": "owner"}
+            },
+            "bindings": {
+                "valuesController": {"<-": "@control.valuesController"}
             }
         },
         "field": {
@@ -46,7 +49,9 @@
 <body>
     <div data-montage-id="owner" class="FieldMultipleSelect">
         <div data-montage-id="field">
-            <div data-montage-id="control"></div>
+            <div data-montage-id="control">
+                <div data-param="*"></div>
+            </div>
         </div>
     </div>
 </body>

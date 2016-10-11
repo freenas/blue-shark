@@ -33,6 +33,7 @@ exports.MultipleSelect = AbstractDropZoneComponent.specialize(/** @lends Multipl
     __inputError: {
         value: null
     },
+    
 
     _inputError: {
         get: function() {
@@ -133,11 +134,11 @@ exports.MultipleSelect = AbstractDropZoneComponent.specialize(/** @lends Multipl
             var draggedObject;
 
             if (this._previousOverMultipleSelectValue) {
-                draggedObject = this._valuesController.content[draggableComponent.index];
-                this._valuesController.splice(this._previousOverMultipleSelectValue.index, 0, draggedObject);
-                this._valuesController.splice(draggableComponent.index, 1);
+                draggedObject = this.valuesController.content[draggableComponent.index];
+                this.valuesController.splice(this._previousOverMultipleSelectValue.index, 0, draggedObject);
+                this.valuesController.splice(draggableComponent.index, 1);
             } else {
-                this._valuesController.push(this._valuesController.splice(draggableComponent.index, 1)[0]);
+                this.valuesController.push(this.valuesController.splice(draggableComponent.index, 1)[0]);
             }
         }
     },
@@ -207,7 +208,7 @@ exports.MultipleSelect = AbstractDropZoneComponent.specialize(/** @lends Multipl
     },
 
     handleInputAction: {
-        value: function() {
+        value: function (event) {
             if (this._inputField.value) {
                 if (this._addValueToContent(this._inputField.value)) {
                     this._blurInputField();
@@ -249,15 +250,15 @@ exports.MultipleSelect = AbstractDropZoneComponent.specialize(/** @lends Multipl
             if (!this._typedValue) {
                 this._typedValue = this._inputField.value;
             }
-            this._optionsController.select(option);
-            this._inputField.value = this._optionsController.selection[0].label;
+            this.optionsController.select(option);
+            this._inputField.value = this.optionsController.selection[0].label;
             this._selectedOption = option;
         }
     },
 
     _stopScrollingOptions: {
         value: function () {
-            this._optionsController.clearSelection();
+            this.optionsController.clearSelection();
             this._selectedOption = null;
             this._inputField.value = this._typedValue;
             this._typedValue = null;
@@ -266,9 +267,9 @@ exports.MultipleSelect = AbstractDropZoneComponent.specialize(/** @lends Multipl
 
     _navigateInOptions: {
         value: function(distance) {
-            var currentIndex = this._optionsController.organizedContent.indexOf(this._optionsController.selection[0]),
+            var currentIndex = this.optionsController.organizedContent.indexOf(this.optionsController.selection[0]),
                 newIndex = currentIndex + distance,
-                contentLength = this._optionsController.organizedContent.length;
+                contentLength = this.optionsController.organizedContent.length;
             if (newIndex < -1) {
                 newIndex = contentLength -1;
             }
@@ -276,7 +277,7 @@ exports.MultipleSelect = AbstractDropZoneComponent.specialize(/** @lends Multipl
                 this._inputField.value = this._typedValue;
                 this._stopScrollingOptions();
             } else {
-                this._selectOption(this._optionsController.organizedContent[newIndex % contentLength]);
+                this._selectOption(this.optionsController.organizedContent[newIndex % contentLength]);
             }
         }
     },
