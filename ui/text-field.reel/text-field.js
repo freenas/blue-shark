@@ -46,6 +46,27 @@ exports.TextField = TextField.specialize({
                 }
             }
         }
+    },
+
+    //FIXME: in montage
+    handleChange: {
+        enumerable: false,
+        value: function(event) {
+            this.takeValueFromElement();
+            // this.dispatchActionEvent();
+            this._hasFocus = false;
+        }
+    },
+
+    //FIXME: in montage
+    handleBlur: {
+        enumerable: false,
+        value: function (event) {
+            this.hasFocus = false;
+            this.callDelegateMethod("didEndEditing", this);
+            //This create an issue in textfield, to investigate
+            // this.dispatchActionEvent();
+        }
     }
 
 });
