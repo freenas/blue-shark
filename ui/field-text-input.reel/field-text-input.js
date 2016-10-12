@@ -1,13 +1,13 @@
 /**
  * @module ui/field-text-input.reel
  */
-var Field = require("../field.reel/field").Field;
+var Component = require("montage/ui/component").Component;
 
 /**
  * @class FieldTextInput
  * @extends Component
  */
-exports.FieldTextInput = Field.specialize({
+exports.FieldTextInput = Component.specialize({
     hasTemplate: {
         value: true
     },
