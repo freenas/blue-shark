@@ -145,7 +145,7 @@
                 "value": "add"
             },
             "bindings": {
-                "disabled": {"<-": "!@input.value"}
+                "disabled": {"<-": "@owner.addButtonDisabled.defined() ? !!@owner.addButtonDisabled : !@input.value"}
             }
         },
         "inputTitle": {

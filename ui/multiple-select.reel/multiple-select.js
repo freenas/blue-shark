@@ -316,8 +316,10 @@ exports.MultipleSelect = AbstractDropZoneComponent.specialize(/** @lends Multipl
     },
 
     handleAddButtonAction: {
-        value: function () {
-            if (this._inputField.value) {
+        value: function (event) {
+            if (this.inputController && typeof this.inputController.handleMultipleSelectAddButtonAction === "function") {
+                this.inputController.handleMultipleSelectAddButtonAction(this, event);
+            } else if (this._inputField.value) {
                 if (this._addValueToContent(this._inputField.value)) {
                     this._blurInputField();
                     this._clearInput();
