@@ -1,4 +1,6 @@
 :root {
+    --white:        #fff;
+
     --red:          #E0003A;
 
     --green:        #1E963F;
@@ -12,8 +14,8 @@
     --orange:               #D95B1B;
     --orange-lighten-1:     #DE7225;
     --orange-lighten-2:     #D78F2A;
-    --orange-darken-1:      color(var(--orange) l(- 5%));
-    --orange-darken-2:      color(var(--orange) l(- 10%));
+    --orange-darken-1:      color(var(--orange) l(-5%));
+    --orange-darken-2:      color(var(--orange) l(-10%));
 
     --black:        #0F1213;
     --black-1:      #0F1213;
