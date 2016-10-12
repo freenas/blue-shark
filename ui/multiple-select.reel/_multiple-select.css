@@ -25,11 +25,6 @@
     }
 }
 
-/* .MultipleSelect-input-field.has-options:focus {
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius:  0;
-} */
-
 .MultipleSelect-input-clearButton {
     position: absolute;
     padding: .25em;
