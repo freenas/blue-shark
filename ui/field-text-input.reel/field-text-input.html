@@ -8,6 +8,9 @@
             "properties": {
                 "element": {"#": "owner"},
                 "control": {"@": "control"}
+            },
+            "bindings": {
+                "hasError": {"<-": "!!@control.errorMessage"}
             }
         },
         "field": {
@@ -20,7 +23,7 @@
                 "documentationReference": {"<-": "@owner.documentationReference"},
                 "disabled": {"<-": "@owner.disabled"},
                 "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
-                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"},
+                "hasError": {"<-": "@owner.hasError"},
                 "isMandatory": {"<-": "@owner.isMandatory"}
             }
         },
