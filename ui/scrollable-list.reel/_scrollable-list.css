@@ -17,6 +17,7 @@
 .ScrollableList-item {
     font-weight: 300;
     margin-bottom: .25em;
+    color: var(--white);
 }
 
 .ScrollableList-scrollview .Scrollview-transform {
