@@ -153,7 +153,7 @@ DragDropComponentManager.prototype.dispatchComponentDragEnd = function (draggabl
         }
 
         if (!draggableComponent.shouldCancelDrop && typeof dropZoneComponent.handleComponentDrop === "function") {
-            dropZoneComponent.handleComponentDrop(draggableComponent);
+            dropZoneComponent.handleComponentDrop(draggableComponent, dragEndEvent);
         }
     }
 
