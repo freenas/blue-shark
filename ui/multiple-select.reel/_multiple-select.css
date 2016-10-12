@@ -4,6 +4,8 @@
     border: 2px solid var(--black);
     border-radius: 4px;
     background: #333;
+
+    &.is-disabled { opacity: .5; }
 }
 
 .MultipleSelect-title {

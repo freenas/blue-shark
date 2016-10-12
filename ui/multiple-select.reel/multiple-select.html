@@ -17,7 +17,7 @@
                 "_inputErrorMessage": {"<-": "@owner.inputErrorMessage || 'The input is invalid'"},
                 "_optionsPrefix": {"<-": "@owner._typedValue || @input.value || ''"},
                 "_inputError": {"<-": "!!@owner.invalidValue && @owner.invalidValue == @input.value"},
-                "classList.has('disabled')": {"<-": "@owner.disabled"}
+                "classList.has('is-disabled')": {"<-": "@owner.disabled"}
             },
             "listeners": [
                 {
@@ -34,8 +34,7 @@
             },
             "bindings": {
                 "classList.has('has-value')": {"<-": "@input.value"},
-                "classList.has('has-error')": {"<-": "@owner._inputError"},
-                "classList.has('is-hidden')": {"<-": "@owner.disabled"}
+                "classList.has('has-error')": {"<-": "@owner._inputError"}
             }
         },
         "input": {
@@ -46,7 +45,7 @@
             "bindings": {
                 "placeholder": {"<-": "@owner.placeholderValue"},
                 "classList.has('has-options')": {"<-": "!!@owner.options && @owner.options.length > 0"},
-                "disabled": {"<-": "!@owner.enabled"}
+                "disabled": {"<-": "@owner.disabled"}
             }
         },
         "inputErrorMessage": {
@@ -133,9 +132,6 @@
             "properties": {
                 "element": {"#": "valuesScroll"},
                 "overflow": "scrollY"
-            },
-            "bindings": {
-                "classList.has('is-empty')": {"<-": "@owner.values.length == 0"}
             }
         },
         "addButton": {
@@ -199,11 +195,11 @@
                         <div data-montage-id="inputErrorMessage" class="MultipleSelect-input-error-message"></div>
                     </div>
                 </div>
-                    <div class="MultipleSelect-input-controls">
-                        <div data-montage-id="addButton" class="Button--create MultipleSelect-input-add">
-                            <svg><use xlink:href="#i-plus"/></svg>
-                        </div>
+                <div class="MultipleSelect-input-controls">
+                    <div data-montage-id="addButton" class="Button--create MultipleSelect-input-add">
+                        <svg><use xlink:href="#i-plus"/></svg>
                     </div>
+                </div>
             </div>
         </div>
         <div class="MultipleSelect-body">
