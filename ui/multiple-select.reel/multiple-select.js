@@ -318,7 +318,7 @@ exports.MultipleSelect = AbstractDropZoneComponent.specialize(/** @lends Multipl
     handleAddButtonAction: {
         value: function (event) {
             if (this.controller && typeof this.controller.handleMultipleSelectAddAction === "function") {
-                this.controller.handleMultipleSelectAddAction(this, event);
+                this.controller.handleMultipleSelectAddAction(this, this._inputField.value);
             } else if (this._inputField.value) {
                 if (this._addValueToContent(this._inputField.value)) {
                     this._blurInputField();
@@ -328,7 +328,7 @@ exports.MultipleSelect = AbstractDropZoneComponent.specialize(/** @lends Multipl
         }
     },
 
-      handleDeleteButtonAction: {
+    handleDeleteButtonAction: {
         value: function (event) {
             var element = event.target ? event.target.element : null;
 
@@ -337,12 +337,12 @@ exports.MultipleSelect = AbstractDropZoneComponent.specialize(/** @lends Multipl
 
                 if (multipleSelectComponent) {
                     if (this.controller && typeof this.controller.handleMultipleSelectDeleteAction === "function") {
-                        this.controller.handleMultipleSelectDeleteAction(this, event, multipleSelectComponent);
+                        this.controller.handleMultipleSelectDeleteAction(this, multipleSelectComponent, multipleSelectComponent.object);
                     } else {
                         this.valuesController.delete(multipleSelectComponent.object);
                     }
                 }
             }
         }
-    },
+    }
 });
