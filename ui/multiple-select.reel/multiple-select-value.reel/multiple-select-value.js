@@ -44,12 +44,6 @@ exports.MultipleSelectValue = AbstractDraggableComponent.specialize(/** @lends M
         }
     },
 
-    handleDeleteButtonAction: {
-        value: function () {
-            this.contentController.delete(this.object);
-        }
-    },
-
     handleSaveKeyPress: {
         value: function() {
             var value = this.valueField.value,
