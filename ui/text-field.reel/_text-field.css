@@ -17,12 +17,19 @@
     border-bottom:  1px solid rgba(255, 255, 255, .15);
     transition-property: background, border-color, opacity;
     transition-duration: .25s;
+
+    &:focus { border: 1px solid #2B9CD8; }
+
+    &.montage--disabled {
+        background: rgba(0, 0, 0, .1);
+        border-color: transparent;
+        opacity: .5;
+    }
+
+    &[readonly="readonly"] {
+        background: none;
+        border: none;
+        padding: 0;
+    }
 }
 
-.TextField:focus { border: 1px solid #2B9CD8; }
-
-.TextField.montage--disabled {
-    background: rgba(0, 0, 0, .1);
-    border-color: transparent;
-    opacity: .5;
-}
