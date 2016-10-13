@@ -141,7 +141,7 @@
                 "value": "add"
             },
             "bindings": {
-                "disabled": {"<-": "@owner.addButtonDisabled.defined() ? !!@owner.addButtonDisabled : !@input.value"}
+                "disabled": {"<-": "@owner.canAddNewEntry.defined() ? !@owner.canAddNewEntry : !@input.value"}
             }
         },
         "inputTitle": {
