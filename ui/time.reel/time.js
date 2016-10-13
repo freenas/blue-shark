@@ -9,6 +9,27 @@ var Component = require("montage/ui/component").Component,
  * @extends Component
  */
 exports.Time = Component.specialize(/** @lends Time# */ {
+    __selectedOption: {
+        value: null
+    },
+
+    _selectedOption: {
+        get: function() {
+            return this.__selectedOption;
+        },
+        set: function(option) {
+            if (this.__selectedOption != option) {
+                if (option) {
+                    this.__selectedOption = option;
+                    this._optionsController.select(option);
+                    this.value = option;
+                } else {
+                    this._optionsController.clearSelection();
+                }
+            }
+        }
+    },
+
     enterDocument: {
         value: function() {
             if (!this.options) {
@@ -30,8 +51,15 @@ exports.Time = Component.specialize(/** @lends Time# */ {
             if (!this.allowEmpty && !this.value) {
                 this._selectedOption = this.options[0];
             }
-            if (this.value) {
-                this._selectedOption = this._findMatchingOption();
+
+            this.addPathChangeListener("value", this, "_handleValueChange");
+        }
+    },
+
+    exitDocument: {
+        value: function() {
+            if (this.getPathChangeDescriptor("value", this)) {
+                this.removePathChangeListener("value", this);
             }
         }
     },
@@ -48,20 +76,6 @@ exports.Time = Component.specialize(/** @lends Time# */ {
         }
     },
 
-    enabled: {
-        value: true
-    },
-
-    options: {
-        value: null
-    },
-
-    _blurInputField: {
-        value: function () {
-            this._inputField.element.blur();
-        }
-    },
-
     handleInputAction: {
         value: function() {
             if (this._inputField.value) {
@@ -74,25 +88,36 @@ exports.Time = Component.specialize(/** @lends Time# */ {
 
     handleDownKeyPress: {
         value: function(event) {
-            switch (event.target.component) {
-                case this._inputField:
-                    if (this.options && this.options.length > 0) {
-                        this._navigateInOptions(1)
-                    }
-                    break;
-            }
+            this._handleDirectionKeyPress(event, 1);
         }
     },
 
     handleUpKeyPress: {
         value: function(event) {
-            switch (event.target.component) {
-                case this._inputField:
-                    if (this.options && this.options.length > 0) {
-                        this._navigateInOptions(-1);
-                    }
-                    break;
+            this._handleDirectionKeyPress(event, -1);
+        }
+    },
+
+    _handleDirectionKeyPress: {
+        value: function(event, direction) {
+            if (event.target.component === this._inputField && this.options && this.options.length > 0) {
+                this._navigateInOptions(direction);
             }
+        }
+    },
+
+    _handleValueChange: {
+        value: function() {
+            if (this.value) {
+                this._selectedOption = this._findMatchingOption();
+                this._nextOptionComponent = this._findNextMatchingIndex();
+            }
+        }
+    },
+
+    _blurInputField: {
+        value: function () {
+            this._inputField.element.blur();
         }
     },
 
@@ -105,6 +130,14 @@ exports.Time = Component.specialize(/** @lends Time# */ {
                     return option;
                 }
             }
+            return null;
+        }
+    },
+
+    _findNextMatchingIndex: {
+        value: function() {
+            var option = this._findNextOption();
+            return this.options.indexOf(option);
         }
     },
 
@@ -119,34 +152,28 @@ exports.Time = Component.specialize(/** @lends Time# */ {
 
     _navigateInOptions: {
         value: function(distance) {
-            if (this.value === this._optionsController.selection[0]) {
-                var currentIndex = this._optionsController.organizedContent.indexOf(this._optionsController.selection[0]),
-                    newIndex = currentIndex + distance,
-                    contentLength = this._optionsController.organizedContent.length;
-                if (newIndex < 0) {
-                    newIndex = contentLength -1;
-                }
-                this._selectedOption = this._optionsController.organizedContent[newIndex % contentLength];
+            if (distance > 0) {
+                this._selectedOption = this._findNextOption();
             } else {
-                if (distance > 0) {
-                    this._selectedOption = this._findNextOption();
-                } else {
-                    this._selectedOption = this._findPreviousOption();
-                }
+                this._selectedOption = this._findPreviousOption();
             }
         }
     },
 
     _findPreviousOption: {
         value: function() {
-            var option;
-            for (var i = 0, length = this.options.length; i < length; i++) {
+            var option,
+                i = 0,
+                length = this.options.length;
+            for (; i < length; i++) {
                 option = this.options[i];
-                if (this.value.getHours() === option.getHours() && this.value.getMinutes() === option.getMinutes()) {
-                    return option;
-                } else if (option.getHours() > this.value.getHours() || (option.getHours() === this.value.getHours() && option.getMinutes() > this.value.getMinutes())) {
+                if (option.getHours() > this.value.getHours() || 
+                    option.getHours() === this.value.getHours() && option.getMinutes() >= this.value.getMinutes()) {
                     break;
                 }
+            }
+            if (i === 0) {
+                i = this.options.length;
             }
             return this.options[i-1];
         }
@@ -154,33 +181,20 @@ exports.Time = Component.specialize(/** @lends Time# */ {
 
     _findNextOption: {
         value: function() {
-            var option;
-            for (var i = this.options.length-1; i >= 0; i--) {
+            var option,
+                max = this.options.length - 1,
+                i = max;
+            for (; i >= 0; i--) {
                 option = this.options[i];
-                if (this.value.getHours() === option.getHours() && this.value.getMinutes() === option.getMinutes()) {
-                    return option;
-                } else if (option.getHours() < this.value.getHours() || (option.getHours() === this.value.getHours() && option.getMinutes() < this.value.getMinutes())) {
+                if (option.getHours() < this.value.getHours() ||
+                    option.getHours() === this.value.getHours() && option.getMinutes() <= this.value.getMinutes()) {
                     break;
                 }
             }
-            return this.options[i+1];
-        }
-    },
-
-    __selectedOption: {
-        value: null
-    },
-
-    _selectedOption: {
-        get: function() {
-            return this.__selectedOption;
-        },
-        set: function(option) {
-            if (option && this.__selectedOption != option) {
-                this.__selectedOption = option;
-                this._optionsController.select(option);
-                this.value = option;
+            if (i === max) {
+                i = -1;
             }
+            return this.options[i+1];
         }
     },
 

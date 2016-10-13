@@ -109,17 +109,17 @@ exports.MultipleSelectGrid = Component.specialize(/** @lends MultipleSelectGrid#
                         referenceInterval = this._selectedIndexes[1] - this._selectedIndexes[0];
                     for (i = 0, length = this._selectedIndexes.length-1; i < length; i++) {
                         if (this._selectedIndexes[i+1] - this._selectedIndexes[i] !== referenceInterval) {
-                            return null;
+                            return 0;
                         }
                     }
                     var intervalToEnd = this.options.length - this._selectedIndexes[length];
                     if (intervalToEnd > 1 && intervalToEnd !== referenceInterval) {
-                        return null;
+                        return 0;
                     }
                     return referenceInterval;
                 }
             }
-            return null;
+            return 0;
         }
     }
         
