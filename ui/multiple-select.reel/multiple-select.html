@@ -177,27 +177,29 @@
 </head>
 <body>
     <div data-montage-id="owner" class="MultipleSelect">
-        <div class="MultipleSelect-header">
+        <div class="MultipleSelect-input">
             <div data-montage-id="inputTitle" class="MultipleSelect-title"></div>
-            <div data-montage-id="inputContainer" class="MultipleSelect-input">
+            <div class="MultipleSelect-input-controls">
                 <div data-param="*">
-                    <svg data-montage-id="clearButton" class="MultipleSelect-input-clearButton">
-                        <use xlink:href="#i-plus"/>
-                    </svg>
-                    <div data-montage-id="input" class="MultipleSelect-input-field"></div>
+                    <div data-montage-id="inputContainer" class="MultipleSelect-input-default">
+                        <svg data-montage-id="clearButton" class="MultipleSelect-input-clearButton">
+                            <use xlink:href="#i-plus"/>
+                        </svg>
+                        <div data-montage-id="input" class="MultipleSelect-input-field"></div>
 
-                    <div data-montage-id="inputScroll" class="MultipleSelect-input-options">
-                        <div data-montage-id="options">
-                            <div data-montage-id="option" class="MultipleSelect-input-option"></div>
+                        <div data-montage-id="inputScroll" class="MultipleSelect-input-options">
+                            <div data-montage-id="options">
+                                <div data-montage-id="option" class="MultipleSelect-input-option"></div>
+                            </div>
+                        </div>
+                        <div class="MultipleSelect-input-error">
+                            <div data-montage-id="inputErrorMessage" class="MultipleSelect-input-error-message"></div>
                         </div>
                     </div>
-                    <div class="MultipleSelect-input-error">
-                        <div data-montage-id="inputErrorMessage" class="MultipleSelect-input-error-message"></div>
-                    </div>
                 </div>
-                <div class="MultipleSelect-input-controls">
+                <div class="MultipleSelect-input-buttons">
                     <div data-montage-id="addButton" class="Button--create MultipleSelect-input-add">
-                        <svg><use xlink:href="#i-plus"/></svg>
+                        <svg><use xlink:href="#i-circle-plus"/></svg>
                     </div>
                 </div>
             </div>

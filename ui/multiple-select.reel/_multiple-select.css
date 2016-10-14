@@ -1,7 +1,7 @@
 .MultipleSelect {
     min-width: 16em;
     margin-bottom: 1em;
-    border: 2px solid var(--black);
+    border: 1px solid var(--black);
     border-radius: 4px;
     background: #333;
 
@@ -14,15 +14,29 @@
     font-family: 'lato';
     line-height: 1.5;
     font-weight: 300;
+
+    @nest .MultipleSelect-input & {
+        /* adjustment for extra 1px on outline */
+        height: calc(2em - 1px);
+        line-height: 1.4;
+    }
 }
 
-.MultipleSelect-input {
-    position: relative;
-    margin: .5em;
+.MultipleSelect-input-controls {
+    padding: .5em;
 
-    & input {
-        margin-bottom: .5em;
-    }
+    & .Field { margin-bottom: .5em;}
+}
+
+/* default input */
+
+.MultipleSelect-input-default {
+    position: relative;
+    margin-right: .5rem;
+    display: inline-block;
+    /* magic # */
+    width: calc(100% - 5.35em);
+    vertical-align: middle;
 }
 
 .MultipleSelect-input-clearButton {
@@ -51,11 +65,17 @@
     }
 }
 
-/*  add icon */
+/*  buttons */
 
-.MultipleSelect-input-controls {
+.MultipleSelect-input-buttons {
+    flex: 0;
     display: flex;
     justify-content: flex-end;
+
+    @nest .MultipleSelect-input-default + & {
+        display: inline-block;
+        vertical-align: middle;
+    }
 }
 
 .MultipleSelect-input-options {
@@ -109,7 +129,8 @@
     box-sizing: border-box;
     display: flex;
     color: #FFF;
-    height: 7.25em;
+    min-height: 2.5em;
+    max-height: 7.25em;
     padding: .25em;
     width: 100%;
     transition-property: border-color, background-color, opacity;
