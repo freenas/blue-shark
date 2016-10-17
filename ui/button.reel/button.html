@@ -18,7 +18,8 @@
                 "element": {"#": "buttonLabel"}
             },
             "bindings": {
-                "value": {"<-": "@owner.value"}
+                "value": {"<-": "@owner.value"},
+                "classList.has('is-hidden')": {"<-": "!value"}
             }
         }
     }
