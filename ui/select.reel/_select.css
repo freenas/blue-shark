@@ -1,6 +1,8 @@
 .Select {
     position: relative;
 
+    &.has-error .ControlError { display: block; }
+
     /* Disabled State */
 
     &.montage--disabled {
