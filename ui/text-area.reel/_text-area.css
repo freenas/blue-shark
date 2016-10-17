@@ -1,9 +1,9 @@
 .TextArea {
 
     /* control error style */
-    & .ControlError {
+/*     & .ControlError {
         @apply --control-error--input;
-    }
+    } */
 
     &.has-error .ControlError {
         display: block;

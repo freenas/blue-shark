@@ -1,11 +1,5 @@
 .TextField {
 
-    /* control error style */
-
-    & .ControlError {
-        @apply --control-error--input;
-    }
-
     &.has-error .ControlError {
         display: block;
     }
