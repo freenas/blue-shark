@@ -16,11 +16,13 @@
                 flex: 1;
     transition-delay: .1s, .1s;
     box-shadow: 0 0 6px rgba(0, 0, 0, .5);
+    /* places overlay overtop select */
+    transform: translateY(calc(-2.25em))
 }
 
 
 .SelectOptions.is-below-middle {
-    transform: translateY(calc(-100% - 2em));
+    transform: translateY(calc(-100%));
 }
 
 .SelectOptions.montage-Overlay--visible {
