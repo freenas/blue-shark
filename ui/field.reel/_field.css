@@ -7,7 +7,6 @@
     margin-bottom: 1em;
     min-height: 2em;
     display: flex;
-    flex-wrap: wrap;
 
     & + .Field { margin-top: 0; }
 
@@ -36,17 +35,13 @@
     color: #B1BCBE;
     transition: opacity .25s;
 
-    @nest .Field.has-error & {
-        /* color: #e0003a; */
-    }
-
     @nest .Field.is-disabled & {
         opacity: .5;
     }
 
     @nest .Field.is-mandatory &:after {
         content: "*";
-        padding-left: 0.5em;
+        color: #bb8e00;
     }
 }
 
