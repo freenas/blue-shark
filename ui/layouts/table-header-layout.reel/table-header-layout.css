@@ -1,0 +1,8 @@
+.TableHeaderLayout {
+
+}
+
+.TableHeaderLayoutCells {
+    display: flex;
+    flex-direction: row;
+}

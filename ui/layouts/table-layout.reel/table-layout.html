@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="table-layout.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+
+        "rowRepetition": {
+            "prototype": "montage/ui/repetition.reel",
+            "properties": {
+                "element": {"#": "rowRepetition"}
+            },
+            "bindings": {
+                "content": {"<-": "@owner.rows"}
+            }
+        },
+
+        ":rowIteration": {
+           "alias": "@rowRepetition:iteration"
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Table">
+        <div class="Table-header">
+            <div data-param="table-header-columns" class="TableHeader-columns"></div>
+            <div data-param="table-header-toolbar" class="TableHeader-toolbar"></div>
+        </div>
+        <div class="Table-content">
+            <div data-montage-id="rowRepetition">
+                <div data-param="table-row" class="Table-row"></div>
+            </div>
+        </div>
+        <div class="Table-footer">
+            <div data-param="table-footer"></div>
+        </div>
+    </div>
+</body>
+</html>

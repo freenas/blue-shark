@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="table-read-only.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+
+        "tableLayout": {
+            "prototype": "ui/layouts/table-layout.reel",
+            "properties": {
+                "element": {"#": "tableLayout"}
+            },
+            "bindings": {
+                "rows": {"<-": "@owner.rows"},
+                "sortPath": {"<-": "@owner.sortPath"}
+            }
+        },
+
+        "tableLayoutHeader": {
+            "prototype": "ui/tables/table-read-only-header.reel",
+            "properties": {
+                "element": {"#": "tableLayoutHeader"}
+            },
+            "bindings": {
+                "columns": {"<-": "@owner.columns"}
+            }
+        },
+
+        "textRowCellRepetition": {
+            "prototype": "montage/ui/repetition.reel",
+            "properties": {
+                "element": {"#": "textRowCellRepetition"}
+            },
+            "bindings": {
+                "content": {"<-": "@owner.columns"}
+            }
+        },
+
+        "textRowCell": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "textRowCell"}
+            },
+            "bindings": {
+                "value": {"<-": "@tableLayout:rowIteration.object.path(@textRowCellRepetition:iteration.object.path)"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="TableReadOnly">
+        <div data-montage-id="tableLayout">
+            <div data-arg="table-header-columns" data-montage-id="tableLayoutHeader"></div>
+            <div data-arg="table-header-toolbar">
+                <div data-param="table-read-only-header-toolbar"></div>
+            </div>
+            <div data-arg="table-row">
+                <div data-montage-id="textRowCellRepetition">
+                    <span data-montage-id="textRowCell"></span>
+                </div>
+            </div>
+            <div data-arg="table-footer">
+                <div data-param="table-read-only-footer"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

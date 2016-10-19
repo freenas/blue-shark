@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="table-read-only-header.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+        
+        "tableHeaderLayout": {
+            "prototype": "ui/layouts/table-header-layout.reel",
+            "properties": {
+                "element": {"#": "tableHeaderLayout"}
+            },
+            "bindings": {
+                "columns": {"<-": "@owner.columns"}
+            }
+        },
+
+        "headerCellTitle": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "tableHeaderTitle"}
+            },
+            "bindings": {
+                "value": {"<-": "@tableHeaderLayout:headerCellIteration.object.value"}
+            }
+        }
+
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="TableReadOnlyHeader">
+        <div data-montage-id="tableHeaderLayout">
+            <div data-arg="table-header-cell" data-montage-id="tableHeaderTitle" class="TableReadOnlyHeader-title"></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="table-header-layout.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+
+        "headerCellRepetition": {
+            "prototype": "montage/ui/repetition.reel",
+            "properties": {
+                "element": {"#": "headerCellRepetition"}
+            },
+            "bindings": {
+                "content": {"<-": "@owner.columns"}
+            }
+        },
+
+        ":headerCellIteration": {
+           "alias": "@headerCellRepetition:iteration"
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="TableHeaderLayout">
+        <div data-montage-id="headerCellRepetition" class="TableHeaderLayout-cells">
+            <div data-param="table-header-cell" class="TableHeaderLayout-cell"></div>
+        </div>
+    </div>
+</body>
+</html>

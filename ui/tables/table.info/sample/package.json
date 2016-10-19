@@ -6,8 +6,8 @@
         "montage": "*"
     },
         "mappings": {
-        "montage": "../../../node_modules/montage",
-        "blue-shark": "../../../"
+        "montage": "../../../../node_modules/montage",
+        "blue-shark": "../../../../"
     }
 }
 
