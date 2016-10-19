@@ -21,10 +21,10 @@
             }
         },
 
-        "tableLayoutHeader": {
+        "tableReadOnlyHeader": {
             "prototype": "ui/tables/table-read-only-header.reel",
             "properties": {
-                "element": {"#": "tableLayoutHeader"}
+                "element": {"#": "tableReadOnlyHeader"}
             },
             "bindings": {
                 "columns": {"<-": "@owner.columns"}
@@ -56,7 +56,7 @@
 <body>
     <div data-montage-id="owner" class="TableReadOnly">
         <div data-montage-id="tableLayout">
-            <div data-arg="table-header-columns" data-montage-id="tableLayoutHeader"></div>
+            <div data-arg="table-header-columns" data-montage-id="tableReadOnlyHeader"></div>
             <div data-arg="table-header-toolbar">
                 <div data-param="table-read-only-header-toolbar"></div>
             </div>
