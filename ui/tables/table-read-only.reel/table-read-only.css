@@ -1,3 +1,19 @@
-.TableReadOnly {
+.table              { display: table              }  /* <table>     */
+.table-caption      { display: table-caption      }  /* <caption>    */
+.table-cell         { display: table-cell         }  /* <td>        */
+.table-row          { display: table-row          }  /* <tr>        */
+.table-row-group    { display: table-row-group    }  /* <tbody>     */
+.table-column       { display: table-column       }  /* <col>       */
+.table-column-group { display: table-column-group }  /* <colgroup>  */
+.table-footer-group { display: table-footer-group }  /* <tfoot>     */
+.table-header-group { display: table-header-group }  /* <thead>     */
 
+
+.table-cell {
+    outline: 1px solid white;
+    padding: .5em 1em;
+}
+
+.TableReadOnly {
+    outline: 1px solid red;
 }
