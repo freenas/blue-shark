@@ -47,7 +47,7 @@
         },
 
         "textRowCell": {
-            "prototype": "montage/ui/text.reel",
+            "prototype": "ui/text-field.reel",
             "properties": {
                 "element": {"#": "textRowCell"}
             },
@@ -99,7 +99,9 @@
             <div data-arg="table-header-columns" data-montage-id="tableEditableHeader"></div>
 
             <div data-arg="table-row" data-montage-id="textRowCellRepetition" class="Table-row">
-                <span data-montage-id="textRowCell" class="Table-cell"></span>
+                <span class="Table-cell">
+                    <span data-montage-id="textRowCell"></span>
+                </span>
             </div>
 
             <div data-arg="table-footer">
