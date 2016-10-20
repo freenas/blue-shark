@@ -4,58 +4,66 @@
     border-collapse: collapse;
 }
 
-
-.Table-row          { display: table-row          }  /* <tr>        */
-.Table-row-group    { display: table-row-group    }  /* <tbody>     */
 .Table-column       { display: table-column       }  /* <col>       */
 .Table-column-group { display: table-column-group }  /* <colgroup>  */
 .Table-footer-group { display: table-footer-group }  /* <tfoot>     */
 .Table-header-group { display: table-header-group }  /* <thead>     */
 
+.Table-cell {
+    display: table-cell;
+    padding: .5em;
+    font-weight: 200;
+    /* border-bottom: 1px solid #282828; */
+}
+
+/* Header Groupd */
 
 .Table-header-group {
     display: table-header-group;
-    background: black;
-}
-
-.Table-cell {
-    display: table-cell;
-    padding: 1em .5em;
-    padding-right: 1em;
-    font-weight: 200;
-    border: 1px solid #282828;
+    background: #1a1d1f;
+    border: 1px solid #1a1d1f;
 }
 
 .Table-header-group .Table-cell {
     position: relative;
     font-weight: 400;
+    color: #e6e6e6;
+    padding: .5em .5em;
 }
 
 .Table-header-group .Table-cell:after {
-    /* position: absolute; */
-    /* top: 50%; */
-    vertical-align: top;
-    margin-left: .75em;
-    margin-top: .35em;
-    content: "";
     display: inline-block;
+    display: none;
+    vertical-align: top;
+    margin-left: .5em;
+    margin-top: .5em;
+    content: "";
     border-left:  .4em solid transparent;
     border-right: .4em solid transparent;
     border-top:   .4em solid #929E9F;
 }
 
+/* Row */
+
+.Table-row-group    {
+    display: table-row-group;
+    border: 1px solid #282828;
+    border-top: none;
+}
+
 .Table-row {
     display: table-row;
     position: relative;
+    transition: background-color .15s ease-in-out;
 }
 
-.Table-row.selected {
-    background: blue;
-}
+.Table-row:last-child .Table-cell { border: none; }
 
-.Table-row:nth-child(odd) {
-    background-color: rgba(0,0,0,.1);
-}
+.Table-row-group .Table-row:nth-child(odd) { background-color: rgba(0,0,0,.1); }
+
+.Table-row-group .Table-row:hover { background-color: rgba(59, 110, 162, 0.05); }
+
+/* Caption */
 
 .Table-caption {
     display: table-caption;

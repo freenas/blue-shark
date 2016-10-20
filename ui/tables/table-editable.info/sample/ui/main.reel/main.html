@@ -11,6 +11,13 @@
             }
         },
 
+        "icons": {
+            "prototype": "blue-shark/ui/icons.reel",
+            "properties": {
+                "element": {"#": "icons"}
+            }
+        },
+
         "editableTable": {
             "prototype": "blue-shark/ui/tables/table-editable.reel",
             "properties": {
@@ -92,9 +99,10 @@
 </head>
 <body>
     <div data-montage-id="owner" class="Main">
+        <div data-montage-id="icons"></div> <!-- sample only -->
         <div data-montage-id="editableTable">
             <div data-arg="table-editable-header-toolbar">
-                <div data-montage-id="addButton" class="Button--create"></div>
+                <div data-montage-id="addButton" class="Button--create"><svg><use xlink:href="#i-circle-plus" x="" y=""/></svg></div>
             </div>
             <div data-arg="row-new" data-montage-id="newEntry" class="Table-row"></div>
             <div data-arg="row-entry" data-montage-id="rowEntry" class="Table-row"></div>
