@@ -9,28 +9,26 @@ var Component = require("montage/ui/component").Component;
  */
 exports.Main = Component.specialize(/** @lends Main# */ {
 
-    options: {
-        value: [
-            {
-                "value": "none",
-                "label": "None"
-            },
-            {
-                "value": "optimal",
-                "label": "Optimal"
-            },
-            {
-                "value": "virtualization",
-                "label": "Virtualization"
-            },
-            {
-                "value": "backups",
-                "label": "Backups"
-            },
-            {
-                "value": "media",
-                "label": "Media"
-            }
-        ]
+    emptyObject: {
+        value: {}
+    },
+
+    prepareForActivationEvents: {
+        value: function () {
+            this.addEventListener("action", this);
+        }
+    },
+
+    handleAddButtonAction: {
+        value: function () {
+            this.editableTable.showNewEntryRow();
+        }
+    },
+
+    tableWillDismissControlOverlay: {
+        value: function () {
+            this.emptyObject = {};
+        }
     }
+
 });

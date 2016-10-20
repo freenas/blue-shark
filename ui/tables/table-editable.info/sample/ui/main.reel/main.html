@@ -6,7 +6,8 @@
     {
         "owner": {
             "properties": {
-                "element": {"#": "owner"}
+                "element": {"#": "owner"},
+                "editableTable": {"@": "editableTable"}
             }
         },
 
@@ -14,6 +15,7 @@
             "prototype": "blue-shark/ui/tables/table-editable.reel",
             "properties": {
                 "element": {"#": "editableTable"},
+                "delegate": {"@": "owner"},
                 "title": "Table Title",
                 "columns":  [
                     {
@@ -33,22 +35,22 @@
                     {
                         "name": "bar",
                         "age": 20,
-                        "gender": "m"
+                        "gender": "M"
                     },
                     {
                         "name": "foo",
                         "age": 15,
-                        "gender": "f"
+                        "gender": "F"
                     },
                     {
                         "name": "baz",
                         "age": 30,
-                        "gender": "m"
+                        "gender": "M"
                     },
                     {
                         "name": "qux",
                         "age": 42,
-                        "gender": "f"
+                        "gender": "F"
                     }
                 ]
             }
@@ -59,6 +61,29 @@
             "properties": {
                 "element": {"#": "addButton"},
                 "value": "add"
+            },
+            "bindings": {
+                "disabled": {"<-": "@editableTable.isNewEntryRowShown"}
+            }
+        },
+
+        "newEntry": {
+            "prototype": "ui/table-new-row.reel",
+            "properties": {
+                "element": {"#": "newEntry"}
+            },
+            "bindings": {
+                "object": {"<-": "@owner.emptyObject"}
+            }
+        },
+
+        "rowEntry": {
+            "prototype": "ui/table-new-row.reel",
+            "properties": {
+                "element": {"#": "rowEntry"}
+            },
+            "bindings": {
+                "object": {"<-": "@editableTable:rowIteration.object"}
             }
         }
 
@@ -71,6 +96,8 @@
             <div data-arg="table-editable-header-toolbar">
                 <div data-montage-id="addButton" class="Button--create"></div>
             </div>
+            <div data-arg="row-new" data-montage-id="newEntry" class="Table-row"></div>
+            <div data-arg="row-entry" data-montage-id="rowEntry" class="Table-row"></div>
         </div>
     </div>
 </body>

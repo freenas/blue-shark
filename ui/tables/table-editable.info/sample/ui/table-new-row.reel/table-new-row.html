@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="table-new-row.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+
+        "nameTextField": {
+            "prototype": "blue-shark/ui/text-field.reel",
+            "properties": {
+                "element": {"#": "nameTextField"},
+                "placeholder": "name"
+            },
+            "bindings": {
+                "value": {"<->": "@owner.object.name"}
+            }
+        },
+
+        "ageTextField": {
+            "prototype": "blue-shark/ui/text-field.reel",
+            "properties": {
+                "element": {"#": "ageTextField"},
+                "placeholder": "age"
+            },
+            "bindings": {
+                "value": {"<->": "@owner.object.age"}
+            }
+        },
+
+        "genderTextField": {
+            "prototype": "blue-shark/ui/select.reel",
+            "properties": {
+                "element": {"#": "genderTextField"},
+                "options": [
+                    {
+                        "label": "Male",
+                        "value": "M"
+                    },
+                    {
+                        "label": "Female",
+                        "value": "F"
+                    }
+                ]
+            },
+            "bindings": {
+                "selectedValue": {"<->": "@owner.object.gender"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="TableNewRow">
+        <span class="Table-cell">
+            <span data-montage-id="nameTextField"></span>
+        </span>
+        <span class="Table-cell">
+            <span data-montage-id="ageTextField"></span>
+        </span>
+        <span class="Table-cell">
+            <span data-montage-id="genderTextField"></span>
+        </span>
+    </div>
+</body>
+</html>
