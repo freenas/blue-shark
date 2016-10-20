@@ -9,6 +9,110 @@ var Component = require("montage/ui/component").Component;
  */
 exports.TableEditable = Component.specialize({
 
+    _shouldStopEditingRow: {
+        set: function (shouldStopEditingRow) {
+            shouldStopEditingRow = !!shouldStopEditingRow;
+
+            if (this.__shouldStopEditingRow !== shouldStopEditingRow) {
+                this.__shouldStopEditingRow = shouldStopEditingRow;
+                this.needsDraw = true;
+            }
+        },
+        get: function () {
+            return this.__shouldStopEditingRow;
+        }
+    },
+
+    _shouldStartEditingRow: {
+        set: function (shouldStartEditingRow) {
+            shouldStartEditingRow = !!shouldStartEditingRow;
+
+            if (this.__shouldStartEditingRow !== shouldStartEditingRow) {
+                this.__shouldStartEditingRow = shouldStartEditingRow;
+                this.needsDraw = true;
+            }
+        },
+        get: function () {
+            return this.__shouldStartEditingRow;
+        }
+    },
+
+    _candidateRow: {
+        set: function (candidateRow) {
+            if (this.__candidateRow !== candidateRow) {
+                var previousCandidate = this.__candidateRow;
+
+                if (previousCandidate) {
+                    this._cancelEditing();
+                }
+
+                this.__candidateRow = candidateRow;
+                this.isNewEntryRowShown = candidateRow === this._tableBodyTopElement;
+
+                if (candidateRow) {
+                    this._shouldStartEditingRow = true;
+                } else if (!candidateRow && !previousCandidate) {
+                    this._shouldStopEditingRow = true;
+                }
+            }
+        },
+        get: function () {
+            return this.__candidateRow;
+        }
+    },
+
+    //Public API
+
+    isEditingRow: {
+        get: function () {
+            return !!this.currentEditingRow;
+        }
+    },
+
+    currentEditingObject: {
+        get: function () {
+            if (this._currentEditingRow) {
+                if (this._rowRepetitionComponent.element.contains(this._currentEditingRow)) {
+                    var iteration = this._rowRepetitionComponent._findIterationContainingElement(this._currentEditingRow);
+                    this._currentEditingObject = iteration ? iteration.object : null;
+                } else {
+                    this._currentEditingObject = null;
+                }
+            } else {
+                this._currentEditingObject = null;
+            }
+
+            return this._currentEditingObject;
+        }
+    },
+
+    currentEditingRow: {
+        set: function (currentEditingRow) {
+            if (this._currentEditingRow !== currentEditingRow) {
+                this._currentEditingRow = currentEditingRow;
+                this.dispatchOwnPropertyChange("isEditingRow", this.isEditingRow);
+                this.dispatchOwnPropertyChange("currentEditingObject", this.currentEditingObject);
+            }
+        },
+        get: function () {
+            return this._currentEditingRow;
+        }
+    },
+
+    hideNewEntryRow: {
+        value: function () {
+            this._candidateRow = null;
+        }
+    },
+
+    showNewEntryRow: {
+        value: function () {
+            this._candidateRow = this._tableBodyTopElement;
+        }
+    },
+
+    //END Public API
+
     willPositionOverlay: {
         value: function (overlay, calculatedPosition) {
             var anchor = overlay.anchor,
@@ -16,25 +120,29 @@ exports.TableEditable = Component.specialize({
                 anchorPosition = anchor.getBoundingClientRect(),
                 anchorHeight = anchor.offsetHeight || 0,
                 anchorWidth = anchor.offsetWidth || 0,
-                position;
-
-            position = {
-                top: anchorPosition.top + anchorHeight,
-                left: anchorPosition.left + (anchorWidth - width)
-            };
+                position = {
+                    top: anchorPosition.top + anchorHeight,
+                    left: anchorPosition.left + (anchorWidth - width)
+                };
 
             if (position.left < 0) {
                 position.left = 0;
             }
 
             return position;
-
         }
     },
 
     shouldDismissOverlay: {
-        value: function (overlay, target) {
-            return !this._tableBodyTopElement.contains(target) && !this._rowRepetitionComponent.element.contains(target);
+        value: function (overlay, target, eventType) {
+            var shouldDismissOverlay = !this._tableBodyTopElement.contains(target) && 
+                !this._rowRepetitionComponent.element.contains(target) && eventType !== "keyPress";
+
+            if (shouldDismissOverlay) {
+                this.currentEditingRow = null;
+            }
+
+            return shouldDismissOverlay;
         }
     },
 
@@ -48,7 +156,7 @@ exports.TableEditable = Component.specialize({
 
     handleCancelAction: {
         value: function () {
-            this.hideNewEntryRow();
+            this._candidateRow = null;
         }
     },
 
@@ -56,8 +164,8 @@ exports.TableEditable = Component.specialize({
         value: function (event) {
             if (event.type = "mouseup") {
                 var textRowCellRepetitionElement = this._rowRepetitionComponent.element,
-                target = event.target.element || event.target,
-                candidate;
+                    target = event.target.element || event.target,
+                    candidate;
 
                 if (textRowCellRepetitionElement.contains(target)) {
                     while (textRowCellRepetitionElement !== target) {
@@ -66,60 +174,51 @@ exports.TableEditable = Component.specialize({
                     }
 
                     if (candidate) {
-                        this._rowCandidate = candidate;
-
-                        if (this.rowControlsOverlay.anchor === this._tableBodyTopElement) {
-                            this.callDelegateMethod("tableWillDismissControlOverlay", this, this.currentRow, this.currentObject);
-
-                            this.isNewEntryRowShown = false;
-                        }
-
-                        this._shouldDisplayControlsOverlay = true;
-                        this.needsDraw = true;
+                        this._candidateRow = candidate;
                     }
                 } else if (this._tableBodyTopElement.contains(target)) {
-                    this.showNewEntryRow();
+                    this._candidateRow = this._tableBodyTopElement;
                 } 
             }             
         }
     },
 
-    hideNewEntryRow: {
+    _cancelEditing: {
         value: function () {
-            this.callDelegateMethod("tableWillDismissControlOverlay", this, this.currentRow, this.currentObject);
-            this._shouldHideNewEntry = true;
-            this.isNewEntryRowShown = false;
-            this.needsDraw = true;
+            this.callDelegateMethod("tableWillCancelEditingRow", this, this.currentEditingObject, this.currentEditingRow);
+            this.rowControlsOverlay.hide();
         }
     },
 
-    showNewEntryRow: {
+    _stopEditing: {
         value: function () {
-            this.callDelegateMethod("tableWillShowControlOverlay", this, this.currentRow, this.currentObject);
+            this.callDelegateMethod("tableWillEndEditingRow", this, this.currentEditingObject, this.currentEditingRow);
+            this.rowControlsOverlay.hide();
+        }
+    },
 
-            this.isNewEntryRowShown = true;
-            this._shouldShowNewEntry = true;
-            this.needsDraw = true;
+    _startEditing: {
+        value: function () {
+            this.callDelegateMethod("tableWillStartEditingRow", this, this.currentEditingObject, this.currentEditingRow);
+            this.rowControlsOverlay.show();
         }
     },
 
     draw: {
         value: function () {
-            if (this._shouldShowNewEntry) {
-                this.rowControlsOverlay.anchor = this._tableBodyTopElement;
-                this.currentRow = this._tableBodyTopElement;
-                this.rowControlsOverlay.show();
-                this._shouldShowNewEntry = false;
+            if (this._shouldStopEditingRow) {
+                this.__shouldStopEditingRow = false;
+                this._stopEditing();
+                this.currentEditingRow = null;
 
-            } else if (this._shouldHideNewEntry) {
-                this.rowControlsOverlay.hide();
-                this._shouldHideNewEntry = false;
+                if (this._shouldStartEditingRow) {
+                    this.needsDraw = true;
+                }
 
-            } else if (this._shouldDisplayControlsOverlay && this._rowCandidate) {
-                this._shouldDisplayControlsOverlay = false;
-                this.rowControlsOverlay.anchor = this._rowCandidate;
-                this.currentRow = this._rowCandidate;
-                this.rowControlsOverlay.show();
+            } else if (this._shouldStartEditingRow) {
+                this.__shouldStartEditingRow = false;
+                this.currentEditingRow = this.rowControlsOverlay.anchor = this._candidateRow;
+                this._startEditing();
             }
         }
     }

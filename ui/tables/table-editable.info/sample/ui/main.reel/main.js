@@ -25,9 +25,21 @@ exports.Main = Component.specialize(/** @lends Main# */ {
         }
     },
 
-    tableWillDismissControlOverlay: {
-        value: function () {
-            this.emptyObject = {};
+    tableWillCancelEditingRow: {
+        value: function (table, editingObject, row) {
+            console.log("table cancel editing: ", editingObject)
+        }
+    },
+
+    tableWillEndEditingRow: {
+        value: function (table, editingObject, row) {
+            console.log("table end editing: ", editingObject)
+        }
+    },
+
+    tableWillStartEditingRow: {
+        value: function (table, editingObject, row) {
+            console.log("table start editing: ", editingObject)
         }
     }
 
