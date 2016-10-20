@@ -30,6 +30,33 @@ exports.TableEditable = Component.specialize({
             return position;
 
         }
+    },
+
+    prepareForActivationEvents: {
+        value: function () {
+            this._rowRepetitionComponent.element.addEventListener("mouseup", this, true);
+        }
+    },
+
+    captureMouseup: {
+        value: function (event) {
+            var textRowCellRepetitionElement = this._rowRepetitionComponent.element,
+                target = event.target,
+                candidate;
+
+            if (textRowCellRepetitionElement.contains(target)) {
+                while (textRowCellRepetitionElement !== target) {
+                    candidate = target;
+                    target = candidate.parentNode;
+                }
+
+                if (candidate) {
+                    this._rowControlsOverlay.anchor = candidate;
+                } else {
+                    //last one?
+                }
+            }            
+        }
     }
 
 });

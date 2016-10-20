@@ -6,7 +6,11 @@
    {
         "owner": {
             "properties": {
-                "element": {"#": "owner"}
+                "element": {"#": "owner"},
+                "_rowControlsOverlay": {"@": "rowControls"}
+            },
+            "bindings": {
+                "_rowRepetitionComponent": {"<-": "@tableLayout.rowRepetitionComponent"}
             }
         },
 
