@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
     <link rel="stylesheet" type="text/css" href="table-editable.css">
     <script type="text/montage-serialization">
    {
@@ -78,7 +77,8 @@
         "rowControls": {
             "prototype": "montage/ui/overlay.reel",
             "properties": {
-                "element": {"#": "rowControls"}
+                "element": {"#": "rowControls"},
+                "delegate": {"@": "owner"}
             }
         }
     }
