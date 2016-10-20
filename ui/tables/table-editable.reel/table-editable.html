@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="table-editable.css">
+    <script type="text/montage-serialization">
+   {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+
+        "tableLayout": {
+            "prototype": "ui/layouts/table-layout.reel",
+            "properties": {
+                "element": {"#": "tableLayout"}
+            },
+            "bindings": {
+                "title": {"<-": "@owner.title"},
+                "rows": {"<-": "@owner.rows"},
+                "sortPath": {"<-": "@owner.sortPath"}
+            }
+        },
+
+        "tableEditableHeader": {
+            "prototype": "ui/tables/table-editable-header.reel",
+            "properties": {
+                "element": {"#": "tableEditableHeader"}
+            },
+            "bindings": {
+                "columns": {"<-": "@owner.columns"}
+            }
+        },
+
+        "textRowCellRepetition": {
+            "prototype": "montage/ui/repetition.reel",
+            "properties": {
+                "element": {"#": "textRowCellRepetition"}
+            },
+            "bindings": {
+                "content": {"<-": "@owner.columns"}
+            }
+        },
+
+        "textRowCell": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "textRowCell"}
+            },
+            "bindings": {
+                "value": {"<-": "@tableLayout:rowIteration.object.path(@textRowCellRepetition:iteration.object.path)"}
+            }
+        },
+        "cancel": {
+            "prototype": "ui/button.reel",
+            "properties": {
+                "element": {"#": "cancel"},
+                "value": "Cancel"
+            }
+        },
+        "submit": {
+            "prototype": "ui/button.reel",
+            "properties": {
+                "element": {"#": "submit"},
+                "value": "Submit"
+            }
+        },
+        "title": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "title"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner.title"}
+            }
+        },
+        "rowControls": {
+            "prototype": "montage/ui/overlay.reel",
+            "properties": {
+                "element": {"#": "rowControls"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="TableEditable">
+        <div data-arg="table-header-toolbar" class="TableEditable-toolbar">
+            <div data-montage-id="title" class="TableEditable-title"></div>
+            <div data-param="table-editable-header-toolbar"></div>
+        </div>
+        <div data-montage-id="tableLayout">
+
+            <div data-arg="table-header-columns" data-montage-id="tableEditableHeader"></div>
+
+            <div data-arg="table-row" data-montage-id="textRowCellRepetition" class="Table-row">
+                <span data-montage-id="textRowCell" class="Table-cell"></span>
+            </div>
+
+            <div data-arg="table-footer">
+                <div data-param="table-editable-footer"></div>
+            </div>
+        </div>
+        <div data-montage-id="rowControls" class="TableEditable-rowControls">
+            <button data-montage-id="cancel"></button>
+            <button data-montage-id="submit" class="Button--primary"></button>
+        </div>
+    </div>
+</body>
+</html>

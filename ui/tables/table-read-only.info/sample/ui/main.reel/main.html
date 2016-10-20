@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+
+        "readOnlyTable": {
+            "prototype": "blue-shark/ui/tables/table-read-only.reel",
+            "properties": {
+                "element": {"#": "readOnlyTable"},
+                "columns":  [
+                    {
+                        "value": "long title here",
+                        "path": "name"
+                    },
+                    {
+                        "value": "age",
+                        "path": "age"
+                    }
+                ],
+                "rows":  [
+                    {
+                        "name": "bar",
+                        "age": 20
+                    },
+                    {
+                        "name": "foo",
+                        "age": 15
+                    },
+                    {
+                        "name": "baz",
+                        "age": 30
+                    },
+                    {
+                        "name": "qux",
+                        "age": 42
+                    }
+                ]
+            }
+        }
+
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Main">
+        <div data-montage-id="readOnlyTable">
+            <div data-arg="table-read-only-header-toolbar">toolbar</div>
+            <div data-arg="table-read-only-footer">footer</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+
+        "editableTable": {
+            "prototype": "blue-shark/ui/tables/table-editable.reel",
+            "properties": {
+                "element": {"#": "editableTable"},
+                "title": "Table Title",
+                "columns":  [
+                    {
+                        "value": "long title here",
+                        "path": "name"
+                    },
+                    {
+                        "value": "age",
+                        "path": "age"
+                    },
+                    {
+                        "value": "gender",
+                        "path": "gender"
+                    }
+                ],
+                "rows":  [
+                    {
+                        "name": "bar",
+                        "age": 20,
+                        "gender": "m"
+                    },
+                    {
+                        "name": "foo",
+                        "age": 15,
+                        "gender": "f"
+                    },
+                    {
+                        "name": "baz",
+                        "age": 30,
+                        "gender": "m"
+                    },
+                    {
+                        "name": "qux",
+                        "age": 42,
+                        "gender": "f"
+                    }
+                ]
+            }
+        },
+
+        "addButton": {
+            "prototype": "blue-shark/ui/button.reel",
+            "properties": {
+                "element": {"#": "addButton"},
+                "value": "add"
+            }
+        }
+
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Main">
+        <div data-montage-id="editableTable">
+            <div data-arg="table-editable-header-toolbar">
+                <div data-montage-id="addButton" class="Button--create"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

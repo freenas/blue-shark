@@ -1,3 +1,64 @@
 .Table {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+}
 
+
+.Table-row          { display: table-row          }  /* <tr>        */
+.Table-row-group    { display: table-row-group    }  /* <tbody>     */
+.Table-column       { display: table-column       }  /* <col>       */
+.Table-column-group { display: table-column-group }  /* <colgroup>  */
+.Table-footer-group { display: table-footer-group }  /* <tfoot>     */
+.Table-header-group { display: table-header-group }  /* <thead>     */
+
+
+.Table-header-group {
+    display: table-header-group;
+    background: black;
+}
+
+.Table-cell {
+    display: table-cell;
+    padding: 1em .5em;
+    padding-right: 1em;
+    font-weight: 200;
+    border: 1px solid #282828;
+}
+
+.Table-header-group .Table-cell {
+    position: relative;
+    font-weight: 400;
+}
+
+.Table-header-group .Table-cell:after {
+    /* position: absolute; */
+    /* top: 50%; */
+    vertical-align: top;
+    margin-left: .75em;
+    margin-top: .35em;
+    content: "";
+    display: inline-block;
+    border-left:  .4em solid transparent;
+    border-right: .4em solid transparent;
+    border-top:   .4em solid #929E9F;
+}
+
+.Table-row {
+    display: table-row;
+    position: relative;
+}
+
+.Table-row.selected {
+    background: blue;
+}
+
+.Table-row:nth-child(odd) {
+    background-color: rgba(0,0,0,.1);
+}
+
+.Table-caption {
+    display: table-caption;
+    padding: .5em;
+    text-align: right;
 }
