@@ -34,17 +34,19 @@ exports.TableEditable = Component.specialize({
 
     prepareForActivationEvents: {
         value: function () {
-            this._rowRepetitionComponent.element.addEventListener("mouseup", this, true);
+            this._rowRepetitionComponent.element.addEventListener("mouseup", this, false);
         }
     },
 
-    captureMouseup: {
+    handleMouseup: {
         value: function (event) {
             var textRowCellRepetitionElement = this._rowRepetitionComponent.element,
                 target = event.target,
                 candidate;
 
             if (textRowCellRepetitionElement.contains(target)) {
+                event.stopPropagation();
+                
                 while (textRowCellRepetitionElement !== target) {
                     candidate = target;
                     target = candidate.parentNode;
@@ -52,6 +54,7 @@ exports.TableEditable = Component.specialize({
 
                 if (candidate) {
                     this._rowControlsOverlay.anchor = candidate;
+                    this._rowControlsOverlay.show();
                 } else {
                     //last one?
                 }
