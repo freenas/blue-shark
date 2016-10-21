@@ -117,7 +117,7 @@ exports.TableEditable = Component.specialize({
                         var iteration = this._rowRepetitionComponent._findIterationContainingElement(this._currentEditingRow);
                         this._currentEditingObject = iteration ? iteration.object : null;
                     } else if (this._currentEditingRow === this._tableBodyTopElement) {
-                        this._currentEditingObject = {};
+                        this._currentEditingObject = this.callDelegateMethod("tableWillSetNewInstance", this) || {};
                     } else {
                         this._currentEditingObject = null;
                     }
