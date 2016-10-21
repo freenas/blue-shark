@@ -13,6 +13,9 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
         value: false
     },
 
+    isEditing: {
+        value: false
+    },
 
     value: {
         set: function (value) {
@@ -59,6 +62,7 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
 
     prepareForActivationEvents: {
         value: function () {
+            this.addEventListener("action", this);
             this._addEventListeners();
         }
     },
@@ -126,6 +130,14 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
             }
 
             this.passwordMatch = passwordMatch;
+        }
+    },
+
+    handleResetAction: {
+        value: function () {
+            var self = this;
+            this.isEditing = !this.isEditing;
+            setTimeout(function(){self.passwordFieldInput1.focus()},0);
         }
     }
 
