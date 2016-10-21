@@ -21,29 +21,24 @@ exports.Main = Component.specialize(/** @lends Main# */ {
         }
     },
 
-    tableWillCancelEditingRow: {
-        value: function (table, editingObject, row) {
-            console.log("table cancel editing: ", editingObject)
+    tableDidCancelEditingNewEntry: {
+        value: function (table, object, row) {
+            console.log("table cancel adding object: ", object)
         }
     },
 
-    tableWillEndEditingRow: {
-        value: function (table, editingObject, contentController, row) {
-            console.log("table end editing: ", editingObject)
-
-            if (!contentController.has(editingObject)) {
-                contentController.add(editingObject);
-                this.newObject = null;
-            }
+    tableWillAddNewEntry: {
+        value: function (table, object, contentController) {
+            console.log("table will add object: ", object)
         }
     },
 
-    tableWillStartEditingRow: {
-        value: function (table, editingObject, contentController, row) {
-            console.log("table start editing: ", editingObject)
+    tableWillStartEditingNewEntry: {
+        value: function (table, object, contentController) {
+            console.log("table will edit object: ", object)
 
-            if (!contentController.has(editingObject)) {
-                this.newObject = editingObject;
+            if (!contentController.has(object)) {
+                this.newObject = object;
             }
         }
     }

@@ -5,6 +5,42 @@ var Component = require("montage/ui/component").Component,
     Overlay = require("montage/ui/overlay.reel").Overlay,
     Composer = require("montage/composer/composer").Composer;
 
+
+function _shouldComposerSurrenderPointerToComponent(composer, pointer, component) {
+    if (component && component.element) {
+        var targetElement = component.element,
+            overlayCandidate;
+
+        if (component instanceof Composer) {
+            component = component.component;
+        }
+
+        if (component) {
+            while (component && !overlayCandidate) {
+                if (component instanceof Overlay) {
+                    overlayCandidate = component;
+                } else {
+                    component = component.parentComponent;
+                }
+            }
+
+            if (component && component.anchor) {
+                targetElement = component.anchor;
+            }
+        }
+
+        if (!this.element.contains(targetElement)) {
+            this.dismissOverlay({
+                targetElement: targetElement,
+                type: pointer
+            });
+        }
+    }
+
+    return true;
+}
+
+
 /**
  * @class TableEditable
  * @extends Component
@@ -13,145 +49,77 @@ exports.TableEditable = Component.specialize({
 
     templateDidLoad: {
         value: function () {
-            this.rowControlsOverlay.shouldComposerSurrenderPointerToComponent = function (composer, pointer, component) {                
-                if (component && component.element) {
-                    var targetElement = component.element,
-                        overlayCandidate;
-
-                    if (component instanceof Composer) {
-                        component = component.component;
-                    }
-
-                    if (component) {
-                        while (component && !overlayCandidate) {
-                            if (component instanceof Overlay) {
-                                overlayCandidate = component;
-                            } else {
-                                component = component.parentComponent;
-                            }
-                        }
-
-                        if (component && component.anchor) {
-                            targetElement = component.anchor;
-                        }
-                    }
-
-                    if (!this.element.contains(targetElement)) {
-                        this.dismissOverlay({
-                            targetElement: targetElement,
-                            type: pointer
-                        });
-                    }
-                }
-
-                return true;
-            }
+            this.rowControlsOverlay.shouldComposerSurrenderPointerToComponent = _shouldComposerSurrenderPointerToComponent;
+            this.rowControlsOverlay.anchor = this._tableBodyTopElement;
         }
     },
 
-    _shouldStopEditingRow: {
-        set: function (shouldStopEditingRow) {
-            shouldStopEditingRow = !!shouldStopEditingRow;
+    _shouldShowNewEntryRow: {
+        set: function (shouldShowNewEntryRow) {
+            shouldShowNewEntryRow = !!shouldShowNewEntryRow;
 
-            if (this.__shouldStopEditingRow !== shouldStopEditingRow) {
-                this.__shouldStopEditingRow = shouldStopEditingRow;
+            if (this.__shouldShowNewEntryRow !== shouldShowNewEntryRow) {
+                this.__shouldShowNewEntryRow = shouldShowNewEntryRow;
+                this._canShowNewEntryRow = true;
                 this.needsDraw = true;
             }
         },
         get: function () {
-            return this.__shouldStopEditingRow;
+            return this.__shouldShowNewEntryRow;
         }
     },
 
-    _shouldStartEditingRow: {
-        set: function (shouldStartEditingRow) {
-            shouldStartEditingRow = !!shouldStartEditingRow;
+    _shouldHideNewEntryRow: {
+        set: function (shouldHideNewEntryRow) {
+            shouldHideNewEntryRow = !!shouldHideNewEntryRow;
 
-            if (this.__shouldStartEditingRow !== shouldStartEditingRow) {
-                this.__shouldStartEditingRow = shouldStartEditingRow;
+            if (this.__shouldHideNewEntryRow !== shouldHideNewEntryRow) {
+                this.__shouldHideNewEntryRow = shouldHideNewEntryRow;
+                this._canShowNewEntryRow = false;
                 this.needsDraw = true;
             }
         },
         get: function () {
-            return this.__shouldStartEditingRow;
-        }
-    },
-
-    _candidateRow: {
-        set: function (candidateRow) {
-            if (this.__candidateRow !== candidateRow) {
-                var previousCandidate = this.__candidateRow;
-
-                if (previousCandidate) {
-                    this._cancelEditing();
-                }
-
-                this.__candidateRow = candidateRow;
-                this.isNewEntryRowShown = candidateRow === this._tableBodyTopElement;
-
-                if (candidateRow) {
-                    this._shouldStartEditingRow = true;
-                } else if (!candidateRow && !previousCandidate) {
-                    this._shouldStopEditingRow = true;
-                }
-            }
-        },
-        get: function () {
-            return this.__candidateRow;
+            return this.__shouldHideNewEntryRow;
         }
     },
 
     //Public API
 
-    isEditingRow: {
+    isAddingNewEntry: {
         get: function () {
-            return !!this.currentEditingRow;
+            return !!this._canShowNewEntryRow;
         }
     },
 
-    currentEditingObject: {
+    currentNewEntry: {
         get: function () {
-            if (this._currentEditingRow) {
-                if (!this._currentEditingObject) {
-                    if (this._rowRepetitionComponent.element.contains(this._currentEditingRow)) {
-                        var iteration = this._rowRepetitionComponent._findIterationContainingElement(this._currentEditingRow);
-                        this._currentEditingObject = iteration ? iteration.object : null;
-                    } else if (this._currentEditingRow === this._tableBodyTopElement) {
-                        this._currentEditingObject = this.callDelegateMethod("tableWillSetNewInstance", this) || {};
-                    } else {
-                        this._currentEditingObject = null;
-                    }
+            if (this.isAddingNewEntry) {
+                if (!this._currentNewEntry) {
+                    var defaultNewEntry = {};
+                    this._currentNewEntry = this.callDelegateMethod(
+                        "tableWillUseNewEntry",
+                        this,
+                        defaultNewEntry
+                    ) || defaultNewEntry;
                 }
             } else {
-                this._currentEditingObject = null;
+                this._currentNewEntry = null;
             }
 
-            return this._currentEditingObject;
-        }
-    },
-
-    currentEditingRow: {
-        set: function (currentEditingRow) {
-            if (this._currentEditingRow !== currentEditingRow) {
-                this._currentEditingRow = currentEditingRow;
-                this.dispatchOwnPropertyChange("isEditingRow", this.isEditingRow);
-                this.dispatchOwnPropertyChange("currentEditingObject", this.currentEditingObject);
-            }
-        },
-        get: function () {
-            return this._currentEditingRow;
+            return this._currentNewEntry;
         }
     },
 
     hideNewEntryRow: {
         value: function () {
-            this._candidateRow = null;
+            this._cancelAddingNewEntry();
         }
     },
 
     showNewEntryRow: {
         value: function () {
-            this._candidateRow = this._tableBodyTopElement;
+            this._shouldShowNewEntryRow = true;
         }
     },
 
@@ -179,99 +147,89 @@ exports.TableEditable = Component.specialize({
 
     shouldDismissOverlay: {
         value: function (overlay, target, eventType) {
-            var shouldDismissOverlay = !this._tableBodyTopElement.contains(target) && 
-                !this._rowRepetitionComponent.element.contains(target) && eventType !== "keyPress";
-
-            if (shouldDismissOverlay) {
-                this.currentEditingRow = null;
-            }
-
-            return shouldDismissOverlay;
+            return overlay === this.rowControlsOverlay && !this.isAddingNewEntry;
         }
     },
 
     prepareForActivationEvents: {
         value: function () {
-            //FIXME: Can use AddEventListener bug in montage??
-            this.element.nativeAddEventListener("mouseup", this, false);
             this.rowControlsOverlay.addEventListener("action", this);
         }
     },
 
     handleCancelAction: {
         value: function () {
-            this._candidateRow = null;
+            this._cancelAddingNewEntry();
         }
     },
 
     handleDoneAction: {
         value: function () {
-            this._stopEditing();
+            this._stopAddingNewEntry();
         }
     },
 
-    handleEvent: {
-        value: function (event) {
-            if (event.type = "mouseup") {
-                var textRowCellRepetitionElement = this._rowRepetitionComponent.element,
-                    target = event.target.element || event.target,
-                    candidate;
-
-                if (textRowCellRepetitionElement.contains(target)) {
-                    while (textRowCellRepetitionElement !== target) {
-                        candidate = target;
-                        target = candidate.parentNode;
-                    }
-
-                    if (candidate) {
-                        this._candidateRow = candidate;
-                    }
-                } else if (this._tableBodyTopElement.contains(target)) {
-                    this._candidateRow = this._tableBodyTopElement;
-                } 
-            }             
-        }
-    },
-
-    _cancelEditing: {
+    _cancelAddingNewEntry: {
         value: function () {
-            this.callDelegateMethod("tableWillCancelEditingRow", this, this.currentEditingObject, this.contentController, this.currentEditingRow);
-            this.rowControlsOverlay.hide();
+            if (this.isAddingNewEntry) {
+                this.callDelegateMethod(
+                    "tableDidCancelEditingNewEntry",
+                    this,
+                    this.currentNewEntry,
+                    this.contentController
+                );
+
+                this._shouldHideNewEntryRow = true;
+            }
+
         }
     },
 
-    _stopEditing: {
+    _stopAddingNewEntry: {
         value: function () {
-            this.callDelegateMethod("tableWillEndEditingRow", this, this.currentEditingObject, this.contentController, this.currentEditingRow);
-            this.rowControlsOverlay.hide();
-            this.__candidateRow = null;
-            this._currentEditingObject = null;
-            this.isNewEntryRowShown = false;
+            if (this.isAddingNewEntry) {
+
+                var shoulAddNewEntry = this.callDelegateMethod(
+                    "tableWillAddNewEntry",
+                    this,
+                    this.currentNewEntry,
+                    this.contentController
+                );
+
+                if (shoulAddNewEntry !== void 0 ? !!shoulAddNewEntry : true) {
+                    this.contentController.add(this.currentNewEntry);
+                    this.callDelegateMethod(
+                        "tableDidAddNewEntry",
+                        this,
+                        this.currentNewEntry,
+                        this.contentController
+                    );
+                }
+
+                this._shouldHideNewEntryRow = true;
+            }
         }
     },
 
-    _startEditing: {
+    _startAddingNewEntry: {
         value: function () {
-            this.callDelegateMethod("tableWillStartEditingRow", this, this.currentEditingObject, this.contentController, this.currentEditingRow);
-            this.rowControlsOverlay.show();
+            this.callDelegateMethod("tableWillStartEditingNewEntry", this, this.currentNewEntry, this.contentController);
+            this.dispatchOwnPropertyChange("isAddingNewEntry", this.isAddingNewEntry);
         }
     },
 
     draw: {
         value: function () {
-            if (this._shouldStopEditingRow) {
-                this.__shouldStopEditingRow = false;
-                this._stopEditing();
-                this.currentEditingRow = null;
+            if (this._shouldShowNewEntryRow) {
+                this.__shouldShowNewEntryRow = false;
+                this._startAddingNewEntry();
+                this.rowControlsOverlay.show();
 
-                if (this._shouldStartEditingRow) {
-                    this.needsDraw = true;
-                }
-
-            } else if (this._shouldStartEditingRow) {
-                this.__shouldStartEditingRow = false;
-                this.currentEditingRow = this.rowControlsOverlay.anchor = this._candidateRow;
-                this._startEditing();
+            } else if (this._shouldHideNewEntryRow) {
+                this._shouldHideNewEntryRow = false;
+                this.dispatchOwnPropertyChange("isAddingNewEntry", this.isAddingNewEntry);
+                this.dispatchOwnPropertyChange("currentNewEntry", this.currentNewEntry);
+                this.rowControlsOverlay.hide();
             }
         }
     }
