@@ -13,8 +13,8 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
         value: false
     },
 
-    isEditing: {
-        value: false
+    editEnabled: {
+        value: null
     },
 
     value: {
@@ -135,9 +135,23 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
 
     handleResetAction: {
         value: function () {
-            var self = this;
-            this.isEditing = !this.isEditing;
-            setTimeout(function(){self.passwordFieldInput1.focus()},0);
+            this.editEnabled = true;
+            this.needsfocus = true;
+        }
+    },
+
+    draw: {
+        value: function () {
+            if(this.needsfocus) {
+                this.passwordFieldInput1.focus();
+                this.needsfocus = false;
+            }
+        }
+    },
+
+    exitDocument: {
+        value: function () {
+            this.editEnabled = null;
         }
     }
 

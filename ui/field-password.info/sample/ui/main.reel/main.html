@@ -18,8 +18,25 @@
                 "errorMessage": "the passwords do not match",
                 "label": "password",
                 "placeholder1": "enter password",
-                "placeholder2": "confirm password"
+                "placeholder2": "confirm password",
+                "editEnabled": true
+            }
+        },
+        "condition": {
+            "prototype": "montage/ui/condition.reel",
+            "properties": {
+                "element": {"#": "condition"}
+            },
+            "bindings": {
+                "condition": {"<-": "@checkbox.checked"}
+            }
+        },
 
+        "checkbox": {
+            "prototype": "blue-shark/ui/checkbox.reel",
+            "properties": {
+                "element": {"#": "checkbox"},
+                "label": "display password component"
             }
         }
     }
@@ -27,7 +44,10 @@
 </head>
 <body>
     <div data-montage-id="owner" class="Main">
-        <div data-montage-id="passwordField"></div>
+        <div data-montage-id="checkbox"></div>
+        <div data-montage-id="condition">
+            <div data-montage-id="passwordField"></div>
+        </div>
     </div>
 </body>
 </html>
