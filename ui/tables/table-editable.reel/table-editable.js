@@ -1,13 +1,53 @@
 /**
  * @module ui/table-editable.reel
  */
-var Component = require("montage/ui/component").Component;
+var Component = require("montage/ui/component").Component,
+    Overlay = require("montage/ui/overlay.reel").Overlay,
+    Composer = require("montage/composer/composer").Composer;
 
 /**
  * @class TableEditable
  * @extends Component
  */
 exports.TableEditable = Component.specialize({
+
+    templateDidLoad: {
+        value: function () {
+            this.rowControlsOverlay.shouldComposerSurrenderPointerToComponent = function (composer, pointer, component) {                
+                if (component && component.element) {
+                    var targetElement = component.element,
+                        overlayCandidate;
+
+                    if (component instanceof Composer) {
+                        component = component.component;
+                    }
+
+                    if (component) {
+                        while (component && !overlayCandidate) {
+                            if (component instanceof Overlay) {
+                                overlayCandidate = component;
+                            } else {
+                                component = component.parentComponent;
+                            }
+                        }
+
+                        if (component && component.anchor) {
+                            targetElement = component.anchor;
+                        }
+                    }
+
+                    if (!this.element.contains(targetElement)) {
+                        this.dismissOverlay({
+                            targetElement: targetElement,
+                            type: pointer
+                        });
+                    }
+                }
+
+                return true;
+            }
+        }
+    },
 
     _shouldStopEditingRow: {
         set: function (shouldStopEditingRow) {
@@ -72,11 +112,15 @@ exports.TableEditable = Component.specialize({
     currentEditingObject: {
         get: function () {
             if (this._currentEditingRow) {
-                if (this._rowRepetitionComponent.element.contains(this._currentEditingRow)) {
-                    var iteration = this._rowRepetitionComponent._findIterationContainingElement(this._currentEditingRow);
-                    this._currentEditingObject = iteration ? iteration.object : null;
-                } else {
-                    this._currentEditingObject = null;
+                if (!this._currentEditingObject) {
+                    if (this._rowRepetitionComponent.element.contains(this._currentEditingRow)) {
+                        var iteration = this._rowRepetitionComponent._findIterationContainingElement(this._currentEditingRow);
+                        this._currentEditingObject = iteration ? iteration.object : null;
+                    } else if (this._currentEditingRow === this._tableBodyTopElement) {
+                        this._currentEditingObject = {};
+                    } else {
+                        this._currentEditingObject = null;
+                    }
                 }
             } else {
                 this._currentEditingObject = null;
@@ -160,6 +204,12 @@ exports.TableEditable = Component.specialize({
         }
     },
 
+    handleDoneAction: {
+        value: function () {
+            this._stopEditing();
+        }
+    },
+
     handleEvent: {
         value: function (event) {
             if (event.type = "mouseup") {
@@ -185,21 +235,24 @@ exports.TableEditable = Component.specialize({
 
     _cancelEditing: {
         value: function () {
-            this.callDelegateMethod("tableWillCancelEditingRow", this, this.currentEditingObject, this.currentEditingRow);
+            this.callDelegateMethod("tableWillCancelEditingRow", this, this.currentEditingObject, this.contentController, this.currentEditingRow);
             this.rowControlsOverlay.hide();
         }
     },
 
     _stopEditing: {
         value: function () {
-            this.callDelegateMethod("tableWillEndEditingRow", this, this.currentEditingObject, this.currentEditingRow);
+            this.callDelegateMethod("tableWillEndEditingRow", this, this.currentEditingObject, this.contentController, this.currentEditingRow);
             this.rowControlsOverlay.hide();
+            this.__candidateRow = null;
+            this._currentEditingObject = null;
+            this.isNewEntryRowShown = false;
         }
     },
 
     _startEditing: {
         value: function () {
-            this.callDelegateMethod("tableWillStartEditingRow", this, this.currentEditingObject, this.currentEditingRow);
+            this.callDelegateMethod("tableWillStartEditingRow", this, this.currentEditingObject, this.contentController, this.currentEditingRow);
             this.rowControlsOverlay.show();
         }
     },

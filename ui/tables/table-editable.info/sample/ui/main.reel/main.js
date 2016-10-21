@@ -9,10 +9,6 @@ var Component = require("montage/ui/component").Component;
  */
 exports.Main = Component.specialize(/** @lends Main# */ {
 
-    emptyObject: {
-        value: {}
-    },
-
     prepareForActivationEvents: {
         value: function () {
             this.addEventListener("action", this);
@@ -32,14 +28,23 @@ exports.Main = Component.specialize(/** @lends Main# */ {
     },
 
     tableWillEndEditingRow: {
-        value: function (table, editingObject, row) {
+        value: function (table, editingObject, contentController, row) {
             console.log("table end editing: ", editingObject)
+
+            if (!contentController.has(editingObject)) {
+                contentController.add(editingObject);
+                this.newObject = null;
+            }
         }
     },
 
     tableWillStartEditingRow: {
-        value: function (table, editingObject, row) {
+        value: function (table, editingObject, contentController, row) {
             console.log("table start editing: ", editingObject)
+
+            if (!contentController.has(editingObject)) {
+                this.newObject = editingObject;
+            }
         }
     }
 
