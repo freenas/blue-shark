@@ -211,7 +211,7 @@ exports.TableEditable = Component.specialize({
 
             if (this._toggleAllComponent.element.contains(target.element)) {
                 this._handleToggleAllAction(event);
-            } else if (target instanceof Checkbox) {
+            } else if (target instanceof Checkbox && this._rowRepetitionComponent.element.contains(target.element)) {
                 this._toggleAllComponent.checked = this.selectedRows &&
                     this.selectedRows.length === this.rows.length;
             }
