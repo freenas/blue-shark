@@ -74,6 +74,17 @@
             }
         },
 
+        "deleteButton": {
+            "prototype": "blue-shark/ui/button.reel",
+            "properties": {
+                "element": {"#": "deleteButton"},
+                "value": "delete"
+            },
+            "bindings": {
+                "disabled": {"<-": "!@editableTable.selectedRows.length"}
+            }
+        },
+
         "newEntry": {
             "prototype": "ui/table-new-row.reel",
             "properties": {
@@ -90,7 +101,7 @@
                 "element": {"#": "rowEntry"}
             },
             "bindings": {
-                "object": {"<-": "@editableTable:rowIteration.object"}
+                "object": {"<-": "@editableTable:rowIteration.object.object"}
             }
         }
 
@@ -102,6 +113,7 @@
         <div data-montage-id="icons"></div> <!-- sample only -->
         <div data-montage-id="editableTable">
             <div data-arg="table-editable-header-toolbar">
+                <div data-montage-id="deleteButton" class="Button--alert"></div>
                 <div data-montage-id="addButton" class="Button--create"><svg><use xlink:href="#i-circle-plus" x="" y=""/></svg></div>
             </div>
             <div data-arg="row-new" data-montage-id="newEntry" class="Table-row"></div>

@@ -4,7 +4,7 @@
 var Component = require("montage/ui/component").Component;
 
 /**
- * @class TableReadOnlyHeader
+ * @class TableHeaderLayout
  * @extends Component
  */
-exports.TableReadOnlyHeader = Component.specialize();
+exports.TableHeaderLayout = Component.specialize();

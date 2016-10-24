@@ -3,6 +3,7 @@
  */
 var Component = require("montage/ui/component").Component,
     Overlay = require("montage/ui/overlay.reel").Overlay,
+    Checkbox = require("montage/ui/checkbox.reel").Checkbox,
     Composer = require("montage/composer/composer").Composer;
 
 
@@ -41,6 +42,12 @@ function _shouldComposerSurrenderPointerToComponent(composer, pointer, component
 }
 
 
+function RowEntry(object) {
+    this.object = object;
+    this.selected = false
+}
+
+
 /**
  * @class TableEditable
  * @extends Component
@@ -51,6 +58,7 @@ exports.TableEditable = Component.specialize({
         value: function () {
             this.rowControlsOverlay.shouldComposerSurrenderPointerToComponent = _shouldComposerSurrenderPointerToComponent;
             this.rowControlsOverlay.anchor = this._tableBodyTopElement;
+            this.addRangeAtPathChangeListener("rows", this, "handleRowsChange");
         }
     },
 
@@ -97,11 +105,13 @@ exports.TableEditable = Component.specialize({
             if (this.isAddingNewEntry) {
                 if (!this._currentNewEntry) {
                     var defaultNewEntry = {};
-                    this._currentNewEntry = this.callDelegateMethod(
+                    defaultNewEntry = this.callDelegateMethod(
                         "tableWillUseNewEntry",
                         this,
                         defaultNewEntry
                     ) || defaultNewEntry;
+
+                    this._currentNewEntry = new RowEntry(defaultNewEntry);
                 }
             } else {
                 this._currentNewEntry = null;
@@ -120,6 +130,21 @@ exports.TableEditable = Component.specialize({
     showNewEntryRow: {
         value: function () {
             this._shouldShowNewEntryRow = true;
+        }
+    },
+
+    deleteSelectedRows: {
+        value: function () {
+            var rowEntry,
+                index;
+
+            while (this.selectedRows.length) {
+                rowEntry = this.selectedRows[0];
+
+                if ((index = this.rows.indexOf(rowEntry.object)) > -1) {
+                    this.rows.splice(index, 1);
+                }
+            }
         }
     },
 
@@ -154,6 +179,16 @@ exports.TableEditable = Component.specialize({
     prepareForActivationEvents: {
         value: function () {
             this.rowControlsOverlay.addEventListener("action", this);
+            this.addEventListener("action", this);
+        }
+    },
+
+    handleRowsChange: {
+        value: function () {
+            if (this._inDocument) {
+                this._toggleAllComponent.checked = this.rows.length > 0 && this.selectedRows &&
+                    this.selectedRows.length === this.rows.length;
+            }
         }
     },
 
@@ -169,13 +204,36 @@ exports.TableEditable = Component.specialize({
         }
     },
 
+    handleAction: {
+        value: function (event) {
+            var target = event.target;
+
+            if (this._toggleAllComponent.element.contains(target.element)) {
+                this._handleToggleAllAction(event);
+            } else if (target instanceof Checkbox) {
+                this._toggleAllComponent.checked = this.selectedRows &&
+                    this.selectedRows.length === this.rows.length;
+            }
+        }
+    },
+
+    _handleToggleAllAction: {
+        value: function (event) {
+            var self = this;
+
+            this._rowEntries.forEach(function (rowEntry) {
+                rowEntry.selected = !!self._toggleAllComponent.checked;
+            });
+        }
+    },
+
     _cancelAddingNewEntry: {
         value: function () {
             if (this.isAddingNewEntry) {
                 this.callDelegateMethod(
                     "tableDidCancelEditingNewEntry",
                     this,
-                    this.currentNewEntry,
+                    this.currentNewEntry.object,
                     this.contentController
                 );
 
@@ -192,16 +250,16 @@ exports.TableEditable = Component.specialize({
                 var shoulAddNewEntry = this.callDelegateMethod(
                     "tableWillAddNewEntry",
                     this,
-                    this.currentNewEntry,
+                    this.currentNewEntry.object,
                     this.contentController
                 );
 
                 if (shoulAddNewEntry !== void 0 ? !!shoulAddNewEntry : true) {
-                    this.contentController.add(this.currentNewEntry);
+                    this.contentController.add(this.currentNewEntry.object);
                     this.callDelegateMethod(
                         "tableDidAddNewEntry",
                         this,
-                        this.currentNewEntry,
+                        this.currentNewEntry.object,
                         this.contentController
                     );
                 }
@@ -213,7 +271,12 @@ exports.TableEditable = Component.specialize({
 
     _startAddingNewEntry: {
         value: function () {
-            this.callDelegateMethod("tableWillStartEditingNewEntry", this, this.currentNewEntry, this.contentController);
+            this.callDelegateMethod(
+                "tableWillStartEditingNewEntry",
+                this,
+                this.currentNewEntry.object,
+                this.contentController
+            );
             this.dispatchOwnPropertyChange("isAddingNewEntry", this.isAddingNewEntry);
         }
     },

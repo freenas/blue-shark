@@ -21,6 +21,12 @@ exports.Main = Component.specialize(/** @lends Main# */ {
         }
     },
 
+    handleDeleteButtonAction: {
+        value: function () {
+            this.editableTable.deleteSelectedRows();
+        }
+    },
+
     tableDidCancelEditingNewEntry: {
         value: function (table, object, row) {
             console.log("table cancel adding object: ", object)

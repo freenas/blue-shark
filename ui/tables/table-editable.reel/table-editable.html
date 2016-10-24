@@ -8,13 +8,24 @@
             "properties": {
                 "element": {"#": "owner"},
                 "rowControlsOverlay": {"@": "rowControls"},
-                "_tableBodyTopElement": {"#": "tableBodyTop"}
+                "_tableBodyTopElement": {"#": "tableBodyTop"},
+                "contentController": {"@": "contentController"},
+                "_toggleAllComponent": {"@": "toggleAll"}
             },
             "bindings": {
                 "_rowRepetitionComponent": {"<-": "@tableLayout.rowRepetitionComponent"},
-                "contentController": {"<-": "@tableLayout.rowRepetitionComponent.contentController"}
+                "_rowEntries": {"<-": "@contentController.content.map{{object: this, selected: false}}"},
+                "selectedRows": {"<-": "@owner._rowEntries.filter{selected == true}"}
             }
         },
+
+        "contentController": {
+            "prototype": "montage/core/range-controller",
+            "bindings": {
+                "content": {"<-": "@owner.rows"}
+            }
+        },
+
         "tableLayout": {
             "prototype": "ui/layouts/table-layout.reel",
             "properties": {
@@ -22,14 +33,25 @@
             },
             "bindings": {
                 "title": {"<-": "@owner.title"},
-                "rows": {"<-": "@owner.rows"},
+                "rows": {"<-": "@owner._rowEntries"},
                 "sortPath": {"<-": "@owner.sortPath"}
             }
         },
-        "tableEditableHeader": {
-            "prototype": "ui/tables/table-editable-header.reel",
+
+        "toggleAll": {
+            "prototype": "ui/checkbox.reel",
             "properties": {
-                "element": {"#": "tableEditableHeader"}
+                "element": {"#": "selectAll"}
+            },
+            "bindings": {
+                "disabled": {"<-": "!@owner.rows.length"}
+            }
+        },
+
+        "columnTitle": {
+            "prototype": "ui/layouts/table-header-layout.reel",
+            "properties": {
+                "element": {"#": "columnTitle"}
             },
             "bindings": {
                 "columns": {"<-": "@owner.columns"}
@@ -54,6 +76,7 @@
                 "value": "Cancel"
             }
         },
+
         "done": {
             "prototype": "ui/button.reel",
             "properties": {
@@ -61,6 +84,7 @@
                 "value": "Done"
             }
         },
+
         "title": {
             "prototype": "montage/ui/text.reel",
             "properties": {
@@ -70,6 +94,18 @@
                 "value": {"<-": "@owner.title"}
             }
         },
+
+        "selectRow": {
+            "prototype": "ui/checkbox.reel",
+            "properties": {
+                "element": {"#": "selectRow"}
+            },
+            "bindings": {
+                "rowEntry": {"<-": "@tableLayout:rowIteration.object"},
+                "checked": {"<->": "@selectRow.rowEntry.selected"}
+            }
+        },
+
         "rowControls": {
             "prototype": "montage/ui/overlay.reel",
             "properties": {
@@ -92,11 +128,17 @@
             <div data-param="table-editable-header-toolbar"></div>
         </div>
         <div data-montage-id="tableLayout">
-            <div data-arg="table-header-columns" data-montage-id="tableEditableHeader"></div>
+            <div data-arg="table-header-columns">
+                <div data-montage-id="selectAll"></div>
+                <div data-montage-id="columnTitle"></div>
+            </div>
             <div data-arg="table-body-top" data-montage-id="tableBodyTop" class="Table-row-group Table-body-top">
                 <div data-param="row-new" class="Table-row"></div>
             </div>
-            <div data-arg="table-row" data-param="row-entry" class="Table-row"></div>
+            <div data-arg="table-row" class="Table-row">
+                <div data-montage-id="selectRow"></div>
+                <div data-param="row-entry"></div>
+            </div>
             <div data-arg="table-footer">
                 <div data-param="table-editable-footer"></div>
             </div>
