@@ -54,15 +54,12 @@ function RowEntry(object) {
  */
 exports.TableEditable = Component.specialize({
 
-    rows: {
-        value: []
-    },
-
     templateDidLoad: {
         value: function () {
             this.rowControlsOverlay.shouldComposerSurrenderPointerToComponent = _shouldComposerSurrenderPointerToComponent;
             this.rowControlsOverlay.anchor = this._tableBodyTopElement;
             this.addRangeAtPathChangeListener("rows", this, "handleRowsChange");
+            this.rows = [];
         }
     },
 
