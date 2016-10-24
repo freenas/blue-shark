@@ -54,6 +54,10 @@ function RowEntry(object) {
  */
 exports.TableEditable = Component.specialize({
 
+    rows: {
+        value: []
+    },
+
     templateDidLoad: {
         value: function () {
             this.rowControlsOverlay.shouldComposerSurrenderPointerToComponent = _shouldComposerSurrenderPointerToComponent;
@@ -277,7 +281,7 @@ exports.TableEditable = Component.specialize({
                 this.currentNewEntry.object,
                 this.contentController
             );
-            this.dispatchOwnPropertyChange("isAddingNewEntry", this.isAddingNewEntry);
+            
         }
     },
 
@@ -287,6 +291,8 @@ exports.TableEditable = Component.specialize({
                 this.__shouldShowNewEntryRow = false;
                 this._startAddingNewEntry();
                 this.rowControlsOverlay.show();
+                this.dispatchOwnPropertyChange("isAddingNewEntry", this.isAddingNewEntry);
+                this.dispatchOwnPropertyChange("currentNewEntry", this.currentNewEntry);
 
             } else if (this._shouldHideNewEntryRow) {
                 this._shouldHideNewEntryRow = false;
