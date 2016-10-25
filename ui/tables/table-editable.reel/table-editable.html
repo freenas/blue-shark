@@ -34,7 +34,8 @@
             "bindings": {
                 "title": {"<-": "@owner.title"},
                 "rows": {"<-": "@owner._rowEntries"},
-                "sortPath": {"<-": "@owner.sortPath"}
+                "sortPath": {"<-": "@owner.sortPath"},
+                "classList.has('is-hidden')": {"<-": "!@owner._rowEntries.length && !@owner._canShowNewEntryRow"}
             }
         },
 
