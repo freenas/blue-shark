@@ -42,3 +42,15 @@
     padding: .5em;
     text-align: right;
 }
+
+/* Empty State */
+
+.Table-emptyState {
+    width: 100%;
+    border: 1px solid #282828;
+    padding: 1em;
+    line-height: 1em;
+    text-align: center;
+    border-top: none;
+    background-color: rgba(0,0,0,.1);
+}

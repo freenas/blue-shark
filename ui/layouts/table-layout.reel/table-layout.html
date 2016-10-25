@@ -23,6 +23,17 @@
 
         ":rowIteration": {
            "alias": "@rowRepetition:iteration"
+        },
+
+        "emptyState": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "emptyState"}
+            },
+            "bindings": {
+                "classList.has('is-hidden')": {"<-": "@rowRepetition.content.length"},
+                "value": {"<-": "!!@owner.emptyMessage ? @owner.emptyMessage : 'No data added'"}
+            }
         }
     }
     </script>
@@ -33,6 +44,9 @@
         <div data-param="table-body-top" class="Table-row-group"></div>
         <div data-montage-id="rowRepetition" class="Table-row-group">
             <div data-param="table-row"></div>
+        </div>
+        <div data-montage-id="emptyState" class="Table-emptyState">
+            this is empty
         </div>
         <div class="Table-footer">
             <div data-param="table-footer"></div>
