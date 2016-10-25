@@ -144,4 +144,15 @@
     }
 }
 
+.Button--icon {
+    min-width: 0;
+    padding: 0;
+    height: 2.5em;
+    width: 2.5em;
+
+    & svg { margin-right: 0 !important; }
+
+    & .Button-label { display: none; }
+}
+
 
