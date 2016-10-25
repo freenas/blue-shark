@@ -173,7 +173,17 @@ exports.TableEditable = Component.specialize({
 
     shouldDismissOverlay: {
         value: function (overlay, target, eventType) {
-            return overlay === this.rowControlsOverlay && !this.isAddingNewEntry;
+            if (overlay === this.rowControlsOverlay) {
+               if (!this._tableBodyTopElement.contains(target)) {
+                   if (this.isAddingNewEntry) {
+                        this._cancelAddingNewEntry();
+                    }
+               } else {
+                   return false;
+               }
+            }
+
+           return true;
         }
     },
 
