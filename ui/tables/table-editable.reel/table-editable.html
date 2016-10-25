@@ -85,13 +85,13 @@
             }
         },
 
-        "title": {
+        "label": {
             "prototype": "montage/ui/text.reel",
             "properties": {
-                "element": {"#": "title"}
+                "element": {"#": "label"}
             },
             "bindings": {
-                "value": {"<-": "@owner.title"}
+                "value": {"<-": "@owner.label"}
             }
         },
 
@@ -124,19 +124,19 @@
 <body>
     <div data-montage-id="owner" class="TableEditable">
         <div data-arg="table-header-toolbar" class="TableEditable-toolbar">
-            <div data-montage-id="title" class="TableEditable-title"></div>
+            <div data-montage-id="label" class="TableEditable-title"></div>
             <div data-param="table-editable-header-toolbar"></div>
         </div>
         <div data-montage-id="tableLayout">
             <div data-arg="table-header-columns">
-                <div data-montage-id="selectAll"></div>
-                <div data-montage-id="columnTitle"></div>
+                <div data-montage-id="selectAll" class="Table-selectAll"></div>
+                <div data-montage-id="columnTitle" class="TableEditable-columns"></div>
             </div>
-            <div data-arg="table-body-top" data-montage-id="tableBodyTop" class="Table-row-group Table-body-top">
-                <div data-param="row-new" class="Table-row"></div>
+            <div data-arg="table-body-top" data-montage-id="tableBodyTop" class="Table-body-top">
+                <div data-param="row-new" class="Table-row test"></div>
             </div>
             <div data-arg="table-row" class="Table-row">
-                <div data-montage-id="selectRow"></div>
+                <div data-montage-id="selectRow" class="Table-selectRow"></div>
                 <div data-param="row-entry"></div>
             </div>
             <div data-arg="table-footer">

@@ -23,7 +23,7 @@
             "properties": {
                 "element": {"#": "editableTable"},
                 "delegate": {"@": "owner"},
-                "title": "Table Title",
+                "label": "Foo",
                 "columns":  [
                     {
                         "value": "long title here",
@@ -111,13 +111,13 @@
 <body>
     <div data-montage-id="owner" class="Main">
         <div data-montage-id="icons"></div> <!-- sample only -->
-        <div data-montage-id="editableTable">
+        <div data-montage-id="editableTable" class="sampleTable">
             <div data-arg="table-editable-header-toolbar">
                 <div data-montage-id="deleteButton" class="Button--alert"></div>
                 <div data-montage-id="addButton" class="Button--create"><svg><use xlink:href="#i-circle-plus" x="" y=""/></svg></div>
             </div>
-            <div data-arg="row-new" data-montage-id="newEntry" class="Table-row"></div>
-            <div data-arg="row-entry" data-montage-id="rowEntry" class="Table-row"></div>
+            <div data-arg="row-new" data-montage-id="newEntry"></div>
+            <div data-arg="row-entry" data-montage-id="rowEntry"></div>
         </div>
     </div>
 </body>
