@@ -37,6 +37,28 @@
                         "value": "gender",
                         "path": "gender"
                     }
+                ],
+                "rows":  [
+                    {
+                        "name": "bar",
+                        "age": 20,
+                        "gender": "M"
+                    },
+                    {
+                        "name": "foo",
+                        "age": 15,
+                        "gender": "F"
+                    },
+                    {
+                        "name": "baz",
+                        "age": 30,
+                        "gender": "M"
+                    },
+                    {
+                        "name": "qux",
+                        "age": 42,
+                        "gender": "F"
+                    }
                 ]
             }
         },
@@ -91,8 +113,8 @@
         <div data-montage-id="icons"></div> <!-- sample only -->
         <div data-montage-id="editableTable" class="sampleTable">
             <div data-arg="table-editable-header-toolbar">
-                <div data-montage-id="deleteButton" class="Button--alert"></div>
-                <div data-montage-id="addButton" class="Button--create"><svg><use xlink:href="#i-circle-plus" x="" y=""/></svg></div>
+                <div data-montage-id="deleteButton" class="Button--alert Button--icon"><svg><use xlink:href="#i-trashCan"/></svg></div>
+                <div data-montage-id="addButton" class="Button--create Button--icon"><svg><use xlink:href="#i-plus"/></svg></div>
             </div>
             <div data-arg="row-new" data-montage-id="newEntry"></div>
             <div data-arg="row-entry" data-montage-id="rowEntry"></div>
