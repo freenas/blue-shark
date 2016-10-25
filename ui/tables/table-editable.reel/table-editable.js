@@ -59,7 +59,7 @@ exports.TableEditable = Component.specialize({
             this.rowControlsOverlay.shouldComposerSurrenderPointerToComponent = _shouldComposerSurrenderPointerToComponent;
             this.rowControlsOverlay.anchor = this._tableBodyTopElement;
             this.addRangeAtPathChangeListener("rows", this, "handleRowsChange");
-            this.rows = [];
+            if (!this.rows) {this.rows = []};
         }
     },
 
@@ -278,7 +278,7 @@ exports.TableEditable = Component.specialize({
                 this.currentNewEntry.object,
                 this.contentController
             );
-            
+
         }
     },
 
