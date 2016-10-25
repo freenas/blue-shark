@@ -37,28 +37,6 @@
                         "value": "gender",
                         "path": "gender"
                     }
-                ],
-                "rows":  [
-                    {
-                        "name": "bar",
-                        "age": 20,
-                        "gender": "M"
-                    },
-                    {
-                        "name": "foo",
-                        "age": 15,
-                        "gender": "F"
-                    },
-                    {
-                        "name": "baz",
-                        "age": 30,
-                        "gender": "M"
-                    },
-                    {
-                        "name": "qux",
-                        "age": 42,
-                        "gender": "F"
-                    }
                 ]
             }
         },
@@ -81,7 +59,7 @@
                 "value": "delete"
             },
             "bindings": {
-                "disabled": {"<-": "!@editableTable.selectedRows.length"}
+                "classList.has('is-hidden')": {"<-": "!@editableTable.selectedRows.length"}
             }
         },
 

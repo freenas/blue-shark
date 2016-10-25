@@ -117,6 +117,17 @@
 
         ":rowIteration": {
            "alias": "@tableLayout:rowIteration"
+        },
+
+        "emptyState": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "emptyState"}
+            },
+            "bindings": {
+                "classList.has('is-hidden')": {"<-": "@tableLayout.rows.length || @owner._canShowNewEntryRow"},
+                "value": {"<-": "!!@owner.emptyMessage ? @owner.emptyMessage : 'No data added'"}
+            }
         }
     }
     </script>
@@ -143,6 +154,7 @@
                 <div data-param="table-editable-footer"></div>
             </div>
         </div>
+        <div data-montage-id="emptyState" class="Table-emptyState"></div>
         <div data-montage-id="rowControls" class="TableEditable-rowControls">
             <button data-montage-id="cancel"></button>
             <button data-montage-id="done" class="Button--primary"></button>

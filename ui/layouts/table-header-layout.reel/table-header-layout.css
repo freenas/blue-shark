@@ -15,8 +15,8 @@
 .TableHeaderLayout-cell {
     position: relative;
     font-weight: 400;
-    color: #e6e6e6;
-    padding: .5em .5em;
+    /* color: #16171A; */
+    padding: 1em;
     flex: 1;
 }
 
