@@ -70,7 +70,6 @@ exports.TableEditable = Component.specialize({
             if (this.__shouldShowNewEntryRow !== shouldShowNewEntryRow) {
                 this.__shouldShowNewEntryRow = shouldShowNewEntryRow;
                 this._canShowNewEntryRow = true;
-                console.log(this._tableBodyTopElement);
                 this.needsDraw = true;
             }
         },
