@@ -41,7 +41,6 @@ function _shouldComposerSurrenderPointerToComponent(composer, pointer, component
     return true;
 }
 
-
 function RowEntry(object) {
     this.object = object;
     this.selected = false
@@ -59,6 +58,7 @@ exports.TableEditable = Component.specialize({
             this.rowControlsOverlay.shouldComposerSurrenderPointerToComponent = _shouldComposerSurrenderPointerToComponent;
             this.rowControlsOverlay.anchor = this._tableBodyTopElement;
             this.addRangeAtPathChangeListener("rows", this, "handleRowsChange");
+
             if (!this.rows) {this.rows = []};
         }
     },
@@ -68,6 +68,7 @@ exports.TableEditable = Component.specialize({
             shouldShowNewEntryRow = !!shouldShowNewEntryRow;
 
             if (this.__shouldShowNewEntryRow !== shouldShowNewEntryRow) {
+                document.addEventListener("wheel", this, true);
                 this.__shouldShowNewEntryRow = shouldShowNewEntryRow;
                 this._canShowNewEntryRow = true;
                 this.needsDraw = true;
@@ -83,6 +84,7 @@ exports.TableEditable = Component.specialize({
             shouldHideNewEntryRow = !!shouldHideNewEntryRow;
 
             if (this.__shouldHideNewEntryRow !== shouldHideNewEntryRow) {
+                document.removeEventListener("wheel", this, true);
                 this.__shouldHideNewEntryRow = shouldHideNewEntryRow;
                 this._canShowNewEntryRow = false;
                 this.needsDraw = true;
@@ -146,6 +148,12 @@ exports.TableEditable = Component.specialize({
                     this.rows.splice(index, 1);
                 }
             }
+        }
+    },
+
+    captureWheel: {
+        value: function () {
+            this.rowControlsOverlay.needsDraw = true;
         }
     },
 
@@ -257,7 +265,6 @@ exports.TableEditable = Component.specialize({
     _stopAddingNewEntry: {
         value: function () {
             if (this.isAddingNewEntry) {
-
                 var shoulAddNewEntry = this.callDelegateMethod(
                     "tableWillAddNewEntry",
                     this,
