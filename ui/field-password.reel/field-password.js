@@ -70,7 +70,6 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
     exitDocument: {
         value: function () {
             this.reset();
-
             if (this.preparedForActivationEvents) {
                 this.passwordFieldInput2.element.removeEventListener("blur", this, true);
                 this.passwordFieldInput2.element.removeEventListener("focus", this, true);
@@ -146,12 +145,6 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
                 this.passwordFieldInput1.focus();
                 this.needsfocus = false;
             }
-        }
-    },
-
-    exitDocument: {
-        value: function () {
-            this.editEnabled = null;
         }
     }
 
