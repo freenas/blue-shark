@@ -47,8 +47,11 @@
 
 .TableEditable .Table-body-top.Table-row-group .Table-cells {
     /* magic # based on checkbox width */
-    padding-left: 2.5em;
     background-color: #3d4c5b;
+}
+
+.TableEditable .Table.has-multipleSelection .Table-body-top.Table-row-group .Table-cells {
+    padding-left: 2.5em;
 }
 
 
