@@ -16,10 +16,16 @@
 
 .Table-selectAll,
 .Table-selectRow {
+    display: none;
     flex-grow: 0;
     padding: .25em;
     padding-left: .5em;
     padding-right: 0;
+}
+
+.Table.has-multipleSelection .Table-selectAll,
+.Table.has-multipleSelection .Table-selectRow {
+    display: block;
 }
 
 /* Controls */
