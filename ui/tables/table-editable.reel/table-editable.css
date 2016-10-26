@@ -7,7 +7,10 @@
     margin-bottom: .5em;
 }
 
-.TableEditable-title { display: inline-block; }
+.TableEditable-title {
+    color: #B1BCBE;
+    font-weight: 400;
+}
 
 /* Select Cells */
 
@@ -23,7 +26,7 @@
 
 .TableEditable-rowControls {
     position: absolute;
-    z-index: 999;
+    z-index: 999 !important;
     background: #3d4c5b;
     padding: .5em;
     transform: translateY(-1px);
