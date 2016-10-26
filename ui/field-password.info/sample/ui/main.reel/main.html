@@ -13,13 +13,11 @@
             "prototype": "blue-shark/ui/field-password.reel",
             "properties": {
                 "element": {"#": "passwordField"},
-                "passwordLabel1": "type password",
-                "passwordLabel2": "retype password",
                 "errorMessage": "the passwords do not match",
-                "label": "password",
+                "label": "Password!",
                 "placeholder1": "enter password",
                 "placeholder2": "confirm password",
-                "editEnabled": true
+                "resetLabel": "Reset Password"
             }
         },
         "condition": {
@@ -38,15 +36,28 @@
                 "element": {"#": "checkbox"},
                 "label": "display password component"
             }
+        },
+
+        "passwordField2": {
+            "prototype": "blue-shark/ui/field-password.reel",
+            "properties": {
+                "element": {"#": "passwordField2"},
+                "errorMessage": "the passwords do not match",
+                "label": "password",
+                "placeholder1": "enter password",
+                "placeholder2": "confirm password",
+                "editEnabled": true
+            }
         }
     }
     </script>
 </head>
 <body>
     <div data-montage-id="owner" class="Main">
-        <div data-montage-id="checkbox"></div>
+        <div data-montage-id="checkbox" style="margin-bottom: 2em;"></div>
+        <div data-montage-id="passwordField"></div>
         <div data-montage-id="condition">
-            <div data-montage-id="passwordField"></div>
+            <div data-montage-id="passwordField2"></div>
         </div>
     </div>
 </body>
