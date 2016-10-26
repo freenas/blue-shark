@@ -53,6 +53,10 @@ function RowEntry(object) {
  */
 exports.TableEditable = Component.specialize({
 
+    isMultiSelectionEnabled: {
+        value: true
+    },
+
     rows: {
         set: function (rows) {
             this._rows = rows;
