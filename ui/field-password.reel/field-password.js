@@ -62,7 +62,6 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
 
     prepareForActivationEvents: {
         value: function () {
-            this.addEventListener("action", this);
             this._addEventListeners();
         }
     },
@@ -81,6 +80,7 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
         value: function () {
             this.passwordFieldInput2.element.addEventListener("blur", this, true);
             this.element.addEventListener("focus", this, true);
+            this.addEventListener("action", this);
         }
     },
 
