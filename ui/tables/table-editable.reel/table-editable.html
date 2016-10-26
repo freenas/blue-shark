@@ -127,7 +127,8 @@
                 "element": {"#": "emptyState"}
             },
             "bindings": {
-                "value": {"<-": "!!@owner.emptyMessage ? @owner.emptyMessage : 'No data added'"}
+                "value": {"<-": "!!@owner.emptyMessage ? @owner.emptyMessage : 'No data added'"},
+                "classList.has('is-hidden')": {"<-": "@owner.rows.length"}
             }
         }
     }

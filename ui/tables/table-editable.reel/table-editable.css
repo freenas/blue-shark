@@ -7,23 +7,32 @@
     margin-bottom: .5em;
 }
 
-.TableEditable-title { display: inline-block; }
+.TableEditable-title {
+    color: #B1BCBE;
+    font-weight: 400;
+}
 
 /* Select Cells */
 
 .Table-selectAll,
 .Table-selectRow {
+    display: none;
     flex-grow: 0;
     padding: .25em;
     padding-left: .5em;
     padding-right: 0;
 }
 
+.Table.has-multipleSelection .Table-selectAll,
+.Table.has-multipleSelection .Table-selectRow {
+    display: block;
+}
+
 /* Controls */
 
 .TableEditable-rowControls {
     position: absolute;
-    z-index: 999;
+    z-index: 999 !important;
     background: #3d4c5b;
     padding: .5em;
     transform: translateY(-1px);

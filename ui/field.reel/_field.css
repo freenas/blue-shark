@@ -32,7 +32,7 @@
     width: var(--fieldtitleWidth);
     padding-right: 1.5rem;
     padding-top: .35rem;
-    color: rgba(255,255,255,.8);
+    color: #B1BCBE;
     transition: opacity .25s;
 }
 
