@@ -36,7 +36,7 @@
 
 /* .Table-row-group .Table-row:nth-child(odd) { background-color: rgba(0,0,0,.1); } */
 
-.Table-row-group .Table-row:hover { background-color: rgba(59, 110, 162, 0.05); }
+.Table-row-group .Table-row:hover { background-color: rgba(59, 110, 162, 0.1); }
 
 /* Caption */
 
