@@ -70,6 +70,7 @@ BODY
 .TableEditable .Table-cells {
     flex: 1;
     display: flex;
+    align-items: center;
 }
 
 /* Row Cell */
