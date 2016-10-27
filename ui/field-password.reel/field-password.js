@@ -13,6 +13,9 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
         value: false
     },
 
+    editEnabled: {
+        value: null
+    },
 
     value: {
         set: function (value) {
@@ -66,7 +69,6 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
     exitDocument: {
         value: function () {
             this.reset();
-
             if (this.preparedForActivationEvents) {
                 this.passwordFieldInput2.element.removeEventListener("blur", this, true);
                 this.passwordFieldInput2.element.removeEventListener("focus", this, true);
@@ -78,6 +80,7 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
         value: function () {
             this.passwordFieldInput2.element.addEventListener("blur", this, true);
             this.element.addEventListener("focus", this, true);
+            this.addEventListener("action", this);
         }
     },
 
@@ -126,6 +129,22 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
             }
 
             this.passwordMatch = passwordMatch;
+        }
+    },
+
+    handleResetAction: {
+        value: function () {
+            this.editEnabled = true;
+            this.needsfocus = true;
+        }
+    },
+
+    draw: {
+        value: function () {
+            if(this.needsfocus) {
+                this.passwordFieldInput1.focus();
+                this.needsfocus = false;
+            }
         }
     }
 
