@@ -13,39 +13,10 @@
             "prototype": "blue-shark/ui/field-password.reel",
             "properties": {
                 "element": {"#": "passwordField"},
-                "errorMessage": "the passwords do not match",
-                "label": "Password!",
+                "label": "type password",
                 "placeholder1": "enter password",
                 "placeholder2": "confirm password",
-                "resetLabel": "Reset Password"
-            }
-        },
-        "condition": {
-            "prototype": "montage/ui/condition.reel",
-            "properties": {
-                "element": {"#": "condition"}
-            },
-            "bindings": {
-                "condition": {"<-": "@checkbox.checked"}
-            }
-        },
-
-        "checkbox": {
-            "prototype": "blue-shark/ui/checkbox.reel",
-            "properties": {
-                "element": {"#": "checkbox"},
-                "label": "display password component"
-            }
-        },
-
-        "passwordField2": {
-            "prototype": "blue-shark/ui/field-password.reel",
-            "properties": {
-                "element": {"#": "passwordField2"},
                 "errorMessage": "the passwords do not match",
-                "label": "password",
-                "placeholder1": "enter password",
-                "placeholder2": "confirm password",
                 "editEnabled": true
             }
         }
