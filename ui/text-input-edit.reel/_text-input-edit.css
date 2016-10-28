@@ -1,4 +1,7 @@
-.TextInputEdit { display: flex; }
+.TextInputEdit {
+    display: flex;
+    flex: 1;
+}
 
 .TextInputEdit-editButton {
     @nest .TextInputEdit.is-editing & {
@@ -8,7 +11,7 @@
 
 .TextInputEdit-cancelButton {
     display: none;
-    margin-right: .5em;
+    margin-right: .5em !important;
 
     @nest .TextInputEdit.is-editing & {
         display: block;
