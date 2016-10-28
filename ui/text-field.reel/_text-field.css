@@ -15,7 +15,7 @@
     border:         1px solid transparent;
     border-top:     1px solid rgba(0, 0, 0, .23);
     border-bottom:  1px solid rgba(255, 255, 255, .15);
-    transition-property: background, border-color, opacity;
+    transition-property: background-color, border-color, opacity;
     transition-duration: .25s;
 
     &:focus { border: 1px solid #2B9CD8; }
@@ -27,7 +27,7 @@
     }
 
     &[readonly="readonly"] {
-        background: none;
+        background-color: transparent;
         border: none;
         padding: 0;
     }
