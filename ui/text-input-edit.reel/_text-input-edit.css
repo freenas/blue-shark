@@ -1,8 +1,4 @@
-.TextInputEdit {
-    display: flex;
-}
-
-.TextInputEdit-input {}
+.TextInputEdit { display: flex; }
 
 .TextInputEdit-editButton {
     @nest .TextInputEdit.is-editing & {
