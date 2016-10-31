@@ -17,15 +17,18 @@
 .Table-selectAll,
 .Table-selectRow {
     display: none !important;
+    align-self: stretch;
+    align-items: center;
     flex-grow: 0;
     padding: .25em;
     padding-left: .5em;
     padding-right: 0;
+    border-right: 1px solid rgba(0,0,0,.25);
 }
 
 .Table.has-multipleSelection .Table-selectAll,
 .Table.has-multipleSelection .Table-selectRow {
-    display: block !important;
+    display: flex !important;
 }
 
 /* Controls */
@@ -70,14 +73,31 @@ BODY
 .TableEditable .Table-cells {
     flex: 1;
     display: flex;
-    align-items: center;
+    align-items: stretch;
+
 }
 
 /* Row Cell */
 
 .TableEditable .Table-cells > div {
+    position: relative;
     padding: .5em;
     flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.TableEditable .Table-cells > div:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -1px;;
+    border-right: 1px solid rgba(0,0,0,.25);
+}
+
+.TableEditable .Table-cells > div:last-child {
+    border: none;
 }
 
 /* Empty State */

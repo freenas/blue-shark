@@ -19,6 +19,15 @@
     flex: 1;
 }
 
+.TableHeaderLayout-cell:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -1px;;
+    border-right: 1px solid rgba(0,0,0,.25);
+}
+
 .TableHeaderLayout-cell:after {
     display: inline-block;
     display: none;
