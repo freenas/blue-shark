@@ -7,6 +7,9 @@
         "owner": {
             "properties": {
                 "element": {"#": "owner"}
+            },
+            "bindings": {
+                "selectedRow": {"<-": "@tableLayout.rowRepetitionComponent.selection.one()"}
             }
         },
 
@@ -17,7 +20,8 @@
             },
             "bindings": {
                 "rows": {"<-": "@owner.rows"},
-                "sortPath": {"<-": "@owner.sortPath"}
+                "sortPath": {"<-": "@owner.sortPath"},
+                "isSelectionEnabled": {"<-": "@owner.isSelectionEnabled"}
             }
         },
 
