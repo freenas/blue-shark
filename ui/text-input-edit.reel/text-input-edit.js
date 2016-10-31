@@ -1,14 +1,20 @@
 /**
  * @module ui/text-input-edit.reel
  */
-var Component = require("montage/ui/component").Component,
+var AbstractControl = require("montage/ui/base/abstract-control").AbstractControl,
     KeyComposer = require("montage/composer/key-composer").KeyComposer;
 
 /**
  * @class TextInputEdit
  * @extends Component
  */
-var TextInputEdit = exports.TextInputEdit = Component.specialize(/** @lends TextInputEdit# */ {
+var TextInputEdit = exports.TextInputEdit = AbstractControl.specialize(/** @lends TextInputEdit# */ {
+
+    enterDocument: {
+        value: function () {
+            // this.createActionEvent();
+        }
+    },
 
     prepareForActivationEvents: {
         value: function () {
@@ -56,11 +62,12 @@ var TextInputEdit = exports.TextInputEdit = Component.specialize(/** @lends Text
 
     handleSubmitButtonAction: {
         value: function () {
-            if (this.input.value != this._originalValue) {
-                // do some action
-            }
             this.isEditEnabled = false;
             this._deselectText();
+            if(this._originalValue != this.input.value) {
+                this.detail.set('eventName', 'textValueChanged');
+                this.dispatchActionEvent();
+            }
         }
     },
 
