@@ -173,6 +173,12 @@ exports.TableEditable = Component.specialize({
         }
     },
 
+    findRowIterationContainingElement: {
+        value: function (element) {
+            return this._rowRepetitionComponent._findIterationContainingElement(element);
+        }
+    },
+
     //END Public API
 
     willPositionOverlay: {
