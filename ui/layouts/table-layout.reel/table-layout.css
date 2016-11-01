@@ -19,6 +19,10 @@
     background-color: #2A2E33;
 }
 
+.Table-row-group:empty {
+    display: none;
+}
+
 .Table-row {
     display: flex;
     flex: 1;

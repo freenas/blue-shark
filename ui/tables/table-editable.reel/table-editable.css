@@ -96,10 +96,6 @@ BODY
     border-right: 1px solid rgba(0,0,0,.25);
 }
 
-.TableEditable .Table-cells > div:last-child {
-    border: none;
-}
-
 /* Empty State */
 
 .Table-emptyState {

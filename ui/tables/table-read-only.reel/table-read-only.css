@@ -1,1 +1,22 @@
 .TableReadOnly {}
+
+.TableReadOnly .Table-row > div {
+    position: relative;
+    padding: .5em;
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.TableReadOnly .Table-row > div:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -1px;;
+    border-right: 1px solid rgba(0,0,0,.25);
+}
+
+.TableReadOnly .Table-cell {
+    padding: 0;
+}
