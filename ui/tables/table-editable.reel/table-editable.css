@@ -83,16 +83,3 @@ BODY
     right: -1px;;
     border-right: 1px solid rgba(0,0,0,.25);
 }
-
-/* Empty State */
-
-.Table-emptyState {
-    width: 100%;
-    border: 1px solid #282828;
-    padding: 1em;
-    color: #939E9F;
-    line-height: 1em;
-    text-align: center;
-    border-top: none;
-    background-color: rgba(0,0,0,.1);
-}

@@ -38,7 +38,9 @@
                 "label": {"<-": "@owner.label"},
                 "classList.has('has-multipleSelection')": {"<-": "@owner.isMultiSelectionEnabled"},
                 "classList.has('is-hidden')": {"<-": "!@owner._rowEntries.length && !@owner._canShowNewEntryRow"},
-                "contentMaxHeight": {"<-": "@owner.contentMaxHeight"}
+                "contentMaxHeight": {"<-": "@owner.contentMaxHeight"},
+                "isLoading": {"<-": "@owner.isLoading"},
+                "loadingMessage": {"<-": "@owner.loadingMessage"}
             }
         },
 
@@ -111,17 +113,6 @@
 
         ":rowIteration": {
            "alias": "@tableLayout:rowIteration"
-        },
-
-        "emptyState": {
-            "prototype": "montage/ui/text.reel",
-            "properties": {
-                "element": {"#": "emptyState"}
-            },
-            "bindings": {
-                "value": {"<-": "!!@owner.emptyMessage ? @owner.emptyMessage : 'No data added'"},
-                "classList.has('is-hidden')": {"<-": "@owner.rows.length"}
-            }
         }
     }
     </script>
@@ -147,7 +138,6 @@
                 <div data-param="table-editable-footer"></div>
             </div>
         </div>
-        <div data-montage-id="emptyState" class="Table-emptyState"></div>
         <div data-montage-id="rowControls" class="TableEditable-rowControls">
             <button data-montage-id="cancel"></button>
             <button data-montage-id="done" class="Button--primary"></button>

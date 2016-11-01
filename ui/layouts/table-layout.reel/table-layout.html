@@ -47,6 +47,28 @@
             "bindings": {
                 "value": {"<-": "@owner.label"}
             }
+        },
+
+        "isLoading": {
+            "prototype": "ui/loading-message.reel",
+            "properties": {
+                "element": {"#": "isLoading"}
+            },
+            "bindings": {
+                "loadingMessage": {"<-": "@owner.loadingMessage"},
+                "classList.has('is-hidden')": {"<-": "!@owner.isLoading"}
+            }
+        },
+
+        "emptyState": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "emptyState"}
+            },
+            "bindings": {
+                "value": {"<-": "!!@owner.emptyMessage ? @owner.emptyMessage : 'No data added'"},
+                "classList.has('is-hidden')": {"<-": "@owner.rows.length || @owner.isLoading"}
+            }
         }
     }
     </script>
@@ -59,9 +81,15 @@
         </div>
         <div data-param="table-header-columns" class="Table-header-columns"></div>
         <div data-param="table-body-top" class="Table-row-group"></div>
-        <div data-montage-id="scrollview">
-            <div data-montage-id="rowRepetition" class="Table-row-group">
-                <div data-param="table-row"></div>
+        <div data-montage-id="table-content" class="Table-content">
+            <div data-montage-id="isLoading" class="Table-isLoading"></div>
+            <div data-montage-id="emptyState" class="Table-emptyState"></div>
+            <div data-montage-id="scrollview">
+                <div>
+                    <div data-montage-id="rowRepetition" class="Table-row-group">
+                        <div data-param="table-row"></div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="Table-footer">
