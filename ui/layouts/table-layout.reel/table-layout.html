@@ -37,12 +37,26 @@
                 "element": {"#": "scrollview"},
                 "overflow": "scrollY"
             }
+        },
+
+        "label": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "label"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner.label"}
+            }
         }
     }
     </script>
 </head>
 <body>
     <div data-montage-id="owner" class="Table">
+        <div class="Table-caption">
+            <div data-montage-id="label" class="Table-label"></div>
+            <div data-param="table-header-toolbar"></div>
+        </div>
         <div data-param="table-header-columns" class="Table-header-columns"></div>
         <div data-param="table-body-top" class="Table-row-group"></div>
         <div data-montage-id="scrollview">

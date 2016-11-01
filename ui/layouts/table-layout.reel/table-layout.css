@@ -1,4 +1,7 @@
-.Table {}
+.Table-label {
+    color: #B1BCBE;
+    font-weight: 400;
+}
 
 /* Table-header-columns */
 
@@ -40,7 +43,10 @@ Rows - selection Enabled
 
 .Table.has-selection-enabled .Table-row { cursor: pointer; }
 
-.Table-row.selected                        { background-color: #2089d3; }
+.Table-row.selected {
+    color: #fff;
+    background-color: #2089d3;
+}
 .Table-row-group .Table-row.selected:hover { background-color: #2089d3; }
 
 /* Table Cell */
@@ -55,8 +61,10 @@ Rows - selection Enabled
 /* Caption */
 
 .Table-caption {
-    padding: .5em;
-    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: .5em;
 }
 
 /* Scrollview */

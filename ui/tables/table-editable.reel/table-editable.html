@@ -35,6 +35,7 @@
                 "title": {"<-": "@owner.title"},
                 "rows": {"<-": "@owner._rowEntries"},
                 "sortPath": {"<-": "@owner.sortPath"},
+                "label": {"<-": "@owner.label"},
                 "classList.has('has-multipleSelection')": {"<-": "@owner.isMultiSelectionEnabled"},
                 "classList.has('is-hidden')": {"<-": "!@owner._rowEntries.length && !@owner._canShowNewEntryRow"},
                 "contentMaxHeight": {"<-": "@owner.contentMaxHeight"}
@@ -88,16 +89,6 @@
             }
         },
 
-        "label": {
-            "prototype": "montage/ui/text.reel",
-            "properties": {
-                "element": {"#": "label"}
-            },
-            "bindings": {
-                "value": {"<-": "@owner.label"}
-            }
-        },
-
         "selectRow": {
             "prototype": "ui/checkbox.reel",
             "properties": {
@@ -137,11 +128,10 @@
 </head>
 <body>
     <div data-montage-id="owner" class="TableEditable">
-        <div data-arg="table-header-toolbar" class="TableEditable-toolbar">
-            <div data-montage-id="label" class="TableEditable-title"></div>
-            <div data-param="table-editable-header-toolbar"></div>
-        </div>
         <div data-montage-id="tableLayout">
+            <div data-arg="table-header-toolbar" class="TableEditable-toolbar">
+                <div data-param="table-editable-header-toolbar"></div>
+            </div>
             <div data-arg="table-header-columns">
                 <div data-montage-id="selectAll" class="Table-selectAll"></div>
                 <div data-montage-id="columnTitle" class="TableEditable-columns"></div>

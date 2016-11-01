@@ -1,17 +1,5 @@
 .TableEditable { position: relative; }
 
-.TableEditable-toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: .5em;
-}
-
-.TableEditable-title {
-    color: #B1BCBE;
-    font-weight: 400;
-}
-
 /* Select Cells */
 
 .Table-selectAll,
@@ -108,5 +96,3 @@ BODY
     border-top: none;
     background-color: rgba(0,0,0,.1);
 }
-
-
