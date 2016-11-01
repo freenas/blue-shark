@@ -10,22 +10,15 @@ var AbstractControl = require("montage/ui/base/abstract-control").AbstractContro
  */
 var TextInputEdit = exports.TextInputEdit = AbstractControl.specialize(/** @lends TextInputEdit# */ {
 
-    enterDocument: {
-        value: function () {
-            // this.createActionEvent();
-        }
-    },
-
     prepareForActivationEvents: {
         value: function () {
             var keyboardIdentifiers = this.constructor.KEY_IDENTIFIERS,
-                keyboardIdentifiersKeys = Object.keys(keyboardIdentifiers),
                 keyboardIdentifier;
 
             this._keyComposerMap = new Map();
 
-            for (var i = 0, length = keyboardIdentifiersKeys.length; i < length; i++) {
-                keyboardIdentifier = keyboardIdentifiers[keyboardIdentifiersKeys[i]];
+            for (var i = 0, length = keyboardIdentifiers.length; i < length; i++) {
+                keyboardIdentifier = keyboardIdentifiers[i];
 
                 this._keyComposerMap.set(
                     keyboardIdentifier,
@@ -82,10 +75,10 @@ var TextInputEdit = exports.TextInputEdit = AbstractControl.specialize(/** @lend
 {
 
     KEY_IDENTIFIERS: {
-        value: {
-            enter: "enter",
-            escape: "escape"
-        }
+        value: [
+            "enter",
+            "escape"
+        ]
     }
 });
 
