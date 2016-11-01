@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="loading-message.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+        "message": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "message"}
+            },
+            "bindings": {
+                "value": {"<-": "!!@owner.loadingMessage ? @owner.loadingMessage : 'Loading...'"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="LoadingMessage">
+        <div data-montage-id="message" class="LoadingMessage-message"></div>
+        <div data-montage-id="spinner" class="LoadingMessage-spinner"></div>
+    </div>
+</body>
+</html>
