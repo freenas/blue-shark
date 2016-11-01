@@ -7,7 +7,12 @@
         "owner": {
             "properties": {
                 "element": {"#": "owner"},
-                "rowRepetitionComponent": {"@": "rowRepetition"}
+                "rowRepetitionComponent": {"@": "rowRepetition"},
+                "scrollview": {"#": "scrollview"}
+            },
+            "bindings": {
+                "selectionEnabled": {"<-": "!!@owner.isSelectionEnabled"},
+                "classList.has('has-selection-enabled')": {"<-": "selectionEnabled"}
             }
         },
 
@@ -18,12 +23,20 @@
             },
             "bindings": {
                 "content": {"<-": "@owner.rows"},
-                "isSelectionEnabled": {"<-": "!!@owner.isSelectionEnabled"}
+                "isSelectionEnabled": {"<-": "@owner.selectionEnabled"}
             }
         },
 
         ":rowIteration": {
            "alias": "@rowRepetition:iteration"
+        },
+
+        "scrollview": {
+            "prototype": "ui/scrollview.reel",
+            "properties": {
+                "element": {"#": "scrollview"},
+                "overflow": "scrollY"
+            }
         }
     }
     </script>
@@ -32,8 +45,10 @@
     <div data-montage-id="owner" class="Table">
         <div data-param="table-header-columns" class="Table-header-columns"></div>
         <div data-param="table-body-top" class="Table-row-group"></div>
-        <div data-montage-id="rowRepetition" class="Table-row-group">
-            <div data-param="table-row"></div>
+        <div data-montage-id="scrollview">
+            <div data-montage-id="rowRepetition" class="Table-row-group">
+                <div data-param="table-row"></div>
+            </div>
         </div>
         <div class="Table-footer">
             <div data-param="table-footer"></div>

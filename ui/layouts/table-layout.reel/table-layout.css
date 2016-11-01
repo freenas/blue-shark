@@ -10,18 +10,15 @@
     border: 1px solid #1a1d1f;
 }
 
-/* Row */
+.Table-row-group { width: 100%; }
 
-.Table-row-group    {
-    width: 100%;
-    border: 1px solid #1a1d1f;
-    border-top: none;
-    background-color: #2A2E33;
-}
+.Table-row-group:empty { display: none; } /* removes table row group if empty */
 
-.Table-row-group:empty {
-    display: none;
-}
+/*
+
+Row
+
+*/
 
 .Table-row {
     display: flex;
@@ -29,7 +26,24 @@
     align-items: center;
     position: relative;
     transition: background-color .15s ease-in-out;
+    background-color: #2A2E33;
 }
+
+.Table-row:nth-child(odd)         { background-color: #242628; }
+.Table-row-group .Table-row:hover { background-color: rgba(59, 110, 162, 0.1); }
+
+/*
+
+Rows - selection Enabled
+
+*/
+
+.Table.has-selection-enabled .Table-row { cursor: pointer; }
+
+.Table-row.selected                        { background-color: #2089d3; }
+.Table-row-group .Table-row.selected:hover { background-color: #2089d3; }
+
+/* Table Cell */
 
 .Table-cell {
     flex: 1;
@@ -38,13 +52,14 @@
     font-weight: 200;
 }
 
-.Table-row-group .Table-row:nth-child(odd) { background-color: rgba(0,0,0,.15); }
-
-.Table-row-group .Table-row:hover { background-color: rgba(59, 110, 162, 0.1); }
-
 /* Caption */
 
 .Table-caption {
     padding: .5em;
     text-align: right;
 }
+
+/* Scrollview */
+
+.Table .Scrollview { border: 1px solid #1a1d1f; border-top: none;}
+.Table .Scrollview .Scrollview-transform { display: block; }

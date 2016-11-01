@@ -36,7 +36,8 @@
                 "rows": {"<-": "@owner._rowEntries"},
                 "sortPath": {"<-": "@owner.sortPath"},
                 "classList.has('has-multipleSelection')": {"<-": "@owner.isMultiSelectionEnabled"},
-                "classList.has('is-hidden')": {"<-": "!@owner._rowEntries.length && !@owner._canShowNewEntryRow"}
+                "classList.has('is-hidden')": {"<-": "!@owner._rowEntries.length && !@owner._canShowNewEntryRow"},
+                "contentMaxHeight": {"<-": "@owner.contentMaxHeight"}
             }
         },
 
