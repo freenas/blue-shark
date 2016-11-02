@@ -40,16 +40,16 @@ var TextInputEdit = exports.TextInputEdit = AbstractControl.specialize(/** @lend
 
     _deselectText: {
         value: function () {
-            this.input.element.selectionEnd = this.input.element.selectionStart;
+            this.inputComponent.input.element.selectionEnd = this.inputComponent.input.element.selectionStart;
         }
     },
 
     handleEditButtonAction: {
         value: function () {
             this.isEditEnabled = true;
-            this._originalValue = this.input.value;
-            this.input.focus();
-            this.input.select();
+            this._originalValue = this.inputComponent.value;
+            this.inputComponent.input.focus();
+            this.inputComponent.input.select();
         }
     },
 
@@ -57,7 +57,7 @@ var TextInputEdit = exports.TextInputEdit = AbstractControl.specialize(/** @lend
         value: function () {
             this.isEditEnabled = false;
             this._deselectText();
-            if(this._originalValue != this.input.value) {
+            if(this._originalValue != this.inputComponent.value) {
                 this.detail.set('eventName', 'textValueChanged');
                 this.dispatchActionEvent();
             }
@@ -66,9 +66,11 @@ var TextInputEdit = exports.TextInputEdit = AbstractControl.specialize(/** @lend
 
     handleCancelButtonAction: {
         value: function () {
-            this.input.value = this._originalValue;
+            this.inputComponent.value = this._originalValue;
             this.isEditEnabled = false;
             this._deselectText();
+            this.inputComponent.input.blur();
+
         }
     }
 },

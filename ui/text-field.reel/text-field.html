@@ -6,7 +6,8 @@
     {
         "owner": {
             "properties": {
-                "element": {"#": "owner"}
+                "element": {"#": "owner"},
+                "input": {"@": "input"}
             },
             "bindings": {
                 "classList.has('has-error')": {"<-": "@owner.hasError"}
@@ -21,7 +22,8 @@
                 "placeholder": {"<-": "@owner.placeholder"},
                 "disabled": {"<-": "@owner.disabled"},
                 "value": {"<->": "@owner.value"},
-                "hasFocus": {"<->": "@owner.hasFocus"}
+                "hasFocus": {"<->": "@owner.hasFocus"},
+                "readonly": {"<-": "@owner.readonly"}
             }
         },
         "controlError": {
