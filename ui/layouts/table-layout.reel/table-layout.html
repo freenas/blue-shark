@@ -12,7 +12,8 @@
             },
             "bindings": {
                 "selectionEnabled": {"<-": "!!@owner.isSelectionEnabled"},
-                "classList.has('has-selection-enabled')": {"<-": "selectionEnabled"}
+                "classList.has('has-selection-enabled')": {"<-": "selectionEnabled"},
+                "classList.has('content-is-empty')": {"<-": "@owner.contentIsEmpty"}
             }
         },
 

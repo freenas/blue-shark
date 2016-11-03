@@ -26,7 +26,6 @@
     z-index: 999 !important;
     background: #3d4c5b;
     padding: .5em;
-    transform: translateY(-1px);
     border-bottom-left-radius:  4px;
     border-bottom-right-radius: 4px;
     border: 1px solid #1a1d1f;
@@ -36,13 +35,18 @@
 
 /* New Row */
 
+.Table-body-top {
+    border: 1px solid #1a1d1f;
+    border-top: none;
+}
+
 .TableEditable .Table-body-top.Table-row-group .Table-cells {
     /* magic # based on checkbox width */
     background-color: #3d4c5b;
 }
 
 .TableEditable .Table.has-multipleSelection .Table-body-top.Table-row-group .Table-cells {
-    padding-left: 2.5em;
+    padding-left: 2.6em;
 }
 
 
@@ -62,7 +66,6 @@ BODY
     flex: 1;
     display: flex;
     align-items: stretch;
-
 }
 
 /* Row Cell */

@@ -37,7 +37,7 @@
                 "sortPath": {"<-": "@owner.sortPath"},
                 "label": {"<-": "@owner.label"},
                 "classList.has('has-multipleSelection')": {"<-": "@owner.isMultiSelectionEnabled"},
-                "classList.has('is-hidden')": {"<-": "!@owner._rowEntries.length && !@owner._canShowNewEntryRow"},
+                "contentIsEmpty": {"<-": "!@owner._rowEntries.length && !@owner._canShowNewEntryRow"},
                 "contentMaxHeight": {"<-": "@owner.contentMaxHeight"},
                 "isLoading": {"<-": "@owner.isLoading"},
                 "loadingMessage": {"<-": "@owner.loadingMessage"}
