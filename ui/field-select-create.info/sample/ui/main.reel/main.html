@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"},
+                "options": [
+                    {"value": "true", "label": "true"},
+                    {"value": "test", "label": "test"},
+                    {"value": "another", "label": "another"},
+                    {"value": "last option", "label": "last option"},
+                    {"value": "last option frb", "label": "'last option' + number", "number": 3}
+                ]
+            },
+            "listeners": [
+                {
+                    "listener": {"@": "owner"},
+                    "type": "action"
+                }
+            ]
+        },
+        "icons": {
+            "prototype": "blue-shark/ui/icons.reel",
+            "properties": {
+                "element": {"#": "icons"}
+            }
+        },
+        "eventTest": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "eventTest"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner.eventTarget"}
+            }
+        },
+        "default": {
+            "prototype": "blue-shark/ui/field-select-create.reel",
+            "properties": {
+                "element": {"#": "default"},
+                "label": "Select Option"
+            },
+            "bindings": {
+                "options": {"<-": "@owner.options"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Main">
+        <div data-montage-id="icons"></div> <!-- example only -->
+        <div class="container">
+            <h1>Field Select Create</h1>
+            <h3>Default </h3>
+            <div data-montage-id="default"></div>
+            <div data-montage-id="eventTest"></div>
+        </div>
+    </div>
+</body>
+</html>
