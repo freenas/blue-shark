@@ -128,3 +128,6 @@ $Icons
 .sharedIcon-preferences:before {
     content: "\67";
 }
+
+.g-margin-bottom        { margin-bottom:  1rem; }
+.g-margin-bottom--half  { margin-bottom: .5rem; }
