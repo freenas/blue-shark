@@ -11,7 +11,7 @@
             },
             "bindings": {
                 "classList.has('is-disabled')": {"<-": "!!@owner.disabled"},
-                "classList.has('has-error')": {"<-": "@owner.hasError"}
+                "classList.has('has-error')": {"<-": "@owner.hasError || !!@owner.errorMessage"}
             }
         },
         "controlError": {
@@ -20,7 +20,8 @@
                 "element": {"#": "controlError"}
             },
             "bindings": {
-                "errorMessage": {"<-": "@owner.errorMessage"}
+                "errorMessage": {"<-": "@owner.errorMessage"},
+                "hasError": {"<-": "@owner.hasError || !!@owner.errorMessage"}
             }
         },
         "input": {

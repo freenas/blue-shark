@@ -1,8 +1,3 @@
-.SelectMultiple {
-
-    &.has-error .ControlError { display: block; }
-}
-
 .SelectMultiple-input {
     position: relative;
     width: 100%;
@@ -42,3 +37,11 @@
     }
 }
 
+.SelectMultiple select option:hover,
+.SelectMultiple select option:focus,
+.SelectMultiple select option:active,
+.SelectMultiple select option:checked
+{
+    background: linear-gradient(var(--color-selected),var(--color-selected));
+    background-color: var(--color-selected) !important; /* for IE */
+}
