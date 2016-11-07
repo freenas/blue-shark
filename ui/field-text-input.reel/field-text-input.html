@@ -8,9 +8,6 @@
                 "element": {"#": "owner"},
                 "field": {"@": "field"},
                 "control": {"@": "control"}
-            },
-            "bindings": {
-                "hasError": {"<-": "!!@control.errorMessage"}
             }
         },
         "field": {
@@ -35,8 +32,8 @@
                 "converter": {"<-": "@owner.converter"},
                 "value": {"<->": "@owner.value"},
                 "readonly": {"<-": "@owner.readonly"},
-                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
-                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"},
+                "errorMessage": {"<-": "@owner.errorMessage"},
+                "hasError": {"<-": "@owner.hasError"},
                 "disabled": {"<-": "@owner.disabled"}
             }
         }
