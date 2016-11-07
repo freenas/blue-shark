@@ -4,6 +4,9 @@
     font-size: 1em;
 
     &.has-error .ControlError { display: block; }
+
+    &.has-error label:before { border-color: var(--red); }
+    &.has-error label:after  { color:        var(--red); }
 }
 
 .Checkbox > * {
@@ -31,9 +34,7 @@
         box-shadow: none;
     }
 
-    &[disabled="disabled"] + label:after {
-        color: #666;
-    }
+    &[disabled="disabled"] + label:after { color: #666; }
 }
 
 .Checkbox label {
