@@ -7,7 +7,13 @@
         "owner": {
             "properties": {
                 "element": {"#": "owner"}
-            }
+            },
+            "listeners": [
+                {
+                    "listener": {"@": "owner"},
+                    "type": "action"
+                }
+            ]
         },
         "icons": {
             "prototype": "blue-shark/ui/icons.reel",
@@ -15,12 +21,26 @@
                 "element": {"#": "icons"}
             }
         },
+        "disableButton": {
+            "prototype": "blue-shark/ui/button.reel",
+            "properties": {
+                "element": {"#": "disableButton"},
+                "value": "toggle disable on components"
+            }
+        },
+        "toggleErrorsButton": {
+            "prototype": "blue-shark/ui/button.reel",
+            "properties": {
+                "element": {"#": "toggleErrorsButton"},
+                "value": "toggle component error state"
+            }
+        },
         "textField": {
             "prototype": "blue-shark/ui/text-field.reel",
             "properties": {
                 "element": {"#": "textField"},
                 "placeholder": "Enter text here",
-                "disabled": true
+                "hasError": false
             }
         },
         "textArea": {
@@ -28,7 +48,7 @@
             "properties": {
                 "element": {"#": "textArea"},
                 "placeholder": "Enter text here",
-                "disabled": true
+                "hasError": false
             }
         },
         "passwordInput": {
@@ -37,25 +57,20 @@
                 "element": {"#": "passwordInput"},
                 "placeholder": "Enter password",
                 "value": "this is the initial value",
-                "hasError": false,
-                "errorMessage": "This is the error message",
-                "disabled": false
+                "hasError": false
             }
         },
         "toggleSwitch": {
             "prototype": "blue-shark/ui/toggle-switch.reel",
             "properties": {
-                "element": {"#": "toggleSwitch"},
-                "disabled": true
+                "element": {"#": "toggleSwitch"}
             }
         },
         "radioGroup": {
             "prototype": "blue-shark/ui/radio-button-field-group.reel",
             "properties": {
                 "element": {"#": "radioGroup"},
-                "errorMessage": "This is the error message",
-                "hasError": true,
-                "disabled": true,
+                "hasError": false,
                 "options": [
                     {"label": "option1", "value": "option1"},
                     {"label": "option2", "value": "option2"},
@@ -68,10 +83,7 @@
             "prototype": "blue-shark/ui/select.reel",
             "properties": {
                 "element": {"#": "select"},
-                "selectedValue": "media",
-                "errorMessage": "This is the error message",
-                "hasError": true,
-                "disabled": true,
+                "hasError": false,
                 "options": [
                     {
                         "value": "none",
@@ -116,10 +128,7 @@
             "prototype": "blue-shark/ui/checkbox.reel",
             "properties": {
                 "element": {"#": "checkbox"},
-                "errorMessage": "This is the checkbox error message",
-                "hasError": true,
-                "label": "checkbox label",
-                "disabled": {"<-": "@owner.disabled"}
+                "label": "checkbox label"
             }
         },
         "converter": {
@@ -130,9 +139,6 @@
             "properties": {
                 "element": {"#": "multiSelect"},
                 "placeholder": "Enter name of item to add",
-                "inputErrorMessage": "this is the input error message",
-                "valueErrorMessage": "this is the value error message",
-                "disabled": true,
                 "options": [
                     {"name": "foo", "myProperty": "blah 1"},
                     {"name": "aaoption2", "myProperty": "blah 2"},
@@ -159,36 +165,32 @@
             "prototype": "blue-shark/ui/date.reel",
             "properties": {
                 "element": {"#": "date"},
-                "errorMessage": "This is the date error message",
-                "hasError": true,
-                "disabled": true
-            }
+                "hasError": false            }
         },
         "time": {
             "prototype": "blue-shark/ui/time.reel",
             "properties": {
                 "element": {"#": "time"},
-                "errorMessage": "This is the date error message",
-                "hasError": true,
+                "hasError": false,
                 "intervalInSeconds": 1800,
                 "pattern": "hh:mm:ss",
-                "isDefaultNow": false,
-                "disabled": true
+                "isDefaultNow": false
             }
         },
         "duration": {
             "prototype": "blue-shark/ui/duration.reel",
             "properties": {
                 "element": {"#": "duration"},
-                "errorMessage": "This is the duration error message",
-                "disabled": true,
-                "placeholder": "duration placeholder value"
+                "placeholder": "duration placeholder value",
+                "inputHasError": false,
+                "unitHasError": false
             }
         },
         "selectMultiple": {
             "prototype": "blue-shark/ui/select-multiple.reel",
             "properties": {
                 "element": {"#": "selectMultiple"},
+                "hasError": false,
                 "options": [
                     "one",
                     "two",
@@ -196,10 +198,7 @@
                     "four",
                     "five",
                     "six"
-                ],
-                "errorMessage": "This is the select multiple error message",
-                "hasError": true,
-                "disabled": true
+                ]
             }
         }
 
@@ -211,6 +210,8 @@
         <div data-montage-id="icons" class="is-hidden"></div>
         <div class="container">
             <h1>Widget Examples</h1>
+            <div data-montage-id="disableButton"></div>
+            <div data-montage-id="toggleErrorsButton"></div>
             <div class="column">
                 <h4>text field</h4>
                 <div data-montage-id="textField"></div>
