@@ -9,7 +9,6 @@
                 "element": {"#": "owner"}
             },
             "bindings": {
-                "classList.has('has-error')": {"<-": "@owner.hasError"},
                 "classList.has('is-disabled')": {"<-": "@owner.disabled"}
             }
         },
@@ -46,7 +45,8 @@
                 "element": {"#": "controlError"}
             },
             "bindings": {
-                "errorMessage": {"<-": "@owner.errorMessage"}
+                "errorMessage": {"<-": "@owner.errorMessage"},
+                "hasError":     {"<-": "@owner.hasError || !!@owner.errorMessage"}
             }
         }
     }
