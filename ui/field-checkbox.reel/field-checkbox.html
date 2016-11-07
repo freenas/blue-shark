@@ -29,7 +29,7 @@
             "bindings": {
                 "checked": {"<->": "@owner.checked"},
                 "disabled": {"<-": "@owner.disabled"},
-                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
+                "errorMessage": {"<-": "@owner.errorMessage"},
                 "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"}
             }
         }
