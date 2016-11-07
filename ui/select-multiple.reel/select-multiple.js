@@ -11,6 +11,26 @@ exports.SelectMultiple = Component.specialize({
         }
     },
 
+    _disabled: {
+        value: null
+    },
+
+    disabled: {
+        set: function(value) {
+            if(this.input && value !== this._disabled) {
+                if (value) {
+                    this.input.element.setAttribute("disabled", "disabled");
+                } else {
+                    this.input.element.removeAttribute("disabled");
+                }
+                this._disabled = value;
+            }
+        },
+        get: function () {
+            return this._disabled;
+        }
+    },
+
     handleChange: {
         value: function () {
             var children = this.input.element.children,
