@@ -16,7 +16,8 @@
                 }
             ],
             "bindings": {
-                "classList.has('is-expanded')": {"<-": "@dateValue.hasFocus || @decrement.hasFocus || @increment.hasFocus"}
+                "classList.has('is-expanded')": {"<-": "!@owner.disabled && (@dateValue.hasFocus || @decrement.hasFocus || @increment.hasFocus)"},
+                "classList.has('is-disabled')": {"<-": "@owner.disabled"}
             }
         },
         "dateToStringConverter": {
@@ -44,7 +45,10 @@
                 "converter": {"@": "dateToStringConverter"}
             },
             "bindings": {
-                "value": {"<->": "@owner.value"}
+                "value": {"<->": "@owner.value"},
+                "errorMessage": {"<-": "@owner.errorMessage"},
+                "hasError": {"<-": "@owner.hasError || !!@owner.errorMessage"},
+                "disabled": {"<-": "@owner.disabled"}
             }
         },
         "currentMonth": {
