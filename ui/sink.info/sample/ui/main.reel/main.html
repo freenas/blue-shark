@@ -21,9 +21,8 @@
                 "element": {"#": "textField"},
                 "placeholder": "Enter text here",
                 "label": "Field Text Input",
-                "errorMessage": "This is the text input error message",
-                "hasError": true,
-                "disabled": true
+                "hasError": false,
+                "disabled": false
             }
         },
         "textArea": {
@@ -32,9 +31,8 @@
                 "element": {"#": "textArea"},
                 "placeholder": "Enter text here",
                 "label": "Field Text Area",
-                "errorMessage": "This is the error message that is really long to hopefully not break things, This is the error message that is really long to hopefully not break things",
-                "hasError": true,
-                "disabled": true
+                "hasError": false,
+                "disabled": false
             }
         },
         "passwordInput": {
@@ -43,8 +41,7 @@
                 "element": {"#": "passwordInput"},
                 "label": "Password Input",
                 "placeholder": "enter password...",
-                "errorMessage": "This is the password input error message",
-                "hasError": true
+                "hasError": false
             }
         },
         "password": {
@@ -54,8 +51,6 @@
                 "label": "Password",
                 "placeholder1": "Enter password...",
                 "placeholder2": "Confirm password...",
-                "errorMessage1": "This is the 1st error message",
-                "errorMessage2": "This is the 2nd error message",
                 "hasError1": false,
                 "hasError2": false,
                 "disabled": false
@@ -66,7 +61,7 @@
             "properties": {
                 "element": {"#": "toggleSwitch"},
                 "label": "Toggle Switch",
-                "disabled": true
+                "disabled": false
             }
         },
         "radioGroup": {
@@ -74,8 +69,8 @@
             "properties": {
                 "element": {"#": "radioGroup"},
                 "label": "Radio Group",
-                "errorMessage": "This is the field-radio-group error message",
-                "disabled": true,
+                "hasError": false,
+                "disabled": false,
                 "options": [
                     {"label": "option1", "value": "option1"},
                     {"label": "option2", "value": "option2"},
@@ -90,8 +85,8 @@
                 "element": {"#": "select"},
                 "label": "Select",
                 "selectedValue": "media",
-                "errorMessage": "This is field-select the error message",
-                "disabled": true,
+                "disabled": false,
+                "hasError": false,
                 "options": [
                     {
                         "value": "none",
@@ -137,10 +132,8 @@
             "properties": {
                 "element": {"#": "checkbox"},
                 "label": "Checkbox",
-                "disabled": true,
-                "errorMessage": "This is the field-checkbox error message",
-                "hasError": true
-            }
+                "disabled": false,
+                "hasError": false            }
         },
         "converter": {
             "prototype": "montage/core/converter/number-converter"
@@ -151,11 +144,8 @@
                 "element": {"#": "multiSelect"},
                 "label": "Multiple Select",
                 "placeholder": "Enter name of item",
-                "errorMessage": "This is the overall error message",
-                "inputHasError": true,
-                "inputErrorMessage": "this is the input error message",
-                "valueErrorMessage": "this is the value error message",
-                "disabled": true,
+                "disabled": false,
+                "hasError": false,
                 "options": [
                     {"name": "foo", "myProperty": "blah 1"},
                     {"name": "aaoption2", "myProperty": "blah 2"},
@@ -183,9 +173,8 @@
             "properties": {
                 "element": {"#": "date"},
                 "label": "Date",
-                "disabled": true,
-                "errorMessage": "This is the date error message",
-                "hasError": true
+                "disabled": false,
+                "hasError": false
             }
         },
         "time": {
@@ -193,12 +182,11 @@
             "properties": {
                 "element": {"#": "time"},
                 "label": "Time",
-                "errorMessage": "This is the date error message",
-                "hasError": true,
+                "hasError": false,
                 "intervalInSeconds": 1800,
                 "pattern": "hh:mm:ss",
                 "isDefaultNow": false,
-                "disabled": true
+                "disabled": false
             }
         },
         "dateTime": {
@@ -209,11 +197,7 @@
                 "intervalInSeconds": 1800,
                 "pattern": "hh:mm:ss",
                 "isDefaultNow": false,
-                "dateErrorMessage": "This is the date error message",
-                "dateHasError": true,
-                "timeHasError": true,
-                "timeErrorMessage": "This is the time error message",
-                "disabled": true
+                "disabled": false
             }
         },
         "duration": {
@@ -221,10 +205,12 @@
             "properties": {
                 "element": {"#": "duration"},
                 "label": "Duration",
-                "errorMessage": "This is the duration input error message",
                 "placeholder": "duration placeholder value",
-                "hasError": true,
-                "disabled": true
+                "unitErrorMessage": null,
+                "inputErrorMessage": null,
+                "inputHasError": false,
+                "unitHasError": false,
+                "disabled": false
             }
         },
         "selectMultiple": {
@@ -240,9 +226,8 @@
                     "five",
                     "six"
                 ],
-                "errorMessage": "This is the select multiple error message",
-                "hasError": true,
-                "disabled": true
+                "hasError": false,
+                "disabled": false
             }
         }
     }
