@@ -29,8 +29,10 @@
                 "value": {"<->": "@owner.value"},
                 "disabled": {"<-": "@owner.disabled"},
                 "placeholder": {"<-": "@owner.placeholder"},
-                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
-                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"}
+                "inputErrorMessage": {"<-": "@owner.inputErrorMessage"},
+                "inputHasError": {"<-": "@owner.inputHasError || !!@owner.inputErrorMessage"},
+                "unitErrorMessage": {"<-": "@owner.unitErrorMessage"},
+                "unitHasError": {"<-": "@owner.unitHasError || !!@owner.unitErrorMessage"}
             }
         }
     }

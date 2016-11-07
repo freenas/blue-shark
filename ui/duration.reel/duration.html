@@ -25,9 +25,9 @@
             "bindings": {
                 "value": {"<->": "@owner.count"},
                 "disabled": {"<-": "@owner.disabled"},
-                "hasError": {"<-": "@owner.hasError"},
                 "placeholder": {"<-": "@owner.placeholder"},
-                "errorMessage": {"<-": "@owner.errorMessage"}
+                "hasError": {"<-": "@owner.inputHasError || !!@owner.inputErrorMessage"},
+                "errorMessage": {"<-": "@owner.inputErrorMessage"}
             }
         },
         "unit": {
@@ -38,7 +38,9 @@
             "bindings": {
                 "options": {"<-": "@owner.units"},
                 "selectedValue": {"<->": "@owner.unit"},
-                "disabled": {"<-": "@owner.disabled"}
+                "disabled": {"<-": "@owner.disabled"},
+                "hasError": {"<-": "@owner.unitHasError || !!@owner.unitErrorMessage"},
+                "errorMessage": {"<-": "@owner.unitErrorMessage"}
             }
         }
     }
