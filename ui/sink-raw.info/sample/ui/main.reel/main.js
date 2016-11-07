@@ -9,28 +9,30 @@ var Component = require("montage/ui/component").Component;
  */
 exports.Main = Component.specialize(/** @lends Main# */ {
 
-    options: {
-        value: [
-            {
-                "value": "none",
-                "label": "None"
-            },
-            {
-                "value": "optimal",
-                "label": "Optimal"
-            },
-            {
-                "value": "virtualization",
-                "label": "Virtualization"
-            },
-            {
-                "value": "backups",
-                "label": "Backups"
-            },
-            {
-                "value": "media",
-                "label": "Media"
-            }
-        ]
+    handleDisableButtonAction: {
+        value: function () {
+            this._childComponents.forEach(function(component){
+                if(component.identifier !== "disableButton") {
+                    component.disabled = !component.disabled;
+                }
+            })
+        }
+    },
+
+    handleToggleErrorsButtonAction: {
+        value: function () {
+            this._childComponents.forEach(function(component){
+                if(component.identifier !== "toggleErrorsButton") {
+                    if (component.identifier == "multiSelect") {
+                        component.inputHasError = !!component.inputHasError ? false : true;
+                    } else if (component.identifier == "duration") {
+                        component.inputHasError = !!component.inputHasError ? false : true;
+                        component.unitHasError = !!component.unitHasError ? false : true;
+                    } else {
+                        component.hasError = !!component.hasError ? false : true;
+                    }
+                }
+            })
+        }
     }
 });
