@@ -4,7 +4,7 @@
         margin-top: -.2em;
     }
 
-    &.FieldRadioGroup .RadioButtonFieldGroup {
+    &.FieldRadioGroup--block .RadioButtonFieldGroup {
         margin-top: 0.35em;
     }
 }
