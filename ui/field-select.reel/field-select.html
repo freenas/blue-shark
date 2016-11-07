@@ -28,12 +28,12 @@
             },
             "bindings": {
                 "hasOptionalValue": {"<-": "@owner.hasOptionalValue"},
+                "options": {"<-": "@owner.options"},
                 "selectedValue": {"<->": "@owner.selectedValue"},
                 "converter": {"<-": "@owner.converter"},
-                "options": {"<-": "@owner.options"},
                 "optionsMaxHeight": {"<-": "@owner.optionsMaxHeight"},
-                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
-                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"},
+                "errorMessage": {"<-": "@owner.errorMessage"},
+                "hasError": {"<-": "@owner.hasError"},
                 "disabled": {"<-": "@owner.disabled"}
             }
         }
