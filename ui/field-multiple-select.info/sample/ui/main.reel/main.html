@@ -9,6 +9,12 @@
                 "element": {"#": "owner"}
             }
         },
+        "icons": {
+            "prototype": "blue-shark/ui/icons.reel",
+            "properties": {
+                "element": {"#": "icons"}
+            }
+        },
         "default": {
             "prototype": "blue-shark/ui/field-multiple-select.reel",
             "properties": {
@@ -26,11 +32,10 @@
                 ],
                 "labelPath": "name",
                 "placeholder": "enter info here",
+                "inputHasError": false,
                 "inputErrorMessage": "This is my custom error message",
                 "valueErrorMessage": "This is an error message for values edition",
-                "disabled": true,
                 "isMandatory": true,
-                "hasError": true,
                 "errorMessage": "This is the error message"
             }
         }
@@ -39,16 +44,9 @@
 </head>
 <body>
     <div data-montage-id="owner" class="Main">
-        <!-- for sample only -->
-        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-            <symbol id="i-plus" viewBox="0 0 32 32">
-                <title>Plus Icon</title>
-                <g fill="currentColor" fill-rule="evenodd"><path d="M15 3v27h2V2h-2v1z"/><path d="M3 17h27v-2H2v2h1z"/></g>
-            </symbol>
-        </svg>
-        <!-- end -->
+        <div data-montage-id="icons"></div> <!-- sample only -->
         <div class="container">
-            <h1>Field Date</h1>
+            <h1>Field Multiple Select</h1>
             <h3>Default</h3>
             <div data-montage-id="default"></div>
         </div>
