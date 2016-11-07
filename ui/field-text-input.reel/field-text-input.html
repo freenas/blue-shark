@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="field-text-input.css">
     <script type="text/montage-serialization">
     {
         "owner": {
@@ -9,9 +8,6 @@
                 "element": {"#": "owner"},
                 "field": {"@": "field"},
                 "control": {"@": "control"}
-            },
-            "bindings": {
-                "hasError": {"<-": "!!@control.errorMessage"}
             }
         },
         "field": {
@@ -23,8 +19,6 @@
                 "label": {"<-": "@owner.label"},
                 "documentationReference": {"<-": "@owner.documentationReference"},
                 "disabled": {"<-": "@owner.disabled"},
-                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
-                "hasError": {"<-": "@owner.hasError"},
                 "isMandatory": {"<-": "@owner.isMandatory"}
             }
         },
@@ -34,11 +28,13 @@
                 "element": {"#": "control"}
             },
             "bindings": {
-                "placeholder": {"<-": "@owner.placeholderValue"},
+                "placeholder": {"<-": "@owner.placeholder"},
                 "converter": {"<-": "@owner.converter"},
                 "value": {"<->": "@owner.value"},
-                "disabled": {"<-": "@owner.disabled"},
-                "readonly": {"<-": "@owner.readonly"}
+                "readonly": {"<-": "@owner.readonly"},
+                "errorMessage": {"<-": "@owner.errorMessage"},
+                "hasError": {"<-": "@owner.hasError"},
+                "disabled": {"<-": "@owner.disabled"}
             }
         }
     }

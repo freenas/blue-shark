@@ -6,13 +6,41 @@
     {
         "owner": {
             "properties": {
-                "element": {"#": "owner"}
+                "element": {"#": "owner"},
+                "input": {"@": "input"}
+            }
+        },
+        "input": {
+            "prototype": "montage/ui/text-field.reel",
+            "properties": {
+                "element": {"#": "input"}
+            },
+            "bindings": {
+                "placeholder": {"<-": "@owner.placeholder"},
+                "disabled": {"<-": "@owner.disabled"},
+                "value": {"<->": "@owner.value"},
+                "hasFocus": {"<->": "@owner.hasFocus"},
+                "readonly": {"<-": "@owner.readonly"},
+                "classList.has('has-error')": {"<-": "@owner.hasError || !!@owner.errorMessage"}
+            }
+        },
+        "controlError": {
+            "prototype": "ui/control-error.reel",
+            "properties": {
+                "element": {"#": "controlError"}
+            },
+            "bindings": {
+                "errorMessage": {"<-": "@owner.errorMessage"},
+                "hasError": {"<-": "@owner.hasError || !!@owner.errorMessage"}
             }
         }
     }
     </script>
 </head>
-<body>
-    <input data-montage-id="owner" class="TextField" />
+<body >
+    <div data-montage-id="owner" class="TextField">
+        <input data-montage-id="input" class="TextField-input" />
+        <div data-montage-id="controlError"></div>
+    </div>
 </body>
 </html>

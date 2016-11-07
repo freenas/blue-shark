@@ -1,39 +1,21 @@
-.TextArea {
-    box-sizing: border-box;
-    display: block;
-    outline: none;
-    font-family: 'lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 100%; /* Override UA style. */
-    font-weight: 300;
-    width: 100%;
+.TextArea-input {
+    @apply --input-field;
     height: 5em;
     padding: 0.25em .5em;
     resize: vertical;
-    color: #FFF;
-    background-color: rgba(0, 0, 0, .25);
-    border:         1px solid transparent;
-    border-top:     1px solid rgba(0, 0, 0, .23);
-    border-bottom:  1px solid rgba(255, 255, 255, .15);
-    border-radius: 4px;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-appearance: none; /* Removes inner shadow on iOS. */
+
+    &:focus { border-color: var(--color-focus); }
+
+    &.montage--disabled {
+        background: var(--color-input-bg--disabled);
+        border-color: transparent;
+        opacity: .5;
+        cursor: not-allowed;
+    }
+
+    /* input error style */
+    &.has-error {
+        @apply --input-error;
+    }
 }
 
-/* States --------------------- */
-
-.TextArea:focus {
-    border-color: #2B9CD8;
-}
-
-.TextArea.montage--disabled {
-    background: rgba(0, 0, 0, .1);
-    border-color: transparent;
-    opacity: .5;
-    pointer-events: none;
-}
-
-/* Placeholder --------------------- */
-
-.TextArea::-webkit-input-placeholder    { color: inherit; opacity: .5; }
-.TextArea::-moz-placeholder             { color: inherit; opacity: .5; }
-.TextArea:-ms-input-placeholder         { color: inherit; opacity: .5; }

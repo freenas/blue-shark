@@ -1,5 +1,3 @@
-.Time {}
-
 .Time-container {
     position: relative;
     -webkit-user-select: none;
@@ -8,19 +6,28 @@
     user-select: none;
 }
 
+.Time-input-field.TextField:focus {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+}
+
 /* Time Controls ---------------------------------- */
 
 .Time-controls {
     position: absolute;
     right: 0;
     top: 0;
-    bottom: 1px;
     display: flex;
     cursor: default;
+
+    @nest .Time.is-disabled & {
+        pointer-events: none;
+    }
 }
 
 .Time-controls svg {
-    height: 100%;
+    height: 2em;
     width:  2em;
     padding: .5em;
     opacity: .5;

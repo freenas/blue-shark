@@ -9,6 +9,9 @@
                 "element": {"#": "owner"},
                 "checkboxComponent": {"@": "checkbox"},
                 "labelComponent": {"@": "label"}
+            },
+            "bindings": {
+                "classList.has('has-error')": {"<-": "@owner.hasError || !!@owner.errorMessage"}
             }
         },
         "checkbox": {
@@ -29,7 +32,18 @@
             "bindings": {
                 "value": {"<-": "@owner.label"}
             }
+        },
+        "controlError": {
+            "prototype": "ui/control-error.reel",
+            "properties": {
+                "element": {"#": "controlError"}
+            },
+            "bindings": {
+                "errorMessage": {"<-": "@owner.errorMessage"},
+                "hasError": {"<-": "@owner.hasError || !!@owner.errorMessage"}
+            }
         }
+
     }
     </script>
 </head>
@@ -37,6 +51,7 @@
     <div data-montage-id="owner" class="Checkbox">
         <input type='checkbox' data-montage-id="checkbox" tabindex="0">
         <label data-montage-id="label" class="Checkbox-label"></label>
+        <div data-montage-id="controlError"></div>
     </div>
 </body>
 </html>

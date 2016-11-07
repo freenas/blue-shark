@@ -70,15 +70,15 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
         value: function () {
             this.reset();
             if (this.preparedForActivationEvents) {
-                this.passwordFieldInput2.element.removeEventListener("blur", this, true);
-                this.passwordFieldInput2.element.removeEventListener("focus", this, true);
+                this.passwordFieldInput2.input.element.removeEventListener("blur", this, true);
+                this.passwordFieldInput2.input.element.removeEventListener("focus", this, true);
             }
         }
     },
 
     _addEventListeners: {
         value: function () {
-            this.passwordFieldInput2.element.addEventListener("blur", this, true);
+            this.passwordFieldInput2.input.element.addEventListener("blur", this, true);
             this.element.addEventListener("focus", this, true);
             this.addEventListener("action", this);
         }
@@ -102,7 +102,7 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
         value: function (event) {
             var target = event.target;
 
-            if (target === this.passwordFieldInput1.element || target === this.passwordFieldInput2.element) {
+            if (target === this.passwordFieldInput1.input.element || target === this.passwordFieldInput2.input.element) {
                 this._password2 = null;
                 this._passwordMatch = null;
                 this.dispatchOwnPropertyChange("passwordMatch", null, false);
@@ -142,7 +142,7 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
     draw: {
         value: function () {
             if(this.needsfocus) {
-                this.passwordFieldInput1.focus();
+                this.passwordFieldInput1.input.focus();
                 this.needsfocus = false;
             }
         }

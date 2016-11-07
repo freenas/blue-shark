@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="field-text-area.css">
     <script type="text/montage-serialization">
     {
         "owner": {
@@ -18,8 +17,6 @@
                 "label": {"<-": "@owner.label"},
                 "documentationReference": {"<-": "@owner.documentationReference"},
                 "disabled": {"<-": "@owner.disabled"},
-                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
-                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"},
                 "isMandatory": {"<-": "@owner.isMandatory"}
             }
         },
@@ -29,9 +26,11 @@
                 "element": {"#": "control"}
             },
             "bindings": {
-                "placeholderValue": {"<-": "@owner.placeholderValue"},
+                "placeholder": {"<-": "@owner.placeholder"},
                 "value": {"<->": "@owner.value"},
-                "enabled": {"<-": "!@owner.disabled"}
+                "errorMessage": {"<-": "@owner.errorMessage"},
+                "hasError": {"<-": "@owner.hasError"},
+                "disabled": {"<-": "@owner.disabled"}
             }
         }
     }

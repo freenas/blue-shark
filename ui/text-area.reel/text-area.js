@@ -1,7 +1,3 @@
-var AbstractTextArea = require("montage/ui/base/abstract-text-area").AbstractTextArea;
+var Component = require("montage/ui/component").Component;
 
-exports.TextArea = AbstractTextArea.specialize({
-    hasTemplate: {
-        value: true
-    }
-});
+exports.TextArea = Component.specialize();

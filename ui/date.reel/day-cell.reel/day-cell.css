@@ -14,6 +14,8 @@
 
 .DayCell.is-selected {
     background: #0095d5;
+    color: #fff;
+    font-weight: 400;
 }
 
 .DayCell.is-filler {

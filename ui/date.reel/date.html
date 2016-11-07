@@ -14,7 +14,11 @@
                     "type": "action",
                     "listener": { "@": "owner" }
                 }
-            ]
+            ],
+            "bindings": {
+                "classList.has('is-expanded')": {"<-": "!@owner.disabled && (@dateValue.hasFocus || @decrement.hasFocus || @increment.hasFocus)"},
+                "classList.has('is-disabled')": {"<-": "@owner.disabled"}
+            }
         },
         "dateToStringConverter": {
             "prototype": "montage/core/converter/date-converter",
@@ -41,7 +45,10 @@
                 "converter": {"@": "dateToStringConverter"}
             },
             "bindings": {
-                "value": {"<->": "@owner.value"}
+                "value": {"<->": "@owner.value"},
+                "errorMessage": {"<-": "@owner.errorMessage"},
+                "hasError": {"<-": "@owner.hasError || !!@owner.errorMessage"},
+                "disabled": {"<-": "@owner.disabled"}
             }
         },
         "currentMonth": {
@@ -77,13 +84,13 @@
             }
         },
         "increment": {
-            "prototype": "montage/ui/button.reel",
+            "prototype": "ui/button.reel",
             "properties": {
                 "element": {"#": "increment"}
             }
         },
         "decrement": {
-            "prototype": "montage/ui/button.reel",
+            "prototype": "ui/button.reel",
             "properties": {
                 "element": {"#": "decrement"}
             }
@@ -96,13 +103,17 @@
         <div data-montage-id="dateValue" class="Date-value"></div>
         <div data-montage-id="calendar" class="Date-calendar">
             <div class="DateCalendar-header">
-                <svg data-montage-id="decrement" class="DateCalendarHeader-decrement">
-                    <use xlink:href="#i-arrow"/>
-                </svg>
-                <div data-montage-id="currentMonth"></div>
-                <svg data-montage-id="increment" class="DateCalendarHeader-increment">
-                    <use xlink:href="#i-arrow"/>
-                </svg>
+                <div data-montage-id="decrement" class="DateCalendarHeader-decrement Button--naked">
+                    <svg>
+                        <use xlink:href="#i-arrow"/>
+                    </svg>
+                </div>
+                <div data-montage-id="currentMonth" class="Date-currentMonth"></div>
+                <div data-montage-id="increment" class="DateCalendarHeader-increment Button--naked">
+                    <svg>
+                        <use xlink:href="#i-arrow"/>
+                    </svg>
+                </div>
             </div>
             <div class="DateCalendar-daysHeader">
                 <div>S</div>

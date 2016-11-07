@@ -16,7 +16,10 @@
             },
             "bindings": {
                 "value": {"<->": "@owner._date"},
-                "allowEmpty": {"<-": "@owner.allowEmpty"}
+                "allowEmpty": {"<-": "@owner.allowEmpty"},
+                "hasError": {"<-": "@owner.dateHasError"},
+                "errorMessage": {"<-":"@owner.dateErrorMessage"},
+                "disabled": {"<-": "@owner.disabled"}
             }
         },
         "time": {
@@ -27,7 +30,10 @@
             "bindings": {
                 "value": {"<->": "@owner._time"},
                 "allowEmpty": {"<-": "@owner.allowEmpty"},
-                "intervalInSeconds": {"<-": "@owner.intervalInSeconds"}
+                "intervalInSeconds": {"<-": "@owner.intervalInSeconds"},
+                "hasError": {"<-": "@owner.timeHasError"},
+                "errorMessage": {"<-":"@owner.timeErrorMessage"},
+                "disabled": {"<-": "@owner.disabled"}
             }
         }
     }
