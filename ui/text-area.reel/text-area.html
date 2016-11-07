@@ -7,9 +7,6 @@
         "owner": {
             "properties": {
                 "element": {"#": "owner"}
-            },
-            "bindings": {
-                "classList.has('has-error')": {"<-": "@owner.hasError"}
             }
         },
         "input": {
@@ -20,7 +17,8 @@
             "bindings": {
                 "placeholder": {"<-": "@owner.placeholder"},
                 "disabled": {"<-": "@owner.disabled"},
-                "value": {"<-": "@owner.value"}
+                "value": {"<-": "@owner.value"},
+                "classList.has('has-error')": {"<-": "@owner.hasError || !!@owner.errorMessage"}
             }
         },
         "controlError": {
@@ -29,7 +27,8 @@
                 "element": {"#": "controlError"}
             },
             "bindings": {
-                "errorMessage": {"<-": "@owner.errorMessage"}
+                "errorMessage": {"<-": "@owner.errorMessage"},
+                "hasError": {"<-": "@owner.hasError || !!@owner.errorMessage"}
             }
         }
     }
