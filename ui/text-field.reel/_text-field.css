@@ -1,14 +1,7 @@
-.TextField {
-
-    &.has-error .ControlError {
-        display: block;
-    }
-}
-
 .TextField-input {
     @apply --input-field;
 
-    @nest .TextField.has-error & {
+    &.has-error {
         @apply --input-error;
     }
 

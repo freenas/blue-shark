@@ -8,9 +8,6 @@
             "properties": {
                 "element": {"#": "owner"},
                 "input": {"@": "input"}
-            },
-            "bindings": {
-                "classList.has('has-error')": {"<-": "@owner.hasError"}
             }
         },
         "input": {
@@ -23,7 +20,8 @@
                 "disabled": {"<-": "@owner.disabled"},
                 "value": {"<->": "@owner.value"},
                 "hasFocus": {"<->": "@owner.hasFocus"},
-                "readonly": {"<-": "@owner.readonly"}
+                "readonly": {"<-": "@owner.readonly"},
+                "classList.has('has-error')": {"<-": "@owner.hasError || !!@owner.errorMessage"}
             }
         },
         "controlError": {
@@ -32,7 +30,8 @@
                 "element": {"#": "controlError"}
             },
             "bindings": {
-                "errorMessage": {"<-": "@owner.errorMessage"}
+                "errorMessage": {"<-": "@owner.errorMessage"},
+                "hasError": {"<-": "@owner.hasError || !!@owner.errorMessage"}
             }
         }
     }
