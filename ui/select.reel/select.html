@@ -17,7 +17,7 @@
                 }
             ],
             "bindings": {
-                "classList.has('has-error')": {"<-": "@owner.hasError"}
+                "classList.has('has-error')": {"<-": "@owner.hasError || !!@owner.errorMessage"}
             }
         },
 
@@ -60,7 +60,8 @@
                 "element": {"#": "controlError"}
             },
             "bindings": {
-                "errorMessage": {"<-": "@owner.errorMessage"}
+                "errorMessage": {"<-": "@owner.errorMessage"},
+                "hasError": {"<-": "@owner.hasError || !!@owner.errorMessage"}
             }
         }
 
