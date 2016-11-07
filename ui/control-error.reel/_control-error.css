@@ -6,10 +6,6 @@
     font-weight: 300;
     font-family: 'lato';
     line-height: 1.15em;
-    margin-top: .5em;
+    margin-top: .25em;
     color: var(--white);
-
-    &.is-visible {
-        display: block;
-    }
 }

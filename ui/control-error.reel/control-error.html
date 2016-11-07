@@ -8,6 +8,9 @@
         "owner": {
             "properties": {
                 "element": {"#": "owner"}
+            },
+            "bindings": {
+                "classList.has('is-visible')": {"<-": "@owner.hasError"}
             }
         },
         "errorMessage": {
@@ -16,7 +19,7 @@
                 "element": {"#": "errorMessage"}
             },
             "bindings": {
-                "value": {"<-": "@owner.errorMessage"}
+                "value": {"<-": "!!@owner.errorMessage ? @owner.errorMessage : 'An error has occurred'"}
             }
         }
     }
