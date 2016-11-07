@@ -5,6 +5,10 @@
 
     &.has-error .ControlError { display: block; }
 
+    &.has-error label:before { border-color: var(--red); }
+    &.has-error label:after  { color:        var(--red); }
+}
+
     & input {
         -webkit-appearance: none;
         cursor: pointer;
