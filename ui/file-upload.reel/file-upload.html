@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="file-upload.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"},
+                "_fileInput": {"#": "fileInput"}
+            }
+        },
+
+         "fileInput": {
+            "prototype": "montage/ui/component",
+            "properties": {
+                "element": {"#": "fileInput"},
+                "hasTemplate": false
+            }
+        }
+
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="FileUpload">
+        <input data-montage-id="fileInput" name="file" type="file" />
+    </div>
+</body>
+</html>
