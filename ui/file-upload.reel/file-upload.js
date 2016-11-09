@@ -49,59 +49,63 @@ exports.FileUpload = Component.specialize(/** @lends FileUpload# */ {
 
     handleChange: {
         value: function () {
-            var file = this._fileInput.files[0],
-                fileSize = file.size,
-                fileType = file.size,
-                shouldAcceptFile = true,
-                supportedExtensions = this.supportedExtensions,
-                supportedFileTypes = this.supportedFileTypes;
+            var file = this._fileInput.files[0];
 
-            this._reset();
+            if (file) {
+                var fileSize = file.size,
+                    fileType = file.type,
+                    shouldAcceptFile = true,
+                    supportedExtensions = this.supportedExtensions,
+                    supportedFileTypes = this.supportedFileTypes;
 
-            if (typeof supportedExtensions === "string") {
-                //todo
-            } else if (Array.isArray(supportedExtensions)) {
-                //todo
-            }
+                this._reset();
 
-            if (this.maxFileSize !== void 0 || this.maxFileSize !== null && fileSize > this.maxFileSize) {
-                shouldAcceptFile = false;
-            }
+                if (typeof supportedExtensions === "string") {
+                    //todo
+                } else if (Array.isArray(supportedExtensions)) {
+                    //todo
+                }
 
-            if (typeof supportedFileTypes === "string") {
-                shouldAcceptFile = fileType === supportedFileTypes;
-            } else if (Array.isArray(supportedFileTypes)) {
-                //todo
-            }
+                if (this.maxFileSize !== void 0 || this.maxFileSize !== null && fileSize > this.maxFileSize) {
+                    shouldAcceptFile = false;
+                }
 
-            if (shouldAcceptFile) {
-				var reader = new FileReader(),
-                    self = this;
+                if (typeof supportedFileTypes === "string") {
+                    shouldAcceptFile = fileType === supportedFileTypes;
+                } else if (Array.isArray(supportedFileTypes)) {
+                    //todo
+                }
 
-                reader.onload = function (event) {
-					self.data = reader.result;
-				};
+                if (shouldAcceptFile) {
+                    var reader = new FileReader(),
+                        self = this;
 
-                reader.onprogress = function (event) {
-                    if (event.lengthComputable) {
-                        self.progress = event.loaded/event.total*100;
-                    } else {
-                        self.progress = -1;
+                    reader.onload = function (event) {
+                        self.data = reader.result;
+                    };
+
+                    reader.onprogress = function (event) {
+                        if (event.lengthComputable) {
+                            self.progress = event.loaded / event.total * 100;
+                        } else {
+                            self.progress = -1;
+                        }
+                    };
+
+                    reader.onerror = function (event) {
+                        self.error = error;
                     }
-                };
 
-                reader.onerror = function (event) {
-                    self.error = error;
-                }
-
-                if (this.resultType === this.constructor.TYPES.dataUrl) {
-                    reader.readAsDataURL(file);
-                }  else if (this.resultType === this.constructor.TYPES.binary) {
-                    reader.readAsBinaryString(file);
-                } else {
-                    reader.readAsText(file);
+                    if (this.resultType === this.constructor.TYPES.dataUrl) {
+                        reader.readAsDataURL(file);
+                    } else if (this.resultType === this.constructor.TYPES.binary) {
+                        reader.readAsBinaryString(file);
+                    } else {
+                        reader.readAsText(file);
+                    }
                 }
             }
+
         }
     },
 
@@ -115,12 +119,12 @@ exports.FileUpload = Component.specialize(/** @lends FileUpload# */ {
 
 }, {
 
-    TYPES: {
-        value: {
-            text: "text",
-            binary: "binary",
-            dataUrl: "dataUrl"
+        TYPES: {
+            value: {
+                text: "text",
+                binary: "binary",
+                dataUrl: "dataUrl"
+            }
         }
-    }
 
-});
+    });
