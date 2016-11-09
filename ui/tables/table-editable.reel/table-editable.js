@@ -121,18 +121,7 @@ exports.TableEditable = Component.specialize({
 
     currentNewEntry: {
         get: function () {
-            if (this.isAddingNewEntry) {
-                if (!this._currentNewEntry) {
-                    var defaultNewEntry = {};
-                    defaultNewEntry = this.callDelegateMethod(
-                        "tableWillUseNewEntry",
-                        this,
-                        defaultNewEntry
-                    ) || defaultNewEntry;
-
-                    this._currentNewEntry = new RowEntry(defaultNewEntry);
-                }
-            } else {
+            if (!this.isAddingNewEntry) {
                 this._currentNewEntry = null;
             }
 
@@ -258,6 +247,28 @@ exports.TableEditable = Component.specialize({
         }
     },
 
+    _getNewEntry: {
+        value: function () {
+            var defaultNewEntry = {};
+
+            defaultNewEntry = this.callDelegateMethod(
+                "tableWillUseNewEntry",
+                this,
+                defaultNewEntry
+            ) || defaultNewEntry;
+
+            if (Promise.is(defaultNewEntry)) {
+                var self = this;
+
+                return defaultNewEntry.then(function (NewEntry) {
+                    return new RowEntry(NewEntry);
+                });
+            }
+
+            return Promise.resolve(new RowEntry(defaultNewEntry));
+        }
+    },
+
     _handleToggleAllAction: {
         value: function (event) {
             var self = this;
@@ -311,13 +322,22 @@ exports.TableEditable = Component.specialize({
 
     _startAddingNewEntry: {
         value: function () {
-            this.callDelegateMethod(
-                "tableWillStartEditingNewEntry",
-                this,
-                this.currentNewEntry.object,
-                this.contentController
-            );
+            var self = this;
 
+            return this._getNewEntry().then(function (newEntry) {
+                self._currentNewEntry = newEntry;
+
+                self.callDelegateMethod(
+                    "tableWillStartEditingNewEntry",
+                    self,
+                    self.currentNewEntry.object,
+                    self.contentController
+                );
+
+                self.rowControlsOverlay.show();
+                self.dispatchOwnPropertyChange("isAddingNewEntry", self.isAddingNewEntry);
+                self.dispatchOwnPropertyChange("currentNewEntry", self.currentNewEntry);
+            });
         }
     },
 
@@ -326,9 +346,6 @@ exports.TableEditable = Component.specialize({
             if (this._shouldShowNewEntryRow) {
                 this.__shouldShowNewEntryRow = false;
                 this._startAddingNewEntry();
-                this.rowControlsOverlay.show();
-                this.dispatchOwnPropertyChange("isAddingNewEntry", this.isAddingNewEntry);
-                this.dispatchOwnPropertyChange("currentNewEntry", this.currentNewEntry);
 
             } else if (this._shouldHideNewEntryRow) {
                 this._shouldHideNewEntryRow = false;
