@@ -128,3 +128,27 @@ $Icons
 .sharedIcon-preferences:before {
     content: "\67";
 }
+
+/* Animations */
+
+@keyframes rotatedPulse {
+    0%   { opacity: .3; }
+    50%  { opacity:  1; }
+    100% { opacity: .3; transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes blink {
+    0%      { border-color: rgba(43,156,216,0.1); }
+    50%     { border-color: rgba(43,156,216,0.5); }
+    100%    { border-color: rgba(43,156,216,0.1); }
+}
+
+@keyframes spin {
+    0%   {}
+    100% { transform: rotate(360deg); }
+}

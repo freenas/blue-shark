@@ -78,6 +78,23 @@
                 "element": {"#": "buttonNaked"},
                 "value": "naked button"
             }
+        },
+        "buttonLoader": {
+            "prototype": "blue-shark/ui/button.reel",
+            "properties": {
+                "element": {"#": "buttonLoader"},
+                "value": "Button Loader"
+            },
+            "bindings" : {
+                "isProcessing": {"<-": "@checkbox.checked"},
+                "disabled": {"<-": "isProcessing"}
+            }
+        },
+        "checkbox": {
+            "prototype": "blue-shark/ui/checkbox.reel",
+            "properties": {
+                "element": {"#": "checkbox"}
+            }
         }
     }
     </script>
@@ -87,6 +104,11 @@
         <div data-montage-id="icons" style="display: none"></div>
         <div class="container">
             <h1>Buttons</h1>
+            <div data-montage-id="checkbox"></div>
+            <h3>Button Loader</h3>
+            <div data-montage-id="buttonLoader" class="Button--loader Button--primary Button--block Button--large">
+                <svg><use xlink:href="#i-freenasIcon"/></svg>
+            </div>
             <h3>Default Button</h3>
             <div data-montage-id="button"></div>
             <h3>Primary Button</h3>
@@ -108,7 +130,7 @@
                 <svg><use xlink:href="#i-circle-plus"/></svg>
             </div>
             <h3>Naked Button</h3>
-            <div data-montage-id="buttonNaked" class=" Button--naked">
+            <div data-montage-id="buttonNaked" class="Button--naked">
                 <svg><use xlink:href="#i-circle-plus"/></svg>
             </div>
 
