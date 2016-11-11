@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="field-file-upload.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            }
+        },
+        "field": {
+            "prototype": "ui/field.reel",
+            "properties": {
+                "element": {"#": "field"}
+            },
+            "bindings": {
+                "label": {"<-": "@owner.label"},
+                "documentationReference": {"<-": "@owner.documentationReference"},
+                "disabled": {"<-": "@owner.disabled"},
+                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
+                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"},
+                "isMandatory": {"<-": "@owner.isMandatory"}
+            }
+        },
+        "control": {
+            "prototype": "ui/file-upload.reel",
+            "properties": {
+                "element": {"#": "fileUpload"}
+            },
+            "bindings": {
+                "resultType": {"<-": "@owner.resultType"},
+                "supportedExtensions": {"<-": "@owner.supportedExtensions"},
+                "supportedFileTypes": {"<-": "@owner.supportedFileTypes"},
+                "maxFileSize": {"<-": "@owner.maxFileSize"},
+                "data": {"<->": "@owner.data"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="FieldFileUpload">
+        <div data-montage-id="field">
+            <div data-montage-id="fileUpload"></div>
+        </div>
+    </div>
+</body>
+</html>
