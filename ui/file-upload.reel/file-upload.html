@@ -17,6 +17,16 @@
                 "element": {"#": "fileInput"},
                 "hasTemplate": false
             }
+        },
+
+        "path": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "path"}
+            },
+            "bindings": {
+                "value": {"<-": "!!@owner._fileInput.value ? @owner._fileInput.value : 'no file chosen'"}
+            }
         }
 
     }
@@ -24,7 +34,8 @@
 </head>
 <body>
     <div data-montage-id="owner" class="FileUpload">
-        <input data-montage-id="fileInput" name="file" type="file" />
+        <label for="file-upload" class="FileUpload-button">Browse<input data-montage-id="fileInput" name="file" id="file-upload" type="file" class="FileUpload-input"/></label>
+        <div data-montage-id="path" class="FileUpload-path"></div>
     </div>
 </body>
 </html>
