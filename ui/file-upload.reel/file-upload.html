@@ -25,7 +25,29 @@
                 "element": {"#": "path"}
             },
             "bindings": {
-                "value": {"<-": "!!@owner.x ? @owner.x : 'no file chosen'"}
+                "value": {"<-": "!!@owner.filename ? @owner.filename : 'no file chosen'"}
+            }
+        },
+
+        "progress": {
+            "prototype": "ui/progress.reel",
+            "properties": {
+                "element": {"#": "progress"}
+            },
+            "bindings": {
+                "percentageComplete": {"<-": "@owner.progress"},
+                "classList.has('is-hidden')": {"<-": "!percentageComplete"},
+                "status": {"<-": "@owner.status"}
+            }
+        },
+
+        "errorMessage": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "errorMessage"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner.error"}
             }
         }
 
@@ -36,6 +58,8 @@
     <div data-montage-id="owner" class="FileUpload">
         <label for="file-upload" class="FileUpload-button">Browse<input data-montage-id="fileInput" name="file" id="file-upload" type="file" class="FileUpload-input"/></label>
         <div data-montage-id="path" class="FileUpload-path"></div>
+        <div data-montage-id="errorMessage"></div>
+        <div data-montage-id="progress" class="FileUpload-progress"></div>
     </div>
 </body>
 </html>

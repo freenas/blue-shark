@@ -1,13 +1,16 @@
 .FileUpload {
+    position: relative;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
+    padding-bottom: 1em;
 }
 
 .FileUpload-path {
-    margin-left: 1rem;
     font-family: lato;
     font-weight: 200;
     font-size: .75em;
+    margin-bottom: .5rem;
 }
 
 .FileUpload-button {
@@ -15,9 +18,18 @@
     display: inline-block;
     vertical-align: middle;
     line-height: 2.5em;
+    margin-bottom: .5rem;
+    margin-right: 1rem;
 }
 
 .FileUpload-input {
     position: absolute;
     left: -9999px;
+}
+
+.FileUpload-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }

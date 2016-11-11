@@ -20,6 +20,10 @@ exports.FileUpload = Component.specialize(/** @lends FileUpload# */ {
         }
     },
 
+    status: {
+        value: null
+    },
+
     resultType: {
         value: null
     },
@@ -126,10 +130,18 @@ exports.FileUpload = Component.specialize(/** @lends FileUpload# */ {
 
                     reader.onprogress = function (event) {
                         self.progress = event.lengthComputable ? event.loaded / event.total * 100 : -1;
+                        if (self.progress > 0 && self.progress !== 100) {
+                            self.status = "active";
+                        } else if (self.progress == 100 ) {
+                            self.status = "success"
+                        } else {
+                            self.status = null
+                        }
                     };
 
                     reader.onerror = function (event) {
                         self.error = error;
+                        self.status = "error";
                     }
 
                     if (this.resultType === this.constructor.TYPES.binary) {
