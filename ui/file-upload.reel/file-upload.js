@@ -48,6 +48,10 @@ exports.FileUpload = Component.specialize(/** @lends FileUpload# */ {
         value: 0
     },
 
+    filename: {
+        value: null
+    },
+
     _getFilenameExtension: {
         value: function (filename) {
             var data = /\.+([a-zA-Z0-9]+)$/.exec(filename);
@@ -115,6 +119,7 @@ exports.FileUpload = Component.specialize(/** @lends FileUpload# */ {
                         self = this;
 
                     reader.onload = function (event) {
+                        self.filename = file.name;
                         self.data = self.resultType === self.constructor.TYPES.binary ?
                             reader.result.split(',')[1] : reader.result;
                     };
@@ -140,6 +145,7 @@ exports.FileUpload = Component.specialize(/** @lends FileUpload# */ {
 
     _reset: {
         value: function () {
+            this.filename = null;
             this.data = null;
             this.error = null;
             this.progress = 0;
