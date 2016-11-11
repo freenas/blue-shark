@@ -3,20 +3,6 @@
  */
 var Component = require("montage/ui/component").Component;
 
-//https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/Base64_encoding_and_decoding#The_.22Unicode_Problem.22
-function b64DecodeUnicode(str) {
-    return decodeURIComponent(Array.prototype.map.call(atob(str), function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-}
-
-function b64EncodeUnicode(str) {
-    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
-        return String.fromCharCode('0x' + p1);
-    }));
-}
-
-
 /**
  * @class FileUpload
  * @extends Component
@@ -130,7 +116,7 @@ exports.FileUpload = Component.specialize(/** @lends FileUpload# */ {
 
                     reader.onload = function (event) {
                         self.data = self.resultType === self.constructor.TYPES.binary ?
-                            b64EncodeUnicode(reader.result) : reader.result;
+                            reader.result.split(',')[1] : reader.result;
                     };
 
                     reader.onprogress = function (event) {
@@ -141,7 +127,7 @@ exports.FileUpload = Component.specialize(/** @lends FileUpload# */ {
                         self.error = error;
                     }
 
-                    if (this.resultType === this.constructor.TYPES.dataUrl) {
+                    if (this.resultType === this.constructor.TYPES.binary) {
                         reader.readAsDataURL(file);
                     } else {
                         reader.readAsText(file);
@@ -165,8 +151,7 @@ exports.FileUpload = Component.specialize(/** @lends FileUpload# */ {
         TYPES: {
             value: {
                 text: "text",
-                binary: "binary",
-                dataUrl: "dataUrl"
+                binary: "binary"
             }
         }
 
