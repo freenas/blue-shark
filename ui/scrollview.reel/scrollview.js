@@ -451,20 +451,27 @@ var Scrollview = exports.Scrollview = Component.specialize({
         }
     },
 
+    hasFixedFooter: {
+        value: true
+    },
 
     draw: {
         value: function () {
-            var footer = this._getFooter();
+            if(this.hasFixedFooter) {
 
-            if (footer) {
-                if (this._contentHeight > this._visibleHeight) {
-                    if (footer.parentNode !== this.footerWrapperElement) {
-                        this.footerWrapperElement.appendChild(footer);
+                var footer = this._getFooter();
+
+                if (footer) {
+                    if (this._contentHeight > this._visibleHeight) {
+                        if (footer.parentNode !== this.footerWrapperElement) {
+                            this.footerWrapperElement.appendChild(footer);
+                        }
+                    } else if (footer.parentNode === this.footerWrapperElement) {
+                        this.contentElement.appendChild(footer);
                     }
-                } else if (footer.parentNode === this.footerWrapperElement) {
-                    this.contentElement.appendChild(footer);
                 }
             }
+
 
             this._maxTranslateX = Math.max(0, this._contentWidth - this._visibleWidth);
             this._maxTranslateY = Math.max(0, this._contentHeight - this._visibleHeight);
