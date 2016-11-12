@@ -1,7 +1,8 @@
 /**
  * @module ui/file-upload.reel
  */
-var Component = require("montage/ui/component").Component;
+var Component = require("montage/ui/component").Component,
+    UUID = require("montage/core/uuid");
 
 /**
  * @class FileUpload
@@ -12,6 +13,7 @@ exports.FileUpload = Component.specialize(/** @lends FileUpload# */ {
     enterDocument: {
         value: function (isFirstTime) {
             if (isFirstTime) {
+                this._id = UUID.generate();
                 this._fileInput.addEventListener('change', this);
             }
 
@@ -109,12 +111,12 @@ exports.FileUpload = Component.specialize(/** @lends FileUpload# */ {
                     this.error = "extension not supported";
                 }
 
-                if (this.maxFileSize !== void 0 || this.maxFileSize !== null && fileSize > this.maxFileSize) {
+                if (shouldAcceptFile && this.maxFileSize !== void 0 && this.maxFileSize !== null && fileSize > this.maxFileSize) {
                     shouldAcceptFile = false;
                     this.error = "file too big!";
                 }
 
-                if ((shouldAcceptFile = this._isFileMimeTypeValid(extenstionFilename)) === false)  {
+                if (shouldAcceptFile && (shouldAcceptFile = this._isFileMimeTypeValid(extenstionFilename)) === false)  {
                     this.error = "wrong type of file";
                 }
 
