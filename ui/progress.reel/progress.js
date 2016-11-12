@@ -31,7 +31,6 @@ exports.Progress = Component.specialize(/** @lends Progress# */ {
             return this._status;
         },
         set: function (value) {
-            debugger;
             if (value != this._status) {
                 this._status = value;
                 this._oldStatusClasses.push(this._statusClass);
@@ -61,7 +60,6 @@ exports.Progress = Component.specialize(/** @lends Progress# */ {
 
     draw: {
         value: function () {
-            debugger;
             this.bar.style.transform = "translateX(" + (this._percentageComplete - 100) + "%)";
 
             this._cleanupClasses();
