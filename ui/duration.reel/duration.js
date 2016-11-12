@@ -8,36 +8,13 @@ var Component = require("montage/ui/component").Component;
  * @extends Component
  */
 exports.Duration = Component.specialize(/** @lends Duration# */ {
-    _unit: {
-        value: null
-    },
 
     unit: {
-        get: function() {
-            return this._unit;
-        },
-        set: function(unit) {
-            if (this._unit !== unit) {
-                this._unit = unit;
-                this.value = this._getSeconds();
-            }
-        }
-    },
-
-    _count: {
         value: null
     },
 
     count: {
-        get: function() {
-            return this._count;
-        },
-        set: function(count) {
-            if (this._count !== count) {
-                this._count = count;
-                this.value = this._getSeconds();
-            }
-        }
+        value: null
     },
 
     _value: {
@@ -45,51 +22,55 @@ exports.Duration = Component.specialize(/** @lends Duration# */ {
     },
 
     value: {
-        get: function() {
-            return this._value;
-        },
-        set: function(value) {
-            if (this._value !== value) {
-                this._value = value;
-                if (value) { 
-                    if (this.units && !this._unit && !this._count) {
-                        this._splitValue();
-                    }
-                } else {
-                    this.unit = null;
-                    this.count = null;
-                }
+        value: null
+    },
+
+    enterDocument: {
+        value: function(isFirstTime) {
+            if (isFirstTime) {
+                this.addPathChangeListener("unit", this, "_handleInputChange");
+                this.addPathChangeListener("count", this, "_handleInputChange");
+                this.addPathChangeListener("value", this, "_handleValueChange");
             }
         }
     },
 
-    enterDocument: {
-        value: function() {
-            if (this._value) {
+    _handleValueChange: {
+        value: function (value) {
+
+            if (value && value != this._value) {
                 this._splitValue();
+                this._value = value;
+            }
+        }
+    },
+
+    _handleInputChange: {
+        value: function () {
+            if (this.value == this._value) {
+                this._getSeconds();
             }
         }
     },
 
     _getSeconds: {
         value: function() {
-            if (!this._unit || !this._count) {
-                return 0;
-            }
-            return this._unit * this._count;
+            this._value = this.unit * this.count;
+            this.value = this._value;
         }
     },
 
     _splitValue: {
         value: function() {
             for (var i = 1, length = this.units.length; i < length; i++) {
-                var count = this._value / this.units[i].value;
-                if (count < 1) {
-                    this.unit = this.units[i-1].value;
-                    this.count = this._value / this._unit;
+                var count = this.value / this.units[i].value;
+                if (count < 1 || Math.round(count) !== count) {
                     break;
                 }
             }
+
+            this.unit = this.units[i-1].value;
+            this.count = this.value / this.unit;
         }
     }
 });

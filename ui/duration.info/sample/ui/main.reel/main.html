@@ -9,34 +9,21 @@
                 "element": {"#": "owner"},
                 "seconds": 32,
                 "minutes": 90,
-                "hours": 7200
+                "hours": 7200,
+                "unit": 86400
             }
         },
-        "seconds": {
-            "prototype": "blue-shark/ui/duration.reel",
+        "icons": {
+            "prototype": "blue-shark/ui/icons.reel",
             "properties": {
-                "element": {"#": "seconds"}
-            },
-            "bindings": {
-                "value": {"<->": "@owner.seconds"}
+                "element": {"#": "icons"}
             }
         },
         "minutes": {
             "prototype": "blue-shark/ui/duration.reel",
             "properties": {
-                "element": {"#": "minutes"}
-            },
-            "bindings": {
-                "value": {"<->": "@owner.minutes"}
-            }
-        },
-        "hours": {
-            "prototype": "blue-shark/ui/duration.reel",
-            "properties": {
-                "element": {"#": "hours"}
-            },
-            "bindings": {
-                "value": {"<->": "@owner.hours"}
+                "element": {"#": "minutes"},
+                "value": 2592000
             }
         }
     }
@@ -44,9 +31,13 @@
 </head>
 <body>
     <div data-montage-id="owner" class="Main">
-        <div data-montage-id="seconds"></div>
-        <div data-montage-id="minutes"></div>
-        <div data-montage-id="hours"></div>
+        <div data-montage-id="icons"></div>
+        <div class="container">
+            <h1>Duration Sample</h1>
+            <div data-montage-id="seconds"></div>
+            <div data-montage-id="minutes"></div>
+            <div data-montage-id="hours"></div>
+        </div>
     </div>
 </body>
 </html>
