@@ -121,7 +121,7 @@ exports.FileUpload = Component.specialize(/** @lends FileUpload# */ {
                 }
 
                 if (shouldAcceptFile) {
-                    if (this.resultType !== self.constructor.TYPES.file) {
+                    if (this.resultType !== this.constructor.TYPES.file) {
                         var reader = new FileReader(),
                             self = this;
 
