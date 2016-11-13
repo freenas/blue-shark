@@ -121,39 +121,42 @@ exports.FileUpload = Component.specialize(/** @lends FileUpload# */ {
                 }
 
                 if (shouldAcceptFile) {
-                    var reader = new FileReader(),
-                        self = this;
+                    if (this.resultType !== self.constructor.TYPES.file) {
+                        var reader = new FileReader(),
+                            self = this;
 
-                    reader.onload = function (event) {
-                        self.filename = file.name;
-                        self.data = self.resultType === self.constructor.TYPES.binary ?
-                            reader.result.split(',')[1] : reader.result;
-                    };
+                        reader.onload = function (event) {
+                            self.filename = file.name;
+                            self.data = self.resultType === self.constructor.TYPES.binary ?
+                                reader.result.split(',')[1] : reader.result;
+                        };
 
-                    reader.onprogress = function (event) {
-                        self.progress = event.lengthComputable ? event.loaded / event.total * 100 : -1;
-                        if (self.progress > 0 && self.progress !== 100) {
-                            self.status = "active";
-                        } else if (self.progress == 100 ) {
-                            self.status = "success"
-                        } else {
-                            self.status = null
+                        reader.onprogress = function (event) {
+                            self.progress = event.lengthComputable ? event.loaded / event.total * 100 : -1;
+                            if (self.progress > 0 && self.progress !== 100) {
+                                self.status = "active";
+                            } else if (self.progress == 100 ) {
+                                self.status = "success"
+                            } else {
+                                self.status = null
+                            }
+                        };
+
+                        reader.onerror = function (event) {
+                            self.error = error;
+                            self.status = "error";
                         }
-                    };
 
-                    reader.onerror = function (event) {
-                        self.error = error;
-                        self.status = "error";
-                    }
-
-                    if (this.resultType === this.constructor.TYPES.binary) {
-                        reader.readAsDataURL(file);
+                        if (this.resultType === this.constructor.TYPES.binary) {
+                            reader.readAsDataURL(file);
+                        } else {
+                            reader.readAsText(file);
+                        }
                     } else {
-                        reader.readAsText(file);
+                        this.data = file;
                     }
                 }
             }
-
         }
     },
 
@@ -168,11 +171,12 @@ exports.FileUpload = Component.specialize(/** @lends FileUpload# */ {
 
 }, {
 
-        TYPES: {
-            value: {
-                text: "text",
-                binary: "binary"
-            }
+    TYPES: {
+        value: {
+            text: "text",
+            binary: "binary",
+            file: "file"
         }
+    }
 
-    });
+});
