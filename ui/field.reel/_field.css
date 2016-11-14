@@ -27,6 +27,7 @@
 /* Title */
 
 .Field-title {
+    position: relative;
     font-weight: 300;
     line-height: 1.25em;
     width: var(--fieldtitleWidth);
@@ -37,8 +38,10 @@
 }
 
 .Field.is-mandatory .Field-title:after {
+    position: absolute;
+    margin-left: .5em;
     content: "*";
-    padding-left: 0.5em;
+    color: var(--orange);
 }
 
 .Field.is-disabled .Field-title { opacity: .5; }
@@ -56,7 +59,7 @@
     display: none;
     position: relative;
     height: 1em;
-    margin-left: -1em;
+    margin-left: -.5em;
 }
 
 .Field-info-condition:not(.montage-invisible) { display: inline-block; }
