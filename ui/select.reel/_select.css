@@ -71,19 +71,26 @@
 }
 
 .Select-currentOption {
-    flex: 1;
-    min-width: 0;
+    position: absolute;
+    left: .5rem;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
 }
 
 .Select-icon {
-    width:  1.4rem;
-    height: 1.4rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: absolute;
+    right: .25rem;
+    top: 50%;
+    margin-top: -.7rem;
+    width:  1.4rem;
+    height: 1.4rem;
     border-radius: 3px;
     text-shadow: 0 1px 0 rgba(0, 0, 0, .5);
     background-color: #666;
