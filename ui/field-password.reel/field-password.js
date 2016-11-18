@@ -113,7 +113,6 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
 
     reset: {
         value: function () {
-            console.log("reset");
             this._password2 = this._password1 = null;
             this._passwordMatch = null;
 
@@ -136,7 +135,6 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
 
     handleResetAction: {
         value: function () {
-            console.log("handleReset");
             this.editEnabled = true;
             this.needsfocus = true;
         }
