@@ -1,14 +1,1 @@
-.SelectSearchOption {
-    cursor: pointer;
-    padding: .25em .5em .35em;
-    font-family: 'lato';
-    font-weight: 200;
-}
-
-/*
-.SearchSelectOption:hover,
-*/
-.SelectSearchOption.selected {
-    background: #2B9CD8;
-    color: #fff;
-}
+.SelectSearchOption{cursor:pointer;padding:.25em .5em .35em;font-family:lato;font-weight:200}.SelectSearchOption.selected{background:#2b9cd8;color:#fff}
