@@ -6,16 +6,21 @@
         /* Style added here to workaround a problem with Montage/Firefox not */
         /* loading or parsing the css file on time for width/height measurement */
 
-        .Scrollview { display: flex; flex: 1; flex-direction: column;}
+        .Scrollview { display: -ms-flexbox; display: flex; -ms-flex: 1; flex: 1; -ms-flex-direction: column; flex-direction: column;}
         .ScrollviewContentWrapper {
             overflow: hidden;
-            flex: 1;
+            -ms-flex: 1;
+                flex: 1;
+            display: -ms-flexbox;
             display: flex;
         }
         .ScrollviewContent {
+            display: -ms-flexbox;
             display: flex;
-            flex: 1;
-            flex-direction: column;
+            -ms-flex: 1;
+                flex: 1;
+            -ms-flex-direction: column;
+                flex-direction: column;
         }
         .ScrollviewHorizontalScrollbar {
             position: absolute;
@@ -29,17 +34,22 @@
         }
         .ScrollviewSpacer {
             position: relative;
+            display: -ms-flexbox;
             display: flex;
-            flex: 1;
+            -ms-flex: 1;
+                flex: 1;
         }
 
         .Scrollview-transform {
-            flex: 1;
+            -ms-flex: 1;
+                flex: 1;
+            display: -ms-flexbox;
             display: flex;
-            flex-direction: column;
+            -ms-flex-direction: column;
+                flex-direction: column;
         }
 
-        .Scrollview-is-horizontal .ScrollviewTransform { flex-direction: row;}
+        .Scrollview-is-horizontal .ScrollviewTransform { -ms-flex-direction: row; flex-direction: row;}
     </style>
     <script type="text/montage-serialization">
     {
