@@ -3,42 +3,10 @@
  * This file is reserved for your global style rules.
  */
 
-/*
-
-FreeNas Color Palette
-
-Dark Blue BG:                   #0B1E29 - Global Sections
-Dark Blue Accent:               #093A51 - Selected Item on Global Sections
-
-Selection Primary Blue:         #0C5688 - Selection
-Selection Secondary Blue:       #0D65A0
-Selection Tertiary Blue:        #2089D3 - Selection mos
-
-Orange Primary:                 #D95B1B - Interior Accents
-Orange Secondary:               #DE7225
-Orange Tertiary:                #D78F2A
-
-Green:                          #1E963F - Success & Creation
-
-Dark Black:                     #0F1213 - Column Headers, Shadows @ 40%
-Medium Black:                   #16171A - Main BG & Text on light BG
-
-Dark Cool Grey:                 #242628 - Backgrounds, buttons, secondary section headers
-Medium Cool Grey:               #2A2E33
-Body Grey:                      #2F3233
-
-Light Grey:                     #939E9F -
-Lighter Grey:                   #B1BCBE -
-Lightest Grey:                  #E0E5E5 -
-
-Red:                            #E0003A - Error / Warning
-
-*/
-
 html {
     font-family: sans-serif;
     color: #FFF;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Lato','Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 body {
@@ -68,7 +36,7 @@ $Fonts
 
 @font-face {
     font-family: 'Lato';
-    src: url('../fonts/lato/Lato-Light-7244318390cc4d36aac4a613ff42d308.woff2') format('woff2'), url(../fonts/lato/Lato-Light-90301aa07d780a09812229d6375c3b28.woff) format('woff');
+    src: url('../assets/fonts/lato/Lato-Light-7244318390cc4d36aac4a613ff42d308.woff2') format('woff2'), url(../assets/fonts/lato/Lato-Light-90301aa07d780a09812229d6375c3b28.woff) format('woff');
     font-style: normal;
     font-weight: 300;
     text-rendering: optimizeLegibility;
@@ -76,7 +44,7 @@ $Fonts
 
 @font-face {
     font-family: 'Lato';
-    src: url('../fonts/lato/Lato-Regular-bd03a2cc277bbbc338d464e679fe9942.woff2') format('woff2'), url(../fonts/lato/Lato-Regular-27bd77b9162d388cb8d4c4217c7c5e2a.woff) format('woff');
+    src: url('../assets/fonts/lato/Lato-Regular-bd03a2cc277bbbc338d464e679fe9942.woff2') format('woff2'), url(../assets/fonts/lato/Lato-Regular-27bd77b9162d388cb8d4c4217c7c5e2a.woff) format('woff');
     font-style: normal;
     font-weight: 400;
     text-rendering: optimizeLegibility;
@@ -86,7 +54,7 @@ $Fonts
   font-family: 'Lato';
   font-style: italic;
   font-weight: 300;
-  src: local('Lato Light Italic'), local('Lato-LightItalic'), url(../fonts/lato/Lato-Regular-27bd77b9162d388cb8d4c4217c7c5e2a.woff) format('woff'),  url(../fonts/lato/Lato-LightItalic-314210a4825a7cc8ca7db893dfd9d283.woff2) format('woff2');
+  src: local('Lato Light Italic'), local('Lato-LightItalic'), url(../assets/fonts/lato/Lato-Regular-27bd77b9162d388cb8d4c4217c7c5e2a.woff) format('woff'),  url(../assets/fonts/lato/Lato-LightItalic-314210a4825a7cc8ca7db893dfd9d283.woff2) format('woff2');
   text-rendering: optimizeLegibility;
 }
 
@@ -100,9 +68,9 @@ $Icons
 @font-face {
     font-family: 'freenas';
     src:
-        url('../fonts/icons/freenas.ttf?df1sb9') format('truetype'),
-        url('../fonts/icons/freenas.woff?df1sb9') format('woff'),
-        url('../fonts/icons/freenas.svg?df1sb9#freenas') format('svg');
+        url('../assets/fonts/icons/freenas.ttf?df1sb9') format('truetype'),
+        url('../assets/fonts/icons/freenas.woff?df1sb9') format('woff'),
+        url('../assets/fonts/icons/freenas.svg?df1sb9#freenas') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -137,7 +105,11 @@ $Icons
     content: "\67";
 }
 
-/* Animations */
+/*
+
+Animations
+
+*/
 
 @keyframes rotatedPulse {
     0%   { opacity: .3; }
