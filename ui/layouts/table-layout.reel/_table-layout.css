@@ -1,0 +1,105 @@
+.Table-label {
+    color: #B1BCBE;
+    font-weight: 400;
+}
+
+/* Table-header-columns */
+
+.Table-header-columns {
+    display: flex;
+    align-items: center;
+    background: #1a1d1f;
+    background: #333e4a;
+    border: 1px solid #1a1d1f;
+}
+
+.Table.content-is-empty .Table-header-columns { display: none;}
+
+.Table-row-group { width: 100%; }
+
+.Table-row-group:empty { display: none; } /* removes table row group if empty */
+
+/* Content */
+
+.Table-content { position: relative; }
+
+/*
+
+Row
+
+*/
+
+.Table-row {
+    display: flex;
+    flex: 1;
+    align-items: stretch;
+    position: relative;
+    transition: background-color .15s ease-in-out;
+}
+
+.Table-row:not(.Table-cells):nth-child(odd)          { background-color: #242628; }
+.Table-row:not(.Table-cells):nth-child(even)         { background-color: #1f2123; }
+.Table-row-group .Table-row:not(.Table-cells):hover  { background-color: #2f3235; }
+
+/*
+
+Rows - selection Enabled
+
+*/
+
+.Table.has-selection-enabled .Table-row { cursor: pointer; }
+
+.Table-row.selected:not(.Table-cells) {
+    color: #fff;
+    background-color: #2089d3;
+}
+.Table-row-group .Table-row.selected:hover { background-color: #2089d3; }
+
+/* Table Cell */
+
+.Table-cell {
+    flex: 1;
+    flex-shrink: 0;
+    padding: .5em;
+    font-weight: 200;
+    word-break: break-all;
+}
+
+/* Caption */
+
+.Table-caption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: .5em;
+}
+
+/* isLoading */
+
+.Table-isLoading {
+    justify-content: center;
+    min-height: 4em;
+}
+
+/* Empty State */
+
+.Table-emptyState {
+    width: 100%;
+    border: 1px solid #282828;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #939E9F;
+    line-height: 1em;
+    height: 4em;
+    text-align: center;
+    border-top: none;
+    background-color: rgba(0,0,0,.1);
+}
+
+/* Scrollview */
+
+.Table .Scrollview { border: 1px solid #1a1d1f; border-top: none;}
+
+.Table.content-is-empty .Scrollview { display: none;}
+.Table .Scrollview .Scrollview-transform { display: block; }
