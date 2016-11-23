@@ -50,22 +50,11 @@
     transition: opacity .25s;
 }
 
-<<<<<<< c3cf946548471464b178b943ecb88cc96846bdf6
 .Field.is-mandatory .Field-title:after {
     position: absolute;
     margin-left: .5em;
     content: "*";
     color: var(--orange);
-=======
-    @nest .Field.is-disabled & {
-        opacity: .5;
-    }
-
-    @nest .Field.is-mandatory &:after {
-        content: "*";
-        color: #bb8e00;
-    }
->>>>>>> adds color to required items and removes flex-wrap on field
 }
 
 /* Control */
