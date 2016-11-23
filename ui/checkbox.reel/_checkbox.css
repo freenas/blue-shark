@@ -7,7 +7,6 @@
 
     &.has-error label:before { border-color: var(--red); }
     &.has-error label:after  { color:        var(--red); }
-}
 
     & input {
         -webkit-appearance: none;
@@ -39,7 +38,7 @@
         cursor: pointer;
         transition: opacity .5s;
         display: inline-block;
-        color: var(--text-color--dim);
+        color: #B1BCBE;
 
         /* checkbox container */
 
@@ -63,7 +62,7 @@
             font-size: 1.3em;
             color: var(--blue-lighten-2);
             position: absolute;
-            top:    .05em;
+            top:    .1em;
             left:   .025em;
             right:  0;
             width: 1.1em;
