@@ -51,11 +51,11 @@ $Fonts
 }
 
 @font-face {
-  font-family: 'Lato';
-  font-style: italic;
-  font-weight: 300;
-  src: local('Lato Light Italic'), local('Lato-LightItalic'), url(../assets/fonts/lato/Lato-Regular-27bd77b9162d388cb8d4c4217c7c5e2a.woff) format('woff'),  url(../assets/fonts/lato/Lato-LightItalic-314210a4825a7cc8ca7db893dfd9d283.woff2) format('woff2');
-  text-rendering: optimizeLegibility;
+    font-family: 'Lato';
+    font-style: italic;
+    font-weight: 300;
+    src: local('Lato Light Italic'), local('Lato-LightItalic'), url(../assets/fonts/lato/Lato-Regular-27bd77b9162d388cb8d4c4217c7c5e2a.woff) format('woff'),  url(../assets/fonts/lato/Lato-LightItalic-314210a4825a7cc8ca7db893dfd9d283.woff2) format('woff2');
+    text-rendering: optimizeLegibility;
 }
 
 

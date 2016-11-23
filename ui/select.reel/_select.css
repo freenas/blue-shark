@@ -4,7 +4,7 @@
     align-items: center;
     height: 2em;
     font-weight: 300;
-    -webkit-user-select: none;
+    user-select: none;
     width: 100%;
     font-family: 'Lato', 'helvetica neue', 'helvetica', 'sans-serif';
     border-radius: 4px;
@@ -61,7 +61,7 @@
     padding: 0;
     padding: 0 .25em 0 .5em;
     color: #e6e6e6;
-    -webkit-appearance: none;
+    appearance: none;
     border-radius: inherit;
     cursor: initial;
 

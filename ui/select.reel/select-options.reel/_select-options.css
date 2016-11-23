@@ -12,8 +12,8 @@
     border-radius: 3px;
     overflow: hidden;
     transition: visibility .25s ease-in-out,
-                opacity .25s ease-in-out;
-                flex: 1;
+                opacity    .25s ease-in-out;
+    flex: 1;
     transition-delay: .1s, .1s;
     box-shadow: 0 0 6px rgba(0, 0, 0, .5);
     /* places overlay overtop select */

@@ -100,7 +100,6 @@
 
 .MultipleSelectValue-handler {
     cursor: move;
-    cursor: -webkit-grab;
     cursor: grab;
     padding: 0 0.5em;
     background: #2F3233;
@@ -120,16 +119,10 @@
 
 .MultipleSelectValue.dragged {
     opacity: 0.5;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-        user-select: none;
+    user-select: none;
 }
 
 .MultipleSelectValue.dragOver {
     border-top: 5px solid #2B9CD8;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-        user-select: none;
+    user-select: none;
 }
