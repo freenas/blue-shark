@@ -7,12 +7,27 @@ var path                    = require('path');
     newer                   = require('gulp-newer'),
     cssnext                 = require('postcss-cssnext'),
     postcssImport           = require('postcss-import'),
-    postcssUrl              = require('postcss-url'),
+    styleLint               = require('stylelint'),
     postcssDiscardComments  = require('postcss-discard-comments'),
     browserSync             = require('browser-sync').create(),
     cssnano                 = require('cssnano');
 
 var processors = [
+        styleLint({
+            config: {
+                "extends": "stylelint-config-standard",
+            },
+            rules: {
+                "number-leading-zero": null,
+                "custom-property-empty-line-before": null,
+                "declaration-colon-space-after": null,
+                "indentation": [4, {
+                    ignore: ["value"]
+                }],
+                "value-no-vendor-prefix": true,
+                "property-no-vendor-prefix": true
+            }
+        }),
         postcssImport,
         cssnext,
         postcssDiscardComments,
@@ -48,7 +63,7 @@ gulp.task('css', function() {
 
 gulp.task('allCss', function() {
 
-    return gulp.src("ui/**/**/_*.css")
+    return gulp.src(["ui/**/**/_*.css"])
         .pipe(rename(function(path) {
             path.basename = path.basename.substring(1);
         }))
