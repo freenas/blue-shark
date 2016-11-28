@@ -11,6 +11,12 @@ exports.TableReadOnly = Component.specialize({
 
     isSelectionEnabled: {
         value: false
+    },
+
+    clearSelection: {
+        value: function () {
+            this._tableComponent.rowRepetitionComponent.contentController.clearSelection();
+        }
     }
 
 });
