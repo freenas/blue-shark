@@ -8,29 +8,14 @@ var Component = require("montage/ui/component").Component;
  * @extends Component
  */
 exports.Main = Component.specialize(/** @lends Main# */ {
-
-    options: {
-        value: [
-            {
-                "value": "none",
-                "label": "None"
+    converter: {
+        value: {
+            convert: function(value) {
+                return value;
             },
-            {
-                "value": "optimal",
-                "label": "Optimal"
-            },
-            {
-                "value": "virtualization",
-                "label": "Virtualization"
-            },
-            {
-                "value": "backups",
-                "label": "Backups"
-            },
-            {
-                "value": "media",
-                "label": "Media"
+            revert: function(value) {
+                throw new Error('this is the error')
             }
-        ]
+        }
     }
 });

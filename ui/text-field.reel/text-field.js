@@ -20,21 +20,22 @@ exports.TextField = Component.specialize({
                 var shouldAcceptValue
                 if (!this.delegate ||  (shouldAcceptValue = this.callDelegateMethod("shouldAcceptValue", this, value) ) === undefined ? true : shouldAcceptValue ){
                     if (this.converter) {
+                        debugger;
                         var convertedValue;
                         try {
                             //Where is the matching convert?
                             convertedValue = this.converter.revert(value);
-                            this.error = null;
+                            this.errorMessage = null;
                             this._value = convertedValue;
                         } catch (e) {
                             // unable to convert - maybe error
                             this._value = value;
                             //FIXME: we don't handle required field.
-                            this.error = value !== "" && value !== void 0 && value !== null ? e : null;
+                            this.errorMessage = value !== "" && value !== void 0 && value !== null ? e.message : null;
                         }
                     } else {
                         this._value = value;
-                        this.error = null;
+                        this.errorMessage = null;
                     }
 
                     this.callDelegateMethod("didChange", this);
