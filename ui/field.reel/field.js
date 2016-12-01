@@ -10,9 +10,19 @@ var Component = require("montage/ui/component").Component,
  */
 var Field = exports.Field = Component.specialize(/** @lends Field# */ {
 
+    helpShown: {
+        value: false
+    },
+
     handleFieldInfoButtonAction: {
         value: function () {
-            console.log(this.title + " reference to " + this.documentationReference);
+            this.helpShown = !this.helpShown;
+        }
+    },
+
+    handleCloseHelpButtonAction: {
+        value: function () {
+            this.helpShown = !this.helpShown;
         }
     }
 });
