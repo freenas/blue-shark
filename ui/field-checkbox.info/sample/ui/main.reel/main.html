@@ -10,12 +10,20 @@
                 "myFoo": true
             }
         },
+        "icons": {
+            "prototype": "blue-shark/ui/icons.reel",
+            "properties": {
+                "element": {"#": "icons"}
+            }
+        },
         "fieldCheckbox": {
             "prototype": "blue-shark/ui/field-checkbox.reel",
             "properties": {
                 "element": {"#": "fieldCheckbox"},
                 "label": "test label",
-                "checked": true
+                "checked": true,
+                "documentationReference": "1024",
+                "helpMessage": "This is the checkbox help message"
             }
         },
         "fieldCheckboxLight": {
@@ -31,6 +39,7 @@
 </head>
 <body>
     <div data-montage-id="owner" class="Main">
+        <div data-montage-id="icons"></div>
         <div class="container">
             <h1>Field Text Area</h1>
             <h3>Default</h3>
