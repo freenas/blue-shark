@@ -71,7 +71,11 @@ Rows - selection Enabled
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: .5em;
+    padding-bottom: .5em;
+}
+
+.Table.content-is-empty .Table-caption {
+    border-bottom: 1px solid rgba(255,255,255,.2);
 }
 
 /* isLoading */
@@ -84,18 +88,14 @@ Rows - selection Enabled
 /* Empty State */
 
 .Table-emptyState {
-    width: 100%;
-    border: 1px solid #282828;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: none;
+    font-weight: 300;
     color: #939E9F;
-    line-height: 1em;
-    height: 4em;
-    text-align: center;
-    border-top: none;
-    background-color: rgba(0,0,0,.1);
+    margin-top: .5em;
+    font-style: italic;
 }
+
+.Table.content-is-empty .Table-emptyState { display: block;}
 
 /* Scrollview */
 
