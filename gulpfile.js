@@ -1,5 +1,4 @@
 var path                    = require('path');
-    util                    = require('gulp-util'),
     gulp                    = require('gulp'),
     postcss                 = require('gulp-postcss'),
     header                  = require('gulp-header'),
