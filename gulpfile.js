@@ -50,7 +50,7 @@ gulp.task('serve', ['allCss'], function() {
 
 gulp.task('css', function() {
 
-    return gulp.src("ui/**/**/_*.css")
+    return gulp.src(["ui/**/**/_*.css", "!ui/**/**/_config.css"])
         .pipe(rename(function(path) {
             path.basename = path.basename.substring(1);
         }))
@@ -63,7 +63,7 @@ gulp.task('css', function() {
 
 gulp.task('allCss', function() {
 
-    return gulp.src(["ui/**/**/_*.css"])
+    return gulp.src(["ui/**/**/_*.css", "!ui/**/**/_config.css"])
         .pipe(rename(function(path) {
             path.basename = path.basename.substring(1);
         }))
