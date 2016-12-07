@@ -19,11 +19,33 @@
                 "element": {"#": "icons"}
             }
         },
+        "seconds": {
+            "prototype": "blue-shark/ui/duration.reel",
+            "properties": {
+                "element": {"#": "seconds"}
+            },
+            "bindings": {
+                "value": {"<->": "@owner.seconds"}
+            }
+        },
         "minutes": {
             "prototype": "blue-shark/ui/duration.reel",
             "properties": {
                 "element": {"#": "minutes"},
                 "value": 2592000
+                "unit": 60
+            },
+            "bindings": {
+                "value": {"<->": "@owner.minutes"}
+            }
+        },
+        "hours": {
+            "prototype": "blue-shark/ui/duration.reel",
+            "properties": {
+                "element": {"#": "hours"}
+            },
+            "bindings": {
+                "value": {"<->": "@owner.hours"}
             }
         }
     }

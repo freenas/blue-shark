@@ -1,0 +1,11 @@
+.ControlError {
+    display: none;
+    background: var(--red);
+    padding: .4em .5rem .5em .5em;
+    border-radius: var(--input-borderRadius);
+    font-weight: 300;
+    font-family: 'lato';
+    line-height: 1.15em;
+    margin-top: .25em;
+    color: var(--white);
+}

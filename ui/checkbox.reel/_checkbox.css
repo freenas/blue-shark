@@ -3,20 +3,57 @@
     display: inline-block;
     font-size: 1em;
 
+    &.has-error .ControlError { display: block; }
+
+    &.has-error label:before { border-color: var(--red); }
+    &.has-error label:after  { color:        var(--red); }
+
     & input {
         -webkit-appearance: none;
         cursor: pointer;
         opacity: 0;
         position: absolute;
+
+        &:checked + label:after   { opacity: 1; }
+        &:focus +   label:before  { @apply --input-focus; }
+
+        /* disable state */
+        &[disabled="disabled"] + label {
+            opacity: .5;
+            cursor: not-allowed;
+        }
+
+        &[disabled="disabled"] + label:before {
+            border-color: transparent;
+            box-shadow: none;
+        }
+
+        &[disabled="disabled"] + label:after {
+            color: #666;
+        }
     }
 
     & .Checkbox-label {
-        font-weight: 300;
-        font-family: 'lato';
         position: relative;
         cursor: pointer;
         transition: opacity .5s;
         display: inline-block;
+        color: #B1BCBE;
+
+        /* checkbox container */
+
+        &:before {
+            @apply --input-field;
+            content: '';
+            vertical-align: middle;
+            width:  1.5em;
+            height: 1.5em;
+            margin-right: .5em;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        /* checkmark */
 
         &:after {
             opacity: 0;
@@ -25,32 +62,13 @@
             font-size: 1.3em;
             color: var(--blue-lighten-2);
             position: absolute;
-            top:    .05em;
+            top:    .1em;
             left:   .025em;
             right:  0;
             width: 1.1em;
             height: 1em;
             text-align: center;
             transition: color .25s;
-        }
-
-        &:before {
-            content: '';
-            vertical-align: middle;
-            box-sizing: border-box;
-            width:  1.5em;
-            height: 1.5em;
-            margin-right: .5em;
-            margin-top: -0.1em;
-            display: inline-block;
-            cursor: pointer;
-            background: rgba(0, 0, 0, .25);
-            border-radius: 4px;
-            border:         1px solid transparent;
-            border-top:     1px solid rgba(0, 0, 0, .23);
-            border-bottom:  1px solid rgba(255, 255, 255, .15);
-            transition-property: border-color, box-shadow;
-            transition-duration: .25s;
         }
     }
 }
@@ -62,23 +80,4 @@
         border-top:     1px solid rgba(0, 0, 0, .23);
         border-bottom:  1px solid rgba(255, 255, 255, 1);
     }
-}
-
-.Checkbox input:checked + label:after { opacity: 1; }
-
-.Checkbox input:focus + label:before  { @apply --input-focus; }
-
-/* Disabled State */
-
-.Checkbox input[disabled="disabled"] + label {
-    opacity: .5;
-}
-
-.Checkbox input[disabled="disabled"] + label:before {
-    border-color: transparent;
-    box-shadow: none;
-}
-
-.Checkbox input[disabled="disabled"] + label:after {
-    color: #666;
 }

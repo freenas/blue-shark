@@ -45,18 +45,12 @@
             "bindings": {
                 "placeholder": {"<-": "@owner.placeholder"},
                 "classList.has('has-options')": {"<-": "!!@owner.options && @owner.options.length > 0"},
-                "disabled": {"<-": "@owner.disabled"}
+                "disabled": {"<-": "@owner.disabled"},
+                "errorMessage": {"<-": "@owner._inputErrorMessage"},
+                "hasError": {"<-": "@owner.inputHasError"}
             }
         },
-        "inputErrorMessage": {
-            "prototype": "montage/ui/text.reel",
-            "properties": {
-                "element": {"#": "inputErrorMessage"}
-            },
-            "bindings": {
-                "value": {"<-": "@owner._inputErrorMessage"}
-            }
-        },
+
         "clearButton": {
             "prototype": "montage/ui/button.reel",
             "properties": {
@@ -114,6 +108,7 @@
                 "converter": {"<-": "@owner.converter"},
                 "labelPath": {"<-": "@owner.labelPath"},
                 "enabled": {"<-": "@owner.isDraggable"},
+                "disabled": {"<-": "@owner.disabled"},
                 "errorMessage": {"<-": "@owner.valueErrorMessage || @owner._inputErrorMessage"}
             }
         },

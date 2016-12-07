@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="field-duration.css">
     <script type="text/montage-serialization">
     {
         "owner": {
@@ -18,8 +17,6 @@
                 "label": {"<-": "@owner.label"},
                 "documentationReference": {"<-": "@owner.documentationReference"},
                 "disabled": {"<-": "@owner.disabled"},
-                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
-                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"},
                 "isMandatory": {"<-": "@owner.isMandatory"}
             }
         },
@@ -30,7 +27,12 @@
             },
             "bindings": {
                 "value": {"<->": "@owner.value"},
-                "enabled": {"<-": "@owner.enabled"}
+                "disabled": {"<-": "@owner.disabled"},
+                "placeholder": {"<-": "@owner.placeholder"},
+                "inputErrorMessage": {"<-": "@owner.inputErrorMessage"},
+                "inputHasError": {"<-": "@owner.inputHasError || !!@owner.inputErrorMessage"},
+                "unitErrorMessage": {"<-": "@owner.unitErrorMessage"},
+                "unitHasError": {"<-": "@owner.unitHasError || !!@owner.unitErrorMessage"}
             }
         }
     }

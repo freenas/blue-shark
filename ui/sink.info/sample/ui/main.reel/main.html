@@ -9,42 +9,68 @@
                 "element": {"#": "owner"}
             }
         },
+        "icons": {
+            "prototype": "blue-shark/ui/icons.reel",
+            "properties": {
+                "element": {"#": "icons"}
+            }
+        },
         "textField": {
             "prototype": "blue-shark/ui/field-text-input.reel",
             "properties": {
                 "element": {"#": "textField"},
-                "placeholderValue": "Enter text here",
-                "label": "Field Text Input"
+                "placeholder": "Enter text here",
+                "label": "Field Text Input",
+                "hasError": false,
+                "disabled": false
             }
         },
         "textArea": {
             "prototype": "blue-shark/ui/field-text-area.reel",
             "properties": {
                 "element": {"#": "textArea"},
-                "placeholderValue": "Enter text here",
-                "label": "Field Text Input"
+                "placeholder": "Enter text here",
+                "label": "Field Text Area",
+                "hasError": false,
+                "disabled": false
             }
         },
-        "longTitle": {
-            "prototype": "blue-shark/ui/field-text-input.reel",
+        "passwordInput": {
+            "prototype": "blue-shark/ui/field-password-input.reel",
             "properties": {
-                "element": {"#": "longTitle"},
-                "placeholderValue": "Enter text here",
-                "label": "Field Text Input with a long title that wraps"
+                "element": {"#": "passwordInput"},
+                "label": "Password Input",
+                "placeholder": "enter password...",
+                "hasError": false
             }
         },
-        "enabled": {
+        "password": {
+            "prototype": "blue-shark/ui/field-password.reel",
+            "properties": {
+                "element": {"#": "password"},
+                "label": "Password",
+                "placeholder1": "Enter password...",
+                "placeholder2": "Confirm password...",
+                "hasError1": false,
+                "hasError2": false,
+                "disabled": false
+            }
+        },
+        "toggleSwitch": {
             "prototype": "blue-shark/ui/field-toggle-switch.reel",
             "properties": {
-                "element": {"#": "enabled"},
-                "label": "Toggle Switch"
+                "element": {"#": "toggleSwitch"},
+                "label": "Toggle Switch",
+                "disabled": false
             }
         },
         "radioGroup": {
             "prototype": "blue-shark/ui/field-radio-group.reel",
             "properties": {
                 "element": {"#": "radioGroup"},
-                "label": "test label",
+                "label": "Radio Group",
+                "hasError": false,
+                "disabled": false,
                 "options": [
                     {"label": "option1", "value": "option1"},
                     {"label": "option2", "value": "option2"},
@@ -57,8 +83,10 @@
             "prototype": "blue-shark/ui/field-select.reel",
             "properties": {
                 "element": {"#": "select"},
-                "label": "test label",
+                "label": "Select",
                 "selectedValue": "media",
+                "disabled": false,
+                "hasError": false,
                 "options": [
                     {
                         "value": "none",
@@ -103,30 +131,21 @@
             "prototype": "blue-shark/ui/field-checkbox.reel",
             "properties": {
                 "element": {"#": "checkbox"},
-                "label": "Checkbox"
-            }
-        },
-        "checkbox2": {
-            "prototype": "blue-shark/ui/field-checkbox.reel",
-            "properties": {
-                "element": {"#": "checkbox2"},
-                "label": "Checkbox"
-            }
-        },
-        "scrollView": {
-            "prototype": "blue-shark/ui/scrollview.reel",
-            "properties": {
-                "element": {"#": "scrollView"},
-                "overflow": "scrollY"
-            }
+                "label": "Checkbox",
+                "disabled": false,
+                "hasError": false            }
         },
         "converter": {
             "prototype": "montage/core/converter/number-converter"
         },
         "multiSelect": {
-            "prototype": "blue-shark/ui/multiple-select.reel",
+            "prototype": "blue-shark/ui/field-multiple-select.reel",
             "properties": {
                 "element": {"#": "multiSelect"},
+                "label": "Multiple Select",
+                "placeholder": "Enter name of item",
+                "disabled": false,
+                "hasError": false,
                 "options": [
                     {"name": "foo", "myProperty": "blah 1"},
                     {"name": "aaoption2", "myProperty": "blah 2"},
@@ -148,28 +167,94 @@
             "bindings": {
                 "converter": {"<-": "@owner.fakeConverter"}
             }
+        },
+        "date": {
+            "prototype": "blue-shark/ui/field-date.reel",
+            "properties": {
+                "element": {"#": "date"},
+                "label": "Date",
+                "disabled": false,
+                "hasError": false
+            }
+        },
+        "time": {
+            "prototype": "blue-shark/ui/field-time.reel",
+            "properties": {
+                "element": {"#": "time"},
+                "label": "Time",
+                "hasError": false,
+                "intervalInSeconds": 1800,
+                "pattern": "hh:mm:ss",
+                "isDefaultNow": false,
+                "disabled": false
+            }
+        },
+        "dateTime": {
+            "prototype": "blue-shark/ui/field-datetime.reel",
+            "properties": {
+                "element": {"#": "dateTime"},
+                "label": "Date / Time",
+                "intervalInSeconds": 1800,
+                "pattern": "hh:mm:ss",
+                "isDefaultNow": false,
+                "disabled": false
+            }
+        },
+        "duration": {
+            "prototype": "blue-shark/ui/field-duration.reel",
+            "properties": {
+                "element": {"#": "duration"},
+                "label": "Duration",
+                "placeholder": "duration placeholder value",
+                "unitErrorMessage": null,
+                "inputErrorMessage": null,
+                "inputHasError": false,
+                "unitHasError": false,
+                "disabled": false
+            }
+        },
+        "selectMultiple": {
+            "prototype": "blue-shark/ui/field-select-multiple.reel",
+            "properties": {
+                "element": {"#": "selectMultiple"},
+                "label": "Select Multiple",
+                "options": [
+                    "one",
+                    "two",
+                    "three",
+                    "four",
+                    "five",
+                    "six"
+                ],
+                "hasError": false,
+                "disabled": false
+            }
         }
-
     }
     </script>
 </head>
 <body>
     <div data-montage-id="owner" class="Main">
+        <div data-montage-id="icons" class="is-hidden"></div>
         <div class="container">
             <h1>Widget Examples</h1>
-            <div data-montage-id="textField"></div>
-            <div data-montage-id="textArea"></div>
-            <div data-montage-id="longTitle"></div>
-            <div data-montage-id="enabled"></div>
-            <div data-montage-id="radioGroup"></div>
-            <div data-montage-id="select"></div>
-            <div data-montage-id="checkbox"></div>
-            <div data-montage-id="checkbox2"></div>
-            <div class="scrollContainer">
-                <div data-montage-id="scrollView">
-                    <div data-montage-id="multiSelect"></div>
-                </div>
+            <div class="column">
+                <div data-montage-id="textField"></div>
+                <div data-montage-id="textArea"></div>
+                <div data-montage-id="passwordInput"></div>
+                <div data-montage-id="password"></div>
+                <div data-montage-id="toggleSwitch"></div>
+                <div data-montage-id="radioGroup"></div>
+                <div data-montage-id="select"></div>
+                <div data-montage-id="checkbox"></div>
+                <div data-montage-id="multiSelect"></div>
+                <div data-montage-id="date"></div>
+                <div data-montage-id="time"></div>
+                <div data-montage-id="dateTime"></div>
+                <div data-montage-id="duration"></div>
+                <div data-montage-id="selectMultiple"></div>
             </div>
+
         </div>
     </div>
 </body>

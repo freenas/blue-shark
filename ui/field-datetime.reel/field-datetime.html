@@ -18,8 +18,6 @@
                 "label": {"<-": "@owner.label"},
                 "documentationReference": {"<-": "@owner.documentationReference"},
                 "disabled": {"<-": "@owner.disabled"},
-                "errorMessage": {"<-": "@owner.errorMessage || @control.errorMessage"},
-                "hasError": {"<-": "@owner.hasError || !!@control.errorMessage"},
                 "isMandatory": {"<-": "@owner.isMandatory"}
             }
         },
@@ -32,7 +30,12 @@
                 "value": {"<->": "@owner.value"},
                 "enabled": {"<-": "@owner.enabled"},
                 "allowEmpty": {"<-": "@owner.allowEmpty"},
-                "intervalInSeconds": {"<-": "@owner.intervalInSeconds"}
+                "intervalInSeconds": {"<-": "@owner.intervalInSeconds"},
+                "disabled": {"<-": "@owner.disabled"},
+                "dateErrorMessage": {"<-": "@owner.dateErrorMessage || @control.errorMessage"},
+                "dateHasError": {"<-": "@owner.dateHasError || !!@control.errorMessage"},
+                "timeErrorMessage": {"<-": "@owner.timeErrorMessage || @control.errorMessage"},
+                "timeHasError": {"<-": "@owner.timeHasError || !!@control.errorMessage"}
             }
         }
     }

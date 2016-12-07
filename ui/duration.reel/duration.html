@@ -8,7 +8,7 @@
             "properties": {
                 "element": {"#": "owner"},
                 "units": [
-                    {"label": " - ",        "value": null},
+                    {"label": "Select a unit", "value": null},
                     {"label": "Seconds",    "value": 1},
                     {"label": "Minutes",    "value": 60},
                     {"label": "Hours",      "value": 3600},
@@ -23,7 +23,11 @@
                 "element": {"#": "count"}
             },
             "bindings": {
-                "value": {"<->": "@owner.count"}
+                "value": {"<->": "@owner.count"},
+                "disabled": {"<-": "@owner.disabled"},
+                "placeholder": {"<-": "@owner.placeholder"},
+                "hasError": {"<-": "@owner.inputHasError || !!@owner.inputErrorMessage"},
+                "errorMessage": {"<-": "@owner.inputErrorMessage"}
             }
         },
         "unit": {
@@ -33,7 +37,10 @@
             },
             "bindings": {
                 "options": {"<-": "@owner.units"},
-                "selectedValue": {"<->": "@owner.unit"}
+                "selectedValue": {"<->": "@owner.unit"},
+                "disabled": {"<-": "@owner.disabled"},
+                "hasError": {"<-": "@owner.unitHasError || !!@owner.unitErrorMessage"},
+                "errorMessage": {"<-": "@owner.unitErrorMessage"}
             }
         }
     }

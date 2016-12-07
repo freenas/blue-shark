@@ -7,6 +7,9 @@
         "owner": {
             "properties": {
                 "element": {"#": "owner"}
+            },
+            "bindings": {
+                "classList.has('is-disabled')": {"<-": "@owner.disabled"}
             }
         },
         "options": {
@@ -33,8 +36,17 @@
             },
             "bindings": {
                 "label": {"<-": "@options:iteration.object.label || @options:iteration.object"},
-                "value": {"<-": "@options:iteration.object.value || @options:iteration.object"},
-                "enabled": {"<-": "@owner.enabled"}
+                "disabled": {"<-": "@owner.disabled"}
+            }
+        },
+        "controlError": {
+            "prototype": "ui/control-error.reel",
+            "properties": {
+                "element": {"#": "controlError"}
+            },
+            "bindings": {
+                "errorMessage": {"<-": "@owner.errorMessage"},
+                "hasError":     {"<-": "@owner.hasError || !!@owner.errorMessage"}
             }
         }
     }
@@ -45,6 +57,7 @@
         <div data-montage-id="options" class="RadioButtonFieldGroup-options">
             <div data-montage-id="option" class="RadioButtonFieldGroup-option"></div>
         </div>
+        <div data-montage-id="controlError"></div>
     </div>
 </body>
 </html>

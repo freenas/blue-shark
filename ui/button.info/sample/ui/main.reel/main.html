@@ -37,6 +37,12 @@
                 "value": "create"
             }
         },
+        "buttonIcon": {
+            "prototype": "blue-shark/ui/button.reel",
+            "properties": {
+                "element": {"#": "buttonIcon"}
+            }
+        },
         "buttonAlert": {
             "prototype": "blue-shark/ui/button.reel",
             "properties": {
@@ -117,6 +123,10 @@
             </div>
             <h3>Create Button</h3>
             <div data-montage-id="buttonCreate" class="Button--create">
+                <svg><use xlink:href="#i-circle-plus"/></svg>
+            </div>
+            <h3>Icon Button (no label)</h3>
+            <div data-montage-id="buttonIcon" class="Button--create Button--icon">
                 <svg><use xlink:href="#i-circle-plus"/></svg>
             </div>
             <h3>Alert Button</h3>
