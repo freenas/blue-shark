@@ -69,9 +69,9 @@ exports.Datetime = Component.specialize(/** @lends Datetime# */ {
 
     exitDocument: {
         value: function() {
-            this._value = null;
-            this._date = null;
-            this._time = null;
+            this.__value = null;
+            this.__date = null;
+            this.__time = null;
         }
     },
 
