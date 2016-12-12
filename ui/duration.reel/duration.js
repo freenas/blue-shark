@@ -37,8 +37,7 @@ exports.Duration = Component.specialize(/** @lends Duration# */ {
 
     _handleValueChange: {
         value: function (value) {
-
-            if (value && value != this._value) {
+            if (value != this._value) {
                 this._splitValue();
                 this._value = value;
             }
@@ -70,7 +69,7 @@ exports.Duration = Component.specialize(/** @lends Duration# */ {
             }
 
             this.unit = this.units[i-1].value;
-            this.count = this.value / this.unit;
+            this.count = this.unit ? this.value / this.unit : null;
         }
     }
 });
