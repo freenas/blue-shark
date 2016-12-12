@@ -7,6 +7,13 @@
     margin-bottom: 1em;
     min-height: 2em;
     display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    & > div:first-child {
+        display: flex;
+        flex: 1;
+    }
 }
 
 .Field.is-disabled { pointer-events: none; }
@@ -69,33 +76,18 @@
 .Field-info {
     margin-top: -.08em;
     position: absolute;
-    font-size: 1.5em;
-    top: 0;
-    width:  1em;
-    height: 1em;
+    top: .15em;
     right: -2em;
-    border-radius: 50%;
-    border: 1px solid #2B9CD8;
-    color: #2B9CD8;
     cursor: pointer;
-    transition: all .2s ease-in-out;
-    outline: none;
-}
 
-/* Icon Symbol */
+    & svg {
+        height: 1.2em;
+        width:  1.2em;
+    }
 
-.Field-info:after {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'freenas';
-    content: '\69';
-    font-size: .5em;
-    top:    0;
-    bottom: 0;
-    left:   0;
-    right:  0;
+    @nest .help-is-shown & {
+        color: #2B9CD8;
+    }
 }
 
 /* Field Description */
@@ -182,3 +174,30 @@
     visibility: visible;
     transform: translateY(0);
 }
+
+/* Help */
+
+.Field-help {
+    display: none;
+    width: 100%;
+    position: relative;
+    border: 1px solid #2089d3;
+    background-color: rgba(32, 137, 211, .05);
+    margin-top: 1em;
+    padding: 1em;
+    border-radius: 4px;
+
+    @nest .help-is-shown & {
+        display: block;
+    }
+}
+
+.Field-help-message {
+    font-weight: 200;
+    margin-bottom: 1em;
+}
+
+
+
+
+

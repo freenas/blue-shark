@@ -9,7 +9,8 @@
                 "element": {"#": "owner"}
             },
             "bindings": {
-                "classList.has('is-mandatory')": {"<-": "!!@owner.isMandatory"}
+                "classList.has('is-mandatory')": {"<-": "!!@owner.isMandatory"},
+                "classList.has('help-is-shown')": {"<-": "@owner.helpShown"}
             },
             "listeners": [
                 {
@@ -33,7 +34,7 @@
                 "element": {"#": "condition"}
             },
             "bindings": {
-                "condition": {"<-": "!!@owner.documentationReference"}
+                "condition": {"<-": "!!@owner.helpMessage"}
             }
         },
         "fieldInfoButton": {
@@ -50,21 +51,45 @@
             "bindings": {
                 "value": {"<-": "@owner.errorMessage"}
             }
+        },
+        "closeHelpButton": {
+            "prototype": "ui/button.reel",
+            "properties": {
+                "element": {"#": "closeHelpButton"},
+                "value": "Close"
+            }
+        },
+        "helpMessage": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "helpMessage"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner.helpMessage"}
+            }
         }
     }
     </script>
 </head>
 <body>
     <div data-montage-id="owner" class="Field">
-        <div class="Field-title">
-            <label data-montage-id="fieldTitle"></label>
-            <div data-montage-id="condition" class="Field-info-condition">
-                <div data-montage-id="fieldInfoButton" class="Field-info"></div>
+        <div>
+            <div class="Field-title">
+                <label data-montage-id="fieldTitle"></label>
+                <div data-montage-id="condition" class="Field-info-condition">
+                    <div data-montage-id="fieldInfoButton" class="Field-info">
+                    <svg><use xlink:href="#i-help"/></svg>
+                    </div>
+                </div>
+            </div>
+            <div class="Field-control">
+                <div data-param="*"></div>
+                <div data-montage-id="error" class="Field-error"></div>
             </div>
         </div>
-        <div class="Field-control">
-            <div data-param="*"></div>
-            <div data-montage-id="error" class="Field-error"></div>
+        <div class="Field-help">
+            <div data-montage-id="helpMessage" class="Field-help-message"></div>
+            <button data-montage-id="closeHelpButton"></button>
         </div>
     </div>
 </body>
