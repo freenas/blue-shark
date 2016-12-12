@@ -2,7 +2,7 @@
   "name": "blue-shark",
   "version": "0.1.0",
   "dependencies": {
-    "montage": "montagejs/montage#d8936b90fafb3a1d9bc01ff8924208513418b408"
+    "montage": "freenas/montage#3c57c13d859cc908e7a2709d933a22094fd79a66"
   },
   "devDependencies": {
     "browser-sync": "^2.13.0",
@@ -15,7 +15,9 @@
     "montage-testing": "~0.4.3",
     "postcss-cssnext": "^2.7.0",
     "postcss-discard-comments": "^2.0.4",
-    "postcss-import": "^8.1.2"
+    "postcss-import": "^8.1.2",
+    "stylelint": "^7.6.0",
+    "stylelint-config-standard": "^15.0.0"
   },
   "exclude": [
     "run-tests.html",

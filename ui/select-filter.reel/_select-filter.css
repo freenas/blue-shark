@@ -31,7 +31,6 @@
 }
 
 .SelectFilter-items {
-    /* display: none; */
 
     @nest .SelectFilter.filters-are-visible & {
         display: block;

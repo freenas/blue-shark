@@ -5,9 +5,6 @@
     font-weight: 200;
 }
 
-/*
-.SearchSelectOption:hover,
-*/
 .SelectSearchOption.selected {
     background: #2B9CD8;
     color: #fff;
