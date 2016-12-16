@@ -64,6 +64,10 @@ var AbstractDraggableComponent = exports.AbstractDraggableComponent = Component.
                 } else {
                     this._unload();
                 }
+
+                if (this._translateComposer) {
+                    this._translateComposer.enabled = boolean;
+                }
             }
         },
         get: function () {
