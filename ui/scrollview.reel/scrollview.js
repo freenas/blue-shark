@@ -145,6 +145,7 @@ var Scrollview = exports.Scrollview = Component.specialize({
             if (!this.__translateComposer) {
                 this.__translateComposer = new TranslateComposer();
                 this.__translateComposer.listenToWheelEvent = true;
+                this.__translateComposer.listenToPointerEvent = false;
                 this.__translateComposer.minTranslateX = 0;
                 this.__translateComposer.minTranslateY = 0;
                 this.__translateComposer.invertAxis = true;
