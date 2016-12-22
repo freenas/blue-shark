@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="modal.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"},
+                "content": {"#": "content"}
+            },
+            "bindings": {
+                "classList.has('is-shown')": {"<-": "@owner.isShown"}
+            },
+            "listeners": [
+                {
+                    "listener": {"@": "owner"},
+                    "type": "action"
+                }
+            ]
+        },
+        "title": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "title"}
+            },
+            "bindings": {
+                "value": {"<-": "!!@owner.title ? @owner.title : 'Are you sure?'"}
+            }
+        },
+        "message": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "message"}
+            },
+            "bindings": {
+                "value": {"<-": "!!@owner.message ? @owner.message : 'Click to confirm.'"}
+            }
+        },
+        "falseButton": {
+            "prototype": "ui/button.reel",
+            "properties": {
+                "element": {"#": "falseButton"}
+            },
+            "bindings": {
+                "value": {"<-": "!!@owner.falseButtonLabel ? @owner.falseButtonLabel : 'Cancel'"}
+            }
+        },
+        "trueButton": {
+            "prototype": "ui/button.reel",
+            "properties": {
+                "element": {"#": "trueButton"}
+            },
+            "bindings": {
+                "value": {"<-": "!!@owner.trueButtonLabel ? @owner.trueButtonLabel : 'Confirm'"}
+            }
+        },
+        "closeButton": {
+            "prototype": "ui/button.reel",
+            "properties": {
+                "element": {"#": "closeButton"}
+            }
+        }
+
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Modal" role="dialog">
+        <div data-montage-id="content" class="Modal-content">
+            <div class="Modal-header">
+                <h3 data-montage-id="title" class="flush-v"></h3>
+                <button data-montage-id="closeButton" class="Button--icon Button--naked Modal-close">
+                    <svg><use xlink:href="#i-close"/></svg>
+                </button>
+            </div>
+            <div class="Modal-body">
+                <p data-montage-id="message"></p>
+                <div data-param="*"></div>
+            </div>
+            <div class="Modal-footer">
+                <button data-montage-id="falseButton"></button>
+                <button data-montage-id="trueButton" class="Button--primary"></button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
