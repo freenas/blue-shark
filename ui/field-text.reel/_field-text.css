@@ -1,4 +1,15 @@
+.FieldText {
+
+    & .Field {
+        min-height: auto;
+    }
+
+    & .Field-title {
+        padding-top: 0;
+        line-height: 1rem;
+    }
+}
+
 .FieldText-text {
-    margin-top: .2em;
-    line-height: 1.5;
+    line-height: 1rem;
 }
