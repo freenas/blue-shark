@@ -39,7 +39,9 @@ var processors = [
 
 gulp.task('serve', ['allCss'], function() {
     browserSync.init({
-        server: "./"
+        server: "./",
+        port: 3002,
+        ui: { port: 3003 }
     });
 
     gulp.watch("ui/**/**/_*.css", ['css']);
