@@ -285,6 +285,17 @@ $layout
 .is-shown   { display: initial !important; }
 .is-visible { display: block   !important; }
 
+/********************
+
+$color
+
+********************/
+
+/* backgrounds */
+.bg-c--grey     { background-color: var(--grey); }
+
+/* color */
+.c--grey        { color: var(--grey) };
 
 /********************
 
@@ -300,9 +311,10 @@ $flex
     flex-direction: column;
 }
 
-.flex-spaceBetween { justify-content: space-between; }
-.flex-justifyContent--spaceBetween { justify-content: space-between; }
-.flex-justifyContent--end { justify-content: flex-end; }
+.flex-spaceBetween                  { justify-content: space-between; }
+.flex-justifyContent--spaceBetween  { justify-content: space-between; }
+.flex-justifyContent--end           { justify-content: flex-end; }
+.flex-justifyContent--center        { justify-content: center; }
 
 .flex-alignItems--center { align-items: center; }
 .flex-align--bottom      { align-items: flex-end; }
