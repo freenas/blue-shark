@@ -38,7 +38,7 @@
     font-weight: 300;
     line-height: 1.25em;
     width: var(--fieldtitleWidth);
-    padding-right: 1.5rem;
+    margin-right: 1.5rem;
     padding-top: .35rem;
     color: #B1BCBE;
     transition: opacity .25s;
