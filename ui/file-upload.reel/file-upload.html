@@ -8,6 +8,9 @@
             "properties": {
                 "element": {"#": "owner"},
                 "_fileInput": {"#": "fileInput"}
+            },
+            "bindings": {
+                "classList.has('has-progress')": {"<-": "@owner.progress"}
             }
         },
 
@@ -50,7 +53,6 @@
             },
             "bindings": {
                 "percentageComplete": {"<-": "@owner.progress"},
-                "classList.has('is-hidden')": {"<-": "!percentageComplete"},
                 "status": {"<-": "@owner.status"}
             }
         },
