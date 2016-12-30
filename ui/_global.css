@@ -295,7 +295,8 @@ $color
 .bg-c--grey     { background-color: var(--grey); }
 
 /* color */
-.c--grey        { color: var(--grey) };
+.c--grey        { color: var(--grey)    !important};
+.c--orange      { color: var(--orange)  !important};
 
 /********************
 
@@ -317,6 +318,7 @@ $flex
 .flex-justifyContent--center        { justify-content: center; }
 
 .flex-alignItems--center { align-items: center; }
+.flex-align--center      { align-items: center; }
 .flex-align--bottom      { align-items: flex-end; }
 
 /* Table Styles */
