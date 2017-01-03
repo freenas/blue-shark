@@ -346,11 +346,7 @@ exports.Scrollbar = Component.specialize({
             this._translateComposer.addEventListener("translate", this, false);
             this._translateComposer.addEventListener("translateEnd", this, false);
 
-            if (window.PointerEvent) {
-                this._element.addEventListener("pointerenter", this, false);
-                this._element.addEventListener("pointerleave", this, false);
-
-            } else if (window.MSPointerEvent && window.navigator.msPointerEnabled) {
+            if (window.MSPointerEvent && window.navigator.msPointerEnabled) {
                 this._element.addEventListener("MSPointerEnter", this, false);
                 this._element.addEventListener("MSPointerLeave", this, false);
 
@@ -368,11 +364,7 @@ exports.Scrollbar = Component.specialize({
                 this._translateComposer.removeEventListener("translate", this, false);
                 this._translateComposer.removeEventListener("translateEnd", this, false);
 
-                if (window.PointerEvent) {
-                    this._element.removeEventListener("pointerenter", this, false);
-                    this._element.removeEventListener("pointerleave", this, false);
-
-                } else if (window.MSPointerEvent && window.navigator.msPointerEnabled) {
+                if (window.MSPointerEvent && window.navigator.msPointerEnabled) {
                     this._element.removeEventListener("MSPointerEnter", this, false);
                     this._element.removeEventListener("MSPointerLeave", this, false);
 
