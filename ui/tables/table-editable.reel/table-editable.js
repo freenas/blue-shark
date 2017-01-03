@@ -168,6 +168,7 @@ exports.TableEditable = Component.specialize({
         }
     },
 
+
     //END Public API
 
     willPositionOverlay: {
@@ -175,11 +176,9 @@ exports.TableEditable = Component.specialize({
             var anchor = overlay.anchor,
                 width = overlay.element.offsetWidth,
                 anchorPosition = anchor.getBoundingClientRect(),
-                anchorHeight = anchor.offsetHeight || 0,
-                anchorWidth = anchor.offsetWidth || 0,
                 position = {
-                    top: anchorPosition.top + anchorHeight,
-                    left: anchorPosition.left + (anchorWidth - width)
+                    top: anchorPosition.top + anchorPosition.height,
+                    left: anchorPosition.left + (anchorPosition.width - width)
                 };
 
             if (position.left < 0) {
