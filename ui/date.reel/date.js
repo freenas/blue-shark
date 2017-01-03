@@ -16,9 +16,12 @@ exports.Date = Component.specialize(/** @lends Date# */ {
         get: function() {
             return this._value;
         },
-        set: function(value) {
+        set: function (value) {
+                value = value ? value : null;
+
             if (this._value != value) {
                 this._value = value;
+
                 if (value) {
                     this.currentMonth = new Date(value);
                 }
@@ -78,7 +81,7 @@ exports.Date = Component.specialize(/** @lends Date# */ {
     _getDaysInMonth: {
         value: function(date) {
             var days = [];
-            
+
             for (var i = 1, daysInMonth = this._getLastDayOfMonth(date); i < daysInMonth; i++) {
                 days.push(new Date(date.getFullYear(), date.getMonth(), i));
             }
