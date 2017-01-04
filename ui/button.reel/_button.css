@@ -8,12 +8,13 @@
 
 /* image */
 
-.Button > :not(.Button-label) {
+.Button svg {
     margin-top: -1px;
     margin-right: .25em;
     max-height: 1.4em;
     max-width:  1.4em;
     vertical-align: middle;
+    overflow: visible;
 
     @nest .Button.montage--disabled:active & {
         transform: translateY(0);
@@ -76,13 +77,9 @@
     box-shadow: none;
     border-radius: 0;
 
-    &:hover {
-        box-shadow: none;
-    }
+    &:hover  { box-shadow: none; }
 
-    &:active {
-        background: none;
-    }
+    &:active { background: none; }
 }
 
 .Button--icon {
@@ -97,11 +94,14 @@
 }
 
 .Button--loader {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
+
+    & .Button-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
 
     &:after  {
         content: '';
@@ -122,7 +122,7 @@
         z-index: 1;
     }
 
-    & > svg {
+    & svg {
         position: relative;
         z-index: 1;
         order: 1;
@@ -130,6 +130,11 @@
         width: 0;
         transition: all .25s ease-in;
         animation: rotatedPulse 1.2s infinite;
+
+        @nest .is-processing & {
+            margin-left: .5rem;
+            width: 2em;
+        }
     }
 
     &.is-processing {
@@ -139,8 +144,7 @@
             visibility: visible;
         }
 
-
-        & > svg {
+        & svg {
             margin-left: .5rem;
             width: 2em;
         }
