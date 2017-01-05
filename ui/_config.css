@@ -46,7 +46,7 @@
 
     --input-focus: {
         outline: none;
-        box-shadow: 0 0 2px 2px var(--blue-lighten-2);
+        box-shadow: inset 0 0 0 1px var(--blue-lighten-2);
     }
 
     --border-radius: 4px;
