@@ -2,44 +2,44 @@
  * @module ui/table-editable.reel
  */
 var Component = require("montage/ui/component").Component,
-    Overlay = require("montage/ui/overlay.reel").Overlay,
+    // Overlay = require("montage/ui/overlay.reel").Overlay,
     Checkbox = require("montage/ui/checkbox.reel").Checkbox,
     Composer = require("montage/composer/composer").Composer;
 
 
-function _shouldComposerSurrenderPointerToComponent(composer, pointer, component) {
-    if (component && component.element) {
-        var targetElement = component.element,
-            overlayCandidate;
+// function _shouldComposerSurrenderPointerToComponent(composer, pointer, component) {
+//     if (component && component.element) {
+//         var targetElement = component.element,
+//             overlayCandidate;
 
-        if (component instanceof Composer) {
-            component = component.component;
-        }
+//         if (component instanceof Composer) {
+//             component = component.component;
+//         }
 
-        if (component) {
-            while (component && !overlayCandidate) {
-                if (component instanceof Overlay) {
-                    overlayCandidate = component;
-                } else {
-                    component = component.parentComponent;
-                }
-            }
+//         if (component) {
+//             while (component && !overlayCandidate) {
+//                 if (component instanceof Overlay) {
+//                     overlayCandidate = component;
+//                 } else {
+//                     component = component.parentComponent;
+//                 }
+//             }
 
-            if (component && component.anchor) {
-                targetElement = component.anchor;
-            }
-        }
+//             if (component && component.anchor) {
+//                 targetElement = component.anchor;
+//             }
+//         }
 
-        if (!this.element.contains(targetElement)) {
-            this.dismissOverlay({
-                targetElement: targetElement,
-                type: pointer
-            });
-        }
-    }
+//         if (!this.element.contains(targetElement)) {
+//             this.dismissOverlay({
+//                 targetElement: targetElement,
+//                 type: pointer
+//             });
+//         }
+//     }
 
-    return true;
-}
+//     return true;
+// }
 
 function RowEntry(object) {
     this.object = object;
@@ -72,8 +72,8 @@ exports.TableEditable = Component.specialize({
 
     templateDidLoad: {
         value: function () {
-            this.rowControlsOverlay.shouldComposerSurrenderPointerToComponent = _shouldComposerSurrenderPointerToComponent;
-            this.rowControlsOverlay.anchor = this._tableBodyTopElement;
+            // this.rowControlsOverlay.shouldComposerSurrenderPointerToComponent = _shouldComposerSurrenderPointerToComponent;
+            // this.rowControlsOverlay.anchor = this._tableBodyTopElement;
             this.addRangeAtPathChangeListener("rows", this, "handleRowsChange");
 
         }
@@ -84,7 +84,7 @@ exports.TableEditable = Component.specialize({
             shouldShowNewEntryRow = !!shouldShowNewEntryRow;
 
             if (this.__shouldShowNewEntryRow !== shouldShowNewEntryRow) {
-                document.addEventListener("wheel", this, true);
+                // document.addEventListener("wheel", this, true);
                 this.__shouldShowNewEntryRow = shouldShowNewEntryRow;
                 this._canShowNewEntryRow = true;
                 this.needsDraw = true;
@@ -100,7 +100,7 @@ exports.TableEditable = Component.specialize({
             shouldHideNewEntryRow = !!shouldHideNewEntryRow;
 
             if (this.__shouldHideNewEntryRow !== shouldHideNewEntryRow) {
-                document.removeEventListener("wheel", this, true);
+                // document.removeEventListener("wheel", this, true);
                 this.__shouldHideNewEntryRow = shouldHideNewEntryRow;
                 this._canShowNewEntryRow = false;
                 this.needsDraw = true;
@@ -156,11 +156,11 @@ exports.TableEditable = Component.specialize({
         }
     },
 
-    captureWheel: {
-        value: function () {
-            this.rowControlsOverlay.needsDraw = true;
-        }
-    },
+    // captureWheel: {
+    //     value: function () {
+    //         this.rowControlsOverlay.needsDraw = true;
+    //     }
+    // },
 
     findRowIterationContainingElement: {
         value: function (element) {
@@ -171,43 +171,43 @@ exports.TableEditable = Component.specialize({
 
     //END Public API
 
-    willPositionOverlay: {
-        value: function (overlay, calculatedPosition) {
-            var anchor = overlay.anchor,
-                width = overlay.element.offsetWidth,
-                anchorPosition = anchor.getBoundingClientRect(),
-                position = {
-                    top: anchorPosition.top + anchorPosition.height,
-                    left: anchorPosition.left + (anchorPosition.width - width)
-                };
+    // willPositionOverlay: {
+    //     value: function (overlay, calculatedPosition) {
+    //         var anchor = overlay.anchor,
+    //             width = overlay.element.offsetWidth,
+    //             anchorPosition = anchor.getBoundingClientRect(),
+    //             position = {
+    //                 top: anchorPosition.top + anchorPosition.height,
+    //                 left: anchorPosition.left + (anchorPosition.width - width)
+    //             };
 
-            if (position.left < 0) {
-                position.left = 0;
-            }
+    //         if (position.left < 0) {
+    //             position.left = 0;
+    //         }
 
-            return position;
-        }
-    },
+    //         return position;
+    //     }
+    // },
 
-    shouldDismissOverlay: {
-        value: function (overlay, target, eventType) {
-            if (overlay === this.rowControlsOverlay) {
-               if (!this._tableBodyTopElement.contains(target)) {
-                   if (this.isAddingNewEntry) {
-                        this._cancelAddingNewEntry();
-                    }
-               } else {
-                   return false;
-               }
-            }
+    // shouldDismissOverlay: {
+    //     value: function (overlay, target, eventType) {
+    //         if (overlay === this.rowControlsOverlay) {
+    //            if (!this._tableBodyTopElement.contains(target)) {
+    //                if (this.isAddingNewEntry) {
+    //                     this._cancelAddingNewEntry();
+    //                 }
+    //            } else {
+    //                return false;
+    //            }
+    //         }
 
-           return true;
-        }
-    },
+    //        return true;
+    //     }
+    // },
 
     prepareForActivationEvents: {
         value: function () {
-            this.rowControlsOverlay.addEventListener("action", this);
+            // this.rowControlsOverlay.addEventListener("action", this);
             this.addEventListener("action", this);
         }
     },
@@ -333,7 +333,7 @@ exports.TableEditable = Component.specialize({
                     self.contentController
                 );
 
-                self.rowControlsOverlay.show();
+                // self.rowControlsOverlay.show();
                 self.dispatchOwnPropertyChange("isAddingNewEntry", self.isAddingNewEntry);
                 self.dispatchOwnPropertyChange("currentNewEntry", self.currentNewEntry);
             });
@@ -350,7 +350,7 @@ exports.TableEditable = Component.specialize({
                 this._shouldHideNewEntryRow = false;
                 this.dispatchOwnPropertyChange("isAddingNewEntry", this.isAddingNewEntry);
                 this.dispatchOwnPropertyChange("currentNewEntry", this.currentNewEntry);
-                this.rowControlsOverlay.hide();
+                // this.rowControlsOverlay.hide();
             }
         }
     }

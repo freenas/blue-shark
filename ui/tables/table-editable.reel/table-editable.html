@@ -7,7 +7,6 @@
         "owner": {
             "properties": {
                 "element": {"#": "owner"},
-                "rowControlsOverlay": {"@": "rowControls"},
                 "_tableBodyTopElement": {"#": "tableBodyTop"},
                 "contentController": {"@": "contentController"},
                 "_toggleAllComponent": {"@": "toggleAll"}
@@ -103,15 +102,6 @@
             }
         },
 
-        "rowControls": {
-            "prototype": "montage/ui/overlay.reel",
-            "properties": {
-                "element": {"#": "rowControls"},
-                "delegate": {"@": "owner"},
-                "isModal": false
-            }
-        },
-
         ":rowIteration": {
            "alias": "@tableLayout:rowIteration"
         }
@@ -129,7 +119,13 @@
                 <div data-montage-id="columnTitle" class="TableEditable-columns"></div>
             </div>
             <div data-arg="table-body-top" data-montage-id="tableBodyTop" class="Table-body-top">
-                <div data-param="row-new"></div>
+                <div class="TableEditable-newRow">
+                    <div data-param="row-new"></div>
+                    <div class="TableEditable-rowControls">
+                        <button data-montage-id="cancel"></button>
+                        <button data-montage-id="done" class="Button--primary"></button>
+                    </div>
+                </div>
             </div>
             <div data-arg="table-row" class="Table-row">
                 <div data-montage-id="selectRow" class="Table-selectRow"></div>
@@ -138,10 +134,6 @@
             <div data-arg="table-footer">
                 <div data-param="table-editable-footer"></div>
             </div>
-        </div>
-        <div data-montage-id="rowControls" class="TableEditable-rowControls">
-            <button data-montage-id="cancel"></button>
-            <button data-montage-id="done" class="Button--primary"></button>
         </div>
     </div>
 </body>
