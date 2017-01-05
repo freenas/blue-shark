@@ -292,17 +292,41 @@ exports.Scrollbar = Component.specialize({
         }
     },
 
-    handleMouseenter: {
+    _enterScrollbar: {
         value: function () {
             this.classList.add("isAnimating");
         }
     },
 
-    handleMouseleave: {
+    _leaveScrollbar: {
         value: function (event) {
             if (event.target === this.element && !this._isDragging) {
                 this.classList.remove("isAnimating");
             }
+        }
+    },
+
+    handleMouseenter: {
+        value: function () {
+            this._enterScrollbar();
+        }
+    },
+
+    handlePointerenter: {
+        value: function () {
+            this.classList.add("isAnimating");
+        }
+    },
+
+    handlePointerleave: {
+        value: function (event) {
+            this._leaveScrollbar(event);
+        }
+    },
+
+    handleMouseleave: {
+        value: function (event) {
+            this._leaveScrollbar(event);
         }
     },
 
