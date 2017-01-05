@@ -158,11 +158,15 @@ var Select = exports.Select = Component.specialize({
         }
     },
 
+    _hasHighlightedOptionChanged: {
+        value: function () {
+            return (this.optionsOverlayComponent.isShown && this._highlightedOption == this.optionsOverlayComponent.templateObjects.options.selectedIterations[0]);
+        }
+    },
+
     handleMouseup: {
-        value: function(e) {
-            if (e.target.component.iteration == this.optionsOverlayComponent.templateObjects.options.selectedIterations[0]) {
-                this._toggleOptionsOverlay();
-            }
+        value: function() {
+            this._hasHighlightedOptionChanged() ? this._toggleOptionsOverlay() : this._selectOption();
         }
     },
 
@@ -305,11 +309,7 @@ var Select = exports.Select = Component.specialize({
 
     _handleEnterKeyPress: {
         value: function () {
-            if (this.optionsOverlayComponent.isShown && this._highlightedOption == this.optionsOverlayComponent.templateObjects.options.selectedIterations[0]) {
-                this._toggleOptionsOverlay();
-            } else {
-                this._selectOption();
-            }
+            this._hasHighlightedOptionChanged() ? this._toggleOptionsOverlay() : this._selectOption();
         }
     }
 
