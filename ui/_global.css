@@ -190,11 +190,12 @@ $placeholder Styles
 
 /* typography  helpers */
 
-.h1 { font-size: 3em; }
-.h2 { font-size: 2em; }
-.h3 { font-size: 1.5em; }
-.h4 { font-size: 1.25em; }
-.h5 { font-size: 1em; }
+.h1     { font-size: 3em;       }
+.h2     { font-size: 2em;       }
+.h3     { font-size: 1.5em;     }
+.h4     { font-size: 1.25em;    }
+.h5     { font-size: 1em;       }
+.small  { font-size: .75em;     }
 
 .bold { font-weight: 400; }
 
@@ -319,7 +320,12 @@ $flex
 
 .flex-alignItems--center { align-items: center; }
 .flex-align--center      { align-items: center; }
+.flex-align--baseline    { align-items: baseline; }
+.flex-align--stretch     { align-items: stretch; }
 .flex-align--bottom      { align-items: flex-end; }
+.flex-align--end         { align-items: flex-end; }
+
+.flex-minHeight {min-height: 0;}
 
 /* Table Styles */
 
