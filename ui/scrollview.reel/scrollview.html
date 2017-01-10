@@ -96,6 +96,16 @@
             "bindings": {
                 "drag": {"<->": "@owner.scrollTop"}
             }
+        },
+        "content": {
+            "prototype": "montage/ui/component",
+            "properties": {
+                "element": {"#": "content"},
+                "hasTemplate": false
+            },
+            "bindings": {
+                "classList.has('flex-minHeight')": {"<-": "!!@owner.minHeight"}
+            }
         }
     }
     </script>
@@ -106,7 +116,7 @@
             <div data-montage-id="verticalScrollbar" class="ScrollviewVerticalScrollbar"></div>
             <div data-montage-id="horizontalScrollbar" class="ScrollviewHorizontalScrollbar"></div>
             <div data-montage-id="contentWrapper" class="ScrollviewContentWrapper">
-                <div  class="ScrollviewContent">
+                <div class="ScrollviewContent">
                     <div data-montage-id="content" class="Scrollview-transform">
                         <div data-param="*"></div>
                     </div>
