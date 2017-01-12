@@ -17,12 +17,21 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
         value: null
     },
 
+    _value: {
+        value: null
+    },
+
     value: {
         set: function (value) {
-            this.reset();
+            if (value != this._value) {
+                this._value = value;
+                if(this.editEnabled) {
+                    this.reset();
+                }
+            }
         },
         get: function () {
-            return this._passwordMatch ? this._password1 : null;
+            return this._passwordMatch ? this._password1 : this._value;
         }
     },
 
@@ -135,6 +144,7 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
 
     handleResetAction: {
         value: function () {
+            this.value = null;
             this.editEnabled = true;
             this.needsfocus = true;
         }

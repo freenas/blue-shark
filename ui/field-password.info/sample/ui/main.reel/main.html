@@ -17,7 +17,21 @@
                 "placeholder1": "enter password",
                 "placeholder2": "confirm password",
                 "errorMessage": "the passwords do not match",
-                "editEnabled": true
+                "editEnabled": false
+            },
+            "bindings": {
+                "value": {"<-": "@owner.password"}
+            }
+        },
+        "currentPassword": {
+            "prototype": "blue-shark/ui/field-text.reel",
+            "properties": {
+                "element": {"#": "currentPassword"},
+                "readOnly": true,
+                "label": "Current Password"
+            },
+            "bindings": {
+                "value": {"<-": "@passwordField.value"}
             }
         }
     }
@@ -25,11 +39,8 @@
 </head>
 <body>
     <div data-montage-id="owner" class="Main">
-        <div data-montage-id="checkbox" style="margin-bottom: 2em;"></div>
         <div data-montage-id="passwordField"></div>
-        <div data-montage-id="condition">
-            <div data-montage-id="passwordField2"></div>
-        </div>
+        <div data-montage-id="currentPassword"></div>
     </div>
 </body>
 </html>
