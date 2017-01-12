@@ -1,6 +1,7 @@
 .Date { font-family: 'Lato', 'helvetica neue', 'helvetica', 'sans-serif'; }
 
 .Date-calendar {
+    max-width: 25em;
     position: absolute;
     top: 2em;
     right: 0;
