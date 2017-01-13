@@ -44,20 +44,26 @@
     align-self: center;
     height: 1.2rem;
     width:  1.2rem;
-    padding: .25em;
+    padding: .25rem;
     color: #E0003A;
-    transform: rotate(45deg);
     cursor: pointer;
     border: 1px solid #E0003A;
     border-radius: 50%;
+    border: none;
+    background: none;
     outline: none;
     margin-right: .25em;
+
+    & svg {
+        transform: rotate(45deg);
+    }
+
+    &:hover {
+        background: #E0003A;
+        color: #fff;
+    }
 }
 
-.MultipleSelectValue-delete:hover {
-    background: #E0003A;
-    color: #fff;
-}
 
 .MultipleSelectValue-error {
     position: relative;

@@ -41,16 +41,16 @@
 
 .MultipleSelect-input-clearButton {
     position: absolute;
-    padding: .25em;
-    height: 1.2em;
-    width:  1.2em;
+    padding: .25rem;
+    height: 1.2rem;
+    width:  1.2rem;
     top: 1em;
     right: .5em;
-    margin-top: -.6em;
+    margin-top: -.5em;
     border-radius: 1em;
     color: #fff;
-    transform: rotate(45deg);
     background: #000;
+    border: none;
     border-radius: 2em;
     cursor: pointer;
     outline: none;
@@ -59,7 +59,11 @@
     transition-property: visibility, opacity;
     transition-duration: .2s;
 
-    @nest .MultipleSelect-input.has-value & {
+    & svg {
+        transform: rotate(45deg);
+    }
+
+    @nest .MultipleSelect-input-default.has-value & {
         visibility: visible;
         opacity: 1;
     }
