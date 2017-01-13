@@ -1,5 +1,11 @@
 .Button {
     @apply --button;
+
+    & .Button-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 .Button-label {
@@ -96,9 +102,6 @@
 .Button--loader {
 
     & .Button-content {
-        display: flex;
-        align-items: center;
-        justify-content: center;
         position: relative;
         overflow: hidden;
     }
