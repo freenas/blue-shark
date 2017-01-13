@@ -9,14 +9,12 @@ body {
 
 .Main {
     flex: 1;
-    display: flex;
-    flex-direction: column;
+    @apply --flex-column;
 }
 
 .Main .container {
     flex: 1;
-    display: flex;
-    flex-direction: column;
+    @apply --flex-column;
     position: relative;
     width: 300px;
 }
