@@ -71,13 +71,13 @@
             }
         },
         "increment": {
-            "prototype": "montage/ui/button.reel",
+            "prototype": "ui/button.reel",
             "properties": {
                 "element": {"#": "increment"}
             }
         },
         "decrement": {
-            "prototype": "montage/ui/button.reel",
+            "prototype": "ui/button.reel",
             "properties": {
                 "element": {"#": "decrement"}
             }
@@ -89,12 +89,16 @@
     <div data-montage-id="owner" class="Time">
         <div data-montage-id="inputContainer" class="Time-container">
             <div class="Time-controls">
-                <svg data-montage-id="decrement" class="Time-input-decrement">
-                    <use xlink:href="#i-arrow"/>
-                </svg>
-                <svg data-montage-id="increment" class="Time-input-increment">
-                    <use xlink:href="#i-arrow"/>
-                </svg>
+                <button data-montage-id="decrement" class="Time-input-decrement Button--naked Button--icon">
+                    <svg data-montage-id="decrement">
+                        <use xlink:href="#i-arrow"/>
+                    </svg>
+                </button>
+                <button data-montage-id="increment" class="Time-input-increment Button--naked Button--icon">
+                    <svg>
+                        <use xlink:href="#i-arrow"/>
+                    </svg>
+                </button>
             </div>
             <div data-montage-id="input" class="Time-input-field"></div>
             <div data-montage-id="optionsScroll" class="Time-optionsContainer">
