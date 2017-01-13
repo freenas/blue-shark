@@ -71,13 +71,13 @@
             }
         },
         "increment": {
-            "prototype": "montage/ui/button.reel",
+            "prototype": "ui/button.reel",
             "properties": {
                 "element": {"#": "increment"}
             }
         },
         "decrement": {
-            "prototype": "montage/ui/button.reel",
+            "prototype": "ui/button.reel",
             "properties": {
                 "element": {"#": "decrement"}
             }
@@ -90,13 +90,17 @@
         <div data-montage-id="dateValue" class="Date-value"></div>
         <div data-montage-id="calendar" class="Date-calendar">
             <div class="DateCalendar-header">
-                <svg data-montage-id="decrement" class="DateCalendarHeader-decrement">
-                    <use xlink:href="#i-arrow"/>
-                </svg>
+                <button data-montage-id="decrement" class="Button--naked Button--icon">
+                    <svg class="DateCalendarHeader-decrement">
+                        <use xlink:href="#i-arrow"/>
+                    </svg>
+                </button>
                 <div data-montage-id="currentMonth"></div>
-                <svg data-montage-id="increment" class="DateCalendarHeader-increment">
-                    <use xlink:href="#i-arrow"/>
-                </svg>
+                <button data-montage-id="increment" class="Button--naked Button--icon">
+                    <svg class="DateCalendarHeader-increment">
+                        <use xlink:href="#i-arrow"/>
+                    </svg>
+                </button>
             </div>
             <div class="DateCalendar-daysHeader">
                 <div>S</div>
