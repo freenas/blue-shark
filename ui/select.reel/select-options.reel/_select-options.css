@@ -17,7 +17,7 @@
     transition-delay: .1s, .1s;
     box-shadow: 0 0 6px rgba(0, 0, 0, .5);
     /* places overlay overtop select */
-    transform: translateY(calc(-2.25em))
+    transform: translateY(calc(-2.25em));
 }
 
 
