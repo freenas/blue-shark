@@ -1,14 +1,14 @@
 /**
  * @module ui/modal.reel
  */
-var Component = require("montage/ui/component").Component,
+var AbstractControl = require("montage/ui/base/abstract-control").AbstractControl,
     KeyComposer = require("montage/composer/key-composer").KeyComposer;
 
 /**
  * @class Modal
  * @extends Component
  */
-exports.Modal = Component.specialize(/** @lends Modal# */ {
+exports.Modal = AbstractControl.specialize(/** @lends Modal# */ {
     isShown: {
         value: false
     },
@@ -26,7 +26,6 @@ exports.Modal = Component.specialize(/** @lends Modal# */ {
     },
 
     // FIXME: not working??
-
     prepareForActivationEvents: {
         value: function() {
             KeyComposer.createKey(this, "enter", "enter").addEventListener("keyPress", this);
@@ -63,12 +62,16 @@ exports.Modal = Component.specialize(/** @lends Modal# */ {
     handleFalseButtonAction: {
         value: function() {
             this.toggle();
+            this.detail.set('modalBoolean', 'false');
+            this.dispatchActionEvent();
         }
     },
 
     handleTrueButtonAction: {
         value: function() {
             this.toggle();
+            this.detail.set('modalBoolean', 'true');
+            this.dispatchActionEvent();
         }
     }
 });
