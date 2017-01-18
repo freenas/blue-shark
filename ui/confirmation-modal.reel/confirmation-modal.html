@@ -7,13 +7,21 @@
     {
         "owner": {
             "properties": {
-                "element": {"#": "owner"}
-            }
+                "element": {"#": "owner"},
+                "modal": {"@": "modal"}
+            },
+            "listeners": [
+                {
+                    "listener": {"@": "owner"},
+                    "type": "action"
+                }
+            ]
         },
         "modal": {
             "prototype": "ui/modal.reel",
             "properties": {
-                "element": {"#": "modal"}
+                "element": {"#": "modal"},
+                "controller": {"@": "owner"}
             },
             "bindings": {
                 "isShown": {"<->": "@owner.isShown"}

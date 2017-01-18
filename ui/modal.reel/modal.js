@@ -1,21 +1,15 @@
-/**
- * @module ui/modal.reel
- */
 var AbstractControl = require("montage/ui/base/abstract-control").AbstractControl,
     KeyComposer = require("montage/composer/key-composer").KeyComposer;
 
-/**
- * @class Modal
- * @extends Component
- */
-exports.Modal = AbstractControl.specialize(/** @lends Modal# */ {
+exports.Modal = AbstractControl.specialize({
     isShown: {
         value: false
     },
 
-    toggle: {
+    templateDidLoad: {
         value: function() {
-            this.isShown = !this.isShown;
+            this.super();
+            this.isShown = false;
         }
     },
 
@@ -33,15 +27,25 @@ exports.Modal = AbstractControl.specialize(/** @lends Modal# */ {
         }
     },
 
-    handleEnterKeyPress: {
+    close: {
         value: function() {
-            this.handleTrueButtonAction();
+            this.isShown = false;
         }
     },
 
-    handleFalseKeyPress: {
+    toggle: {
         value: function() {
-            this.handleFalseButtonAction();
+            this.isShown = !this.isShown;
+        }
+    },
+
+    handleEscapeKeyPress: {
+        value: function() {
+            if (this.controller && typeof this.controller.handleCloseAction === 'function') {
+                this.controller.handleCloseAction()
+            } else {
+                this.close();
+            }
         }
     },
 
@@ -55,23 +59,11 @@ exports.Modal = AbstractControl.specialize(/** @lends Modal# */ {
 
     handleCloseButtonAction: {
         value: function() {
-            this.toggle();
-        }
-    },
-
-    handleFalseButtonAction: {
-        value: function() {
-            this.toggle();
-            this.detail.set('modalBoolean', 'false');
-            this.dispatchActionEvent();
-        }
-    },
-
-    handleTrueButtonAction: {
-        value: function() {
-            this.toggle();
-            this.detail.set('modalBoolean', 'true');
-            this.dispatchActionEvent();
+            if (this.controller && typeof this.controller.handleCloseAction === 'function') {
+                this.controller.handleCloseAction()
+            } else {
+                this.close();
+            }
         }
     }
 });

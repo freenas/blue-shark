@@ -1,10 +1,35 @@
-/**
- * @module ui/confirmation-modal.reel
- */
 var Component = require("montage/ui/component").Component;
 
-/**
- * @class ConfirmationModal
- * @extends Component
- */
-exports.ConfirmationModal = Component.specialize();
+exports.ConfirmationModal = Component.specialize({
+
+    handleFalseButtonAction: {
+        value: function(event) {
+            if (this.deferred && typeof this.deferred.resolve === 'function') {
+                this.deferred.resolve(false);
+            }
+            this.modal.close();
+            event.stopPropagation();
+        }
+    },
+
+    handleTrueButtonAction: {
+        value: function(event) {
+            if (this.deferred && typeof this.deferred.resolve === 'function') {
+                this.deferred.resolve({
+                });
+            }
+            this.modal.close();
+            event.stopPropagation();
+        }
+    },
+
+    handleCloseAction: {
+        value: function() {
+            if (this.deferred && typeof this.deferred.resolve === 'function') {
+                this.deferred.resolve(false);
+            }
+            this.modal.close();
+            event.stopPropagation();
+        }
+    }
+});
