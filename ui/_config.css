@@ -29,7 +29,6 @@
     --grey-blue-1:  #2A2E33;
     --grey-blue-2:  #2F3233;
 
-
     --main-bg-color:    #16171A;
     --main-text-color:  #e6e6e6;
 
@@ -44,10 +43,14 @@
     --space-dbl:    calc(var(--space) * 2);
     --space-half:   calc(var(--space) / 2);
 
+    --shadow-1: rgba(0,0,0,.3);
+
     --input-focus: {
         outline: none;
         box-shadow: inset 0 0 0 1px var(--blue-lighten-2);
     }
+
+    --transparent--lighten: rgba(0,0,0,.1);
 
     --flex-column {
         display: flex;
