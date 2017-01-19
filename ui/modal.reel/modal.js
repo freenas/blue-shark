@@ -1,21 +1,15 @@
-/**
- * @module ui/modal.reel
- */
-var Component = require("montage/ui/component").Component,
+var AbstractControl = require("montage/ui/base/abstract-control").AbstractControl,
     KeyComposer = require("montage/composer/key-composer").KeyComposer;
 
-/**
- * @class Modal
- * @extends Component
- */
-exports.Modal = Component.specialize(/** @lends Modal# */ {
+exports.Modal = AbstractControl.specialize({
     isShown: {
         value: false
     },
 
-    toggle: {
+    templateDidLoad: {
         value: function() {
-            this.isShown = !this.isShown;
+            this.super();
+            this.isShown = false;
         }
     },
 
@@ -26,7 +20,6 @@ exports.Modal = Component.specialize(/** @lends Modal# */ {
     },
 
     // FIXME: not working??
-
     prepareForActivationEvents: {
         value: function() {
             KeyComposer.createKey(this, "enter", "enter").addEventListener("keyPress", this);
@@ -34,41 +27,47 @@ exports.Modal = Component.specialize(/** @lends Modal# */ {
         }
     },
 
-    handleEnterKeyPress: {
+    close: {
         value: function() {
-            this.handleTrueButtonAction();
+            this.isShown = false;
         }
     },
 
-    handleFalseKeyPress: {
+    toggle: {
         value: function() {
-            this.handleFalseButtonAction();
+            this.isShown = !this.isShown;
+        }
+    },
+
+    handleEscapeKeyPress: {
+        value: function() {
+            if (this.controller && typeof this.controller.handleCloseAction === 'function') {
+                this.controller.handleCloseAction()
+            } else {
+                this.close();
+            }
         }
     },
 
     handleClick: {
         value: function (e) {
             if(e.target == this.element) {
-                this.toggle();
+                if (this.controller && typeof this.controller.handleCloseAction === 'function') {
+                    this.controller.handleCloseAction()
+                } else {
+                    this.close();
+                }
             }
         }
     },
 
     handleCloseButtonAction: {
         value: function() {
-            this.toggle();
-        }
-    },
-
-    handleFalseButtonAction: {
-        value: function() {
-            this.toggle();
-        }
-    },
-
-    handleTrueButtonAction: {
-        value: function() {
-            this.toggle();
+            if (this.controller && typeof this.controller.handleCloseAction === 'function') {
+                this.controller.handleCloseAction()
+            } else {
+                this.close();
+            }
         }
     }
 });

@@ -23,9 +23,23 @@
             }
         },
         "default": {
-            "prototype": "blue-shark/ui/modal.reel",
+            "prototype": "blue-shark/ui/confirmation-modal.reel",
             "properties": {
-                "element": {"#": "default"}
+                "element": {"#": "default"},
+                "object": {
+                    "message": "Do you wish to save your changes?",
+                    "title": "You have unsaved changes!",
+                    "trueButtonLabel": "Yes",
+                    "falseButtonLabel": "No"
+                }
+            }
+        },
+        "checkbox": {
+            "prototype": "blue-shark/ui/checkbox.reel",
+            "properties": {
+                "element": {"#": "checkbox"},
+                "label": "Optional Item",
+                "checked": true
             }
         },
         "trigger": {
@@ -33,6 +47,15 @@
             "properties": {
                 "element": {"#": "trigger"},
                 "value": "Trigger Modal"
+            }
+        },
+        "result": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "result"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner.result"}
             }
         }
     }
@@ -42,12 +65,13 @@
     <div data-montage-id="owner" class="Main">
         <div data-montage-id="icons"></div>
         <div data-montage-id="default">
-            <span>This is the contents of the modal</span>
+            <div data-montage-id="checkbox"></div>
         </div>
         <div class="container">
             <h1>Loading Message</h1>
             <h3>Default</h3>
-            <button data-montage-id="trigger"></button>
+            <button data-montage-id="trigger" class="g-margin-bottom"></button>
+            <div>Result: <span data-montage-id="result"></span></div>
         </div>
     </div>
 </body>
