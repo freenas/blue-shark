@@ -51,7 +51,7 @@
                 "element": {"#": "falseButton"}
             },
             "bindings": {
-                "value": {"<-": "!!@owner.falseButtonLabel ? @owner.falseButtonLabel : 'Cancel'"}
+                "value": {"<-": "!!@owner.buttonLabelFalse ? @owner.buttonLabelFalse : 'Cancel'"}
             }
         },
         "trueButton": {
@@ -60,7 +60,7 @@
                 "element": {"#": "trueButton"}
             },
             "bindings": {
-                "value": {"<-": "!!@owner.trueButtonLabel ? @owner.trueButtonLabel : 'Confirm'"}
+                "value": {"<-": "!!@owner.buttonLabelTrue ? @owner.buttonLabelTrue : 'Confirm'"}
             }
         }
     }
@@ -72,7 +72,7 @@
             <div class="ConfirmationModal-header">
                 <h3 data-montage-id="title" class="flush-top g-margin-bottom"></h3>
             </div>
-            <div class="ConfirmationModal-body g-margin-bottom">
+            <div class="ConfirmationModal-body g-margin-bottom--double">
                 <p data-montage-id="message"></p>
                 <div data-param="*"></div>
             </div>
