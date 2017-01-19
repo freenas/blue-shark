@@ -26,7 +26,7 @@ exports.ConfirmationModal = Component.specialize({
     handleCloseAction: {
         value: function() {
             if (this.deferred && typeof this.deferred.resolve === 'function') {
-                this.deferred.resolve(false);
+                this.deferred.resolve({});
             }
             this.modal.close();
             event.stopPropagation();

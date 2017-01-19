@@ -52,7 +52,11 @@ exports.Modal = AbstractControl.specialize({
     handleClick: {
         value: function (e) {
             if(e.target == this.element) {
-                this.toggle();
+                if (this.controller && typeof this.controller.handleCloseAction === 'function') {
+                    this.controller.handleCloseAction()
+                } else {
+                    this.close();
+                }
             }
         }
     },
