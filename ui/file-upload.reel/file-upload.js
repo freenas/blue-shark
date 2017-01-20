@@ -121,39 +121,38 @@ exports.FileUpload = Component.specialize(/** @lends FileUpload# */ {
                 }
 
                 if (shouldAcceptFile) {
-                    if (this.resultType !== this.constructor.TYPES.file) {
-                        var reader = new FileReader(),
-                            self = this;
 
-                        reader.onload = function (event) {
-                            self.filename = file.name;
-                            self.data = self.resultType === self.constructor.TYPES.binary ?
-                                reader.result.split(',')[1] : reader.result;
-                        };
+                    var reader = new FileReader(),
+                        self = this;
 
-                        reader.onprogress = function (event) {
-                            self.progress = event.lengthComputable ? event.loaded / event.total * 100 : -1;
-                            if (self.progress > 0 && self.progress !== 100) {
-                                self.status = "active";
-                            } else if (self.progress == 100 ) {
-                                self.status = "success"
-                            } else {
-                                self.status = null
-                            }
-                        };
+                    reader.onload = function (event) {
+                        self.filename = file.name;
+                        self.data = self.resultType === self.constructor.TYPES.binary ?
+                            reader.result.split(',')[1] : reader.result;
+                    };
 
-                        reader.onerror = function (event) {
-                            self.error = error;
-                            self.status = "error";
-                        }
-
-                        if (this.resultType === this.constructor.TYPES.binary) {
-                            reader.readAsDataURL(file);
+                    reader.onprogress = function (event) {
+                        self.progress = event.lengthComputable ? event.loaded / event.total * 100 : -1;
+                        if (self.progress > 0 && self.progress !== 100) {
+                            self.status = "active";
+                        } else if (self.progress == 100 ) {
+                            self.status = "success"
                         } else {
-                            reader.readAsText(file);
+                            self.status = null
                         }
+                    };
+
+                    reader.onerror = function (event) {
+                        self.error = error;
+                        self.status = "error";
+                    }
+
+                    if (this.resultType === this.constructor.TYPES.base64) {
+                        reader.readAsDataURL(file);
+                    } else if (this.resultType === this.constructor.TYPES.arrayBuffer) {
+                        reader.readAsArrayBuffer(file);
                     } else {
-                        this.data = file;
+                        reader.readAsText(file);
                     }
                 }
             }
@@ -174,8 +173,8 @@ exports.FileUpload = Component.specialize(/** @lends FileUpload# */ {
     TYPES: {
         value: {
             text: "text",
-            binary: "binary",
-            file: "file"
+            base64: "base64",
+            arrayBuffer: "arrayBuffer"
         }
     }
 
