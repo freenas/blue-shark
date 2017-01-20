@@ -9,7 +9,7 @@
     height: 5em;
     padding: 0.25em .5em;
     resize: vertical;
-    color: #FFF;
+    color: var(--white);
     background-color: rgba(0, 0, 0, .25);
     border:         1px solid transparent;
     border-top:     1px solid rgba(0, 0, 0, .23);
@@ -22,7 +22,7 @@
 /* States --------------------- */
 
 .TextArea:focus {
-    border-color: #2B9CD8;
+    border-color: var(--blue-lighten-2);
 }
 
 .TextArea.montage--disabled {

@@ -9,18 +9,18 @@
 .InputSearch-field.TextField {
     padding: .25em;
     border-radius: 3px;
-    background: #E0E5E5;
-    color: #16171A;
+    background: var(--grey-3);
+    color: var(--main-bg-color);
     text-indent: .25em;
 
     &:focus {
-        border-left:  1px solid #2B9CD8;
-        border-right: 1px solid #2B9CD8;
-        box-shadow: 0 0 1px 1px #2B9CD8;
+        border-left:  1px solid var(--blue-lighten-2);
+        border-right: 1px solid var(--blue-lighten-2);
+        box-shadow: 0 0 1px 1px var(--blue-lighten-2);
     }
 
     &:hover {
-        background-color: color(#E0E5E5 lightness(100%));
+        background-color: color(var(--grey-3) lightness(100%));
     }
 }
 
@@ -37,9 +37,9 @@
     right: .5em;
     margin-top: -.65em;
     padding: .25em;
-    color: #E0E5E5;
+    color: var(--grey-3);
     transform: rotate(45deg);
-    background: #242628;
+    background: var(--grey-blue);
     border-radius: 2em;
     cursor: pointer;
     outline: none;
@@ -59,7 +59,7 @@
     top: 50%;
     right: .4em;
     margin-top: -.75em;
-    color: #16171A;
+    color: var(--main-bg-color);
     padding: .1em;
     pointer-events: none;
 

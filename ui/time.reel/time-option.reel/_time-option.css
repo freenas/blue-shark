@@ -6,12 +6,12 @@
 
 
 .TimeOption:hover {
-    color: #fff;
-    background-color: rgba(255,255,255,.1);
+    color: var(--white);
+    background-color: var(--transparent--lighten);
 }
 
 .TimeOption.selected {
-    background-color: #0C5688;
-    color: #fff;
+    background-color: var(--color-selected);
+    color: var(--white);
     pointer-events: none;
 }

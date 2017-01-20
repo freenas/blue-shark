@@ -40,7 +40,7 @@
     width: var(--fieldtitleWidth);
     margin-right: 1.5rem;
     padding-top: .35rem;
-    color: #B1BCBE;
+    color: var(--grey-2);
     transition: opacity .25s;
 }
 
@@ -86,7 +86,7 @@
     }
 
     @nest .help-is-shown & {
-        color: #2B9CD8;
+        color: var(--blue-lighten-2);
     }
 }
 
@@ -94,7 +94,7 @@
 
 .Field-info-description {
     position: absolute;
-    color: #000;
+    color: var(--black);
     font-size: .65em;
     font-weight: 300;
     padding: .75em 1em;
@@ -102,7 +102,7 @@
     top:    2.5em;
     width: 15em;
     border-radius: 4px;
-    color: #000;
+    color: var(--black);
     border-radius: 0.3em;
     background: rgba(2555,255,255,1);
     box-shadow: 0 2px 4px rgba(0,0,0,.5);
@@ -116,7 +116,7 @@
 .Field-info-description:after {
     position: absolute;
     content: '';
-    background: #fff;
+    background: var(--white);
     height: 1.2em;
     width:  1.2em;
     left: 1em;
@@ -132,11 +132,11 @@
     display: none;
     position: relative;
     width: 100%;
-    background: #E0003A;
+    background: var(--red);
     padding: .5em;
     padding-top: .2em;
     font-weight: 300;
-    color: #fff;
+    color: var(--white);
     border-bottom-left-radius:  4px;
     border-bottom-right-radius: 4px;
 }
@@ -149,24 +149,24 @@
 
 .Field.has-error .Field-control input,
 .Field.has-error .Field-control textarea {
-    border-color: #E0003A;
+    border-color: var(--red);
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
 
 .Field.is-validated .Field-control input,
 .Field.is-validated .Field-control textarea {
-    border-color: #1E963F;
+    border-color: var(--green);
 }
 
 .Field-info:hover {
-    color: #fff;
-    border-color: #FFF;
+    color: var(--white);
+    border-color: var(--white);
 }
 
 .Field-info.is-expanded {
-    background: #2B9CD8;
-    color: #fff;
+    background: var(--blue-lighten-2);
+    color: var(--white);
 }
 
 .Field-info.is-expanded .Field-info-description {
@@ -181,7 +181,7 @@
     display: none;
     width: 100%;
     position: relative;
-    border: 1px solid #2089d3;
+    border: 1px solid var(--blue-lighten-2);
     background-color: rgba(32, 137, 211, .05);
     margin-top: 1em;
     padding: 1em;

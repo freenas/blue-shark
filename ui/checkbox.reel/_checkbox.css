@@ -80,5 +80,5 @@
 }
 
 .Checkbox input[disabled="disabled"] + label:after {
-    color: #666;
+    color: var(--grey-1);
 }

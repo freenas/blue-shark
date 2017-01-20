@@ -41,7 +41,7 @@
 .RadioButton.montage-RadioButton--checked:before {
     content: '';
     position: absolute;
-    background: green;
+    background: var(--green);
     height: .7em;
     width:  .7em;
     top: 50%;
@@ -49,7 +49,7 @@
     left: 50%;
     margin-left: -.35em;
     border-radius: 50%;
-    background-color: #2B9CD8;
+    background-color: var(--blue-lighten-2);
     box-shadow: 0 1px 1px rgba(0,0,0,.4);
     transition: background-color.25s;
 }

@@ -26,6 +26,7 @@
         font-weight: 200;
         font-family: 'lato';
         font-size: .8em;
+        color: var(--white);
     };
 }
 

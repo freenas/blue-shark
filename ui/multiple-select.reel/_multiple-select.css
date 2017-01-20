@@ -3,7 +3,7 @@
     margin-bottom: 1em;
     border: 1px solid var(--black);
     border-radius: 4px;
-    background: #333;
+    background: var(--grey);
 
     &.is-disabled { opacity: .5; }
 }
@@ -39,8 +39,6 @@
     vertical-align: middle;
 }
 
-.MultipleSelect-input-field { padding-right: 1.5em !important; }
-
 .MultipleSelect-input-clearButton {
     position: absolute;
     padding: .25rem;
@@ -48,31 +46,26 @@
     width:  1.2rem;
     top: 1em;
     right: .5em;
-    margin-top: -.3rem;
+    margin-top: -.5em;
     border-radius: 1em;
-    color: var(--black);
-    background-color: var(--white);
+    color: var(--white);
+    background: var(--black);
     border: none;
     border-radius: 2em;
     cursor: pointer;
     outline: none;
     visibility: hidden;
     opacity: 0;
-    transition-delay: 0s;
-    transition-property: visibility, opacity, color, background-color;
+    transition-property: visibility, opacity;
     transition-duration: .2s;
 
-    & svg { transform: rotate(45deg); }
-
-    &:hover {
-        color: var(--white);
-        background-color: var(--black);
+    & svg {
+        transform: rotate(45deg);
     }
 
     @nest .MultipleSelect-input-default.has-value & {
         visibility: visible;
         opacity: 1;
-        transition-delay: .5s, .5s, 0s, 0s;
     }
 }
 
@@ -99,9 +92,9 @@
     height: 8.2em;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius:  3px;
-    color: #333;
-    background-color: #ddd;
-    border: 1px solid #2B9CD8;
+    color: var(--grey);
+    background-color: var(--grey-3);
+    border: 1px solid var(--blue-lighten-2);
     border-top: none;
     box-shadow: 0 2px 4px rgba(0,0,0,.3);
     z-index: 100;
@@ -120,8 +113,8 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    background: #E0003A;
-    color: #fff;
+    background: var(--red);
+    color: var(--white);
     font-weight: 300;
     padding: .5em;
     transform: translateY(100%);
@@ -139,7 +132,7 @@
     position: relative;
     box-sizing: border-box;
     display: flex;
-    color: #FFF;
+    color: var(--white);
     min-height: 2.5em;
     max-height: 7.25em;
     padding: .25em;
@@ -186,7 +179,7 @@ States
 }
 
 .MultipleSelect-input.has-error .MultipleSelect-input-field {
-    border-color: #E0003A;
+    border-color: var(--red);
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }

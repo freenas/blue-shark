@@ -5,7 +5,7 @@
     font-size: 1em;
     border-radius: 4px;
     outline: none;
-    background: #242628;
+    background: var(--grey-blue);
     border-radius: 4px;
     border:         1px solid transparent;
     border-top:     1px solid rgba(0, 0, 0, .23);
@@ -15,7 +15,7 @@
 .SelectMultiple option {
     font-family: 'lato';
     font-weight: 300;
-    color: #E0E5E5;
+    color: var(--grey-3);
     padding: .25em .5em;
 }
 

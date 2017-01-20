@@ -5,9 +5,9 @@
 
 html {
     font-family: 'Lato','Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #929E9F;
+    color: var(--grey-1);
     font-weight: 300;
-    background-color: #333;
+    background-color: var(--grey);
 }
 
 body {
@@ -132,8 +132,8 @@ body {
     margin: 0;
     font-family: 'Lato', 'helvetica neue', 'helvetica', 'sans-serif';
     font-weight: 300;
-    background: #333;
-    color: #929E9F;
+    background: var(--grey);
+    color: var(--grey-1);
 }
 
 p { margin-top: 0; }
@@ -145,10 +145,10 @@ dl {
     margin-bottom: -.5em
 }
 
-dt { color: #939E9F; }
+dt { color: var(--grey-1); }
 
 dd {
-    color: #E0E5E5;
+    color: var(--grey-3);
     margin-left: 0;
     margin-bottom: .5em;
 }
@@ -173,19 +173,19 @@ $placeholder Styles
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     font-style: italic;
-    color: #6d6d6d;
+    color: var(--grey-1);
 }
 ::-moz-placeholder { /* Firefox 19+ */
     font-style: italic;
-    color: #6d6d6d;
+    color: var(--grey-1);
 }
 :-ms-input-placeholder { /* IE 10+ */
     font-style: italic;
-    color: #6d6d6d;
+    color: var(--grey-1);
 }
 :-moz-placeholder { /* Firefox 18- */
     font-style: italic;
-    color: #6d6d6d;
+    color: var(--grey-1);
 }
 
 /* typography  helpers */
@@ -340,7 +340,7 @@ table {
 thead {
     font-weight: 400;
     background: rgba(0,0,0,.2);
-    color: #fff;
+    color: var(--white);
 }
 
 thead td { padding: .5rem 1rem; }

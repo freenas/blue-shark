@@ -30,5 +30,5 @@ body {
 }
 
 .ScrollviewFooterWrapper .ExampleFooter {
-    background-color: orange;
+    background-color: var(--orange);
 }

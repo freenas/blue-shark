@@ -15,7 +15,7 @@
     height: 2.5em;
     line-height: 1.5em;
     text-align: center;
-    color: #939E9F;
+    color: var(--grey-1);
     cursor: pointer;
 }
 
@@ -26,13 +26,13 @@
 }
 
 .MultipleSelectGrid-option:hover {
-    color: #fff;
+    color: var(--white);
     background-color: rgba(255,255,255,.1);
 }
 
 .MultipleSelectGrid-option.selected {
-    color: #fff;
-    background-color: #0C5688;
+    color: var(--white);
+    background-color: var(--color-selected);
 }
 
 .MultipleSelectGrid-option:before {

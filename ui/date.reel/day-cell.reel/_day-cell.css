@@ -6,8 +6,8 @@
 }
 
 .DayCell:hover {
-    color: #fff;
-    background-color: rgba(255,255,255,.1);
+    color: var(--white);
+    background-color: var(--transparent--lighten);
 }
 
 .DayCell.is-today {
@@ -15,7 +15,7 @@
 }
 
 .DayCell.is-selected {
-    background: #0095d5;
+    background: var(--color-selected);
 }
 
 .DayCell.is-filler {

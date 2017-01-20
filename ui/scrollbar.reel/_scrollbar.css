@@ -32,12 +32,12 @@
     right: 0;
     bottom: 0;
     border-radius: 9999px;
-    background-color: #aaa;
-    border: 1px solid #1A1A1A;
+    background-color: var(--grey-2);
+    border: 1px solid color(var(--grey) shade(25%));
     opacity: 0;
     transition: opacity .5s 1s;
 }
 
 .ScrollbarHandle:active:before {
-    background-color: #ccc;
+    background-color: var(--grey-2);
 }

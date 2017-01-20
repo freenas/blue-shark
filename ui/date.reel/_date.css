@@ -8,8 +8,8 @@
     width: 100%;
     font-family: lato;
     font-weight: 200;
-    color: #939E9F;
-    background: #242628;
+    color: var(--grey-1);
+    background: var(--grey-blue);
     opacity: 0;
     visibility: hidden;
     z-index: 100;
@@ -42,7 +42,7 @@
     & svg {
         height: 2rem;
         width:  2rem;
-        color: #fff;
+        color: var(--white);
     }
 
     &:hover {

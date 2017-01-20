@@ -43,7 +43,7 @@
     --color-success: var(--green);
     --color-create:  var(--green);
     --color-alert:   color(var(--red) alpha(-10%));
-    --color-selected: #2089d3;
+    --color-selected: var(--blue-lighten-2);
 
     --color-text-dark: #16171A;
 

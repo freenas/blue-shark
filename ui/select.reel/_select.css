@@ -29,7 +29,7 @@
     }
 
     & > button:not(.montage--disabled):hover {
-        box-shadow:  0 0 0 1px #0095d5;
+        box-shadow:  0 0 0 1px var(--color-selected);
     }
 
     & .Select-icon {
@@ -60,7 +60,7 @@
     outline: none;
     padding: 0;
     padding: 0 .25em 0 .5em;
-    color: #e6e6e6;
+    color: var(--grey-3);
     appearance: none;
     border-radius: inherit;
     cursor: initial;
@@ -94,8 +94,8 @@
     height: 1.4rem;
     border-radius: 3px;
     text-shadow: 0 1px 0 rgba(0, 0, 0, .5);
-    background-color: #666;
-    background-image: linear-gradient(to bottom, #666, #505050);
+    background-color: var(--grey-1);
+    background-image: linear-gradient(to bottom, var(--grey-1), #505050);
     border-bottom:  1px solid rgba(0, 0, 0, .36);
     border-top:     1px solid rgba(255, 255, 255, .21);
 
@@ -125,15 +125,15 @@
     font-weight: inherit;
     font-size: inherit;
     line-height: 1.25em;
-    color: white;
+    color: var(--white);
     margin-top: -.05em;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
 
-    &:active { background: #0095d5; }
+    &:active { background: var(--color-selected); }
 
-    &.highlighted { background: #0095d5; }
+    &.highlighted { background: var(--color-selected); }
 
     &.selected {
         padding-left: .7em;

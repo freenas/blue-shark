@@ -37,5 +37,5 @@
     margin-top: .5em;
     border-left:  .4em solid transparent;
     border-right: .4em solid transparent;
-    border-top:   .4em solid #929E9F;
+    border-top:   .4em solid var(--grey-1);
 }
