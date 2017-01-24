@@ -16,11 +16,12 @@
 
 .Button svg {
     margin-top: -1px;
-    margin-right: .25em;
+    margin-right: .5em;
     max-height: 1.4em;
     max-width:  1.4em;
     vertical-align: middle;
     overflow: visible;
+    color: currentColor;
 
     @nest .Button.montage--disabled:active & {
         transform: translateY(0);
@@ -41,7 +42,7 @@
 .Button--large { font-size: 1em; }
 
 .Button--primary    { background-color: var(--blue); }
-.Button--create     { background-color: var(--green); }
+.Button--create     { background-color: color(var(--green) shade(9%)); }
 
 .Button--alert  {
     position: relative;
@@ -141,6 +142,7 @@
     }
 
     &.is-processing {
+        position: relative;
 
         &:after {
             opacity: 1;
