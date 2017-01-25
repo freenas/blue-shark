@@ -39,7 +39,7 @@
     vertical-align: middle;
 }
 
-.MultipleSelect-input-field { padding-right: 1.5em; }
+.MultipleSelect-input-field { padding-right: 1.5em !important; }
 
 .MultipleSelect-input-clearButton {
     position: absolute;
