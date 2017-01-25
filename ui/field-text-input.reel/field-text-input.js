@@ -1,12 +1,6 @@
-/**
- * @module ui/field-text-input.reel
- */
-var Component = require("montage/ui/component").Component;
+var Component = require("montage/ui/component").Component,
+    Translator = require("core/translator").Translator;
 
-/**
- * @class FieldTextInput
- * @extends Component
- */
 exports.FieldTextInput = Component.specialize({
     hasTemplate: {
         value: true
@@ -18,6 +12,25 @@ exports.FieldTextInput = Component.specialize({
 
     hasError: {
         value: false
+    },
+
+    _placeholder: {
+        value: void 0
+    },
+
+    placeholder: {
+        get: function() {
+            return this._placeholder;
+        },
+        set: function(placeholder) {
+            if (this._placeholder !== placeholder) {
+                var self = this;
+                this._placeholder = placeholder;
+                Translator.translate(placeholder).then(function(translated) {
+                    this.translatedPlaceholder = translated;
+                });
+            }
+        }
     },
 
     prepareForActivationEvents: {

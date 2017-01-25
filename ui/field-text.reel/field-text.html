@@ -24,12 +24,13 @@
             }
         },
         "control": {
-            "prototype": "montage/ui/text.reel",
+            "prototype": "ui/text.reel",
             "properties": {
                 "element": {"#": "control"}
             },
             "bindings": {
                 "value": {"<->": "@owner.value"},
+                "args": {"<-": "@owner.args"},
                 "converter": {"<-": "@owner.converter"}
             }
         }
