@@ -20,7 +20,6 @@ exports.Translator = Montage.specialize({}, {
                     i18next
                         .use(xhrBackend)
                         .init({
-                            debug: true,
                             lng: self._getLanguage(),
                             fallbackLng: false,
                             nsSeparator: false,
