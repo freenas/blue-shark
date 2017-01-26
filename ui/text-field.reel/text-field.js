@@ -1,26 +1,35 @@
-/**
- * @module ui/text-field.reel
- */
-var TextField = require("montage/ui/text-field.reel").TextField;
+var TextField = require("montage/ui/text-field.reel").TextField,
+    Translator = require("core/translator").Translator;
 
-/**
- * @class TextField
- * @extends Component
- */
 exports.TextField = TextField.specialize({
 
     hasTemplate: {
         value: true
     },
 
-    //FIXME: in montage
+    _placeholder: {
+        value: void 0
+    },
+
+    placeholder: {
+        get: function() {
+            return this._placeholder;
+        },
+        set: function(placeholder) {
+            var self = this;
+            Translator.translate(placeholder).then(function(translated) {
+                self._placeholder = self.element.placeholder = translated;
+            });
+        }
+    },
+
     value: {
         get: function () {
             return this._value;
         },
         set: function (value, fromInput) {
             if (value !== this._value) {
-                var shouldAcceptValue
+                var shouldAcceptValue;
                 if (!this.delegate ||  (shouldAcceptValue = this.callDelegateMethod("shouldAcceptValue", this, value) ) === undefined ? true : shouldAcceptValue ){
                     if (this.converter) {
                         var convertedValue;
@@ -48,7 +57,6 @@ exports.TextField = TextField.specialize({
         }
     },
 
-    //FIXME: in montage
     handleChange: {
         enumerable: false,
         value: function(event) {
@@ -58,7 +66,6 @@ exports.TextField = TextField.specialize({
         }
     },
 
-    //FIXME: in montage
     handleBlur: {
         enumerable: false,
         value: function (event) {
