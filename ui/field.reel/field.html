@@ -65,7 +65,7 @@
                 "element": {"#": "helpMessage"}
             },
             "bindings": {
-                "value": {"<-": "@owner.helpMessage"}
+                "value": {"<-": "@owner.helpMessage && @owner.helpMessage.length > 0 && 'help$$' + @owner.helpMessage"}
             }
         }
     }
