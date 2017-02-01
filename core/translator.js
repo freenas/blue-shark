@@ -21,20 +21,27 @@ exports.Translator = Montage.specialize({}, {
                         .use(xhrBackend)
                         .init({
                             lng: self._getLanguage(),
-                            fallbackLng: false,
-                            nsSeparator: false,
+                            fallbackLng: 'en',
+                            nsSeparator: '$$',
                             keySeparator: false,
+                            ns: [
+                                'help',
+                                'translation'
+                            ],
+                            fallbackNS: 'translation',
                             interpolation: {
                                 escapeValue: false,
                                 prefix: '{',
                                 suffix: '}',
                                 format: function(value, format, lng) {
-                                    if(value instanceof Date) return moment(value).format(format);
+                                    if(value instanceof Date) {
+                                        return moment(value).format(format);
+                                    }
                                     return value;
                                 }
                             },
                             backend: {
-                                loadPath: '/node_modules/blue-shark/assets/locales/{lng}/{ns}.json'
+                                loadPath: '/assets/locales/{lng}/{ns}.json'
                             }
                         }, function(err, t) {
                             resolve(t);
