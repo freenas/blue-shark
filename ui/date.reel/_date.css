@@ -9,7 +9,7 @@
     font-family: lato;
     font-weight: 200;
     color: var(--grey-1);
-    background: var(--grey-blue);
+    background: var(--primary);
     opacity: 0;
     visibility: hidden;
     z-index: 100;
@@ -32,12 +32,11 @@
     align-items: center;
     line-height: 2rem;
     height: 2rem;
-    background-color: rgba(0,0,0,.1);
+    background-color: var(--primary--6);
     margin-bottom: .25em;
 }
 
 .DateCalendar-header .Button {
-    /* outline: none; */
 
     & svg {
         height: 2rem;
@@ -46,7 +45,8 @@
     }
 
     &:hover {
-        background-color: rgba(255,255,255,.1);
+        background-color: var(--primary--7);
+        color: var(--white);
         opacity: 1;
     }
 }
