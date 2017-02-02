@@ -49,7 +49,7 @@
             }
         },
         "inputErrorMessage": {
-            "prototype": "ui/text.reel",
+            "prototype": "montage/ui/text.reel",
             "properties": {
                 "element": {"#": "inputErrorMessage"}
             },
@@ -58,9 +58,10 @@
             }
         },
         "clearButton": {
-            "prototype": "montage/ui/button.reel",
+            "prototype": "ui/button.reel",
             "properties": {
-                "element": {"#": "clearButton"}
+                "element": {"#": "clearButton"},
+                "value": "clear"
             }
         },
         "optionsController": {
@@ -138,14 +139,14 @@
             "prototype": "ui/button.reel",
             "properties": {
                 "element": {"#": "addButton"},
-                "value": "add"
+                "value": "Add"
             },
             "bindings": {
                 "disabled": {"<-": "@owner.canAddNewEntry.defined() ? !@owner.canAddNewEntry : !@input.value"}
             }
         },
         "inputTitle": {
-            "prototype": "ui/text.reel",
+            "prototype": "montage/ui/text.reel",
             "properties": {
                 "element": {"#": "inputTitle"}
             },
@@ -153,17 +154,8 @@
                 "value": {"<-": "!!@owner.inputTitle ? @owner.inputTitle : 'Add Item'"}
             }
         },
-        "valuesTitle": {
-            "prototype": "ui/text.reel",
-            "properties": {
-                "element": {"#": "valuesTitle"}
-            },
-            "bindings": {
-                "value": {"<-": "!!@owner.valuesTitle ? @owner.valuesTitle : 'Added Items'"}
-            }
-        },
         "valuesEmptyState": {
-            "prototype": "ui/text.reel",
+            "prototype": "montage/ui/text.reel",
             "properties": {
                 "element": {"#": "valuesEmptyState"}
             },
@@ -182,7 +174,7 @@
             <div class="MultipleSelect-input-controls">
                 <div data-param="*">
                     <div data-montage-id="inputContainer" class="MultipleSelect-input-default">
-                        <button data-montage-id="clearButton" class="MultipleSelect-input-clearButton">
+                        <button data-montage-id="clearButton" class="MultipleSelect-input-clearButton Button--naked Button--icon">
                             <svg>
                                 <use xlink:href="#i-plus"/>
                             </svg>
@@ -201,13 +193,13 @@
                 </div>
                 <div class="MultipleSelect-input-buttons">
                     <div data-montage-id="addButton" class="Button--create MultipleSelect-input-add">
-                        <svg><use xlink:href="#i-circle-plus"/></svg>
+                        <svg><use xlink:href="#i-plus"/></svg>
                     </div>
                 </div>
             </div>
         </div>
         <div class="MultipleSelect-body">
-            <div data-montage-id="valuesTitle" class="MultipleSelect-title"></div>
+            <!-- <div data-montage-id="valuesTitle" class="g-margin-bottom--half"></div> -->
             <div data-montage-id="valuesContainer" class="MultipleSelect-valuesContainer">
                 <div data-montage-id="valuesEmptyState" class="MultipleSelect-values-emptyState"></div>
                 <div data-montage-id="valuesScroll">

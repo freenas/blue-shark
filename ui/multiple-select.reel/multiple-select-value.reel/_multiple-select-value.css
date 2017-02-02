@@ -3,12 +3,11 @@
     display: flex;
     flex-wrap: wrap;
     background: none;
-    margin: .1em;
-    background-color: var(--grey-blue);
+    margin: -1px;
 }
 
 .MultipleSelectValue:nth-child(even) {
-    background: rgba(0,0,0,.02);
+    background-color: var(--transparent--darken);
 }
 
 .MultipleSelectValue-label.TextField {
@@ -27,18 +26,19 @@
     text-overflow: ellipsis;
     cursor: pointer;
     border-radius: 0;
+
+    &:hover {
+        /* background-color: var(--transparent--lighten); */
+        cursor: text;
+    }
+
+    &:focus {
+        cursor: text;
+        color: var(--white);
+        background: none;
+    }
 }
 
-.MultipleSelectValue-label.TextField:hover {
-    background-color: var(--transparent--lighten);
-    cursor: text;
-}
-
-.MultipleSelectValue-label.TextField:focus {
-    cursor: text;
-    color: var(--white);
-    background: none;
-}
 
 .MultipleSelectValue-delete {
     align-self: center;
