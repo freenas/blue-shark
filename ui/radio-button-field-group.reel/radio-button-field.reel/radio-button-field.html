@@ -11,7 +11,8 @@
             },
             "bindings": {
                 "checked": {"<-": "@radioButton.checked"},
-                "classList.has('checked')": {"<-": "@owner.checked"}
+                "classList.has('checked')": {"<-": "@owner.checked"},
+                "classList.has('montage--disabled')": {"<-": "@owner.disabled"}
             }
         },
         "radioButton": {
@@ -22,7 +23,7 @@
             "bindings": {
                 "value": {"<-": "@owner.value"},
                 "radioButtonController": {"<-": "@owner.radioButtonController"},
-                "enabled": {"<-": "@owner.enabled"}
+                "enabled": {"<-": "!@owner.disabled"}
             }
         },
         "label": {

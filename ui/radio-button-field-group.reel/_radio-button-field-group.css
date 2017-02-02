@@ -7,7 +7,3 @@
         display: block;
     }
 }
-
-.Field.disabled .RadioButtonFieldGroup {
-    opacity: .5;
-}

@@ -2,33 +2,30 @@
     margin-right: 1em;
     display: inline-block;
     cursor: pointer;
+
+    &.montage--disabled {
+        cursor: not-allowed;
+        opacity: .5;
+    }
+
+    &:hover {
+        & .RadioButtonField-control {
+            border-color: var(--primary--1);
+            background-color: var(--input-bg-color);
+        }
+    }
+
+    & label { cursor: pointer; }
+    &.montage--disabled label { cursor: not-allowed; }
 }
 
-.RadioButtonField > * {
-    cursor: pointer;
-}
+.RadioButtonField + .RadioButtonField { margin-top: .5em; }
 
-.RadioButtonField + .RadioButtonField {
-    margin-top: .5em;
-}
-
-.RadioButtonField:first-child {
-    margin-top: 0;
-}
+/* .RadioButtonField:first-child { margin-top: 0; } */
 
 /* Control */
 
-.RadioButtonField-control {
-    margin-right: .25em;
-}
-
-/* Label */
-
-.RadioButtonField-label {
-    font-family: 'lato', 'helvetica neue', helvetica, sans-serif;
-    font-weight: 300;
-    color: rgba(255,255,255,.8);
-}
+.RadioButtonField-control { margin-right: .25em; }
 
 /* Block Modifier */
 
