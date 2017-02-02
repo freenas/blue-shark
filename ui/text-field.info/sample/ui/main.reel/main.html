@@ -13,8 +13,23 @@
             "prototype": "blue-shark/ui/text-field.reel",
             "properties": {
                 "element": {"#": "default"},
+                "placeholder": "placeholder text"
+            }
+        },
+        "readonly": {
+            "prototype": "blue-shark/ui/text-field.reel",
+            "properties": {
+                "element": {"#": "readonly"},
                 "placeholder": "placeholder text",
                 "readonly": true
+            }
+        },
+        "disabled": {
+            "prototype": "blue-shark/ui/text-field.reel",
+            "properties": {
+                "element": {"#": "disabled"},
+                "placeholder": "placeholder text",
+                "disabled": true
             }
         }
     }
@@ -24,8 +39,12 @@
     <div data-montage-id="owner" class="Main">
         <div class="container">
             <h1>Text Field</h1>
-            <h3>Default Text Field</h3>
+            <h2>Default Text Field</h2>
             <input type="text" data-montage-id="default">
+            <h2>Readonly Text Field</h2>
+            <input type="text" data-montage-id="readonly">
+            <h2>Disabled Text Field</h2>
+            <input type="text" data-montage-id="disabled">
         </div>
     </div>
 </body>
