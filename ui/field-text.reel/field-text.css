@@ -1,1 +1,1 @@
-.FieldText .Field{min-height:auto}.FieldText .Field-title{padding-top:0}.FieldText-text,.FieldText .Field-title{line-height:16px;line-height:1rem}
+.FieldText .Field{min-height:auto;margin-bottom:0}.FieldText .Field-title{padding-top:0;line-height:16px;line-height:1rem}.FieldText>.control{line-height:16px;line-height:1rem;color:#fff}

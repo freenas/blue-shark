@@ -2,14 +2,17 @@
 
     & .Field {
         min-height: auto;
+        margin-bottom: 0;
     }
 
     & .Field-title {
         padding-top: 0;
         line-height: 1rem;
     }
+
+    & > .control {
+        line-height: 1rem;
+        color: var(--input-text-color);
+    }
 }
 
-.FieldText-text {
-    line-height: 1rem;
-}
