@@ -8,15 +8,18 @@
     min-height: 2em;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
 
     & > div:first-child {
+        min-height: 2rem;
         display: flex;
         flex: 1;
+        /* flex-shrink: 0; */
     }
 }
 
-.Field.is-disabled { pointer-events: none; }
+.Field.is-disabled {
+    cursor: not-allowed;
+}
 
 .Field + .Field { margin-top: 0; }
 
@@ -27,28 +30,30 @@
 
 .Field-title,
 .Field-control {
-    display: inline-block;
-    vertical-align: top;
+    /* outline: 1px solid red; */
+    align-self: flex-start;
+    /* display: inline-block; */
+    /* vertical-align: middle; */
 }
 
 /* Title */
 
 .Field-title {
     position: relative;
-    font-weight: 300;
+    display: flex;
+    align-items: center;
+    height: auto;
     line-height: 1.25em;
     width: var(--fieldtitleWidth);
     margin-right: 1.5rem;
-    padding-top: .35rem;
-    color: var(--grey-2);
     transition: opacity .25s;
 }
 
 .Field.is-mandatory .Field-title:after {
-    position: absolute;
-    margin-left: .5em;
+    /* position: absolute; */
+    margin-left: .25em;
     content: "*";
-    color: var(--orange);
+    color: var(--red);
 }
 
 .Field.is-disabled .Field-title { opacity: .5; }
@@ -57,28 +62,14 @@
 
 .Field-control {
     flex: 1;
-    min-width: 10em;
 }
 
-/* Field-info */
+/* Field-info Icon */
 
-.Field-info-condition {
-    display: none;
-    position: relative;
-    height: 1em;
-    margin-left: -.5em;
-}
+/* moves icon after isMandatory asterisk */
+.Field-info-condition { order: 1; }
 
-.Field-info-condition:not(.montage-invisible) { display: inline-block; }
-
-/* Icon Background */
-
-.Field-info {
-    margin-top: -.08em;
-    position: absolute;
-    top: .15em;
-    right: -2em;
-    cursor: pointer;
+.Field-info.Button {
 
     & svg {
         height: 1.2em;
@@ -86,13 +77,13 @@
     }
 
     @nest .help-is-shown & {
-        color: var(--blue-lighten-2);
+        color: var(--accent);
     }
 }
 
-/* Field Description */
+/* Field Info */
 
-.Field-info-description {
+/* .Field-info-description {
     position: absolute;
     color: var(--black);
     font-size: .65em;
@@ -124,7 +115,7 @@
     border-radius: .2em;
     transform: rotate(45deg);
     z-index: 5;
-}
+} */
 
 /* Error Message */
 
@@ -165,7 +156,7 @@
 }
 
 .Field-info.is-expanded {
-    background: var(--blue-lighten-2);
+    background: var(--accent);
     color: var(--white);
 }
 
@@ -179,22 +170,10 @@
 
 .Field-help {
     display: none;
-    width: 100%;
-    position: relative;
-    border: 1px solid var(--blue-lighten-2);
-    background-color: rgba(32, 137, 211, .05);
-    margin-top: 1em;
-    padding: 1em;
-    border-radius: 4px;
 
     @nest .help-is-shown & {
         display: block;
     }
-}
-
-.Field-help-message {
-    font-weight: 200;
-    margin-bottom: 1em;
 }
 
 

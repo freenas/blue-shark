@@ -38,7 +38,7 @@
             }
         },
         "fieldInfoButton": {
-            "prototype": "montage/ui/button.reel",
+            "prototype": "ui/button.reel",
             "properties": {
                 "element": {"#": "fieldInfoButton"}
             }
@@ -59,6 +59,12 @@
                 "value": "Close"
             }
         },
+        "help": {
+            "prototype": "ui/panel.reel",
+            "properties": {
+                "element": {"#": "help"}
+            }
+        },
         "helpMessage": {
             "prototype": "ui/text.reel",
             "properties": {
@@ -77,7 +83,7 @@
             <div class="Field-title">
                 <label data-montage-id="fieldTitle"></label>
                 <div data-montage-id="condition" class="Field-info-condition">
-                    <div data-montage-id="fieldInfoButton" class="Field-info">
+                    <div data-montage-id="fieldInfoButton" class="Field-info Button--naked Button--icon">
                     <svg><use xlink:href="#i-help"/></svg>
                     </div>
                 </div>
@@ -87,8 +93,8 @@
                 <div data-montage-id="error" class="Field-error"></div>
             </div>
         </div>
-        <div class="Field-help">
-            <div data-montage-id="helpMessage" class="Field-help-message"></div>
+        <div data-montage-id="help" class="Field-help g-margin-top">
+            <p data-montage-id="helpMessage"></p>
             <button data-montage-id="closeHelpButton"></button>
         </div>
     </div>
