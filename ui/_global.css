@@ -3,19 +3,6 @@
  * This file is reserved for your global style rules.
  */
 
-html {
-    font-family: 'Lato','Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: var(--grey-1);
-    font-weight: 300;
-    background-color: var(--grey);
-}
-
-body {
-    margin: 0; /* Remove default margin */
-}
-
-* { box-sizing: border-box; }
-
 /********************
 
 $Fonts
@@ -126,15 +113,18 @@ $Base Styles
 
 ********************/
 
-* { box-sizing: border-box; }
+html {
+    font-family: var(--font-default);
+    color: var(--main-text-color);
+    font-weight: 300;
+    background-color: var(--primary--9);
+}
 
 body {
-    margin: 0;
-    font-family: 'Lato', 'helvetica neue', 'helvetica', 'sans-serif';
-    font-weight: 300;
-    background: var(--grey);
-    color: var(--grey-1);
+    margin: 0; /* Remove default margin */
 }
+
+* { box-sizing: border-box; }
 
 p { margin-top: 0; }
 
@@ -298,6 +288,7 @@ $color
 /* color */
 .c--grey        { color: var(--grey)    !important};
 .c--orange      { color: var(--orange)  !important};
+.c--white       { color: var(--white)   !important};
 
 /********************
 
