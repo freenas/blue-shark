@@ -109,6 +109,9 @@
                 "element": {"#": "rowControls"},
                 "delegate": {"@": "owner"},
                 "isModal": false
+            },
+            "bindings": {
+                "classList.has('is-visible')": {"<-": "!@owner._canShowNewEntryRow"}
             }
         },
 
