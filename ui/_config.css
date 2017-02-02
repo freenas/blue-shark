@@ -1,7 +1,14 @@
 :root {
+    /* font */
+
+    --font-default: 'Lato','Helvetica Neue', Helvetica, Arial, sans-serif;
+
+    /* colors */
+
     --white:            #ffffff;
 
-    --red:              #E0003A;
+    /* --red:              #E0003A; */
+    --red:              #CF324F;
 
     --green:            #1E963F;
 
@@ -40,9 +47,26 @@
 
     --main-bg-color:    #16171A;
 
+    --separator-color: var(--primary--4);
+
+    /* event colors */
+
+    --task-scrub-color:             #880E4F;
+    --task-replication-color:       #7B1FA2;
+    --task-smart-color:             #311B92;
+    --task-update-color:            #00695C;
+    --task-command-color:           #33691E;
+    --task-snapshot-color:          #F57F17;
+    --task-rsync-color:             #BF360C;
+
+    /* Calendar */
+
+    --calender-line--strong:        var(--main-bg-color);
+    --calender-line--weak:          color(var(--calenderStrongLine) alpha(.3));
+
     /* fixme */
-    --main-text-color:  #e6e6e6;
-    --text-color:       #e6e6e6;
+    --main-text-color:  var(--primary--0);
+    --text-color:       var(--main-text-color);
 
     --color-success: var(--green);
     --color-create:  var(--green);
@@ -71,43 +95,97 @@
         min-height: 0;
     }
 
-    --input-bg-color: color(var(--black) tint(5%));
-    --input-bg-color--disabled: color(var(--black) tint(8%));
+    --input-bg-color:       var(--primary);
+    --input-text-color:     var(--white);
+    --input-border-color:   var(--primary--3);
+    --input-bg-color--disabled: var(--primary--6);
+    --input-min-width: 10rem;
+
+    /* table */
+
+    --table-border-color: var(--primary--7);
+
     --disabled-text-color: var(--grey-2);
 
     --border-radius: 4px;
 
+    --input-field: {
+        font-weight: 300;
+        font-family: var(--font-default);
+        /* margin:     0; */
+        font-size:   1em;
+        color: var(--input-text-color);
+        width: 100%;
+        -webkit-tap-highlight-color: transparent;
+        appearance: none;
+        outline: none;
+        border: 1px solid var(--input-border-color);
+        background-color: var(--input-bg-color);
+        border-radius: var(--border-radius);
+        /* border-top:     1px solid rgba(0, 0, 0, .23); */
+        /* border-bottom:  1px solid rgba(255, 255, 255, .15); */
+        transition-property: background-color, border-color, opacity;
+        transition-duration: .25s;
+
+        &:hover {
+            background-color: color(var(--primary) tint(3%));
+            border-color:     var(--primary--1);
+        }
+
+        &:focus {
+            background-color: color(var(--primary) tint(3%));
+            border-color: var(--accent);
+        }
+
+        &.montage--disabled {
+            border-color: transparent;
+            opacity: .5;
+            cursor: not-allowed;
+
+            &:hover {
+                background-color: var(--input-bg-color);
+                border-color: transparent;
+            }
+        }
+
+        &[readonly="readonly"] {
+            background-color: transparent;
+            border: none;
+            padding: 0;
+        }
+    }
+
     --button: {
         box-sizing: border-box;
-        font-family: "Lato", Helvetica, Arial, sans-serif;
+        font-family: var(--font-default);
         font-size: .75em;
         font-weight: 300;
         min-width: 6em;
         padding: 0 1em;
         text-align: center;
         color: var(--white);
-        background: white;
         border-radius: .3em;
         border: 0;
         margin: 0;
         cursor: pointer;
         appearance: none;
         vertical-align: middle;
-        text-shadow: 0 1px 0 rgba(0, 0, 0, .5);
-        background-color: #666;
-        background-image: linear-gradient(transparent, rgba(0, 0, 0,.2));
-        box-shadow:
+        /* text-shadow: 0 1px 0 rgba(0, 0, 0, .5); */
+        background-color: var(--grey--3);
+        /* background-color: var(--grey--3); */
+        /* background-image: linear-gradient(transparent, rgba(0, 0, 0,.2)); */
+        /* box-shadow:
             inset 0 1px rgba(255, 255, 255, .15),
             inset 0 -1px rgba(0, 0, 0, .2),
-            0 1px 2px var(--shadow-1);
+            0 1px 2px var(--shadow-1); */
         transition: all .25s ease-in-out;
 
         &:hover  {
             background-image: linear-gradient(transparent, transparent);
             box-shadow:
-                inset 0 1px rgba(255, 255, 255, .15),
-                inset 0 -1px var(--shadow-1),
-                0 2px 6px 1px var(--shadow-1);
+                inset 0  1px         rgba(255, 255, 255, .15),
+                inset 0 -1px         var(--shadow-1),
+                      0  2px 6px 1px var(--shadow-1);
         }
 
         &:active {
@@ -122,12 +200,12 @@
         &:focus { @apply --input-focus; }
 
         &.montage--disabled {
-            box-shadow:
+            /* box-shadow:
                 inset 0 1px rgba(255, 255, 255, 0),
                 inset 0 -1px var(--black),
-                0 1px 2px var(--black);
-            background-image: linear-gradient(transparent, transparent);
-            text-shadow: 0 1px 0 rgba(0, 0, 0, 0);
+                0 1px 2px var(--black); */
+            /* background-image: linear-gradient(transparent, transparent); */
+            /* text-shadow: 0 1px 0 rgba(0, 0, 0, 0); */
             cursor: default;
             cursor: not-allowed;
 
@@ -148,4 +226,97 @@
             transform: translateY(.05em);
         }
     }
+
+    /* color palette */
+    --primary: #222b35;
+    --primary--0:  color(var(--primary) tint(70)  s(-0));
+    --primary--1:  color(var(--primary) tint(55)  s(-0));
+    --primary--2:  color(var(--primary) tint(35)  s(-0));
+    --primary--3:  color(var(--primary) tint(22)  s(-0));
+    --primary--4:  color(var(--primary) tint(10)  s(-0));
+    --primary--6:  color(var(--primary) shade(15) s(+0));
+    --primary--7:  color(var(--primary) shade(30) s(+0));
+    --primary--8:  color(var(--primary) shade(45) s(+0));
+    --primary--9:  color(var(--primary) shade(60) s(+0));
+    --primary--10: color(var(--primary) shade(75) s(+0));
+
+    --accent: #2089D3;
+    --accent--1:  color(var(--accent) tint(55)  h(+0) s(-5));
+    --accent--3:  color(var(--accent) tint(30)  h(+0) s(-2));
+    --accent--7:  color(var(--accent) shade(40) h(+2) s(+2));
+    --accent--9:  color(var(--accent) shade(70) h(+3) s(+5));
+    --accent--10: color(var(--accent) shade(90) h(+5) s(+10));
+
+    --secondary: #FECF39;
+    --secondary--1:  color(var(--secondary) tint(45)  s(-10));
+    --secondary--3:  color(var(--secondary) tint(25)  s(-5));
+    --secondary--7:  color(var(--secondary) shade(25) s(+10));
+    --secondary--9:  color(var(--secondary) shade(45) s(+20));
+    --secondary--10: color(var(--secondary) shade(60) s(+25));
+
+
+    --tertiary: #17E0C7;
+    --tertiary--1:  color(var(--tertiary) tint(55)  s(-20));
+    --tertiary--3:  color(var(--tertiary) tint(30)  s(-10));
+    --tertiary--7:  color(var(--tertiary) shade(30) s(+10));
+    --tertiary--9:  color(var(--tertiary) shade(55) s(+20));
+    --tertiary--10: color(var(--tertiary) shade(75) s(+25));
+
+    --grey: #2F3233;
+    --grey--1:  color(var(--grey) tint(55));
+    --grey--3:  color(var(--grey) tint(20));
+    --grey--7:  color(var(--grey) shade(20));
+    --grey--9:  color(var(--grey) shade(55));
+    --grey--10: color(var(--grey) shade(85));
+
+    /* --white:  */
+    /* --black:  */
+
+    /* specifics */
+
+
+
+
+
+
 }
+
+.bg-primary         { background-color: var(--primary); }
+.bg-primary--0      { background-color: var(--primary--0); }
+.bg-primary--1      { background-color: var(--primary--1); }
+.bg-primary--2      { background-color: var(--primary--2); }
+.bg-primary--3      { background-color: var(--primary--3); }
+.bg-primary--4      { background-color: var(--primary--4); }
+.bg-primary--6      { background-color: var(--primary--6); }
+.bg-primary--7      { background-color: var(--primary--7); }
+.bg-primary--8      { background-color: var(--primary--8); }
+.bg-primary--9      { background-color: var(--primary--9); }
+.bg-primary--10     { background-color: var(--primary--10); }
+
+.bg-secondary       { background-color: var(--secondary); }
+.bg-secondary--1    { background-color: var(--secondary--1); }
+.bg-secondary--3    { background-color: var(--secondary--3); }
+.bg-secondary--7    { background-color: var(--secondary--7); }
+.bg-secondary--9    { background-color: var(--secondary--9); }
+.bg-secondary--10   { background-color: var(--secondary--10); }
+
+.bg-tertiary        { background-color: var(--tertiary); }
+.bg-tertiary--1     { background-color: var(--tertiary--1); }
+.bg-tertiary--3     { background-color: var(--tertiary--3); }
+.bg-tertiary--7     { background-color: var(--tertiary--7); }
+.bg-tertiary--9     { background-color: var(--tertiary--9); }
+.bg-tertiary--10    { background-color: var(--tertiary--10); }
+
+.bg-accent          { background-color: var(--accent); }
+.bg-accent--1       { background-color: var(--accent--1); }
+.bg-accent--3       { background-color: var(--accent--3); }
+.bg-accent--7       { background-color: var(--accent--7); }
+.bg-accent--9       { background-color: var(--accent--9); }
+.bg-accent--10      { background-color: var(--accent--10); }
+
+.bg-grey            { background-color: var(--grey); }
+.bg-grey--1         { background-color: var(--grey--1); }
+.bg-grey--3         { background-color: var(--grey--3); }
+.bg-grey--7         { background-color: var(--grey--7); }
+.bg-grey--9         { background-color: var(--grey--9); }
+.bg-grey--10        { background-color: var(--grey--10); }
