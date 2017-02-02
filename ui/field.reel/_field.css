@@ -13,13 +13,10 @@
         min-height: 2rem;
         display: flex;
         flex: 1;
-        /* flex-shrink: 0; */
     }
 }
 
-.Field.is-disabled {
-    cursor: not-allowed;
-}
+.Field.is-disabled { cursor: not-allowed; }
 
 .Field + .Field { margin-top: 0; }
 
@@ -30,10 +27,7 @@
 
 .Field-title,
 .Field-control {
-    /* outline: 1px solid red; */
     align-self: flex-start;
-    /* display: inline-block; */
-    /* vertical-align: middle; */
 }
 
 /* Title */
@@ -50,7 +44,6 @@
 }
 
 .Field.is-mandatory .Field-title:after {
-    /* position: absolute; */
     margin-left: .25em;
     content: "*";
     color: var(--red);
@@ -80,42 +73,6 @@
         color: var(--accent);
     }
 }
-
-/* Field Info */
-
-/* .Field-info-description {
-    position: absolute;
-    color: var(--black);
-    font-size: .65em;
-    font-weight: 300;
-    padding: .75em 1em;
-    left: -.8em;
-    top:    2.5em;
-    width: 15em;
-    border-radius: 4px;
-    color: var(--black);
-    border-radius: 0.3em;
-    background: rgba(2555,255,255,1);
-    box-shadow: 0 2px 4px rgba(0,0,0,.5);
-    z-index: 2000;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-1em);
-    transition: all .25s ease-out;
-}
-
-.Field-info-description:after {
-    position: absolute;
-    content: '';
-    background: var(--white);
-    height: 1.2em;
-    width:  1.2em;
-    left: 1em;
-    top: -.5em;
-    border-radius: .2em;
-    transform: rotate(45deg);
-    z-index: 5;
-} */
 
 /* Error Message */
 
@@ -175,8 +132,3 @@
         display: block;
     }
 }
-
-
-
-
-
