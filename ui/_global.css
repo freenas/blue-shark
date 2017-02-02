@@ -290,6 +290,47 @@ $color
 .c--orange      { color: var(--orange)  !important};
 .c--white       { color: var(--white)   !important};
 
+
+.bg-primary         { background-color: var(--primary); }
+.bg-primary--0      { background-color: var(--primary--0); }
+.bg-primary--1      { background-color: var(--primary--1); }
+.bg-primary--2      { background-color: var(--primary--2); }
+.bg-primary--3      { background-color: var(--primary--3); }
+.bg-primary--4      { background-color: var(--primary--4); }
+.bg-primary--6      { background-color: var(--primary--6); }
+.bg-primary--7      { background-color: var(--primary--7); }
+.bg-primary--8      { background-color: var(--primary--8); }
+.bg-primary--9      { background-color: var(--primary--9); }
+.bg-primary--10     { background-color: var(--primary--10); }
+
+.bg-secondary       { background-color: var(--secondary); }
+.bg-secondary--1    { background-color: var(--secondary--1); }
+.bg-secondary--3    { background-color: var(--secondary--3); }
+.bg-secondary--7    { background-color: var(--secondary--7); }
+.bg-secondary--9    { background-color: var(--secondary--9); }
+.bg-secondary--10   { background-color: var(--secondary--10); }
+
+.bg-tertiary        { background-color: var(--tertiary); }
+.bg-tertiary--1     { background-color: var(--tertiary--1); }
+.bg-tertiary--3     { background-color: var(--tertiary--3); }
+.bg-tertiary--7     { background-color: var(--tertiary--7); }
+.bg-tertiary--9     { background-color: var(--tertiary--9); }
+.bg-tertiary--10    { background-color: var(--tertiary--10); }
+
+.bg-accent          { background-color: var(--accent); }
+.bg-accent--1       { background-color: var(--accent--1); }
+.bg-accent--3       { background-color: var(--accent--3); }
+.bg-accent--7       { background-color: var(--accent--7); }
+.bg-accent--9       { background-color: var(--accent--9); }
+.bg-accent--10      { background-color: var(--accent--10); }
+
+.bg-grey            { background-color: var(--grey); }
+.bg-grey--1         { background-color: var(--grey--1); }
+.bg-grey--3         { background-color: var(--grey--3); }
+.bg-grey--7         { background-color: var(--grey--7); }
+.bg-grey--9         { background-color: var(--grey--9); }
+.bg-grey--10        { background-color: var(--grey--10); }
+
 /********************
 
 $flex
