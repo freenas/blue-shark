@@ -42,6 +42,7 @@
         display: inline-block;
         cursor: pointer;
         transition: opacity .25s;
+        position: relative;
 
         &:after {
             opacity: 0;
