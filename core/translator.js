@@ -1,6 +1,7 @@
 var Montage = require("montage").Montage,
     i18next = require('i18next'),
     moment = require('moment'),
+    numeral = require('numeral'),
     xhrBackend = require('i18next-xhr-backend');
 
 exports.Translator = Montage.specialize({}, {
@@ -36,6 +37,9 @@ exports.Translator = Montage.specialize({}, {
                                 format: function(value, format, lng) {
                                     if(value instanceof Date) {
                                         return moment(value).format(format);
+                                    }
+                                    if (typeof value === 'number') {
+                                        return numeral(value).format(format);
                                     }
                                     return value;
                                 }
