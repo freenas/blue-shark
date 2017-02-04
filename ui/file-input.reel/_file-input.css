@@ -1,4 +1,4 @@
-.FileUpload {
+.FileInput {
     position: relative;
     display: flex;
     flex-wrap: wrap;
@@ -9,13 +9,13 @@
     }
 }
 
-.FileUpload-path {
+.FileInput-path {
     font-family: lato;
     font-weight: 200;
     font-size: .75em;
 }
 
-.FileUpload-button {
+.FileInput-button {
     @apply --button;
     display: inline-block;
     vertical-align: middle;
@@ -23,19 +23,19 @@
     margin-right: 1rem;
 }
 
-.FileUpload-input {
+.FileInput-input {
     position: absolute;
     left: -9999px;
 }
 
-.FileUpload-progress {
+.FileInput-progress {
     display: none;
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
 
-    @nest .FileUpload.has-progress & {
+    @nest .FileInput.has-progress & {
         display: flex;
     }
 }
