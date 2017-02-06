@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="file-upload.css">
+    <link rel="stylesheet" type="text/css" href="file-input.css">
     <script type="text/montage-serialization">
     {
         "owner": {
             "properties": {
                 "element": {"#": "owner"},
                 "_fileInput": {"#": "fileInput"}
-            },
-            "bindings": {
-                "classList.has('has-progress')": {"<-": "@owner.progress"}
             }
         },
 
@@ -42,18 +39,7 @@
                 "element": {"#": "path"}
             },
             "bindings": {
-                "value": {"<-": "!!@owner.filename ? @owner.filename : 'no file chosen'"}
-            }
-        },
-
-        "progress": {
-            "prototype": "ui/progress.reel",
-            "properties": {
-                "element": {"#": "progress"}
-            },
-            "bindings": {
-                "percentageComplete": {"<-": "@owner.progress"},
-                "status": {"<-": "@owner.status"}
+                "value": {"<-": "!!@owner.file ? @owner.file.name : 'no file chosen'"}
             }
         },
 
@@ -63,7 +49,8 @@
                 "element": {"#": "errorMessage"}
             },
             "bindings": {
-                "value": {"<-": "@owner.error"}
+                "value": {"<-": "@owner.errorValue"},
+                "args": {"<-": "@owner.errorArgs"}
             }
         }
 
@@ -71,11 +58,10 @@
     </script>
 </head>
 <body>
-    <div data-montage-id="owner" class="FileUpload">
-        <label data-montage-id="label" class="FileUpload-button">Browse<input data-montage-id="fileInput" name="file" type="file" class="FileUpload-input"/></label>
-        <div data-montage-id="path" class="FileUpload-path"></div>
+    <div data-montage-id="owner" class="FileInput">
+        <label data-montage-id="label" class="FileInput-button">Browse<input data-montage-id="fileInput" name="file" type="file" class="FileInput-input"/></label>
+        <div data-montage-id="path" class="FileInput-path"></div>
         <div data-montage-id="errorMessage"></div>
-        <div data-montage-id="progress" class="FileUpload-progress"></div>
     </div>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="field-file-upload.css">
+    <link rel="stylesheet" type="text/css" href="field-file-input.css">
     <script type="text/montage-serialization">
     {
         "owner": {
@@ -24,25 +24,24 @@
             }
         },
         "control": {
-            "prototype": "ui/file-upload.reel",
+            "prototype": "ui/file-input.reel",
             "properties": {
-                "element": {"#": "fileUpload"}
+                "element": {"#": "fileInput"}
             },
             "bindings": {
-                "resultType": {"<-": "@owner.resultType"},
+                "file": {"<->": "@owner.file"},
                 "supportedExtensions": {"<-": "@owner.supportedExtensions"},
                 "supportedFileTypes": {"<-": "@owner.supportedFileTypes"},
-                "maxFileSize": {"<-": "@owner.maxFileSize"},
-                "data": {"<->": "@owner.data"}
+                "maxFileSize": {"<-": "@owner.maxFileSize"}
             }
         }
     }
     </script>
 </head>
 <body>
-    <div data-montage-id="owner" class="FieldFileUpload">
+    <div data-montage-id="owner" class="FieldFileInput">
         <div data-montage-id="field">
-            <div data-montage-id="fileUpload"></div>
+            <div data-montage-id="fileInput"></div>
         </div>
     </div>
 </body>
