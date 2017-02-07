@@ -1,44 +1,50 @@
 .Select {
-    position: relative;
-    display: flex;
-    align-items: center;
-    height: 2em;
-    font-weight: 300;
+    @apply --input-field;
+    /* position: relative; */
+    /* display: flex; */
+    /* align-items: center; */
+    /* height: 2em; */
+    /* font-weight: 300; */
     user-select: none;
-    width: 100%;
-    font-family: 'Lato', 'helvetica neue', 'helvetica', 'sans-serif';
-    border-radius: 4px;
-    background: rgba(0, 0, 0, .25);
-    border-top:     1px solid rgba(0, 0, 0, .23);
-    border-bottom:  1px solid rgba(255, 255, 255, .15);
-    outline: none;
+    /* width: 100%; */
+    /* background-color: var(--input-bg-color); */
+    /* font-family: 'Lato', 'helvetica neue', 'helvetica', 'sans-serif'; */
+    /* border-radius: var(--border-radius); */
+    /* border: 1px solid var(--input-border-color); */
+    /* transition: */
 
-    &:not(.disabled):focus {
-        @apply --input-focus;
-    }
-}
+    /* background: rgba(0, 0, 0, .25); */
+    /* border-top:     1px solid rgba(0, 0, 0, .23); */
+    /* border-bottom:  1px solid rgba(255, 255, 255, .15); */
+    /* outline: none; */
 
-/* Naked Select Style overrides */
+    &:not(.disabled):focus { @apply --input-focus; }
 
-.Select--naked.Select {
-    background: none;
-    border: none;
-
-    &:hover {
-        background: none;
+    &:hover:not(:focus) {
+        border-color: var(--primary--1);
     }
 
-    & > button:not(.montage--disabled):hover {
-        box-shadow:  0 0 0 1px #0095d5;
-    }
-
-    & .Select-icon {
+    /* Naked Select Style overrides */
+    &.Select--naked {
         background: none;
         border: none;
+
+        &:hover { background: none; }
+
+        & .Select-icon {
+            background: none;
+            border: none;
+        }
+
+        & .Select-currentOption { flex: none; }
     }
 
-    & .Select-currentOption {
-        flex: none;
+    /* Disabled State */
+    @nest .Field.is-disabled & {
+        background: rgba(0, 0, 0, .1);
+        border-color: transparent;
+        opacity: .5;
+        pointer-events: none;
     }
 }
 
@@ -51,7 +57,7 @@
     line-height: 1.2;
     height: 2em;
     font-family: inherit;
-    font-size: inherit;
+    font-size:   inherit;
     line-height: inherit;
     font-weight: inherit;
     width: 100%;
@@ -60,7 +66,7 @@
     outline: none;
     padding: 0;
     padding: 0 .25em 0 .5em;
-    color: #e6e6e6;
+    color: var(--grey-3);
     appearance: none;
     border-radius: inherit;
     cursor: initial;
@@ -92,12 +98,9 @@
     margin-top: -.7rem;
     width:  1.4rem;
     height: 1.4rem;
-    border-radius: 3px;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, .5);
-    background-color: #666;
-    background-image: linear-gradient(to bottom, #666, #505050);
-    border-bottom:  1px solid rgba(0, 0, 0, .36);
-    border-top:     1px solid rgba(255, 255, 255, .21);
+    /* border-radius: 3px; */
+    /* background-color: var(--grey-1); */
+    /* background-image: linear-gradient(to bottom, var(--grey-1), color(var(--grey-1) shade(50%))); */
 
     & svg {
         display: inline-block;
@@ -109,31 +112,34 @@
         opacity: 0;
         width:   0;
     }
-}
 
-.Select:hover { background: rgba(0, 0, 0, .15); }
-.Select:hover .select { background-color: rgba(0, 0, 0, .17); }
+    @nest .Select:hover & {
+        /* background-image: linear-gradient(to bottom, color(var(--grey-1) tint(25%)), color(var(--grey-1) shade(35%))); */
+    }
+
+    @nest .Select:active & {
+        /* background-image: linear-gradient(to bottom, color(var(--grey-1) shade(25%)), var(--grey-1)); */
+    }
+}
 
 /* Options Drop Down */
 
-.Select-options {
-    background: rgba(90, 90, 90, 1);
-}
+.Select-options { background-color: var(--primary--3); }
 
 .Select-option {
     padding: .25em .5em .25em 2em;
     font-weight: inherit;
     font-size: inherit;
     line-height: 1.25em;
-    color: white;
+    color: var(--white);
     margin-top: -.05em;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
 
-    &:active { background: #0095d5; }
+    &:active { background: var(--color-selected); }
 
-    &.highlighted { background: #0095d5; }
+    &.highlighted { background: var(--color-selected); }
 
     &.selected {
         padding-left: .7em;
@@ -143,13 +149,4 @@
             margin-right: .5em;
         }
     }
-}
-
-/* Disabled State */
-
-.Field.is-disabled .Select {
-    background: rgba(0, 0, 0, .1);
-    border-color: transparent;
-    opacity: .5;
-    pointer-events: none;
 }

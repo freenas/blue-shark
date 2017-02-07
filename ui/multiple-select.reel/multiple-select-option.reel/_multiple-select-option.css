@@ -9,6 +9,6 @@
 .MultipleSelectOption:hover,
 */
 .MultipleSelectOption.selected {
-    background: #2B9CD8;
-    color: #fff;
+    background: var(--blue-lighten-2);
+    color: var(--white);
 }

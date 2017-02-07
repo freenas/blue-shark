@@ -16,11 +16,12 @@
 
 .Button svg {
     margin-top: -1px;
-    margin-right: .25em;
+    margin-right: .5em;
     max-height: 1.4em;
     max-width:  1.4em;
     vertical-align: middle;
     overflow: visible;
+    color: currentColor;
 
     @nest .Button.montage--disabled:active & {
         transform: translateY(0);
@@ -40,12 +41,12 @@
 .Button--block { display: block; width: 100%; }
 .Button--large { font-size: 1em; }
 
-.Button--primary    { background-color: #0378AA; }
-.Button--create     { background-color: #1E963F; }
+.Button--primary    { background-color: var(--blue); }
+.Button--create     { background-color: color(var(--green) shade(9%)); }
 
 .Button--alert  {
     position: relative;
-    color: #E0003A;
+    color: var(--red);
     background: rgba(150, 36, 36,.1);
 
     &:before {
@@ -55,13 +56,13 @@
         left: 0;
         right: 0;
         bottom: 0;
-        border: 1px solid #E0003A;
+        border: 1px solid var(--red);
         border-radius: inherit;
     }
 
     &:hover {
-        color: #FFF;
-        background: #E0003A;
+        color: var(--white);
+        background: var(--red);
         box-shadow: none;
     }
 
@@ -69,7 +70,7 @@
         color: var(--main-text-color);
 
         &:hover {
-            background: #666;
+            background: var(--grey-1);
         }
     }
 
@@ -141,6 +142,7 @@
     }
 
     &.is-processing {
+        position: relative;
 
         &:after {
             opacity: 1;

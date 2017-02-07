@@ -90,10 +90,18 @@
                 "disabled": {"<-": "isProcessing"}
             }
         },
+        "buttonIcon": {
+            "prototype": "blue-shark/ui/button.reel",
+            "properties": {
+                "element": {"#": "buttonIcon"},
+                "value": "this should still have a label"
+            }
+        },
         "checkbox": {
             "prototype": "blue-shark/ui/checkbox.reel",
             "properties": {
-                "element": {"#": "checkbox"}
+                "element": {"#": "checkbox"},
+                "label": "trigger loading"
             }
         }
     }
@@ -104,34 +112,36 @@
         <div data-montage-id="icons" style="display: none"></div>
         <div class="container">
             <h1>Buttons</h1>
-            <div data-montage-id="checkbox"></div>
-            <h3>Button Loader</h3>
-            <div data-montage-id="buttonLoader" class="Button--loader Button--primary Button--block Button--large">
-                <svg><use xlink:href="#i-freenasIcon"/></svg>
-            </div>
-            <h3>Default Button</h3>
+            <h2>Default Button</h2>
             <div data-montage-id="button"></div>
-            <h3>Primary Button</h3>
-            <div data-montage-id="buttonPrimary" class="Button--primary">
-                <svg><use xlink:href="#i-circle-plus"/></svg>
-            </div>
-            <h3>Create Button</h3>
+            <h2>Primary Button</h2>
+            <div data-montage-id="buttonPrimary" class="Button--primary"></div>
+            <h2>Create Button</h2>
             <div data-montage-id="buttonCreate" class="Button--create">
                 <svg><use xlink:href="#i-circle-plus"/></svg>
             </div>
-            <h3>Alert Button</h3>
+            <h2>Alert Button</h2>
             <div data-montage-id="buttonAlert" class="Button--alert"></div>
             <div data-montage-id="buttonAlertDisabled" class="Button--alert"></div>
-            <h3>Large Button</h3>
+            <h2>Large Button</h2>
             <div data-montage-id="buttonSmall" class="Button--large"></div>
-            <h3>Large Primary Button</h3>
+            <h2>Large Primary Button</h2>
             <div data-montage-id="buttonSmallPrimary" class="Button--large Button--primary"></div>
             <div data-montage-id="buttonLargeIcon" class="Button--large Button--primary">
                 <svg><use xlink:href="#i-circle-plus"/></svg>
             </div>
-            <h3>Naked Button</h3>
+            <h2>Naked Button</h2>
             <div data-montage-id="buttonNaked" class="Button--naked">
                 <svg><use xlink:href="#i-circle-plus"/></svg>
+            </div>
+            <h2>Icon Button</h2>
+            <div data-montage-id="buttonIcon" class="Button--icon">
+                <svg><use xlink:href="#i-arrow"/></svg>
+            </div>
+            <h2>Button Loader</h2>
+            <div data-montage-id="checkbox" class="g-margin-bottom"></div>
+            <div data-montage-id="buttonLoader" class="Button--loader Button--primary Button--block Button--large">
+                <svg><use xlink:href="#i-freenasIcon"/></svg>
             </div>
 
         </div>

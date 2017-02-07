@@ -54,6 +54,35 @@
             }
         },
 
+        "disabled": {
+            "prototype": "blue-shark/ui/multiple-select.reel",
+            "properties": {
+                "element": {"#": "disabled"},
+                    "options": [
+                        {"name": "foo", "myProperty": "blah 1"},
+                        {"name": "aaoption2", "myProperty": "blah 2"},
+                        {"name": "aaaoption3", "myProperty": "blah 3"},
+                        {"name": "option4", "myProperty": "blah 4"},
+                        {"name": "option42", "myProperty": "blah 5"},
+                        {"name": "_option6", "myProperty": "blah 6"}
+                    ],
+                "values": [
+                ],
+                "disabled": true,
+                "labelPath": "name",
+                "inputTitle": "Add item",
+                "valuesTitle": "Items added",
+                "emptyMessage": "No items added",
+                "isDraggable": true,
+                "placeholderValue": "enter info here",
+                "inputErrorMessage": "This is my custom error message",
+                "valueErrorMessage": "This is an error message for values edition"
+            },
+            "bindings": {
+                "converter": {"<-": "@owner.fakeConverter"}
+            }
+        },
+
         "test": {
             "prototype": "blue-shark/ui/multiple-select.reel",
             "properties": {
@@ -97,7 +126,11 @@
         <!-- end -->
         <div class="container">
             <h1>Multiple Select</h1>
+            <h2>Default</h2>
             <div data-montage-id="default"></div>
+            <h2>Disabled</h2>
+            <div data-montage-id="disabled"></div>
+            <h2>Additional Options</h2>
             <div data-montage-id="test">
                 <div data-montage-id="select"></div>
                 <div data-montage-id="name"></div>

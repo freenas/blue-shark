@@ -7,14 +7,14 @@
     border-radius: 0;
     padding: .25em .75em .35em;
     outline: none;
-    border: 1px solid black;
+    border: 1px solid var(--black);
     cursor: pointer;
-    background: #242628;
-    color: #E0E5E5;
+    background-color: var(--grey-blue);
+    color: var(--grey-3);
     min-width: 5em;
 }
 
-.Tabs-tab:hover { background: #343739; }
+.Tabs-tab:hover { background-color: color(var(--grey-blue) tint(15%)); }
 
 .Tabs-tab + .Tabs-tab { border-left: none; }
 
@@ -29,6 +29,6 @@
 }
 
 .Tabs-tab.selected {
-    background: #2089D3;
-    color: #fff;
+    background: var(--color-selected);
+    color: var(--white);
 }

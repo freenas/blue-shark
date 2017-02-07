@@ -15,27 +15,31 @@
 .TableHeaderLayout-cell {
     position: relative;
     font-weight: 400;
-    padding: 1em .5em;
+    padding: .5rem;
+    min-height: 3rem;
+    display: flex;
+    align-items: center;
     flex: 1;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: -1px;;
+        border-right: 1px solid var(--table-border-color);
+    }
+
+    &:after {
+        display: inline-block;
+        display: none;
+        content: "";
+        vertical-align: top;
+        margin-left: .5em;
+        margin-top: .5em;
+        border-left:  .4em solid transparent;
+        border-right: .4em solid transparent;
+        border-top:   .4em solid var(--grey-1);
+    }
 }
 
-.TableHeaderLayout-cell:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: -1px;;
-    border-right: 1px solid rgba(0,0,0,.25);
-}
-
-.TableHeaderLayout-cell:after {
-    display: inline-block;
-    display: none;
-    content: "";
-    vertical-align: top;
-    margin-left: .5em;
-    margin-top: .5em;
-    border-left:  .4em solid transparent;
-    border-right: .4em solid transparent;
-    border-top:   .4em solid #929E9F;
-}

@@ -3,12 +3,11 @@
     display: flex;
     flex-wrap: wrap;
     background: none;
-    margin: .1em;
-    background-color: #242628;
+    margin: -1px;
 }
 
 .MultipleSelectValue:nth-child(even) {
-    background: rgba(0,0,0,.02);
+    background-color: var(--transparent--darken);
 }
 
 .MultipleSelectValue-label.TextField {
@@ -18,7 +17,7 @@
     font-family: 'lato', sans-serif;
     font-weight: 200;
     font-size: 1em;
-    color: #ddd;
+    color: var(--grey-3);
     padding: .25em .5em .35em;
     margin-right: .25em;
     width: auto;
@@ -27,27 +26,28 @@
     text-overflow: ellipsis;
     cursor: pointer;
     border-radius: 0;
+
+    &:hover {
+        /* background-color: var(--transparent--lighten); */
+        cursor: text;
+    }
+
+    &:focus {
+        cursor: text;
+        color: var(--white);
+        background: none;
+    }
 }
 
-.MultipleSelectValue-label.TextField:hover {
-    background: rgba(255,255,255,.1);
-    cursor: text;
-}
-
-.MultipleSelectValue-label.TextField:focus {
-    cursor: text;
-    color: #FFF;
-    background: none;
-}
 
 .MultipleSelectValue-delete {
     align-self: center;
     height: 1.2rem;
     width:  1.2rem;
     padding: .25rem;
-    color: #E0003A;
+    color: var(--red);
     cursor: pointer;
-    border: 1px solid #E0003A;
+    border: 1px solid var(--red);
     border-radius: 50%;
     border: none;
     background: none;
@@ -59,8 +59,8 @@
     }
 
     &:hover {
-        background: #E0003A;
-        color: #fff;
+        background: var(--red);
+        color: var(--white);
     }
 }
 
@@ -79,7 +79,7 @@
 /* States */
 
 .MultipleSelectValue.has-error .MultipleSelectValue-label {
-    border-color: #E0003A !important;
+    border-color: var(--red) !important;
     border-bottom: none !important;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
@@ -96,7 +96,7 @@
     left: -.25em;
     right: -.25em;
     bottom: 0;
-    background: #E0003A;
+    background: var(--red);
     z-index: -1;
 }
 
@@ -108,7 +108,7 @@
     cursor: move;
     cursor: grab;
     padding: 0 0.5em;
-    background: #2F3233;
+    background: var(--grey-blue-1);
     display: none;
 }
 
@@ -129,6 +129,6 @@
 }
 
 .MultipleSelectValue.dragOver {
-    border-top: 5px solid #2B9CD8;
+    border-top: 5px solid var(--blue-lighten-2);
     user-select: none;
 }

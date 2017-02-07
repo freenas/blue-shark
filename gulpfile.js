@@ -16,6 +16,9 @@ var processors = [
             config: {
                 "extends": "stylelint-config-standard",
             },
+            plugins: [
+                "stylelint-declaration-strict-value"
+            ],
             rules: {
                 "number-leading-zero": null,
                 "custom-property-empty-line-before": null,
@@ -24,7 +27,11 @@ var processors = [
                     ignore: ["value"]
                 }],
                 "value-no-vendor-prefix": true,
-                "property-no-vendor-prefix": true
+                "property-no-vendor-prefix": true,
+                "scale-unlimited/declaration-strict-value": [
+                    ["/color/", "box-shadow", "border", "background"],
+                    {"ignoreKeywords": ["inherit", "currentColor", "transparent", "none"]}
+                ]
             }
         }),
         postcssImport,

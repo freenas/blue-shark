@@ -19,7 +19,7 @@ body {
     flex: 1;
     width: 40em;
     @apply --flex-column;
-    outline: 1px solid white;
+    outline: 1px solid var(--white);
 }
 
 .examples {

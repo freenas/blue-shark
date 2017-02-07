@@ -1,19 +1,21 @@
 .MultipleSelect {
     min-width: 16em;
-    margin-bottom: 1em;
-    border: 1px solid var(--black);
+    margin-bottom: 2em;
     border-radius: 4px;
-    background: #333;
 
-    &.is-disabled { opacity: .5; }
+    &.is-disabled {
+        opacity: .5;
+        cursor: not-allowed;
+    }
 }
 
 .MultipleSelect-title {
-    padding: .25em .5em;
-    background: var(--black);
+    /* padding: .25em .5em; */
+    /* background: var(--primary--6); */
     font-family: 'lato';
     line-height: 1.5;
     font-weight: 300;
+    font-weight: 400;
 
     @nest .MultipleSelect-input & {
         /* adjustment for extra 1px on outline */
@@ -23,7 +25,7 @@
 }
 
 .MultipleSelect-input-controls {
-    padding: .5em;
+    margin-bottom: .5rem;
 
     & .Field { margin-bottom: .5em;}
 }
@@ -32,47 +34,42 @@
 
 .MultipleSelect-input-default {
     position: relative;
-    margin-right: .5rem;
+    margin-right: .25rem;
     display: inline-block;
     /* magic # */
-    width: calc(100% - 5.35em);
+    width: calc(100% - 5.1rem);
     vertical-align: middle;
 }
 
-.MultipleSelect-input-field { padding-right: 1.5em !important; }
-
-.MultipleSelect-input-clearButton {
+.MultipleSelect-input-clearButton.Button {
     position: absolute;
-    padding: .25rem;
-    height: 1.2rem;
-    width:  1.2rem;
-    top: 1em;
-    right: .5em;
-    margin-top: -.3rem;
-    border-radius: 1em;
-    color: var(--black);
-    background-color: var(--white);
+    height: 1.25rem;
+    width:  1.25rem;
+    /* padding: .25rem; */
+    top: 50%;
+    right: .25rem;
+    margin-top: -.625rem;
+    background-color: var(--primary--4);
+    color: var(--primary--1);
     border: none;
-    border-radius: 2em;
-    cursor: pointer;
-    outline: none;
+    border-radius: .75rem;
     visibility: hidden;
     opacity: 0;
-    transition-delay: 0s;
-    transition-property: visibility, opacity, color, background-color;
+    transition-property: visibility, opacity;
     transition-duration: .2s;
 
-    & svg { transform: rotate(45deg); }
+    &:hover { color: var(--white); }
 
-    &:hover {
-        color: var(--white);
-        background-color: var(--black);
+    &:active { background-color: var(--primary--6); }
+
+    & svg {
+        transform: rotate(45deg);
+        padding: 2px;
     }
 
     @nest .MultipleSelect-input-default.has-value & {
         visibility: visible;
         opacity: 1;
-        transition-delay: .5s, .5s, 0s, 0s;
     }
 }
 
@@ -89,6 +86,8 @@
     }
 }
 
+.MultipleSelect-input-add { height: 2rem; }
+
 .MultipleSelect-input-options {
     /* Fix - should I have to do this? */
     position: absolute;
@@ -99,9 +98,9 @@
     height: 8.2em;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius:  3px;
-    color: #333;
-    background-color: #ddd;
-    border: 1px solid #2B9CD8;
+    color: var(--grey);
+    background-color: var(--grey-3);
+    border: 1px solid var(--blue-lighten-2);
     border-top: none;
     box-shadow: 0 2px 4px rgba(0,0,0,.3);
     z-index: 100;
@@ -120,8 +119,8 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    background: #E0003A;
-    color: #fff;
+    background: var(--red);
+    color: var(--white);
     font-weight: 300;
     padding: .5em;
     transform: translateY(100%);
@@ -134,15 +133,16 @@
     transition-property: visibility, opacity;
     transition-duration: .2s;
 }
+.MultipleSelect-values { padding: .25rem; }
 
 .MultipleSelect-valuesContainer {
+    border: 1px solid var(--input-border-color);
+    border-radius: var(--border-radius);
     position: relative;
     box-sizing: border-box;
     display: flex;
-    color: #FFF;
-    min-height: 2.5em;
-    max-height: 7.25em;
-    padding: .25em;
+    color: var(--white);
+    height: 7.25em;
     width: 100%;
     transition-property: border-color, background-color, opacity;
     transition-duration: .25s;
@@ -150,15 +150,17 @@
     & .Scrollview-transform {
         display: block;
     }
+
+    @nest .MultipleSelect.is-disabled & {
+        pointer-events: none;
+    }
 }
 
 /* Empty State */
 
 .MultipleSelect-values-emptyState {
     position: absolute;
-    color: rgba(255,255,255,.3);
-    font-weight: 300;
-    font-family: 'lato';
+    color: var(--primary--3);
     height: 1em;
     line-height: 1em;
     left: .5em;
@@ -186,7 +188,7 @@ States
 }
 
 .MultipleSelect-input.has-error .MultipleSelect-input-field {
-    border-color: #E0003A;
+    border-color: var(--red);
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }

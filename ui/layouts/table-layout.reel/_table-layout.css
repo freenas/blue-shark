@@ -1,5 +1,5 @@
 .Table-label {
-    color: #B1BCBE;
+    color: var(--grey-2);
     font-weight: 400;
 }
 
@@ -8,9 +8,8 @@
 .Table-header-columns {
     display: flex;
     align-items: center;
-    background: #1a1d1f;
-    background: #333e4a;
-    border: 1px solid #1a1d1f;
+    background-color: var(--primary--8);
+    /* border: 1px solid var(--primary--4); */
 }
 
 .Table.content-is-empty .Table-header-columns { display: none;}
@@ -37,9 +36,9 @@ Row
     transition: background-color .15s ease-in-out;
 }
 
-.Table-row:not(.Table-cells):nth-child(odd)          { background-color: #242628; }
-.Table-row:not(.Table-cells):nth-child(even)         { background-color: #1f2123; }
-.Table-row-group .Table-row:not(.Table-cells):hover  { background-color: #2f3235; }
+.Table-row:not(.Table-cells):nth-child(odd)          { background-color: var(--primary); }
+.Table-row:not(.Table-cells):nth-child(even)         { background-color: color(var(--primary) shade(10%)); }
+.Table-row-group .Table-row:not(.Table-cells):hover  { background-color: color(var(--primary) tint(5%)); }
 
 /*
 
@@ -50,10 +49,10 @@ Rows - selection Enabled
 .Table.has-selection-enabled .Table-row { cursor: pointer; }
 
 .Table-row.selected:not(.Table-cells) {
-    color: #fff;
-    background-color: #2089d3;
+    color: var(--white);
+    background-color: var(--color-selected);
 }
-.Table-row-group .Table-row.selected:hover { background-color: #2089d3; }
+.Table-row-group .Table-row.selected:hover { background-color: var(--color-selected); }
 
 /* Table Cell */
 
@@ -75,7 +74,7 @@ Rows - selection Enabled
 }
 
 .Table.content-is-empty .Table-caption {
-    border-bottom: 1px solid rgba(255,255,255,.2);
+    /* border-bottom: 1px solid var(--primary--4); */
 }
 
 /* isLoading */
@@ -90,7 +89,7 @@ Rows - selection Enabled
 .Table-emptyState {
     display: none;
     font-weight: 300;
-    color: #939E9F;
+    color: var(--grey-1);
     margin-top: .5em;
     font-style: italic;
 }
@@ -99,7 +98,7 @@ Rows - selection Enabled
 
 /* Scrollview */
 
-.Table .Scrollview { border: 1px solid #1a1d1f; border-top: none;}
+.Table .Scrollview { /* border: 1px solid var(--primary--4); */ border-top: none;}
 
 .Table.content-is-empty .Scrollview { display: none;}
 .Table .Scrollview .Scrollview-transform { display: block; }
