@@ -227,7 +227,8 @@ $layout
 
 /* margin helpers */
 
-.g-margin                    { margin: 1rem; }
+.g-margin                    { margin:  1rem !important; }
+.g-margin--subtract          { margin: -1rem !important; }
 
 .g-margin-h                  { margin-left:   1rem !important; margin-right:   1rem !important; }
 .g-margin-h--half            { margin-left:  .5rem !important; margin-right:  .5rem !important; }
