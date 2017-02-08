@@ -57,11 +57,17 @@ exports.TextField = TextField.specialize({
         }
     },
 
+    enterDocument: {
+        value: function(isFirstTime) {
+            this.super(isFirstTime);
+            this.element.placeholder = this.placeholder;
+        }
+    },
+
     handleChange: {
         enumerable: false,
         value: function(event) {
             this.takeValueFromElement();
-            // this.dispatchActionEvent();
             this._hasFocus = false;
         }
     },
@@ -71,8 +77,6 @@ exports.TextField = TextField.specialize({
         value: function (event) {
             this.hasFocus = false;
             this.callDelegateMethod("didEndEditing", this);
-            //This create an issue in textfield, to investigate
-            // this.dispatchActionEvent();
         }
     }
 

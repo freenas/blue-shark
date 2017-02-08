@@ -1,5 +1,4 @@
-var Component = require("montage/ui/component").Component,
-    Translator = require("core/translator").Translator;
+var Component = require("montage/ui/component").Component;
 
 exports.FieldTextInput = Component.specialize({
     hasTemplate: {
@@ -12,25 +11,6 @@ exports.FieldTextInput = Component.specialize({
 
     hasError: {
         value: false
-    },
-
-    _placeholder: {
-        value: void 0
-    },
-
-    placeholder: {
-        get: function() {
-            return this._placeholder;
-        },
-        set: function(placeholder) {
-            if (this._placeholder !== placeholder) {
-                var self = this;
-                this._placeholder = placeholder;
-                Translator.translate(placeholder).then(function(translated) {
-                    this.translatedPlaceholder = translated;
-                });
-            }
-        }
     },
 
     prepareForActivationEvents: {
