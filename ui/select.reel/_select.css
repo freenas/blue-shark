@@ -1,22 +1,7 @@
 .Select {
     @apply --input-field;
-    /* position: relative; */
-    /* display: flex; */
-    /* align-items: center; */
-    /* height: 2em; */
-    /* font-weight: 300; */
     user-select: none;
-    /* width: 100%; */
-    /* background-color: var(--input-bg-color); */
-    /* font-family: 'Lato', 'helvetica neue', 'helvetica', 'sans-serif'; */
-    /* border-radius: var(--border-radius); */
-    /* border: 1px solid var(--input-border-color); */
-    /* transition: */
 
-    /* background: rgba(0, 0, 0, .25); */
-    /* border-top:     1px solid rgba(0, 0, 0, .23); */
-    /* border-bottom:  1px solid rgba(255, 255, 255, .15); */
-    /* outline: none; */
 
     &:not(.disabled):focus { @apply --input-focus; }
 
@@ -55,7 +40,8 @@
     border: none;
     font-size: 1em;
     line-height: 1.2;
-    height: 2em;
+    /* handles border */
+    height: calc(2rem - 2px);
     font-family: inherit;
     font-size:   inherit;
     line-height: inherit;
@@ -81,7 +67,6 @@
     left: .5rem;
     right: 2rem;
     top: 50%;
-    margin-top: -.1rem;
     transform: translateY(-50%);
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -98,9 +83,6 @@
     margin-top: -.7rem;
     width:  1.4rem;
     height: 1.4rem;
-    /* border-radius: 3px; */
-    /* background-color: var(--grey-1); */
-    /* background-image: linear-gradient(to bottom, var(--grey-1), color(var(--grey-1) shade(50%))); */
 
     & svg {
         display: inline-block;
