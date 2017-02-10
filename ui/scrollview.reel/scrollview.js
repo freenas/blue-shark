@@ -279,10 +279,32 @@ var Scrollview = exports.Scrollview = Component.specialize({
 
                 if (this.overflow !== "scrollX") {
                     this.scrollTop = event.translateY;
+
+                    var reachBottomY = this._translateComposer.maxTranslateY === event.translateY,
+                        reachTopY = this._translateComposer.minTranslateY === event.translateY;
+
+                    if (reachBottomY && this.controller && typeof this.controller.scrollViewReachBottomY === "function") {
+                        this.controller.scrollViewReachBottomY();
+                    }
+
+                    if (reachTopY && this.controller && typeof this.controller.scrollViewReachTopY === "function") {
+                        this.controller.scrollViewReachTopY();
+                    }
                 }
 
                 if (this.overflow !== "scrollY") {
                     this.scrollLeft = event.translateX;
+
+                    var reachBottomX = this._translateComposer.maxTranslateX === event.translateX,
+                        reachTopX = this._translateComposer.minTranslateX === event.translateX;
+
+                    if (reachBottomX && this.controller && typeof this.controller.scrollViewReachBottomX === "function") {
+                        this.controller.scrollViewReachBottomX();
+                    }
+
+                    if (reachTopX && this.controller && typeof this.controller.scrollViewReachTopX === "function") {
+                        this.controller.scrollViewReachTopX();
+                    }
                 }
 
                 if (this.scrollLeft !== previousScrollLeft || this.scrollTop !== previousScrollTop) {
