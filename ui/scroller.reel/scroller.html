@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="scroller.css">
+    <script src="../../node_modules/simplebar/umd/simplebar.js"></script>
+    <noscript>
+      <style>
+        [data-simplebar] {
+          overflow: auto;
+        }
+      </style>
+    </noscript>
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"},
+                "content": {"#": "content"}
+            }
+        },
+        "content": {
+            "prototype": "montage/ui/component",
+            "properties": {
+                "element": {"#": "content"},
+                "hasTemplate": false
+            },
+            "bindings": {
+                "classList.has('flex-minHeight')": {"<-": "@owner.minHeight"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" data-simplebar>
+        <div data-montage-id="content">
+            <div data-param="*"></div>
+        </div>
+    </div>
+</body>
+</html>
