@@ -91,7 +91,7 @@
 
 .MultipleSelect-input-options {
     /* Fix - should I have to do this? */
-    position: absolute;
+    position: absolute !important;
     display: flex;
     top: 2em;
     left: 0;
