@@ -7,7 +7,7 @@ exports.NumberUnit = Component.specialize({
     },
 
     count: {
-        value: null
+        value: ''
     },
 
     _value: {
@@ -62,7 +62,8 @@ exports.NumberUnit = Component.specialize({
             }
 
             this.unit = this.units[i-1].value;
-            this.count = this.unit ? this.value / this.unit : null;
+            var count = this.unit ? this.value / this.unit : null;
+            this.count = isNaN(count) ? '' : count;
         }
     }
 });

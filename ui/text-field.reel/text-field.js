@@ -60,7 +60,7 @@ exports.TextField = TextField.specialize({
     enterDocument: {
         value: function(isFirstTime) {
             this.super(isFirstTime);
-            this.element.placeholder = this.placeholder;
+            this.element.placeholder = this.placeholder || '';
         }
     },
 
