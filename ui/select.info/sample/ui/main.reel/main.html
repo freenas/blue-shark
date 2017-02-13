@@ -8,7 +8,46 @@
             "properties": {
                 "element": {"#": "owner"},
                 "options": [
-                    {"value": "true", "label": "true"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
+                    {"value": "truthy", "label": "truthy"},
                     {"value": "test", "label": "test"},
                     {"value": "another", "label": "another"},
                     {"value": "last option", "label": "last option"},
@@ -32,6 +71,16 @@
                 "options": {"<-": "@owner.options"},
                 "selectedValue": {"<-": "@owner.selectedValue"}
             }
+        },
+        "select2": {
+            "prototype": "blue-shark/ui/select.reel",
+            "properties": {
+                "element": {"#": "select2"}
+            },
+            "bindings": {
+                "options": {"<-": "@owner.options"},
+                "selectedValue": {"<-": "@owner.selectedValue"}
+            }
         }
     }
     </script>
@@ -45,6 +94,7 @@
             <h1>Select</h1>
             <h3>Default Select</h3>
             <div data-montage-id="select"></div>
+            <div data-montage-id="select2"></div>
         </div>
     </div>
 </body>
