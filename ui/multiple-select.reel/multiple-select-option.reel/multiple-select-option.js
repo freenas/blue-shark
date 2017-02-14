@@ -20,7 +20,7 @@ exports.MultipleSelectOption = Component.specialize(/** @lends MultipleSelectOpt
 
     handlePress: {
         value: function() {
-            this.valueToAdd = this.option;
+            this.dispatchEventNamed("multipleOptionSelected", true, true, this.option);
         }
     },
 

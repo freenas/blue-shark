@@ -23,6 +23,10 @@
                 {
                     "type": "action",
                     "listener": {"@": "owner"}
+                },
+                {
+                    "type": "multipleOptionSelected",
+                    "listener": {"@": "owner"}
                 }
             ]
         },
@@ -86,7 +90,6 @@
             "bindings": {
                 "option": {"<-": "@options:iteration.object"},
                 "selected": {"<->": "@owner._selectedOption"},
-                "valueToAdd": {"<->": "@owner._valueToAdd"},
                 "labelPath": {"<-": "@owner.labelPath"}
             }
         },

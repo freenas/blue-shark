@@ -67,16 +67,19 @@ exports.MultipleSelect = AbstractDropZoneComponent.specialize(/** @lends Multipl
         }
     },
 
-    _valueToAdd: {
-        get: function() {
-            return null;
-        },
-        set: function(value) {
+    _addOption: {
+        value: function(value) {
             if (value) {
                 this._addValueToContent(value, true);
                 this._clearInput();
                 this._stopScrollingOptions();
             }
+        }
+    },
+
+    handleMultipleOptionSelected: {
+        value: function (option) {
+            this._addOption(option.detail);
         }
     },
 
@@ -215,7 +218,7 @@ exports.MultipleSelect = AbstractDropZoneComponent.specialize(/** @lends Multipl
                     this._clearInput();
                 }
             } else {
-                this._valueToAdd = this._selectedOption;
+                this._addOption(this._selectedOption);
                 this._blurInputField();
             }
         }
