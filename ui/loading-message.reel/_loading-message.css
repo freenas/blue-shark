@@ -1,28 +1,31 @@
-.LoadingMessage {
-    display: flex;
-    align-items: center;
-}
-
 @keyframes rotatedPulse {
     0%   { opacity: .3; }
     50%  { opacity:  1; }
     100% { opacity: .3; transform: rotate(360deg); }
 }
 
-.LoadingMessage-spinner:before,
-.LoadingMessage-spinner:after {
-}
+.LoadingMessage {
+    display: none;
+    align-items:     center;
+    justify-content: center;
+    min-height: 3rem;
 
-.LoadingMessage:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,.5);
-    background-image: repeating-linear-gradient(-45deg, rgba(43,156,216,0.25), rgba(43,156,216,0.25) 1px, transparent 1px, transparent 10px);
-    background-size: 28px 28px;
+    &.is-loading { display: flex; }
+
+    &.has-background {
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,.5);
+            background-image: repeating-linear-gradient(-45deg, rgba(43,156,216,0.25), rgba(43,156,216,0.25) 1px, transparent 1px, transparent 10px);
+            background-size: 28px 28px;
+        }
+    }
 }
 
 .LoadingMessage-message {

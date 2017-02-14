@@ -8,6 +8,10 @@
         "owner": {
             "properties": {
                 "element": {"#": "owner"}
+            },
+            "bindings": {
+                "classList.has('is-loading')": {"<-": "@owner.isLoading"},
+                "classList.has('has-background')": {"<-": "@owner.hasBackground"}
             }
         },
         "message": {
