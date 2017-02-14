@@ -10,8 +10,6 @@
 }
 
 .MultipleSelect-title {
-    /* padding: .25em .5em; */
-    /* background: var(--primary--6); */
     font-family: 'lato';
     line-height: 1.5;
     font-weight: 300;
@@ -41,11 +39,14 @@
     vertical-align: middle;
 }
 
+.MultipleSelect-input-field {
+    padding-right: 1.7rem !important;
+}
+
 .MultipleSelect-input-clearButton.Button {
     position: absolute;
     height: 1.25rem;
     width:  1.25rem;
-    /* padding: .25rem; */
     top: 50%;
     right: .25rem;
     margin-top: -.625rem;
