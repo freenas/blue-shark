@@ -16,9 +16,14 @@ exports.MultipleSelectGrid = Component.specialize(/** @lends MultipleSelectGrid#
     _sortedSelection: {
         get: function() {
             if (!this._sorter && this.controller && this.controller.selection && this.controller.selection.length > 0) {
-                this._sorter = typeof this.controller.selection[0].index !== 'undefined' ? this.constructor._indexSorter : this.constructor._valueSorter;
+                this._sorter = typeof this.controller.selection[0].index !== 'undefined' ?
+                    this.constructor._indexSorter : this.constructor._valueSorter;
             }
-            return this.controller && this.controller.selection ? this.controller.selection.slice().sort(this._sorter).map(function(x) { return x.value; }) : [];
+
+            var collection = this.controller && this.controller.selection ?
+                this.controller.selection.slice().map(function(x) { return x.value; }) : [];
+
+            return this._sorter ? collection.sort(this._sorter) : collection;
         }
     },
 
@@ -122,7 +127,7 @@ exports.MultipleSelectGrid = Component.specialize(/** @lends MultipleSelectGrid#
             return 0;
         }
     }
-        
+
 
 }, {
     _indexSorter: {
