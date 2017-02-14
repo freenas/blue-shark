@@ -10,6 +10,7 @@ var AbstractDropZoneComponent = require("core/drag-drop/abstract-dropzone-compon
  * @extends Component
  */
 exports.MultipleSelect = AbstractDropZoneComponent.specialize(/** @lends MultipleSelect# */ {
+
     enabled: {
         value:  true
     },
@@ -92,6 +93,10 @@ exports.MultipleSelect = AbstractDropZoneComponent.specialize(/** @lends Multipl
             }
             if (!this.options) {
                 this.options = [];
+            }
+
+            if (isFinite(this.valuesHeight)) {
+                this.valuesContainer.style.height = this.valuesHeight + 'rem';
             }
         }
     },
@@ -309,10 +314,15 @@ exports.MultipleSelect = AbstractDropZoneComponent.specialize(/** @lends Multipl
 
             if (isValid && value !== null && value !== void 0) {
                 this.invalidValue = null;
+<<<<<<< HEAD
 
                 if (this.values.indexOf(value) === -1) {
                     this.values.push(value);
                 }
+=======
+                this.values.unshift(value);
+                this._inputField.focus();
+>>>>>>> adds ability to set height of multiple-select values container, adds hideTitle option, removes spellcheck on input
             } else {
                 this.invalidValue = value;
             }
