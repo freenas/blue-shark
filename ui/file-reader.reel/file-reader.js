@@ -77,6 +77,7 @@ exports.FileReader = Component.specialize({
     _reset: {
         value: function () {
             this.data = null;
+            this.status = null;
             this.progress = 0;
         }
     }
