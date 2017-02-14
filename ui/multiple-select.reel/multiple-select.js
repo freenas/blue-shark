@@ -307,7 +307,7 @@ exports.MultipleSelect = AbstractDropZoneComponent.specialize(/** @lends Multipl
                 }
             }
 
-            if (isValid) {
+            if (isValid && value !== null && value !== void 0) {
                 this.invalidValue = null;
 
                 if (this.values.indexOf(value) === -1) {
