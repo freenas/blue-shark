@@ -10,14 +10,24 @@
                 "rowControlsOverlay": {"@": "rowControls"},
                 "_tableBodyTopElement": {"#": "tableBodyTop"},
                 "contentController": {"@": "contentController"},
-                "_toggleAllComponent": {"@": "toggleAll"}
+                "_toggleAllComponent": {"@": "toggleAll"},
+                "scrollview": {"#": "scrollView"},
+                "selectRowComponent": {"@": "selectRow"}
             },
             "bindings": {
                 "_rowRepetitionComponent": {"<-": "@tableLayout.rowRepetitionComponent"},
                 "_rowEntries": {"<-": "@contentController.content.map{{object: this, selected: false}}"},
-                "selectedRows": {"<-": "@owner._rowEntries.filter{selected == true}"}
+                "selectedRows": {"<-": "@owner._rows.filter{_selected == true}"}
             }
         },
+
+       "scrollview": {
+           "prototype": "ui/scrollview.reel",
+           "properties": {
+               "element": {"#": "scrollView"},
+               "overflow": "scrollY"
+           }
+       },
 
         "contentController": {
             "prototype": "montage/core/range-controller",
@@ -123,23 +133,21 @@
 </head>
 <body>
     <div data-montage-id="owner" class="TableEditable">
-        <div data-montage-id="tableLayout">
-            <div data-arg="table-header-toolbar" class="TableEditable-toolbar">
-                <div data-param="table-editable-header-toolbar"></div>
-            </div>
-            <div data-arg="table-header-columns">
-                <div data-montage-id="selectAll" class="Table-selectAll"></div>
-                <div data-montage-id="columnTitle" class="TableEditable-columns"></div>
-            </div>
-            <div data-arg="table-body-top" data-montage-id="tableBodyTop" class="Table-body-top">
-                <div data-param="row-new"></div>
-            </div>
-            <div data-arg="table-row" class="Table-row">
-                <div data-montage-id="selectRow" class="Table-selectRow"></div>
-                <div data-param="row-entry"></div>
-            </div>
-            <div data-arg="table-footer">
-                <div data-param="table-editable-footer"></div>
+<div data-montage-id="selectAll" class="Table-selectAll"></div>
+<div data-montage-id="selectRow" class="Table-selectRow hide"></div>
+        <div data-montage-id="scrollView">
+            <div data-montage-id="tableLayout">
+                <div data-arg="table-header-toolbar" class="TableEditable-toolbar">
+                    <div data-param="table-editable-header-toolbar"></div>
+                </div>
+                <div data-arg="table-header-columns" data-montage-id="columnTitle" class="TableEditable-columns"></div>
+                <div data-arg="table-body-top" data-montage-id="tableBodyTop" class="Table-body-top">
+                    <div data-param="row-new"></div>
+                </div>
+                <div data-arg="table-row" data-param="row-entry" class="Table-row"></div>
+                <div data-arg="table-footer">
+                    <div data-param="table-editable-footer"></div>
+                </div>
             </div>
         </div>
         <div data-montage-id="rowControls" class="TableEditable-rowControls">

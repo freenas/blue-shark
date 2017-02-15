@@ -7,13 +7,13 @@
         "owner": {
             "properties": {
                 "element": {"#": "owner"},
-                "rowRepetitionComponent": {"@": "rowRepetition"},
-                "scrollview": {"#": "scrollview"}
+                "rowRepetitionComponent": {"@": "rowRepetition"}
             },
             "bindings": {
                 "selectionEnabled": {"<-": "!!@owner.isSelectionEnabled"},
                 "classList.has('has-selection-enabled')": {"<-": "selectionEnabled"},
-                "classList.has('content-is-empty')": {"<-": "@owner.contentIsEmpty"}
+                "classList.has('content-is-empty')": {"<-": "@owner.contentIsEmpty"},
+                "classList.has('is-loading')": {"<-": "@owner.isLoading"}
             }
         },
 
@@ -30,14 +30,6 @@
 
         ":rowIteration": {
            "alias": "@rowRepetition:iteration"
-        },
-
-        "scrollview": {
-            "prototype": "ui/scrollview.reel",
-            "properties": {
-                "element": {"#": "scrollview"},
-                "overflow": "scrollY"
-            }
         },
 
         "label": {
@@ -77,21 +69,20 @@
 <body>
     <div data-montage-id="owner" class="Table">
         <div class="Table-caption">
-            <div data-montage-id="label" class="Table-label"></div>
-            <div data-param="table-header-toolbar"></div>
+            <div class="TableCaption-content">
+                <div data-montage-id="label" class="Table-label"></div>
+                <div data-param="table-header-toolbar"></div>
+            </div>
         </div>
         <div data-param="table-header-columns" class="Table-header-columns"></div>
-        <div data-param="table-body-top" class="Table-row-group"></div>
-        <div data-montage-id="table-content" class="Table-content">
-            <div data-montage-id="isLoading" class="Table-isLoading"></div>
-            <div data-montage-id="emptyState" class="Table-emptyState"></div>
-            <div data-montage-id="scrollview">
-                <div>
-                    <div data-montage-id="rowRepetition" class="Table-row-group">
-                        <div data-param="table-row"></div>
-                    </div>
-                </div>
-            </div>
+        <div data-param="table-body-top" class="Table-row-group Table-newLine"></div>
+        <div data-montage-id="rowRepetition" class="Table-row-group">
+            <div data-param="table-row"></div>
+        </div>
+        <div data-montage-id="emptyState" class="Table-emptyState"></div>
+        <div class="Table-isLoading">
+            <div data-montage-id="isLoading" ></div>
+        </div>
         </div>
         <div class="Table-footer">
             <div data-param="table-footer"></div>

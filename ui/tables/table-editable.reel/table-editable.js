@@ -1,10 +1,8 @@
-/**
- * @module ui/table-editable.reel
- */
 var Component = require("montage/ui/component").Component,
     Overlay = require("montage/ui/overlay.reel").Overlay,
     Checkbox = require("montage/ui/checkbox.reel").Checkbox,
-    Composer = require("montage/composer/composer").Composer;
+    Composer = require("montage/composer/composer").Composer,
+    _ = require('lodash');
 
 
 function _shouldComposerSurrenderPointerToComponent(composer, pointer, component) {
@@ -47,10 +45,6 @@ function RowEntry(object) {
 }
 
 
-/**
- * @class TableEditable
- * @extends Component
- */
 exports.TableEditable = Component.specialize({
 
     isMultiSelectionEnabled: {
@@ -63,8 +57,8 @@ exports.TableEditable = Component.specialize({
         },
         get: function () {
             if (!this._rows) {
-                this._rows = []
-            };
+                this._rows = [];
+            }
 
             return this._rows;
         }
@@ -75,7 +69,18 @@ exports.TableEditable = Component.specialize({
             this.rowControlsOverlay.shouldComposerSurrenderPointerToComponent = _shouldComposerSurrenderPointerToComponent;
             this.rowControlsOverlay.anchor = this._tableBodyTopElement;
             this.addRangeAtPathChangeListener("rows", this, "handleRowsChange");
+            this._needsLoadComponent = true;
+        }
+    },
 
+    enterDocument: {
+        value: function () {
+            if (!!this.contentMaxHeight) {
+                this.scrollview.style.maxHeight = this.contentMaxHeight + "em";
+            }
+            new MutationObserver(this._handleRowsChange.bind(this)).observe(this._rowRepetitionComponent.element, {
+                childList: true
+            });
         }
     },
 
@@ -143,13 +148,10 @@ exports.TableEditable = Component.specialize({
 
     deleteSelectedRows: {
         value: function () {
-            var rowEntry,
-                index;
+            var index;
 
             while (this.selectedRows.length) {
-                rowEntry = this.selectedRows[0];
-
-                if ((index = this.rows.indexOf(rowEntry.object)) > -1) {
+                if ((index = this.rows.indexOf(this.selectedRows[0])) > -1) {
                     this.rows.splice(index, 1);
                 }
             }
@@ -192,16 +194,16 @@ exports.TableEditable = Component.specialize({
     shouldDismissOverlay: {
         value: function (overlay, target, eventType) {
             if (overlay === this.rowControlsOverlay) {
-               if (!this._tableBodyTopElement.contains(target)) {
-                   if (this.isAddingNewEntry) {
+                if (!this._tableBodyTopElement.contains(target)) {
+                    if (this.isAddingNewEntry) {
                         this._cancelAddingNewEntry();
                     }
-               } else {
-                   return false;
-               }
+                } else {
+                    return false;
+                }
             }
 
-           return true;
+            return true;
         }
     },
 
@@ -251,14 +253,12 @@ exports.TableEditable = Component.specialize({
             var defaultNewEntry = {};
 
             defaultNewEntry = this.callDelegateMethod(
-                "tableWillUseNewEntry",
-                this,
-                defaultNewEntry
-            ) || defaultNewEntry;
+                    "tableWillUseNewEntry",
+                    this,
+                    defaultNewEntry
+                ) || defaultNewEntry;
 
             if (Promise.is(defaultNewEntry)) {
-                var self = this;
-
                 return defaultNewEntry.then(function (NewEntry) {
                     return new RowEntry(NewEntry);
                 });
@@ -272,9 +272,10 @@ exports.TableEditable = Component.specialize({
         value: function (event) {
             var self = this;
 
-            this._rowEntries.forEach(function (rowEntry) {
-                rowEntry.selected = !!self._toggleAllComponent.checked;
+            this.rows.forEach(function (row) {
+                row._selected = !!self._toggleAllComponent.checked;
             });
+            this.needsDraw = true;
         }
     },
 
@@ -340,6 +341,31 @@ exports.TableEditable = Component.specialize({
         }
     },
 
+    _ensureToggleAllIsInHeader: {
+        value: function () {
+            var selectAll = this._toggleAllComponent.element,
+                header = this.element.querySelector('.TableHeaderLayout-row');
+            if (selectAll.parentElement !== header) {
+                header.insertBefore(selectAll, header.firstChild);
+            }
+        }
+    },
+
+    _synchronizeRowsSelection: {
+        value: function () {
+            _.forEach([].slice.call(this.element.querySelectorAll('.Table-cells')), function (row) {
+                var input = row.firstElementChild.querySelector('input');
+                if (input) {
+                    if (row.component.object && row.component.object._selected) {
+                        input.setAttribute('checked', '');
+                    } else {
+                        input.removeAttribute('checked');
+                    }
+                }
+            });
+        }
+    },
+
     draw: {
         value: function () {
             if (this._shouldShowNewEntryRow) {
@@ -352,7 +378,65 @@ exports.TableEditable = Component.specialize({
                 this.dispatchOwnPropertyChange("currentNewEntry", this.currentNewEntry);
                 this.rowControlsOverlay.hide();
             }
+            this._ensureToggleAllIsInHeader();
+            this._synchronizeRowsSelection();
+            var newLine = this.element.querySelector('.Table-newLine').firstElementChild,
+                header = this.element.querySelector('.TableHeaderLayout-row');
+            while (newLine.childElementCount < header.childElementCount) {
+                newLine.insertBefore(document.createElement('div'), newLine.firstChild);
+            }
+
+        }
+    },
+
+    _addRowSelector: {
+        value: function (addedElement) {
+            var self = this,
+                cell = document.createElement('div'),
+                control = document.createElement('div'),
+                input = document.createElement('input'),
+                label = document.createElement('label'),
+                id = Date.now() + '-' + _.round(Math.random() * 1000);
+            cell.setAttribute('class', 'TableCells-selectRow');
+            control.setAttribute('class', 'Checkbox');
+            input.setAttribute('type', 'checkbox');
+            input.setAttribute('role', 'checkbox');
+            input.setAttribute('id', id);
+            label.setAttribute('for', id);
+            label.setAttribute('class', 'Checkbox-label');
+            control.appendChild(input);
+            control.appendChild(label);
+            cell.appendChild(control);
+            control.onclick = function (event) {
+                var rowObject = cell.parentElement.component.object;
+                rowObject._selected = !rowObject._selected;
+                self.needsDraw = true;
+                event.preventDefault();
+            };
+            addedElement.insertBefore(cell, addedElement.firstChild);
+        }
+    },
+
+    _handleRowsChange: {
+        value: function (mutationRecords) {
+            var self = this;
+            _.forEach(
+                _.filter(mutationRecords, function (x) {
+                    return x.addedNodes.length > 0
+                }),
+                function (mutationRecord) {
+                    var addedNodes = [].slice.call(mutationRecord.addedNodes),
+                        addedElements = _.filter(addedNodes, { nodeType: Node.ELEMENT_NODE }),
+                        addedElement;
+                    if (addedElements.length === 1) {
+                        addedElement = addedElements[0];
+                        if (addedElement.classList.contains('Table-cells') &&
+                            !addedElement.firstElementChild.classList.contains('TableCells-selectRow')) {
+                            self._addRowSelector(addedElement);
+                        }
+                    }
+                }
+            );
         }
     }
-
 });

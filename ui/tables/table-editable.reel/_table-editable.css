@@ -1,10 +1,11 @@
+/*
 :root {
     --table-newRow-bg: var(--black);
 }
 
 .TableEditable { position: relative; }
 
-/* Select Cells */
+!* Select Cells *!
 
 .Table-selectAll,
 .Table-selectRow {
@@ -23,7 +24,7 @@
     display: flex !important;
 }
 
-/* Controls */
+!* Controls *!
 
 .TableEditable-rowControls {
     visibility: hidden;
@@ -43,14 +44,14 @@
     }
 }
 
-/* New Row */
+!* New Row *!
 
 .Table-body-top {
     border: 1px solid var(--accent);
 }
 
 .TableEditable .Table-body-top.Table-row-group .Table-cells {
-    /* magic # based on checkbox width */
+    !* magic # based on checkbox width *!
     background-color: var(--table-newRow-bg);
 }
 
@@ -59,24 +60,24 @@
 }
 
 
-/* Header Cells */
+!* Header Cells *!
 
 .TableHeaderLayout-row { display: flex; }
 
-/*
+!*
 
 BODY
 
-*/
+*!
 
-/* Row Cells */
+!* Row Cells *!
 
 .TableEditable .Table-cells {
     flex: 1;
     display: flex;
     align-items: stretch;
 
-    /* Row Cell */
+    !* Row Cell *!
 
     & > div {
         position: relative;
@@ -85,7 +86,7 @@ BODY
         display: flex;
         align-items: center;
 
-        /* cell border-right */
+        !* cell border-right *!
         &:not(:last-child):after {
             content: '';
             position: absolute;
@@ -98,3 +99,4 @@ BODY
 }
 
 
+*/
