@@ -138,3 +138,8 @@
         display: block;
     }
 }
+
+.Field .Spinner {
+    height: 2rem;
+    width: 2rem;
+}

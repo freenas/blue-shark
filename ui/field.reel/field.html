@@ -73,6 +73,21 @@
             "bindings": {
                 "value": {"<-": "@owner.helpMessage && @owner.helpMessage.length > 0 && 'help$$' + @owner.helpMessage"}
             }
+        },
+        "loadingSubstitution": {
+            "prototype": "montage/ui/substitution.reel",
+            "properties": {
+                "element": {"#": "loadingSubstitution"}
+            },
+            "bindings": {
+                "switchValue": {"<-": "!!@owner.isLoading + ''"}
+            }
+        },
+        "loading": {
+            "prototype": "ui/spinner.reel",
+            "properties": {
+                "element": {"#": "loading"}
+            }
         }
     }
     </script>
@@ -88,9 +103,12 @@
                     </div>
                 </div>
             </div>
-            <div class="Field-control">
-                <div data-param="*"></div>
-                <div data-montage-id="error" class="Field-error"></div>
+            <div data-montage-id="loadingSubstitution">
+                <div class="Field-control" data-arg="false">
+                    <div data-param="*"></div>
+                    <div data-montage-id="error" class="Field-error"></div>
+                </div>
+                <div data-montage-id="loading" data-arg="true"></div>
             </div>
         </div>
         <div data-montage-id="help" class="Field-help g-margin-top">
