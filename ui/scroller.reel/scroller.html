@@ -3,7 +3,7 @@
 <head>
     <title></title>
     <link rel="stylesheet" type="text/css" href="scroller.css">
-    <script src="../../node_modules/simplebar/umd/simplebar.js"></script>
+    <script src="../../node_modules/smoothscroll-polyfill/src/smoothscroll.js"></script>
     <noscript>
       <style>
         [data-simplebar] {
@@ -15,28 +15,15 @@
     {
         "owner": {
             "properties": {
-                "element": {"#": "owner"},
-                "content": {"#": "content"}
-            }
-        },
-        "content": {
-            "prototype": "montage/ui/component",
-            "properties": {
-                "element": {"#": "content"},
-                "hasTemplate": false
-            },
-            "bindings": {
-                "classList.has('flex-minHeight')": {"<-": "@owner.minHeight"}
+                "element": {"#": "owner"}
             }
         }
     }
     </script>
 </head>
 <body>
-    <div data-montage-id="owner" data-simplebar>
-        <div data-montage-id="content">
-            <div data-param="*"></div>
-        </div>
+    <div data-montage-id="owner" class="Scroller">
+        <div data-param="*"></div>
     </div>
 </body>
 </html>
