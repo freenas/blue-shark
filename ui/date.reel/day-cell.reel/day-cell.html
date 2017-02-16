@@ -24,10 +24,10 @@
             "prototype": "ui/text.reel",
             "properties": {
                 "element": {"#": "day"},
-                "converter": {"@": "dateToDayConverter"}
+                "value": "{day, DD}"
             },
             "bindings": {
-                "value": {"<-": "@owner.value"}
+                "args": {"<-": "!!@owner.value && {day: @owner.value}"}
             }
         }
     }
