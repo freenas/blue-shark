@@ -18,11 +18,11 @@
         "option": {
             "prototype": "ui/text.reel",
             "properties": {
-                "element": {"#": "option"}
+                "element": {"#": "option"},
+                "value": "{option, HH:mm}"
             },
             "bindings": {
-                "value": {"<-": "@owner.option"},
-                "converter": {"<-": "@owner.converter"}
+                "args": {"<-": "!!@owner.option  && {option: @owner.option}"}
             }
         }
     }
