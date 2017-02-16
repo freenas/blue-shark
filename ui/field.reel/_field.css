@@ -64,7 +64,10 @@
 /* moves icon after isMandatory asterisk */
 .Field-info-condition { order: 1; }
 
-.Field-info.Button {
+.Field-infoButton.Button {
+    margin-top: -0.25rem;
+    margin-left: .25rem;
+    color: var(--accent);
 
     & svg {
         height: 1.2em;
@@ -72,7 +75,7 @@
     }
 
     @nest .help-is-shown & {
-        color: var(--accent);
+        color: var(--white);
     }
 }
 
