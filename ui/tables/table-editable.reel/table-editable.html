@@ -61,7 +61,8 @@
                 "element": {"#": "columnTitle"}
             },
             "bindings": {
-                "columns": {"<-": "@owner.columns"}
+                "columns": {"<-": "@owner.columns"},
+                "classList.has('is-hidden')": {"<-": "@owner.isLoading"}
             }
         },
 
