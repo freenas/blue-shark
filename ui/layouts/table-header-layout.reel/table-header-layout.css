@@ -1,3 +1,4 @@
+.TableHeaderLayout-cell{display:table-cell;height:0 !Important;line-height:0;padding-top:0;padding-bottom:0;color:transparent;border:none;white-space:nowrap}.TableHeaderLayout-cell--fixed{display:table-cell;position:absolute;top:6px;width:100%;background-color:#13181d;color:#fff;z-index:1;padding:8px;padding:.5rem}.TableHeaderLayout-cell--fixed>span{position:relative;line-height:16px;line-height:1rem}.TableHeaderLayout-cell:not(:first-child)>.TableHeaderLayout-cell--fixed>span:before{position:absolute;left:-8px;left:-.5rem;top:calc(-.5rem + 2px);bottom:calc(-.5rem + 1px);content:"";border-left:1px solid #181e25}
 /*
 !* Header Group *!
 

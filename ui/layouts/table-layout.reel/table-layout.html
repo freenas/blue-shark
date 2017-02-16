@@ -7,7 +7,8 @@
         "owner": {
             "properties": {
                 "element": {"#": "owner"},
-                "rowRepetitionComponent": {"@": "rowRepetition"}
+                "rowRepetitionComponent": {"@": "rowRepetition"},
+                "scrollview": {"#": "scrollview"}
             },
             "bindings": {
                 "selectionEnabled": {"<-": "!!@owner.isSelectionEnabled"},
@@ -74,18 +75,24 @@
                 <div data-param="table-header-toolbar"></div>
             </div>
         </div>
-        <div data-param="table-header-columns" class="Table-header-columns"></div>
-        <div data-param="table-body-top" class="Table-row-group Table-newLine"></div>
-        <div data-montage-id="rowRepetition" class="Table-row-group">
-            <div data-param="table-row"></div>
-        </div>
-        <div data-montage-id="emptyState" class="Table-emptyState"></div>
-        <div class="Table-isLoading">
-            <div data-montage-id="isLoading" ></div>
-        </div>
-        </div>
-        <div class="Table-footer">
-            <div data-param="table-footer"></div>
+        <div class="Table-container">
+            <div data-montage-id="scrollview" class="Table-scroll">
+                <div class="Table-content">
+                    <div data-param="table-header-columns" class="Table-header-columns"></div>
+                    <div data-param="table-body-top" class="Table-row-group Table-newLine"></div>
+                    <div data-montage-id="rowRepetition" class="Table-row-group">
+                        <div data-param="table-row"></div>
+                    </div>
+                    <div class="Table-footer">
+                        <div data-param="table-footer"></div>
+                    </div>
+                </div>
+            </div>
+            <div data-montage-id="emptyState" class="Table-emptyState"></div>
+            <div class="Table-isLoading">
+                <div data-montage-id="isLoading" ></div>
+            </div>
+            </div>
         </div>
     </div>
 </body>

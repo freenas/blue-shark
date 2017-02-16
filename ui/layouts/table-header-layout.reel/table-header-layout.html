@@ -28,6 +28,16 @@
             "bindings": {
                 "value": {"<-": "@tableHeaderLayout:iteration.object.value"}
             }
+        },
+
+        "headerCellTitleFixed": {
+            "prototype": "ui/text.reel",
+            "properties": {
+                "element": {"#": "tableHeaderTitleFixed"}
+            },
+            "bindings": {
+                "value": {"<-": "@tableHeaderLayout:iteration.object.value"}
+            }
         }
 
     }
@@ -36,7 +46,12 @@
 <body>
     <div data-montage-id="owner" class="Table-header-group">
         <div data-montage-id="headerCellRepetition" class="TableHeaderLayout-row">
-            <div data-montage-id="tableHeaderTitle" class="TableHeaderLayout-cell"></div>
+            <div class="TableHeaderLayout-cell">
+                <span data-montage-id="tableHeaderTitle"></span>
+                <div class="TableHeaderLayout-cell--fixed">
+                    <span data-montage-id="tableHeaderTitleFixed" </span>
+                </div>
+            </div>
         </div>
     </div>
 </body>

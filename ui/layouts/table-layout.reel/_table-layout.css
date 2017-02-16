@@ -1,6 +1,25 @@
+:root {
+    --table-header-height: 2rem;
+}
+
 .Table {
+    width: 100%;
+}
+
+.Table-container {
+    overflow: hidden;
+    position: relative;
+    padding-top: var(--table-header-height);
+}
+
+.Table-content {
     display: table;
     width: 100%;
+}
+
+.Table-scroll {
+    overflow: auto;
+    height: 10rem;
 }
 
 .Table-caption {
@@ -31,11 +50,12 @@
 }
 
 .Table-cells > div,
-.Table-row > div,
-.TableHeaderLayout-cell {
+.Table-row > div {
     display: table-cell;
     padding: .25em;
-    vertical-align: bottom;
+    vertical-align: top;
+    word-wrap: break-word;
+    word-break: break-word;
 }
 
 .Table.is-loading .Table-isLoading {
@@ -46,21 +66,35 @@
     display: none;
 }
 
-/*
 .Table-label {
     color: var(--grey-2);
     font-weight: 400;
 }
 
-!* Table-header-columns *!
+/* !* Table-header-columns *! */
 
 .Table-header-columns {
+    background-color: var(--primary);
+    border: 1px solid var(--separator-color);
+}
+/* !* Caption *! */
+
+.Table-caption {
     display: flex;
     align-items: center;
-    background-color: var(--primary--8);
-    !* border: 1px solid var(--primary--4); *!
+    justify-content: space-between;
+    padding-bottom: .5em;
 }
 
+.Table.content-is-empty .Table-caption {
+    border-bottom: 1px solid var(--primary--4);
+}
+
+.Table-row:not(.Table-cells):nth-child(odd)          { background-color: var(--primary); }
+.Table-row:not(.Table-cells):nth-child(even)         { background-color: color(var(--primary) shade(10%)); }
+/* .Table-row-group .Table-row:not(.Table-cells):hover  { background-color: color(var(--primary) tint(5%)); } */
+
+/*
 .Table.content-is-empty .Table-header-columns { display: none;}
 
 .Table-row-group { width: 100%; }
@@ -85,9 +119,6 @@ Row
     transition: background-color .15s ease-in-out;
 }
 
-.Table-row:not(.Table-cells):nth-child(odd)          { background-color: var(--primary); }
-.Table-row:not(.Table-cells):nth-child(even)         { background-color: color(var(--primary) shade(10%)); }
-.Table-row-group .Table-row:not(.Table-cells):hover  { background-color: color(var(--primary) tint(5%)); }
 
 !*
 
@@ -113,18 +144,6 @@ Rows - selection Enabled
     word-break: break-all;
 }
 
-!* Caption *!
-
-.Table-caption {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-bottom: .5em;
-}
-
-.Table.content-is-empty .Table-caption {
-    !* border-bottom: 1px solid var(--primary--4); *!
-}
 
 !* isLoading *!
 

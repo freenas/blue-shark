@@ -10,11 +10,11 @@ var Component = require("montage/ui/component").Component;
 exports.TableLayout = Component.specialize({
     enterDocument: {
         value: function () {
-/*
+
             if (!!this.contentMaxHeight) {
                 this.scrollview.style.maxHeight = this.contentMaxHeight + "em";
             }
-*/
+
         }
     }
 });

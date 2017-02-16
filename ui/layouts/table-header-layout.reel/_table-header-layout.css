@@ -1,3 +1,42 @@
+.TableHeaderLayout-cell {
+    display: table-cell;
+    height: 0 !Important;
+    line-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    color: transparent;
+    border: none;
+    white-space: nowrap;
+}
+
+.TableHeaderLayout-cell--fixed {
+    display: table-cell;
+    position: absolute;
+    /* hack because we can't completely remove height on table header cell :( */
+    top: 6px;
+    width: 100%;
+    background-color: var(--primary--8);
+    color: var(--white);
+    z-index: 1;
+    padding: .5rem;
+
+    & > span {
+        position: relative;
+        line-height: 1rem;
+    }
+}
+
+/* left border on header columns */
+.TableHeaderLayout-cell:not(:first-child) > .TableHeaderLayout-cell--fixed > span:before {
+    position: absolute;
+    left: -.5rem;
+    /* hacks :( */
+    top:    calc(-.5rem + 2px);
+    bottom: calc(-.5rem + 1px);
+    content: '';
+    border-left: 1px solid var(--table-border-color);
+}
+
 /*
 !* Header Group *!
 

@@ -1,0 +1,16 @@
+.TableReadOnly .Table-row > div {
+    padding: .5em;
+}
+
+.Table-cell-wrapper {
+    position: relative;
+}
+
+.TableReadOnly .Table-row > .Table-cell-wrapper:not(:last-child):after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -1px;
+    border-right: 1px solid var(--primary--7);
+}
