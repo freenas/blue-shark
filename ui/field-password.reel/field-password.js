@@ -23,6 +23,7 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
 
     value: {
         set: function (value) {
+            if (typeof value === 'object') value = value ? value['$password'] : null;
             if (value != this._value) {
                 this._value = value;
                 if(this.editEnabled) {
@@ -31,7 +32,8 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
             }
         },
         get: function () {
-            return this._passwordMatch ? this._password1 : this._value;
+            var password = this._passwordMatch ? this._password1 : this._value;
+            return password ? { $password: password } : null;
         }
     },
 
@@ -45,7 +47,7 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
 
             if (passwordMatch !== this._passwordMatch) {
                 this._passwordMatch = passwordMatch;
-                this.dispatchOwnPropertyChange("value", this._password1, false);
+                this.dispatchOwnPropertyChange("value", this.value, false);
             }
         },
         get: function () {
