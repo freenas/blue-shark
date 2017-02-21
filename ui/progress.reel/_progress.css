@@ -49,6 +49,10 @@
 .Progress-statusIcon {
     margin-left: .5rem;
     display: flex;
+
+    @nest .Progress.has-error & {
+        color: var(--red);
+    }
 }
 
 .Progress-active {
