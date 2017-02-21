@@ -8,9 +8,27 @@ var Component = require("montage/ui/component").Component;
  * @extends Component
  */
 exports.Panel = Component.specialize(/** @lends Panel# */ {
-    constructor: {
-        value: function Panel() {
-            this.super();
+    _status: {
+        value: null
+    },
+
+    status: {
+        get: function() {
+            return this._status;
+        },
+        set: function(value) {
+            if (value != this._status) {
+                switch(value) {
+                    case 'warn':
+                        this.classList.add('is-warning');
+                        this._status = value;
+                        break;
+                    case 'error':
+                        this.classList.add('is-error');
+                        this._status = value;
+                        break;
+                }
+            }
         }
     }
 });
