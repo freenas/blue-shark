@@ -22,6 +22,7 @@ exports.Translator = Montage.specialize({}, {
                         .use(xhrBackend)
                         .init({
                             lng: self._getLanguage(),
+                            load: 'languageOnly',
                             fallbackLng: 'en',
                             nsSeparator: '$$',
                             keySeparator: false,
