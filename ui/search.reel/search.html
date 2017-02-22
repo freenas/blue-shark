@@ -45,10 +45,11 @@
         "select": {
             "prototype": "ui/select-multiple.reel",
             "properties": {
-                "element": {"#": "select"}
+                "element": {"#": "select"},
+                "allowMultiple": false
             },
             "bindings": {
-                "content": {"<-": "@owner._results"},
+                "options": {"<-": "@owner._results"},
                 "disabled": {"<-": "@owner.disabled"}
             }
         }
