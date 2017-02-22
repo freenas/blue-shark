@@ -10,6 +10,10 @@ exports.SelectMultiple = Component.specialize({
         }
     },
 
+    allowMultiple: {
+        value: true
+    },
+
     handleChange: {
         value: function () {
             var children = this._element.children,

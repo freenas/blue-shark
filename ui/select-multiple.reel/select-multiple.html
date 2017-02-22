@@ -11,11 +11,18 @@
             "bindings": {
                 "classList.has('is-disabled')": {"<-": "!!@owner.disabled"}
             }
+        },
+
+        "ownerOptions": {
+            "value": {"#": "owner"},
+            "bindings": {
+                "multiple": {"<-": "@owner.allowMultiple"}
+            }
         }
     }
     </script>
 </head>
 <body>
-    <select data-montage-id="owner" multiple class="SelectMultiple"></select>
+    <select data-montage-id="owner" size="4" class="SelectMultiple"></select>
 </body>
 </html>
