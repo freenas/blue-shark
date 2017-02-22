@@ -44,7 +44,7 @@ exports.AbstractDropZoneComponent = Component.specialize( /** @lends AbstractDro
     },
 
     scrollThreshold: {
-        value: 40
+        value: 60
     },
 
     _willAcceptDrop: {
@@ -250,10 +250,6 @@ exports.AbstractDropZoneComponent = Component.specialize( /** @lends AbstractDro
         }
     },
 
-
-    
-
-
     willDraw: {
         value: function () {
             if (this._willAcceptDrop && !this._boundingRect) {
@@ -261,11 +257,10 @@ exports.AbstractDropZoneComponent = Component.specialize( /** @lends AbstractDro
             }
 
             if (this.acceptDrop && this.autoScrollView && !this._spacerElementBoundingRect) {
-                this._spacerElementBoundingRect = this.scrollView.spacerElement.getBoundingClientRect();
+                this._scrollviewElementBoundingRect = this.scrollView.element.getBoundingClientRect();
             }
         }
     },
-
 
     draw: {
         value: function () {
@@ -283,39 +278,39 @@ exports.AbstractDropZoneComponent = Component.specialize( /** @lends AbstractDro
             }
 
             if (this.acceptDrop) {
-                var spacerElementBoundingRect = this._spacerElementBoundingRect,
-                    scrollThreshold = this.scrollThreshold;
+                var scrollViewBoundingRect = this._scrollviewElementBoundingRect,
+                    scrollThreshold = this.scrollThreshold,
+                    scrollViewElement = this.scrollView.element;
 
                 if (this.autoScrollView) {
-                    if (this.scrollView._hasVerticalScrollbar) {
-                        this.multiplierY = 0;
+                    if(scrollViewElement.scrollHeight > scrollViewElement.offsetHeight) {
+                        this.multiplierY  = 0;
 
-                        if (spacerElementBoundingRect.top <= this.scrollViewPointerPositionY &&
-                            spacerElementBoundingRect.top + scrollThreshold > this.scrollViewPointerPositionY) {
+                        if (scrollViewBoundingRect.top <= this.scrollViewPointerPositionY &&
+                            scrollViewBoundingRect.top + scrollThreshold > this.scrollViewPointerPositionY) {
+                            this.multiplierY = scrollThreshold / (this.scrollViewPointerPositionY - scrollViewBoundingRect.top);
 
-                            this.multiplierY = scrollThreshold / (this.scrollViewPointerPositionY - spacerElementBoundingRect.top);
+                        } else if (scrollViewBoundingRect.bottom >= this.scrollViewPointerPositionY &&
+                            this.scrollViewPointerPositionY >= scrollViewBoundingRect.bottom - scrollThreshold ) {
 
-                        } else if (spacerElementBoundingRect.bottom >= this.scrollViewPointerPositionY &&
-                            this.scrollViewPointerPositionY >= spacerElementBoundingRect.bottom - scrollThreshold ) {
-
-                            this.multiplierY = scrollThreshold / (spacerElementBoundingRect.bottom - this.scrollViewPointerPositionY);
+                            this.multiplierY = scrollThreshold / (scrollViewBoundingRect.bottom - this.scrollViewPointerPositionY);
                         }
                         // Change the algorithm for speed scrolling.
                         this.multiplierY = this.multiplierY * 2;
                     }
 
-                    if (this.scrollView._hasHorizontalScrollbar) {
+                    if(scrollViewElement.scrollWidth > scrollViewElement.offsetWidth) {
                         this.multiplierX = 0;
 
-                        if (spacerElementBoundingRect.left <= this.scrollViewPointerPositionX &&
-                            spacerElementBoundingRect.left + scrollThreshold > this.scrollViewPointerPositionX) {
+                        if (scrollViewBoundingRect.left <= this.scrollViewPointerPositionX &&
+                            scrollViewBoundingRect.left + scrollThreshold > this.scrollViewPointerPositionX) {
 
-                            this.multiplierX = scrollThreshold / (this.scrollViewPointerPositionX - spacerElementBoundingRect.left);
+                            this.multiplierX = scrollThreshold / (this.scrollViewPointerPositionX - scrollViewBoundingRect.left);
 
-                        } else if (spacerElementBoundingRect.right >= this.scrollViewPointerPositionY &&
-                            this.scrollViewPointerPositionX >= spacerElementBoundingRect.right - scrollThreshold ) {
+                        } else if (scrollViewBoundingRect.right >= this.scrollViewPointerPositionY &&
+                            this.scrollViewPointerPositionX >= scrollViewBoundingRect.right - scrollThreshold ) {
 
-                            this.multiplierX = scrollThreshold / (spacerElementBoundingRect.right - this.scrollViewPointerPositionX);
+                            this.multiplierX = scrollThreshold / (scrollViewBoundingRect.right - this.scrollViewPointerPositionX);
                         }
 
                         this.multiplierX = this.multiplierX * 2;
@@ -326,27 +321,27 @@ exports.AbstractDropZoneComponent = Component.specialize( /** @lends AbstractDro
                 }
 
                 if (this.needsUpdateScrollView) {
-                    if (this.scrollView._hasVerticalScrollbar) {
+                    if (scrollViewElement.scrollHeight > scrollViewElement.offsetHeight) {
                         this.needsUpdateScrollView = false;
 
-                        if (spacerElementBoundingRect.top + scrollThreshold > this.scrollViewPointerPositionY) {
-                            this.scrollView.scrollTop = this.scrollView.scrollTop - (1 * this.multiplierY);
-                            this.needsUpdateScrollView = this.scrollView.scrollTop !== 0;
-                        } else if (this.scrollViewPointerPositionY >= spacerElementBoundingRect.bottom - scrollThreshold ) {
-                            this.scrollView.scrollTop = this.scrollView.scrollTop + (1 * this.multiplierY);
-                            this.needsUpdateScrollView = this.scrollView.scrollTop !== this.scrollView._maxTranslateY;
+                        if (scrollViewBoundingRect.top + scrollThreshold > this.scrollViewPointerPositionY) {
+                            scrollViewElement.scrollTop = scrollViewElement.scrollTop - (1 * this.multiplierY);
+                            this.needsUpdateScrollView = scrollViewElement.scrollTop !== 0;
+                        } else if (this.scrollViewPointerPositionY >= scrollViewBoundingRect.bottom - scrollThreshold ) {
+                            scrollViewElement.scrollTop = scrollViewElement.scrollTop + (1 * this.multiplierY);
+                            this.needsUpdateScrollView = (scrollViewElement.scrollTop + scrollViewElement.offsetHeight) < scrollViewElement.scrollHeight;
                         }
                     }
 
-                    if (this.scrollView._hasHorizontalScrollbar) {
+                    if (scrollViewElement.scrollWidth > scrollViewElement.offsetWidth) {
                         this.needsUpdateScrollView = this.needsUpdateScrollView || false;
 
                         if (spacerElementBoundingRect.left + scrollThreshold > this.scrollViewPointerPositionX) {
-                            this.scrollView.scrollLeft = this.scrollView.scrollLeft - (1 * multiplier);
-                            this.needsUpdateScrollView = this.scrollView.scrollLeft !== 0;
-                        } else if (this.scrollViewPointerPositionX >= spacerElementBoundingRect.right - scrollThreshold ) {
-                            this.scrollView.scrollLeft = this.scrollView.scrollLeft + (1 * multiplier);
-                            this.needsUpdateScrollView = this.scrollView.scrollLeft !== this.scrollView._maxTranslateX;
+                            scrollViewElement.scrollLeft = scrollViewElement.scrollLeft - (1 * multiplier);
+                            this.needsUpdateScrollView = scrollViewElement.scrollLeft !== 0;
+                        } else if (scrollViewElementPointerPositionX >= spacerElementBoundingRect.right - scrollThreshold ) {
+                            scrollViewElement.scrollLeft = scrollViewElement.scrollLeft + (1 * multiplier);
+                            this.needsUpdateScrollView = (scrollViewElement.scrollLeft + scrollViewElement.offsetWidth) < scrollViewElement.scrollWidth;
                         }
                     }
                 }
