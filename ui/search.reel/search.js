@@ -14,23 +14,23 @@ exports.Search = Component.specialize(/** @lends Search# */ {
             var target = event.target;
 
             if (target === this._searchButton || target === this._searchInput) {
-                this._search(this.value);
+                this._search(this._searchInput.value);
             }
         }
     },
 
-    searchController: {
+    controller: {
         value: null
     },
 
     _search: {
         value: function (value) {
-            if (!this.searchController || typeof this.searchController.search !== 'function') {
+            if (!this.controller || typeof this.controller.search !== 'function') {
                 throw new Error('Search component needs a controller that implements an `search` method.');
             }
 
             if (typeof value === 'string' && value.length > 2) {
-                var response = this.searchController.search(this.value);
+                var response = this.controller.search(value);
                 this.isSearching = true;
 
                 if (Promise.is(response)) {
