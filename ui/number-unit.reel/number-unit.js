@@ -39,13 +39,13 @@ exports.NumberUnit = Component.specialize({
 
     _handleInputChange: {
         value: function () {
-            if (this.value == this._value) {
-                this._getSeconds();
+            if (isNaN(this.value) || this.value === this._value) {
+                this._getValue();
             }
         }
     },
 
-    _getSeconds: {
+    _getValue: {
         value: function() {
             this._value = this.unit * this.count;
             this.value = this._value;
