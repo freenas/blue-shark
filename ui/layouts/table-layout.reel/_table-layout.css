@@ -31,7 +31,6 @@ Row
     display: flex;
     flex: 1;
     align-items: stretch;
-    position: relative;
     transition: background-color .15s ease-in-out;
 
     & > div:not(:last-child):after {
@@ -98,3 +97,10 @@ Rows - selection Enabled
 }
 
 .Table.content-is-empty .Table-emptyState { display: block;}
+
+/* Scrollview */
+
+.Table-scroller {
+    position: relative;
+    overflow: auto;
+}

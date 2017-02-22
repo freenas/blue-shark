@@ -81,16 +81,15 @@
             <div data-param="table-header-toolbar"></div>
         </div>
         <div data-param="table-header-columns" class="Table-header-columns"></div>
-        <div data-param="table-body-top" class="Table-row-group"></div>
         <div data-montage-id="table-content" class="Table-content">
             <div data-montage-id="isLoading" class="Table-isLoading"></div>
             <div data-montage-id="emptyState" class="Table-emptyState"></div>
-            <div data-montage-id="scrollview">
-                <div>
-                    <div data-montage-id="rowRepetition" class="Table-row-group">
-                        <div data-param="table-row"></div>
-                    </div>
+            <div data-montage-id="scrollview" class="Table-scroller">
+                <div data-param="table-body-top" class="Table-row-group"></div>
+                <div data-montage-id="rowRepetition" class="Table-row-group">
+                    <div data-param="table-row"></div>
                 </div>
+                <div data-param="table-row-controls"></div>
             </div>
         </div>
         <div class="Table-footer">
