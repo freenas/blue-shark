@@ -68,6 +68,7 @@ exports.SelectMultiple = Component.specialize({
                     "handleRangeChange"
                 );
                 this._needsUpdateOptions = true;
+                this._selectedValues = [];
                 this.needsDraw = true;
             }
         }
