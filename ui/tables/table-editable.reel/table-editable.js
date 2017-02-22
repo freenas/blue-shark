@@ -7,39 +7,39 @@ var Component = require("montage/ui/component").Component,
     Composer = require("montage/composer/composer").Composer;
 
 
-function _shouldComposerSurrenderPointerToComponent(composer, pointer, component) {
-    if (component && component.element) {
-        var targetElement = component.element,
-            overlayCandidate;
+// function _shouldComposerSurrenderPointerToComponent(composer, pointer, component) {
+//     if (component && component.element) {
+//         var targetElement = component.element,
+//             overlayCandidate;
 
-        if (component instanceof Composer) {
-            component = component.component;
-        }
+//         if (component instanceof Composer) {
+//             component = component.component;
+//         }
 
-        if (component) {
-            while (component && !overlayCandidate) {
-                if (component instanceof Overlay) {
-                    overlayCandidate = component;
-                } else {
-                    component = component.parentComponent;
-                }
-            }
+//         if (component) {
+//             while (component && !overlayCandidate) {
+//                 if (component instanceof Overlay) {
+//                     overlayCandidate = component;
+//                 } else {
+//                     component = component.parentComponent;
+//                 }
+//             }
 
-            if (component && component.anchor) {
-                targetElement = component.anchor;
-            }
-        }
+//             if (component && component.anchor) {
+//                 targetElement = component.anchor;
+//             }
+//         }
 
-        if (!this.element.contains(targetElement)) {
-            this.dismissOverlay({
-                targetElement: targetElement,
-                type: pointer
-            });
-        }
-    }
+//         if (!this.element.contains(targetElement)) {
+//             this.dismissOverlay({
+//                 targetElement: targetElement,
+//                 type: pointer
+//             });
+//         }
+//     }
 
-    return true;
-}
+//     return true;
+// }
 
 function RowEntry(object) {
     this.object = object;
@@ -72,8 +72,8 @@ exports.TableEditable = Component.specialize({
 
     templateDidLoad: {
         value: function () {
-            this.rowControlsOverlay.shouldComposerSurrenderPointerToComponent = _shouldComposerSurrenderPointerToComponent;
-            this.rowControlsOverlay.anchor = this._tableBodyTopElement;
+            // this.rowControlsOverlay.shouldComposerSurrenderPointerToComponent = _shouldComposerSurrenderPointerToComponent;
+            // this.rowControlsOverlay.anchor = this._tableBodyTopElement;
             this.addRangeAtPathChangeListener("rows", this, "handleRowsChange");
 
         }
@@ -162,7 +162,7 @@ exports.TableEditable = Component.specialize({
 
     captureWheel: {
         value: function () {
-            this.rowControlsOverlay.needsDraw = true;
+            // this.rowControlsOverlay.needsDraw = true;
         }
     },
 
@@ -175,49 +175,96 @@ exports.TableEditable = Component.specialize({
 
     //END Public API
 
-    willPositionOverlay: {
-        value: function (overlay, calculatedPosition) {
-            var anchor = overlay.anchor,
-                width = overlay.element.offsetWidth,
-                anchorPosition = anchor.getBoundingClientRect(),
-                position = {
-                    top: anchorPosition.top + anchorPosition.height,
-                    left: anchorPosition.left + (anchorPosition.width - width)
-                };
+    // willPositionOverlay: {
+    //     value: function (overlay, calculatedPosition) {
+    //         var anchor = overlay.anchor,
+    //             width = overlay.element.offsetWidth,
+    //             anchorPosition = anchor.getBoundingClientRect(),
+    //             position = {
+    //                 top: anchorPosition.top + anchorPosition.height,
+    //                 left: anchorPosition.left + (anchorPosition.width - width)
+    //             };
 
-            if (position.left < 0) {
-                position.left = 0;
-            }
+    //         if (position.left < 0) {
+    //             position.left = 0;
+    //         }
 
-            return position;
-        }
-    },
+    //         return position;
+    //     }
+    // },
 
-    shouldDismissOverlay: {
-        value: function (overlay, target, eventType) {
-            if (overlay === this.rowControlsOverlay) {
-               if (!this._tableBodyTopElement.contains(target)) {
-                   if (this.isAddingNewEntry) {
-                        this._cancelAddingNewEntry();
-                    }
-               } else {
-                   return false;
-               }
-            }
+    // shouldDismissOverlay: {
+    //     value: function (overlay, target, eventType) {
+    //         if (overlay === this.rowControlsOverlay) {
+    //            if (!this._tableBodyTopElement.contains(target)) {
+    //                if (this.isAddingNewEntry) {
+    //                     this._cancelAddingNewEntry();
+    //                 }
+    //            } else {
+    //                return false;
+    //            }
+    //         }
 
-           return true;
-        }
-    },
+    //        return true;
+    //     }
+    // },
 
     prepareForActivationEvents: {
         value: function () {
-            this.rowControlsOverlay.addEventListener("action", this);
+            // this.rowControlsOverlay.addEventListener("action", this);
             this.addEventListener("action", this);
+            // this.element.addEventListener("transitionend", this);
+            this.element.addEventListener("click", this);
+        }
+    },
+
+    _activeRow: {
+        value: null
+    },
+
+    _showControls: {
+        value: function() {
+            this._rowRepetitionComponent.element.classList.add('is-active');
+            this._activeRow.classList.add('is-active');
+            this.rowControls.classList.add('is-active');
+            this.rowControls.style.top = this._activeRow.offsetHeight + this._activeRow.offsetTop + "px";
+        }
+    },
+
+    _hideControls: {
+        value: function() {
+            if(this._activeRow) {
+                this._activeRow.classList.remove('is-active');
+                this.rowControls.classList.remove('is-active');
+                this._rowRepetitionComponent.element.classList.remove('is-active');
+                this._activeRow = this._activeRowComponent = null;
+            }
+        }
+    },
+
+    // probably should not be a click event?
+    // idea here is to make the row active and show controls based on data being changed
+    handleClick: {
+        value: function(e) {
+            // if a row contains the element and the row element doesn't equal the activeRow
+            if (this.findRowIterationContainingElement(e.target) && this.findRowIterationContainingElement(e.target).firstElement !== this._activeRow) {
+                if (this._activeRow) {
+                    this._activeRow.classList.remove('is-active');
+                }
+                this._activeRowComponent = this.findRowIterationContainingElement(e.target);
+                this._activeRow = this.findRowIterationContainingElement(e.target).firstElement;
+                this._showControls();
+
+            // if the event target is not in the row or the row controls
+            } else if(this._activeRow && !this._activeRow.contains(e.target) && !this.rowControls.contains(e.target)) {
+                this._hideControls();
+            }
         }
     },
 
     handleRowsChange: {
         value: function () {
+            console.log('rows change');
             if (this._inDocument) {
                 this._toggleAllComponent.checked = this.rows.length > 0 && this.selectedRows &&
                     this.selectedRows.length === this.rows.length;
@@ -227,12 +274,14 @@ exports.TableEditable = Component.specialize({
 
     handleCancelAction: {
         value: function () {
+            this._hideControls();
             this._cancelAddingNewEntry();
         }
     },
 
     handleDoneAction: {
         value: function () {
+            this._hideControls();
             this._stopAddingNewEntry();
         }
     },
@@ -244,8 +293,7 @@ exports.TableEditable = Component.specialize({
             if (this._toggleAllComponent.element.contains(target.element)) {
                 this._handleToggleAllAction(event);
             } else if (target instanceof Checkbox && this._rowRepetitionComponent.element.contains(target.element)) {
-                this._toggleAllComponent.checked = this.selectedRows &&
-                    this.selectedRows.length === this.rows.length;
+                this._toggleAllComponent.checked = this.selectedRows && this.selectedRows.length === this.rows.length;
             }
         }
     },
@@ -337,7 +385,7 @@ exports.TableEditable = Component.specialize({
                     self.contentController
                 );
 
-                self.rowControlsOverlay.show();
+                // self.rowControlsOverlay.show();
                 self.dispatchOwnPropertyChange("isAddingNewEntry", self.isAddingNewEntry);
                 self.dispatchOwnPropertyChange("currentNewEntry", self.currentNewEntry);
             });
@@ -349,12 +397,13 @@ exports.TableEditable = Component.specialize({
             if (this._shouldShowNewEntryRow) {
                 this.__shouldShowNewEntryRow = false;
                 this._startAddingNewEntry();
+                this._showControls();
 
             } else if (this._shouldHideNewEntryRow) {
                 this._shouldHideNewEntryRow = false;
                 this.dispatchOwnPropertyChange("isAddingNewEntry", this.isAddingNewEntry);
                 this.dispatchOwnPropertyChange("currentNewEntry", this.currentNewEntry);
-                this.rowControlsOverlay.hide();
+                this._hideControls();
             }
         }
     }

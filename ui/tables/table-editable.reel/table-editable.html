@@ -7,10 +7,10 @@
         "owner": {
             "properties": {
                 "element": {"#": "owner"},
-                "rowControlsOverlay": {"@": "rowControls"},
                 "_tableBodyTopElement": {"#": "tableBodyTop"},
                 "contentController": {"@": "contentController"},
-                "_toggleAllComponent": {"@": "toggleAll"}
+                "_toggleAllComponent": {"@": "toggleAll"},
+                "rowControls": {"#": "rowControls"}
             },
             "bindings": {
                 "_rowRepetitionComponent": {"<-": "@tableLayout.rowRepetitionComponent"},
@@ -104,20 +104,39 @@
             }
         },
 
-        "rowControls": {
-            "prototype": "montage/ui/overlay.reel",
+        ":rowIteration": {
+           "alias": "@tableLayout:rowIteration"
+        },
+
+        "messages": {
+            "prototype": "montage/ui/repetition.reel",
             "properties": {
-                "element": {"#": "rowControls"},
-                "delegate": {"@": "owner"},
-                "isModal": false
+                "element": {"#": "messages"}
             },
             "bindings": {
-                "classList.has('is-visible')": {"<-": "!@owner._canShowNewEntryRow"}
+                "content": {"<-": "@owner._activeRowComponent.errors"}
             }
         },
 
-        ":rowIteration": {
-           "alias": "@tableLayout:rowIteration"
+        "message": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "message"}
+            },
+            "bindings": {
+                "value": {"<-": "@messages:iteration.object"}
+            }
+        },
+
+        "rowControls-info": {
+            "prototype": "montage/ui/component",
+            "properties": {
+                "element": {"#": "rowControls-info"},
+                "hasTemplate": false
+            },
+            "bindings": {
+                "classList.has('is-hidden')": {"<-": "!@messages.content.length"}
+            }
         }
     }
     </script>
@@ -142,10 +161,20 @@
             <div data-arg="table-footer">
                 <div data-param="table-editable-footer"></div>
             </div>
-        </div>
-        <div data-montage-id="rowControls" class="TableEditable-rowControls">
-            <button data-montage-id="cancel"></button>
-            <button data-montage-id="done" class="Button--primary"></button>
+            <div data-arg="table-row-controls" data-montage-id="rowControls" class="TableEditable-rowControls">
+                <div class="flex-column TableEditable-rowControls-content">
+                    <div class="info flex-row" data-montage-id="rowControls-info">
+                        <svg><use xlink:href="#i-alert"/></svg>
+                        <ul data-montage-id="messages" class="messages">
+                            <li data-montage-id="message" class="message"></li>
+                        </ul>
+                    </div>
+                    <div class="actions flex">
+                        <button data-montage-id="cancel" class="g-margin-right--half"></button>
+                        <button data-montage-id="done" class="Button--primary"></button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
