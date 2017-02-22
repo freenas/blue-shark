@@ -19,13 +19,13 @@ exports.Search = Component.specialize(/** @lends Search# */ {
                 this.switchValue = 'write';
 
             } else if (target === this._cancelButton || target === this._validButton) {
-                this._searchInput.value = this._results = null;
-                this.isSearching = false;
-                this.switchValue = 'read';
-
                 if (target === this._validButton) {
                     this.value = this._selectComponent.selectedValues[0];
                 }
+
+                this._searchInput.value = this._results = null;
+                this.isSearching = false;
+                this.switchValue = 'read';
             }
         }
     },
