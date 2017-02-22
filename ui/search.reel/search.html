@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="search.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"},
+                "_searchInput":  {"@": "input"},
+                "_searchButton":  {"@": "search"}
+            },
+            "bindings": {
+                "seelectedValue": {"<-": "@select.selectedValues.one()"}
+            },
+            "listeners": [
+                {
+                    "listener": {"@": "owner"},
+                    "type": "action"
+                }
+            ]
+        },
+
+        "input": {
+            "prototype": "ui/text-field.reel",
+            "properties": {
+                "element": {"#": "input"}
+            },
+            "bindings": {
+                "disabled": {"<-": "@owner.disabled"}
+            }
+        },
+
+        "search": {
+            "prototype": "ui/button.reel",
+            "properties": {
+                "element": {"#": "search"},
+                "label": "Search"
+            },
+            "bindings": {
+                "disabled": {"<-": "@owner.disabled || @owner.isSearching"}
+            }
+        },
+
+        "select": {
+            "prototype": "ui/select-multiple.reel",
+            "properties": {
+                "element": {"#": "select"}
+            },
+            "bindings": {
+                "content": {"<-": "@owner._results"},
+                "disabled": {"<-": "@owner.disabled"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="Search">
+        <div class="Search-input">
+            <div data-montage-id="input"></div>
+            <div data-montage-id="search"></div>
+        </div>
+        <div data-montage-id="select"></div>
+    </div>
+</body>
+</html>
