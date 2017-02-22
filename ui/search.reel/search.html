@@ -8,10 +8,11 @@
             "properties": {
                 "element": {"#": "owner"},
                 "_searchInput":  {"@": "input"},
-                "_searchButton":  {"@": "search"}
-            },
-            "bindings": {
-                "selectedValue": {"<-": "@select.selectedValues.one()"}
+                "_searchButton":  {"@": "search"},
+                "_changeButton":  {"@": "change"},
+                "_validButton":  {"@": "valid"},
+                "_cancelButton":  {"@": "cancel"},
+                "_searchComponent":  {"@": "search"}
             },
             "listeners": [
                 {
@@ -21,13 +22,41 @@
             ]
         },
 
+        "substitution": {
+            "prototype": "montage/ui/substitution.reel",
+            "properties": {
+                "element": {"#": "substitution"}
+            },
+            "bindings": {
+                "switchValue": {"<-": "@owner.switchValue || 'read'"}
+            }
+        },
+
+        "text": {
+            "prototype": "ui/text.reel",
+            "properties": {
+                "element": {"#": "text"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner.selectedValue || 'none'"}
+            }
+        },
+
+        "change": {
+            "prototype": "ui/button.reel",
+            "properties": {
+                "element": {"#": "change"},
+                "label": "Change"
+            },
+            "bindings": {
+                "disabled": {"<-": "@owner.disabled"}
+            }
+        },
+
         "input": {
             "prototype": "ui/text-field.reel",
             "properties": {
                 "element": {"#": "input"}
-            },
-            "bindings": {
-                "disabled": {"<-": "@owner.disabled"}
             }
         },
 
@@ -38,7 +67,7 @@
                 "label": "Search"
             },
             "bindings": {
-                "disabled": {"<-": "@owner.disabled || @owner.isSearching"}
+                "disabled": {"<-": "@owner.isSearching"}
             }
         },
 
@@ -49,8 +78,23 @@
                 "allowMultiple": false
             },
             "bindings": {
-                "options": {"<-": "@owner._results"},
-                "disabled": {"<-": "@owner.disabled"}
+                "options": {"<-": "@owner._results"}
+            }
+        },
+
+        "cancel": {
+            "prototype": "ui/button.reel",
+            "properties": {
+                "element": {"#": "cancel"},
+                "label": "Cancel"
+            }
+        },
+
+        "valid": {
+            "prototype": "ui/button.reel",
+            "properties": {
+                "element": {"#": "valid"},
+                "label": "Valid"
             }
         }
     }
@@ -58,11 +102,23 @@
 </head>
 <body>
     <div data-montage-id="owner" class="Search">
-        <div class="Search-input">
-            <div data-montage-id="input"></div>
-            <div data-montage-id="search"></div>
+        <div data-montage-id="substitution">
+            <div class="flex-row" data-arg="read">
+                <div data-montage-id="text"></div>
+                <div data-montage-id="change"></div>
+            </div>
+            <div data-arg="write">
+                 <div class="flex-row">
+                    <div data-montage-id="input"></div>
+                    <div data-montage-id="search"></div>
+                </div>
+                <div data-montage-id="select"></div>
+                <div class="flex-row">
+                    <div data-montage-id="cancel"></div>
+                    <div data-montage-id="valid"></div>
+                </div>
+            </div>
         </div>
-        <div data-montage-id="select"></div>
     </div>
 </body>
 </html>

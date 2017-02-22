@@ -15,6 +15,17 @@ exports.Search = Component.specialize(/** @lends Search# */ {
 
             if (target === this._searchButton || target === this._searchInput) {
                 this._search(this._searchInput.value);
+            } else if (target === this._changeButton) {
+                this.switchValue = 'write';
+
+            } else if (target === this._cancelButton || target === this._validButton) {
+                this._results = null;
+                this.isSearching = false;
+                this.switchValue = 'read';
+
+                if (target === this._validButton) {
+                    this.selectedValue = this._searchComponent.selectedValue[0];
+                }
             }
         }
     },
@@ -34,10 +45,13 @@ exports.Search = Component.specialize(/** @lends Search# */ {
                 this.isSearching = true;
 
                 if (Promise.is(response)) {
+                    this._searchPromise
                     var self = this;
 
                     response.then(function (results) {
-                        self._results = results
+                        if (self._inDocument) {
+                            self._results = results;
+                        }
                     }).finally(function () {
                         self.isSearching = false;
                     });
