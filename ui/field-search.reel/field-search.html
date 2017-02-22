@@ -7,9 +7,6 @@
         "owner": {
             "properties": {
                 "element": {"#": "owner"}
-            },
-            "bindings": {
-                "selectedValue": {"<-": "@control.selectedValue"}
             }
         },
         "field": {
@@ -34,7 +31,8 @@
             },
             "bindings": {
                 "disabled": {"<-": "@owner.disabled"},
-                "controller": {"<-": "@owner.controller"}
+                "controller": {"<-": "@owner.controller"},
+                "value": {"<->": "@owner.value"}
             }
         }
     }

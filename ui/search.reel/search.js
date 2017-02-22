@@ -24,7 +24,7 @@ exports.Search = Component.specialize(/** @lends Search# */ {
                 this.switchValue = 'read';
 
                 if (target === this._validButton) {
-                    this.selectedValue = this._selectComponent.selectedValues[0];
+                    this.value = this._selectComponent.selectedValues[0];
                 }
             }
         }
