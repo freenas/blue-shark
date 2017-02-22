@@ -39,7 +39,7 @@
             "bindings": {
                 "selectedObject": {"<-": "(@optionsOverlay.optionsRepetition.selection.0 || @owner._selectedValue || @owner._options.0)"},
                 "expressionResult": {"<-": "selectedObject.path(selectedObject.label)"},
-                "value": {"<-": "expressionResult || selectedObject.label"}
+                "value": {"<-": "expressionResult || selectedObject.label || selectedObject"}
             }
         },
 
