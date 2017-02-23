@@ -114,7 +114,7 @@
                 "element": {"#": "messages"}
             },
             "bindings": {
-                "content": {"<-": "@owner._activeRowComponent.errors"}
+                "content": {"<-": "@owner._activeRowEntry.errors.toMap().valuesArray()"}
             }
         },
 

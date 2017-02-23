@@ -43,7 +43,7 @@ var Component = require("montage/ui/component").Component,
 
 function RowEntry(object) {
     this.object = object;
-    this.selected = false
+    this.selected = false;
 }
 
 
@@ -64,7 +64,7 @@ exports.TableEditable = Component.specialize({
         get: function () {
             if (!this._rows) {
                 this._rows = []
-            };
+            }
 
             return this._rows;
         }
@@ -222,6 +222,10 @@ exports.TableEditable = Component.specialize({
         value: null
     },
 
+    _activeRowEntry: {
+        value: null
+    },
+
     _showControls: {
         value: function() {
             this._rowRepetitionComponent.element.classList.add('is-active');
@@ -237,7 +241,7 @@ exports.TableEditable = Component.specialize({
                 this._activeRow.classList.remove('is-active');
                 this.rowControls.classList.remove('is-active');
                 this._rowRepetitionComponent.element.classList.remove('is-active');
-                this._activeRow = this._activeRowComponent = null;
+                this._activeRow = this._activeRowEntry = null;
             }
         }
     },
@@ -251,8 +255,8 @@ exports.TableEditable = Component.specialize({
                 if (this._activeRow) {
                     this._activeRow.classList.remove('is-active');
                 }
-                this._activeRowComponent = this.findRowIterationContainingElement(e.target);
                 this._activeRow = this.findRowIterationContainingElement(e.target).firstElement;
+                this._activeRowEntry = this._activeRow.querySelector('[data-montage-id=rowEntry]').component;
                 this._showControls();
 
             // if the event target is not in the row or the row controls
@@ -309,8 +313,6 @@ exports.TableEditable = Component.specialize({
             ) || defaultNewEntry;
 
             if (Promise.is(defaultNewEntry)) {
-                var self = this;
-
                 return defaultNewEntry.then(function (NewEntry) {
                     return new RowEntry(NewEntry);
                 });
@@ -321,7 +323,7 @@ exports.TableEditable = Component.specialize({
     },
 
     _handleToggleAllAction: {
-        value: function (event) {
+        value: function() {
             var self = this;
 
             this._rowEntries.forEach(function (rowEntry) {
@@ -349,14 +351,14 @@ exports.TableEditable = Component.specialize({
     _stopAddingNewEntry: {
         value: function () {
             if (this.isAddingNewEntry) {
-                var shoulAddNewEntry = this.callDelegateMethod(
+                var shouldAddNewEntry = this.callDelegateMethod(
                     "tableWillAddNewEntry",
                     this,
                     this.currentNewEntry.object,
                     this.contentController
                 );
 
-                if (shoulAddNewEntry !== void 0 ? !!shoulAddNewEntry : true) {
+                if (shouldAddNewEntry !== void 0 ? !!shouldAddNewEntry : true) {
                     this.contentController.add(this.currentNewEntry.object);
                     this.callDelegateMethod(
                         "tableDidAddNewEntry",
