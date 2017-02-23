@@ -17,6 +17,7 @@ exports.Search = Component.specialize(/** @lends Search# */ {
                 this._search(this._searchInput.value);
             } else if (target === this._changeButton) {
                 this.switchValue = 'write';
+                this._searchInput.focus();
 
             } else if (target === this._cancelButton || target === this._validButton) {
                 if (target === this._validButton) {
