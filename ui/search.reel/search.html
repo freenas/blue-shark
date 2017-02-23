@@ -96,20 +96,17 @@
             "properties": {
                 "element": {"#": "valid"},
                 "value": "Select"
-            },
-            "bindings": {
-                "disabled": {"<-": "@select.selectedValues.length > 0"}
             }
         },
 
         "message": {
             "prototype": "montage/ui/text.reel",
             "properties": {
-                "element": {"#": "message"}
+                "element": {"#": "message"},
+                "value": "No results found"
             },
             "bindings": {
-                "classList.has('xis-hidden')": {"<-": "@select.selectedValues"},
-                "value": {"<-": "'No results found'"}
+                "classList.has('is-hidden')": {"<-": "!!@select.options && @select.options.length > 0"}
             }
         }
     }

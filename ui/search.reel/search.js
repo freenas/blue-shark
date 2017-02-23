@@ -46,7 +46,6 @@ exports.Search = Component.specialize(/** @lends Search# */ {
                 this.isSearching = true;
 
                 if (Promise.is(response)) {
-                    this._searchPromise
                     var self = this;
 
                     response.then(function (results) {
