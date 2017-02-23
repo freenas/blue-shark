@@ -72,10 +72,6 @@ Rows - selection Enabled
     padding-bottom: .5em;
 }
 
-.Table.content-is-empty .Table-caption {
-    /* border-bottom: 1px solid var(--primary--4); */
-}
-
 /* isLoading */
 
 .Table-isLoading {
@@ -94,10 +90,3 @@ Rows - selection Enabled
 }
 
 .Table.content-is-empty .Table-emptyState { display: block;}
-
-/* Scrollview */
-
-.Table .Scrollview { /* border: 1px solid var(--primary--4); */ border-top: none;}
-
-.Table.content-is-empty .Scrollview { display: none;}
-.Table .Scrollview .Scrollview-transform { display: block; }
