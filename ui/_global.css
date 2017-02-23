@@ -360,6 +360,15 @@ $flex
 
 .flex-minHeight {min-height: 0;}
 
+/* button helpers */
+
+.button-group {
+
+    & .Button + .Button {
+        margin-left: .5rem;
+    }
+}
+
 /* Table Styles */
 
 table {
