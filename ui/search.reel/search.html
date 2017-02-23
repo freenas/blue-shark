@@ -100,6 +100,17 @@
             "bindings": {
                 "disabled": {"<-": "@select.selectedValues.length > 0"}
             }
+        },
+
+        "message": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "message"}
+            },
+            "bindings": {
+                "classList.has('xis-hidden')": {"<-": "@select.selectedValues"},
+                "value": {"<-": "'No results found'"}
+            }
         }
     }
     </script>
@@ -118,7 +129,10 @@
                         <svg><use xlink:href="#i-search"/></svg>
                     </button>
                 </div>
-                <div data-montage-id="select" class="g-margin-bottom--half"></div>
+                <div class="Search-results g-margin-bottom--half">
+                    <div data-montage-id="select" ></div>
+                    <div data-montage-id="message" class="Search-results-message"></div>
+                </div>
                 <div class="flex-row button-group">
                     <button data-montage-id="cancel"></button>
                     <button data-montage-id="valid" class="Button--primary"></button>
