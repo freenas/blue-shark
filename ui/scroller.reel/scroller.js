@@ -1,10 +1,10 @@
 /**
- * @module ui/main.reel
+ * @module ui/scroller.reel
  */
 var Component = require("montage/ui/component").Component;
 
 /**
- * @class Main
+ * @class Scroller
  * @extends Component
  */
-exports.Main = Component.specialize();
+exports.Scroller = Component.specialize();

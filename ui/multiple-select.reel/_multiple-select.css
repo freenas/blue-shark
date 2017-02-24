@@ -91,7 +91,7 @@
 
 .MultipleSelect-input-options {
     /* Fix - should I have to do this? */
-    position: absolute;
+    position: absolute !important;
     display: flex;
     top: 2em;
     left: 0;
@@ -110,10 +110,6 @@
     opacity: 0;
     transition-property: visibility, opacity;
     transition-duration: .2s;
-
-    & .Scrollview-transform {
-        display: block;
-    }
 }
 
 .MultipleSelect-input-error {
@@ -147,10 +143,6 @@
     width: 100%;
     transition-property: border-color, background-color, opacity;
     transition-duration: .25s;
-
-    & .Scrollview-transform {
-        display: block;
-    }
 
     @nest .MultipleSelect.is-disabled & {
         pointer-events: none;
