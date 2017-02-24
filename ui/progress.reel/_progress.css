@@ -1,13 +1,3 @@
-@keyframes spin {
-    0%   { transform: rotate(0);}
-    100% { transform: rotate(360deg);}
-}
-
-@keyframes pulse {
-    0%   {opacity: 0;}
-    100% {opacity: 1;}
-}
-
 .Progress {
     display: flex;
     align-items: center;
@@ -60,7 +50,8 @@
     align-items: center;
 
     & svg {
-        animation: spin 1s infinite linear;
+        transform-origin: 50% 50%;
+        animation: rotatedPulse 1s infinite linear;
     }
 }
 
