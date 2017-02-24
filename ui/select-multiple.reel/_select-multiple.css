@@ -1,5 +1,6 @@
 .SelectMultiple {
     @apply --input-field;
+    min-width: 10rem;
 }
 
 .SelectMultiple option {
