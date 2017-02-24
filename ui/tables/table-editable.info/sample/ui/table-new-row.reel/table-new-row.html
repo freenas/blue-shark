@@ -7,18 +7,22 @@
         "owner": {
             "properties": {
                 "element": {"#": "owner"},
-                "errors": {}
+                "errors": {},
+                "options": [
+                    {"label": "option1", "value": "option1"},
+                    {"label": "option2", "value": "option2"}
+                ]
             }
         },
 
         "options": {
             "prototype": "blue-shark/ui/radio-button-field-group.reel",
             "properties": {
-                "element": {"#": "options"},
-                "selectedValue": "option1"
+                "element": {"#": "options"}
             },
             "bindings": {
-                "options": {"<->": "@owner.object.options"}
+                "selectedValue": {"<-": "@owner.object.option || 'option1'"},
+                "options": {"<->": "@owner.options"}
             }
         },
 
@@ -89,7 +93,7 @@
 </head>
 <body>
     <div data-montage-id="owner" class="Table-cells">
-        <div><span data-montage-id="options"></span></div>
+        <div><div data-montage-id="options"></div></div>
         <div>
             <div data-montage-id="substitution">
                 <span data-arg="option1" data-montage-id="ageTextField"></span>
