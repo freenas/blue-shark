@@ -150,6 +150,10 @@ exports.TableEditable = Component.specialize({
                 rowEntry = this.selectedRows[0];
 
                 if ((index = this.rows.indexOf(rowEntry.object)) > -1) {
+                    this.callDelegateMethod(
+                        "tableWillDeleteEntry",
+                        rowEntry.object
+                    );
                     this.rows.splice(index, 1);
                 }
             }
