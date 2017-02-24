@@ -9,6 +9,15 @@
                 "element": {"#": "owner"}
             }
         },
+        "readOnlySubstitution": {
+            "prototype": "montage/ui/substitution.reel",
+            "properties": {
+                "element": {"#": "readOnlySubstitution"}
+            },
+            "bindings": {
+                "switchValue": {"<-": "@owner.isReadOnly ? 'ro' : 'rw'"}
+            }
+        },
         "options": {
             "prototype": "montage/ui/repetition.reel",
             "properties": {
@@ -36,14 +45,26 @@
                 "value": {"<-": "@options:iteration.object.value || @options:iteration.object"},
                 "disabled": {"<-": "@owner.disabled"}
             }
+        },
+        "value": {
+            "prototype": "ui/text.reel",
+            "properties": {
+                "element": {"#": "value"}
+            },
+            "bindings": {
+                "value": {"<-": "(@owner.options && @owner.options.0 && @owner.options.0.label) ? @owner.options.filter{value == @owner.selectedValue}.0.label : @owner.selectedValue"}
+            }
         }
     }
     </script>
 </head>
 <body>
     <div data-montage-id="owner" class="RadioButtonFieldGroup">
-        <div data-montage-id="options" class="RadioButtonFieldGroup-options">
-            <div data-montage-id="option" class="RadioButtonFieldGroup-option"></div>
+        <div data-montage-id="readOnlySubstitution">
+            <div data-montage-id="options" data-arg="rw" class="RadioButtonFieldGroup-options">
+                <div data-montage-id="option" class="RadioButtonFieldGroup-option"></div>
+            </div>
+            <div data-montage-id="value" data-arg="ro"></div>
         </div>
     </div>
 </body>
