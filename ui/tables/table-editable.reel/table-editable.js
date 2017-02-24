@@ -228,10 +228,14 @@ exports.TableEditable = Component.specialize({
 
     _showControls: {
         value: function() {
+            if (this._activeRow) {
+                this._activeRow.classList.add('is-active');
+                this.rowControls.style.top = this._activeRow.offsetHeight + this._activeRow.offsetTop + "px";
+            } else {
+                this.rowControls.style.top = this._tableBodyTopElement.offsetHeight + this._tableBodyTopElement.offsetTop + "px";
+            }
             this._rowRepetitionComponent.element.classList.add('is-active');
-            this._activeRow.classList.add('is-active');
             this.rowControls.classList.add('is-active');
-            this.rowControls.style.top = this._activeRow.offsetHeight + this._activeRow.offsetTop + "px";
         }
     },
 
@@ -239,10 +243,10 @@ exports.TableEditable = Component.specialize({
         value: function() {
             if(this._activeRow) {
                 this._activeRow.classList.remove('is-active');
-                this.rowControls.classList.remove('is-active');
-                this._rowRepetitionComponent.element.classList.remove('is-active');
                 this._activeRow = this._activeRowEntry = null;
             }
+            this.rowControls.classList.remove('is-active');
+            this._rowRepetitionComponent.element.classList.remove('is-active');
         }
     },
 
@@ -387,7 +391,7 @@ exports.TableEditable = Component.specialize({
                     self.contentController
                 );
 
-                // self.rowControlsOverlay.show();
+                self._showControls();
                 self.dispatchOwnPropertyChange("isAddingNewEntry", self.isAddingNewEntry);
                 self.dispatchOwnPropertyChange("currentNewEntry", self.currentNewEntry);
             });

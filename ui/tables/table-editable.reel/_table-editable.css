@@ -118,12 +118,13 @@
 /* New Row */
 
 .Table-body-top {
-    border: 1px solid var(--accent);
+    border: 1px solid var(--primary--3);
+    border-bottom: none;
 }
 
-.TableEditable .Table-body-top.Table-row-group .Table-cells {
+.TableEditable .Table-body-top.Table-row-group {
     /* magic # based on checkbox width */
-    background-color: var(--table-newRow-bg);
+    background-color: var(--primary--7);
 }
 
 .TableEditable .Table.has-multipleSelection .Table-body-top.Table-row-group .Table-cells {
