@@ -103,4 +103,8 @@ Rows - selection Enabled
 .Table-scroller {
     position: relative;
     overflow: auto;
+
+    @nest .content-is-empty & {
+        display: none;
+    }
 }
