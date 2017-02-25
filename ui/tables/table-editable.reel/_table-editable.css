@@ -160,4 +160,8 @@ BODY
     }
 }
 
+.TableEditable .Table-scroller {
+    min-height: 6.1rem; /* magic # */
+}
+
 
