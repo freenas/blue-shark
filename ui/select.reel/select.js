@@ -266,21 +266,23 @@ var Select = exports.Select = Component.specialize({
     },
 
     _handledUpKeyPress: {
-        value: function () {
+        value: function (e) {
             if (!this.optionsOverlayComponent.isShown) {
                 this._toggleOptionsOverlay();
             } else {
                 this._previousOption();
+                e.preventDefault();
             }
         }
     },
 
     _handleDownKeyPress: {
-        value: function () {
+        value: function (e) {
             if (!this.optionsOverlayComponent.isShown) {
                 this._toggleOptionsOverlay();
             } else {
                 this._nextOption();
+                e.preventDefault();
             }
         }
     },
