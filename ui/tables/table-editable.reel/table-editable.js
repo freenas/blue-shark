@@ -72,10 +72,7 @@ exports.TableEditable = Component.specialize({
 
     templateDidLoad: {
         value: function () {
-            // this.rowControlsOverlay.shouldComposerSurrenderPointerToComponent = _shouldComposerSurrenderPointerToComponent;
-            // this.rowControlsOverlay.anchor = this._tableBodyTopElement;
             this.addRangeAtPathChangeListener("rows", this, "handleRowsChange");
-
         }
     },
 
@@ -100,7 +97,6 @@ exports.TableEditable = Component.specialize({
             shouldHideNewEntryRow = !!shouldHideNewEntryRow;
 
             if (this.__shouldHideNewEntryRow !== shouldHideNewEntryRow) {
-                document.removeEventListener("wheel", this, true);
                 this.__shouldHideNewEntryRow = shouldHideNewEntryRow;
                 this._canShowNewEntryRow = false;
                 this.needsDraw = true;
@@ -160,60 +156,17 @@ exports.TableEditable = Component.specialize({
         }
     },
 
-    captureWheel: {
-        value: function () {
-            // this.rowControlsOverlay.needsDraw = true;
-        }
-    },
-
     findRowIterationContainingElement: {
         value: function (element) {
             return this._rowRepetitionComponent._findIterationContainingElement(element);
         }
     },
 
-
     //END Public API
-
-    // willPositionOverlay: {
-    //     value: function (overlay, calculatedPosition) {
-    //         var anchor = overlay.anchor,
-    //             width = overlay.element.offsetWidth,
-    //             anchorPosition = anchor.getBoundingClientRect(),
-    //             position = {
-    //                 top: anchorPosition.top + anchorPosition.height,
-    //                 left: anchorPosition.left + (anchorPosition.width - width)
-    //             };
-
-    //         if (position.left < 0) {
-    //             position.left = 0;
-    //         }
-
-    //         return position;
-    //     }
-    // },
-
-    // shouldDismissOverlay: {
-    //     value: function (overlay, target, eventType) {
-    //         if (overlay === this.rowControlsOverlay) {
-    //            if (!this._tableBodyTopElement.contains(target)) {
-    //                if (this.isAddingNewEntry) {
-    //                     this._cancelAddingNewEntry();
-    //                 }
-    //            } else {
-    //                return false;
-    //            }
-    //         }
-
-    //        return true;
-    //     }
-    // },
 
     prepareForActivationEvents: {
         value: function () {
-            // this.rowControlsOverlay.addEventListener("action", this);
             this.addEventListener("action", this);
-            // this.element.addEventListener("transitionend", this);
             this.element.addEventListener("click", this);
         }
     },
@@ -255,7 +208,7 @@ exports.TableEditable = Component.specialize({
     handleClick: {
         value: function(e) {
             // if a row contains the element and the row element doesn't equal the activeRow
-            if (this.findRowIterationContainingElement(e.target) && this.findRowIterationContainingElement(e.target).firstElement !== this._activeRow) {
+            if (this.findRowIterationContainingElement(e.target) && this.findRowIterationContainingElement(e.target).firstElement !== this._activeRow && !e.target.parentNode.classList.contains('Checkbox')) {
                 if (this._activeRow) {
                     this._activeRow.classList.remove('is-active');
                 }
@@ -272,7 +225,6 @@ exports.TableEditable = Component.specialize({
 
     handleRowsChange: {
         value: function () {
-            console.log('rows change');
             if (this._inDocument) {
                 this._toggleAllComponent.checked = this.rows.length > 0 && this.selectedRows &&
                     this.selectedRows.length === this.rows.length;
@@ -415,3 +367,5 @@ exports.TableEditable = Component.specialize({
     }
 
 });
+
+

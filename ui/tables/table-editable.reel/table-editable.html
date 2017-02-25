@@ -90,6 +90,9 @@
             "properties": {
                 "element": {"#": "done"},
                 "value": "Done"
+            },
+            "bindings": {
+                "disabled": {"<-": "@messages.content.length"}
             }
         },
 
@@ -114,7 +117,7 @@
                 "element": {"#": "messages"}
             },
             "bindings": {
-                "content": {"<-": "@owner._activeRowEntry.errors.toMap().valuesArray()"}
+                "content": {"<-": "@owner._activeRowEntry.errors.toMap().valuesArray().filter{this}"}
             }
         },
 
