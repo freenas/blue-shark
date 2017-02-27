@@ -5,41 +5,6 @@ var Component = require("montage/ui/component").Component,
     Checkbox = require("montage/ui/checkbox.reel").Checkbox,
     Composer = require("montage/composer/composer").Composer;
 
-
-// function _shouldComposerSurrenderPointerToComponent(composer, pointer, component) {
-//     if (component && component.element) {
-//         var targetElement = component.element,
-//             overlayCandidate;
-
-//         if (component instanceof Composer) {
-//             component = component.component;
-//         }
-
-//         if (component) {
-//             while (component && !overlayCandidate) {
-//                 if (component instanceof Overlay) {
-//                     overlayCandidate = component;
-//                 } else {
-//                     component = component.parentComponent;
-//                 }
-//             }
-
-//             if (component && component.anchor) {
-//                 targetElement = component.anchor;
-//             }
-//         }
-
-//         if (!this.element.contains(targetElement)) {
-//             this.dismissOverlay({
-//                 targetElement: targetElement,
-//                 type: pointer
-//             });
-//         }
-//     }
-
-//     return true;
-// }
-
 function RowEntry(object) {
     this.object = object;
     this.selected = false;
@@ -50,7 +15,7 @@ function RowEntry(object) {
  * @class TableEditable
  * @extends Component
  */
-var TableEditable = exports.TableEditable = Component.specialize({
+exports.TableEditable = Component.specialize({
 
     isMultiSelectionEnabled: {
         value: true
