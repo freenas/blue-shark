@@ -32,7 +32,7 @@
             "bindings": {
                 "disabled": {"<-": "@owner.disabled"},
                 "controller": {"<-": "@owner.controller"},
-                "displayedValue": {"<-": "@owner.displayedValue || @owner.value"},
+                "displayedValue": {"<->": "@owner.displayedValue"},
                 "value": {"<->": "@owner.value"}
             }
         }
