@@ -2,7 +2,6 @@
  * @module ui/table-editable.reel
  */
 var Component = require("montage/ui/component").Component,
-    Overlay = require("montage/ui/overlay.reel").Overlay,
     Checkbox = require("montage/ui/checkbox.reel").Checkbox,
     Composer = require("montage/composer/composer").Composer;
 
@@ -51,7 +50,7 @@ function RowEntry(object) {
  * @class TableEditable
  * @extends Component
  */
-exports.TableEditable = Component.specialize({
+var TableEditable = exports.TableEditable = Component.specialize({
 
     isMultiSelectionEnabled: {
         value: true
@@ -207,6 +206,7 @@ exports.TableEditable = Component.specialize({
     // idea here is to make the row active and show controls based on data being changed
     handleClick: {
         value: function(e) {
+            console.log(e);
             // if a row contains the element and the row element doesn't equal the activeRow
             if (this.findRowIterationContainingElement(e.target) && this.findRowIterationContainingElement(e.target).firstElement !== this._activeRow && !e.target.parentNode.classList.contains('Checkbox')) {
                 if (this._activeRow) {
@@ -248,6 +248,7 @@ exports.TableEditable = Component.specialize({
 
     handleAction: {
         value: function (event) {
+            console.log(event);
             var target = event.target;
 
             if (this._toggleAllComponent.element.contains(target.element)) {
@@ -367,5 +368,4 @@ exports.TableEditable = Component.specialize({
     }
 
 });
-
 
