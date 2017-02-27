@@ -256,7 +256,7 @@ exports.AbstractDropZoneComponent = Component.specialize( /** @lends AbstractDro
                 this._boundingRect = this._element.getBoundingClientRect();
             }
 
-            if (this.scrollView && this.acceptDrop && this.autoScrollView && !this._spacerElementBoundingRect) {
+            if (this.scrollView && this.acceptDrop && this.autoScrollView) {
                 this._scrollviewElementBoundingRect = this.scrollView.element.getBoundingClientRect();
             }
         }
@@ -352,5 +352,4 @@ exports.AbstractDropZoneComponent = Component.specialize( /** @lends AbstractDro
             }
         }
     }
-
 });
