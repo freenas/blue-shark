@@ -9,6 +9,30 @@ var Component = require("montage/ui/component").Component;
  */
 exports.Search = Component.specialize(/** @lends Search# */ {
 
+    enterDocument: {
+        value: function (firstTime) {
+            if (!this.controller || typeof this.controller.search !== 'function') {
+                throw new Error('Search component needs a controller that implements an `search` method.');
+            }
+
+            if (!this.controller && typeof this.controller.listDefaultOptions !== 'function') {
+                this._handleSearchAction(this.controller.listDefaultOptions(), true);
+            }
+
+            if (firstTime) {
+                this.addPathChangeListener('_searchInput.value', this, 'handleSearchValueChange');
+            }
+        }
+    },
+
+    handleSearchValueChange: {
+        value: function (value) {
+            if (!value && this._inDocument && this._initialResults) {
+                this._results = this._initialResults;
+            }
+        }
+    },
+
     handleAction: {
         value: function (event) {
             var target = event.target;
@@ -37,28 +61,33 @@ exports.Search = Component.specialize(/** @lends Search# */ {
 
     _search: {
         value: function (value) {
-            if (!this.controller || typeof this.controller.search !== 'function') {
-                throw new Error('Search component needs a controller that implements an `search` method.');
+            if (typeof value === 'string' && value.length) {
+                this._handleSearchAction(this.controller.search(value));
             }
+        }
+    },
 
-            if (typeof value === 'string' && value.length > 2) {
-                var response = this.controller.search(value);
-                this.isSearching = true;
+    _handleSearchAction: {
+        value: function (searchAction, initial) {
+            this.isSearching = true;
 
-                if (Promise.is(response)) {
-                    var self = this;
+            if (Promise.is(searchAction)) {
+                var self = this;
 
-                    response.then(function (results) {
-                        if (self._inDocument) {
-                            self._results = results;
+                searchAction.then(function (results) {
+                    if (self._inDocument) {
+                        self._results = results;
+
+                        if (initial) {
+                            self._initialResults = results;
                         }
-                    }).finally(function () {
-                        self.isSearching = false;
-                    });
-                } else {
-                    this._results = response;
-                    this.isSearching = false;
-                }
+                    }
+                }).finally(function () {
+                    self.isSearching = false;
+                });
+            } else {
+                this._results = searchAction;
+                this.isSearching = false;
             }
         }
     }
