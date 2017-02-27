@@ -61,8 +61,8 @@
 
     /* Calendar */
 
-    --calender-line--strong:        var(--main-bg-color);
-    --calender-line--weak:          color(var(--calenderStrongLine) alpha(.3));
+    --calendar-line--strong:        var(--main-bg-color);
+    --calendar-line--weak:          color(var(--calendarStrongLine) alpha(.3));
 
     /* fixme */
     --main-text-color:  var(--primary--0);
