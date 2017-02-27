@@ -16,7 +16,7 @@ exports.Search = Component.specialize(/** @lends Search# */ {
                 throw new Error('Search component needs a controller that implements an `search` method.');
             }
 
-            if (!this.controller && typeof this.controller.listDefaultOptions !== 'function') {
+            if (this.controller && typeof this.controller.listDefaultOptions === 'function') {
                 this._handleSearchAction(this.controller.listDefaultOptions(), true);
             }
 
