@@ -140,6 +140,13 @@
             "bindings": {
                 "classList.has('is-hidden')": {"<-": "!@messages.content.length"}
             }
+        },
+        "addButton": {
+            "prototype": "ui/button.reel",
+            "properties": {
+                "element": {"#": "addButton"},
+                "value": "Add item"
+            }
         }
     }
     </script>
@@ -178,6 +185,7 @@
                     </div>
                 </div>
             </div>
+            <span data-arg="emptyAction" data-montage-id="addButton">test</span>
         </div>
     </div>
 </body>

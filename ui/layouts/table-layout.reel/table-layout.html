@@ -61,16 +61,24 @@
             }
         },
 
-        "emptyState": {
+        "emptyMessage": {
             "prototype": "ui/text.reel",
             "properties": {
-                "element": {"#": "emptyState"}
+                "element": {"#": "emptyMessage"}
             },
             "bindings": {
                 "value": {"<-": "!!@owner.emptyMessage ? @owner.emptyMessage : 'No data added'"},
                 "classList.has('is-hidden')": {"<-": "@owner.rows.length || @owner.isLoading"}
             }
+        },
+
+        "emptyState": {
+            "prototype": "ui/panel.reel",
+            "properties": {
+                "element": {"#": "emptyState"}
+            }
         }
+
     }
     </script>
 </head>
@@ -83,7 +91,10 @@
         <div data-param="table-header-columns" class="Table-header-columns"></div>
         <div data-montage-id="table-content" class="Table-content">
             <div data-montage-id="isLoading" class="Table-isLoading"></div>
-            <div data-montage-id="emptyState" class="Table-emptyState"></div>
+            <div data-montage-id="emptyState" class="Table-emptyState">
+                <p data-montage-id="emptyMessage"></p>
+                <div data-param="emptyAction"></div>
+            </div>
             <div data-montage-id="scrollview" class="Table-scroller">
                 <div data-param="table-body-top" class="Table-row-group"></div>
                 <div data-montage-id="rowRepetition" class="Table-row-group">
