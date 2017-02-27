@@ -43,9 +43,13 @@ exports.Search = Component.specialize(/** @lends Search# */ {
                 this.switchValue = 'write';
                 this._searchInput.focus();
 
-            } else if (target === this._cancelButton || target === this._validButton) {
+            } else if (target === this._cancelButton || target === this._validButton || target === this._noneButton) {
                 if (target === this._validButton) {
                     this.value = this._selectComponent.selectedValues[0];
+                }
+
+                if (target === this._noneButton) {
+                    this.value = null;
                 }
 
                 this._searchInput.value = this._results = null;
