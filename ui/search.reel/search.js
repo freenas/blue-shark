@@ -1,7 +1,8 @@
 /**
  * @module ui/search.reel
  */
-var Component = require("montage/ui/component").Component;
+var Component = require("montage/ui/component").Component
+    _ = require("lodash");
 
 /**
  * @class Search
@@ -45,7 +46,11 @@ exports.Search = Component.specialize(/** @lends Search# */ {
 
             } else if (target === this._cancelButton || target === this._validButton || target === this._noneButton) {
                 if (target === this._validButton) {
+                    var self = this;
                     this.value = this._selectComponent.selectedValues[0];
+                    this.displayedValue = _.find(this._results, function (result) {
+                        return result.value === self.value;
+                    }).label;
                 }
 
                 if (target === this._noneButton) {
