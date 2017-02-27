@@ -26,6 +26,12 @@ exports.Search = Component.specialize(/** @lends Search# */ {
         }
     },
 
+    exitDocument: {
+        value: function () {
+            this._resetState();
+        }
+    },
+
     handleSearchValueChange: {
         value: function (value) {
             if (!value && this._inDocument && this._initialResults) {
@@ -57,15 +63,21 @@ exports.Search = Component.specialize(/** @lends Search# */ {
                     this.value = null;
                 }
 
-                this._searchInput.value = this._results = null;
-                this.isSearching = false;
-                this.switchValue = 'read';
+                this._resetState();
             }
         }
     },
 
     controller: {
         value: null
+    },
+
+    _resetState: {
+        value: function () {
+            this._searchInput.value = this._results = null;
+            this.isSearching = false;
+            this.switchValue = 'read';
+        }
     },
 
     _search: {
