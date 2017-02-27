@@ -197,7 +197,8 @@ $layout
 ********************/
 
 
-.g-padding { padding: 1rem; }
+.g-padding          { padding: 1rem; }
+.g-padding--half    { padding: .5rem; }
 
 .g-padding-h                 { padding-left:   1rem !important; padding-right:   1rem !important; }
 .g-padding-h--half           { padding-left:  .5rem !important; padding-right:  .5rem !important; }
