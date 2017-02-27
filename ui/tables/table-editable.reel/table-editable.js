@@ -167,11 +167,8 @@ exports.TableEditable = Component.specialize({
         }
     },
 
-    // probably should not be a click event?
-    // idea here is to make the row active and show controls based on data being changed
     handleClick: {
         value: function(e) {
-            console.log(e);
             // if a row contains the element and the row element doesn't equal the activeRow
             if (this.findRowIterationContainingElement(e.target) && this.findRowIterationContainingElement(e.target).firstElement !== this._activeRow && !e.target.parentNode.classList.contains('Checkbox')) {
                 if (this._activeRow) {
