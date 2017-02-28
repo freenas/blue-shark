@@ -15,24 +15,12 @@ exports.Search = Component.specialize(/** @lends Search# */ {
             if (!this.controller || typeof this.controller.search !== 'function') {
                 throw new Error('Search component needs a controller that implements an `search` method.');
             }
-
-            if (firstTime) {
-                this.addPathChangeListener('_searchInput.value', this, 'handleSearchValueChange');
-            }
         }
     },
 
     exitDocument: {
         value: function () {
             this._resetState();
-        }
-    },
-
-    handleSearchValueChange: {
-        value: function (value) {
-            if (!value && this._inDocument && this.initalOptions) {
-                this._results = this.initalOptions;
-            }
         }
     },
 

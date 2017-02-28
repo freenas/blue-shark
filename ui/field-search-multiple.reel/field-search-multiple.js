@@ -7,6 +7,4 @@ var Component = require("montage/ui/component").Component;
  * @class FieldSearchMultiple
  * @extends Component
  */
-exports.FieldSearchMultiple = Component.specialize(/** @lends FieldSearchMultiple# */ {
-
-});
+exports.FieldSearchMultiple = Component.specialize();

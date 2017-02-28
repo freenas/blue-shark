@@ -80,7 +80,7 @@
                 "allowMultiple": false
             },
             "bindings": {
-                "options": {"<-": "@owner._results"}
+                "options": {"<-": "!!@input.value && @input.value.length ? @owner._results : @owner.initialOptions"}
             }
         },
 
