@@ -16,10 +16,6 @@ exports.Search = Component.specialize(/** @lends Search# */ {
                 throw new Error('Search component needs a controller that implements an `search` method.');
             }
 
-            if (this.controller && typeof this.controller.listDefaultOptions === 'function') {
-                this._handleSearchAction(this.controller.listDefaultOptions(), true);
-            }
-
             if (firstTime) {
                 this.addPathChangeListener('_searchInput.value', this, 'handleSearchValueChange');
             }
@@ -34,8 +30,8 @@ exports.Search = Component.specialize(/** @lends Search# */ {
 
     handleSearchValueChange: {
         value: function (value) {
-            if (!value && this._inDocument && this._initialResults) {
-                this._results = this._initialResults;
+            if (!value && this._inDocument && this.initalOptions) {
+                this._results = this.initalOptions;
             }
         }
     },
@@ -89,7 +85,7 @@ exports.Search = Component.specialize(/** @lends Search# */ {
     },
 
     _handleSearchAction: {
-        value: function (searchAction, initial) {
+        value: function (searchAction) {
             this.isSearching = true;
 
             if (Promise.is(searchAction)) {
@@ -98,10 +94,6 @@ exports.Search = Component.specialize(/** @lends Search# */ {
                 searchAction.then(function (results) {
                     if (self._inDocument) {
                         self._results = results;
-
-                        if (initial) {
-                            self._initialResults = results;
-                        }
                     }
                 }).finally(function () {
                     self.isSearching = false;
