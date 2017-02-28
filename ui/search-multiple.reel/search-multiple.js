@@ -9,22 +9,7 @@ var Search = require("../search.reel").Search;
  */
 exports.SearchMultiple = Search.specialize(/** @lends SearchMultiple# */ {
     controller: {
-        value: {
-            search: function () {
-                return [{
-                    label: 'foo',
-                    value: 'foo'
-                },
-                {
-                    label: 'bar',
-                    value: 'bar'
-                },
-                {
-                    label: 'qux',
-                    value: 'qux'
-                }]
-            }
-        }
+        value: null
     },
 
     handleAction: {
@@ -39,14 +24,7 @@ exports.SearchMultiple = Search.specialize(/** @lends SearchMultiple# */ {
 
             } else if (target === this._cancelButton || target === this._validButton || target === this._noneButton) {
                 if (target === this._validButton) {
-                    var self = this,
-                        selectedValues = this._selectComponent.selectedValues;
-
-                    this.values = _.concat(this._values || [], _.difference(this._results,
-                        _.differenceWith(this._results, selectedValues, function (option, value) {
-                            return option.value === value;
-                        })
-                    ));
+                    this.values = _.concat(this.values || [], this._selectComponent.selectedValues);
                 }
 
                 if (target === this._noneButton) {
