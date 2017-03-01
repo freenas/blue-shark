@@ -2,7 +2,6 @@
     @apply --input-field;
     user-select: none;
 
-
     &:not(.montage--disabled, .is-read-only):focus { @apply --input-focus; }
 
     &:hover:not(:focus) {

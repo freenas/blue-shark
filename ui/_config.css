@@ -148,6 +148,10 @@
             }
         }
 
+        &.montage--invalidText {
+            border-color: var(--red);
+        }
+
         &[readonly="readonly"] {
             background-color: transparent;
             border: none;

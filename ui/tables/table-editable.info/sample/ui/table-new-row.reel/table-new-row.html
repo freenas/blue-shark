@@ -45,7 +45,8 @@
             "bindings": {
                 "converter": {"<-": "@owner.fakeConverter"},
                 "value": {"<->": "@owner.object.age"},
-                "error": {"<->": "@owner.errors.ageTextField"}
+                "error": {"<->": "@owner.errors.ageTextField"},
+                "hasError": {"<-": "error"}
             }
         },
 
