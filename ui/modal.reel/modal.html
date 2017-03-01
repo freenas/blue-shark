@@ -24,6 +24,9 @@
             "prototype": "ui/button.reel",
             "properties": {
                 "element": {"#": "closeButton"}
+            },
+            "bindings": {
+                "classList.has('is-hidden')": {"<-": "!!@owner.hideCloseButton"}
             }
         }
     }
