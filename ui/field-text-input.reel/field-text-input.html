@@ -40,7 +40,7 @@
                 "converter": {"<-": "@owner.converter"},
                 "value": {"<->": "@owner.value"},
                 "disabled": {"<-": "@owner.disabled"},
-                "readonly": {"<-": "@owner.readonly"},
+                "readonly": {"<-": "@owner.readonly || @owner.isReadOnly"},
                 "delegate": {"<-": "@owner.delegate"}
             }
         }

@@ -10,7 +10,8 @@
     }
 
     /* Naked Select Style overrides */
-    &.Select--naked {
+    &.Select--naked,
+    &.is-read-only {
         background: none;
         border: none;
 

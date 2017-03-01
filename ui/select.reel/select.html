@@ -17,7 +17,8 @@
                 }
             ],
             "bindings": {
-                "classList.has('disabled')": {"<-": "@owner.disabled"}
+                "classList.has('disabled')": {"<-": "@owner.disabled"},
+                "classList.has('is-read-only')": {"<-": "@owner.isReadOnly"}
             }
         },
 
@@ -27,7 +28,8 @@
                 "element": {"#": "selectButton"}
             },
             "bindings": {
-                "disabled": {"<-": "@owner.disabled || @owner._options.length == 0"}
+                "disabled": {"<-": "@owner.disabled || @owner._options.length == 0"},
+                "classList.has('hide')": {"<-": "@owner.isReadOnly"}
             }
         },
 
@@ -37,7 +39,7 @@
                 "element": {"#": "currentSelection"}
             },
             "bindings": {
-                "selectedObject": {"<-": "(@optionsOverlay.optionsRepetition.selection.0 || @owner._selectedValue || @owner._options.0)"},
+                "selectedObject": {"<-": "@optionsOverlay.optionsRepetition.selection.0 || @owner._options.filter{value == @owner._selectedValue}.0  || @owner._selectedValue || @owner._options.0"},
                 "expressionResult": {"<-": "selectedObject.path(selectedObject.label)"},
                 "value": {"<-": "expressionResult || selectedObject.label || selectedObject"}
             }
@@ -51,7 +53,19 @@
             },
             "bindings": {
                 "options": {"<-": "@owner._options"},
-                "selectedValue": {"<->": "@owner._selectedValue"}
+                "selectedValue": {"<->": "@owner._selectedValue"},
+                "classList.has('hide')": {"<-": "@owner.isReadOnly"}
+            }
+        },
+
+        "readOnly": {
+            "prototype": "ui/text.reel",
+            "properties": {
+                "element": {"#": "readOnly"}
+            },
+            "bindings": {
+                "value": {"<-": "@currentSelection.value"},
+                "classList.has('hide')": {"<-": "!@owner.isReadOnly || !@owner.selectedValue"}
             }
         }
 
@@ -67,6 +81,7 @@
             </div>
         </button>
         <div data-montage-id="optionsOverlay"></div>
+        <div data-montage-id="readOnly"></div>
     </div>
 </body>
 </html>
