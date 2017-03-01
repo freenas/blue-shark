@@ -21,10 +21,17 @@ exports.Panel = Component.specialize(/** @lends Panel# */ {
                 switch(value) {
                     case 'warn':
                         this.classList.add('is-warning');
+                        this.classList.remove('is-error');
                         this._status = value;
                         break;
                     case 'error':
                         this.classList.add('is-error');
+                        this.classList.remove('is-warning');
+                        this._status = value;
+                        break;
+                    case 'default':
+                        this.classList.remove('is-error');
+                        this.classList.remove('is-warning');
                         this._status = value;
                         break;
                 }
