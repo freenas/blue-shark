@@ -270,6 +270,7 @@ exports.TableEditable = Component.specialize({
     _stopAddingNewEntry: {
         value: function () {
             if (this.isAddingNewEntry) {
+                self._activeRowEntry = null;
                 var shouldAddNewEntry = this.callDelegateMethod(
                     "tableWillAddNewEntry",
                     this,
@@ -298,6 +299,7 @@ exports.TableEditable = Component.specialize({
 
             return this._getNewEntry().then(function (newEntry) {
                 self._currentNewEntry = newEntry;
+                self._activeRowEntry = self.element.querySelector('[data-montage-id=newEntry]').component;
 
                 self.callDelegateMethod(
                     "tableWillStartEditingNewEntry",
