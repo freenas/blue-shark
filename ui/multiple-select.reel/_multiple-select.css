@@ -40,7 +40,11 @@
 }
 
 .MultipleSelect-input-field {
-    padding-right: 1.7rem !important;
+    padding-right: 0 !Important;
+
+    @nest .MultipleSelect-input-default.has-value & {
+        padding-right: 1.7rem !important;
+    }
 }
 
 .MultipleSelect-input-clearButton.Button {
@@ -92,7 +96,6 @@
 .MultipleSelect-input-options {
     /* Fix - should I have to do this? */
     position: absolute !important;
-    display: flex;
     top: 2em;
     left: 0;
     right: 0;

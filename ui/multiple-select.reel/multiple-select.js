@@ -74,6 +74,7 @@ exports.MultipleSelect = AbstractDropZoneComponent.specialize(/** @lends Multipl
                 this._addValueToContent(value, true);
                 this._clearInput();
                 this._stopScrollingOptions();
+                this._blurInputField();
             }
         }
     },
@@ -211,7 +212,7 @@ exports.MultipleSelect = AbstractDropZoneComponent.specialize(/** @lends Multipl
 
     _blurInputField: {
         value: function () {
-            this._inputField.element.blur();
+            this._inputField.blur();
         }
     },
 
