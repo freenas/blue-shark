@@ -88,6 +88,11 @@
         max-height: 10rem;
         visibility: visible;
     }
+
+    &.is-first-item {
+        position: relative;
+        top: initial !important;
+    }
 }
 
 .info {
@@ -159,9 +164,3 @@ BODY
         align-items: center;
     }
 }
-
-.TableEditable .Table-scroller {
-    min-height: 6.1rem; /* magic # */
-}
-
-

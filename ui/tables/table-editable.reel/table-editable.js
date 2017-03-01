@@ -135,6 +135,12 @@ exports.TableEditable = Component.specialize({
         }
     },
 
+    exitDocument: {
+        value: function() {
+            this._cancelAddingNewEntry();
+        }
+    },
+
     _activeRow: {
         value: null
     },
@@ -210,9 +216,7 @@ exports.TableEditable = Component.specialize({
 
     handleAction: {
         value: function (event) {
-            console.log(event);
             var target = event.target;
-
             if (this._toggleAllComponent.element.contains(target.element)) {
                 this._handleToggleAllAction(event);
             } else if (target instanceof Checkbox && this._rowRepetitionComponent.element.contains(target.element)) {

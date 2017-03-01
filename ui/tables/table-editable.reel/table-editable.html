@@ -141,11 +141,24 @@
                 "classList.has('is-hidden')": {"<-": "!@messages.content.length"}
             }
         },
+        "rowControls": {
+            "prototype": "montage/ui/component",
+            "properties": {
+                "element": {"#": "rowControls"},
+                "hasTemplate": false
+            },
+            "bindings": {
+                "classList.has('is-first-item')": {"<-": "!@owner._rowEntries.length"}
+            }
+        },
         "addButton": {
             "prototype": "ui/button.reel",
             "properties": {
-                "element": {"#": "addButton"},
-                "value": "Add item"
+                "element": {"#": "addButton"}
+            },
+            "bindings": {
+                "classList.has('is-hidden')": {"<-": "!@owner.isMultiSelectionEnabled"},
+                "value": {"<-": "!!@owner.emptyActionLabel ? @owner.emptyActionLabel : 'Add item'"}
             }
         }
     }
@@ -185,7 +198,7 @@
                     </div>
                 </div>
             </div>
-            <span data-arg="emptyAction" data-montage-id="addButton">test</span>
+            <span data-arg="emptyAction" data-montage-id="addButton"></span>
         </div>
     </div>
 </body>
