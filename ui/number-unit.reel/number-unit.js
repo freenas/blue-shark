@@ -20,6 +20,9 @@ exports.NumberUnit = Component.specialize({
 
     enterDocument: {
         value: function(isFirstTime) {
+            if (!this.unit && Array.isArray(this.units) && this.units.length > 0) {
+                this.unit = this.units[0].value;
+            }
             if (isFirstTime) {
                 this.addPathChangeListener("unit", this, "_handleInputChange");
                 this.addPathChangeListener("count", this, "_handleInputChange");
