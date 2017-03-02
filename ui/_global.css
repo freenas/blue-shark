@@ -279,6 +279,9 @@ $layout
 .is-shown   { display: initial !important; }
 .is-visible { display: block   !important; }
 
+
+.rotate-180 { transform: rotate(180deg) !important; }
+
 /********************
 
 $color

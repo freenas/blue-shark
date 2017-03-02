@@ -97,6 +97,13 @@
                 "value": "this should still have a label"
             }
         },
+        "buttonTransparent": {
+            "prototype": "blue-shark/ui/button.reel",
+            "properties": {
+                "element": {"#": "buttonTransparent"},
+                "value": "this should still have a label"
+            }
+        },
         "checkbox": {
             "prototype": "blue-shark/ui/checkbox.reel",
             "properties": {
@@ -136,6 +143,10 @@
             </div>
             <h2>Icon Button</h2>
             <div data-montage-id="buttonIcon" class="Button--icon">
+                <svg><use xlink:href="#i-arrow"/></svg>
+            </div>
+            <h2>Transparent Button</h2>
+            <div data-montage-id="buttonTransparent" class="Button--icon Button--transparent">
                 <svg><use xlink:href="#i-arrow"/></svg>
             </div>
             <h2>Button Loader</h2>
