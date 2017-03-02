@@ -38,7 +38,7 @@ exports.Search = Component.specialize(/** @lends Search# */ {
                 if (target === this._validButton) {
                     var self = this;
                     this.value = this._selectComponent.selectedValues[0];
-                    this.displayedValue = _.find(this._results, function (result) {
+                    this.displayedValue = _.find(this._results && this._results.length ? this._results : this.initialOptions, function (result) {
                         return result.value === self.value;
                     }).label;
                 }
