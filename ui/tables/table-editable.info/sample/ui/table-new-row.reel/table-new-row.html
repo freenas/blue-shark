@@ -62,33 +62,20 @@
             }
         },
 
-        "genderTextField": {
-            "prototype": "blue-shark/ui/select.reel",
+        "weightTextField": {
+            "prototype": "blue-shark/ui/text-field.reel",
             "properties": {
-                "element": {"#": "genderTextField"},
-                "options": [
-                    {
-                        "label": "---",
-                        "value": null
-                    },
-                    {
-                        "label": "Male",
-                        "value": "M"
-                    },
-                    {
-                        "label": "Female",
-                        "value": "F"
-                    },
-                    {
-                        "label": "Really Long Name",
-                        "value": "X"
-                    }
-                ]
+                "element": {"#": "weightTextField"},
+                "placeholder": "weight"
             },
             "bindings": {
-                "selectedValue": {"<->": "@owner.object.gender"}
+                "converter": {"<-": "@owner.fakeConverter"},
+                "value": {"<->": "@owner.object.weight"},
+                "error": {"<->": "@owner.errors.weightTextField"},
+                "hasError": {"<-": "error"}
             }
         }
+
     }
     </script>
 </head>
@@ -101,7 +88,7 @@
                 <span data-arg="option2" data-montage-id="readonly-field"></span>
             </div>
         </div>
-        <div><span data-montage-id="genderTextField"></span></div>
+        <div><span data-montage-id="weightTextField"></span></div>
     </div>
 </body>
 </html>

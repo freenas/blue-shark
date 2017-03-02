@@ -15,7 +15,10 @@
             "bindings": {
                 "_rowRepetitionComponent": {"<-": "@tableLayout.rowRepetitionComponent"},
                 "_rowEntries": {"<-": "@contentController.content.map{{object: this, selected: false}}"},
-                "selectedRows": {"<-": "@owner._rowEntries.filter{selected == true}"}
+                "selectedRows": {"<-": "@owner._rowEntries.filter{selected == true}"},
+                "errorsMap": {"<-": "@owner._activeRowEntry.errors.toMap()"},
+                "fooDebug": {"<-": "@owner._activeRowEntry.errors.map{this}"},
+                "errorMessages": {"<-": "errorsMap.valuesArray()"}
             }
         },
 
@@ -117,7 +120,7 @@
                 "element": {"#": "messages"}
             },
             "bindings": {
-                "content": {"<-": "@owner._activeRowEntry.errors.toMap().valuesArray().filter{this}"}
+                "content": {"<-": "@owner.errorMessages.filter{this}"}
             }
         },
 
