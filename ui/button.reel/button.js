@@ -10,7 +10,6 @@ var Button = exports.Button = Button.specialize({
     },
     handleKeyPress: {
         value: function (mutableEvent) {
-            // debugger;
             // when focused action event on spacebar & enter
             // FIXME - property identifier is not set on the mutable event
             if (mutableEvent.identifier === "space" ||
