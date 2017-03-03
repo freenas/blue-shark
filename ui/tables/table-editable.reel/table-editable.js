@@ -17,6 +17,10 @@ function RowEntry(object) {
  */
 exports.TableEditable = Component.specialize({
 
+    canAddWithError: {
+        value: true
+    },
+
     isMultiSelectionEnabled: {
         value: true
     },
@@ -202,15 +206,16 @@ exports.TableEditable = Component.specialize({
 
     handleCancelAction: {
         value: function () {
-            this._hideControls();
             this._cancelAddingNewEntry();
+            this._hideControls();
         }
     },
 
     handleDoneAction: {
         value: function () {
-            this._hideControls();
-            this._stopAddingNewEntry();
+            if (this._stopAddingNewEntry()) {
+                this._hideControls();
+            }
         }
     },
 
@@ -273,8 +278,15 @@ exports.TableEditable = Component.specialize({
 
     _stopAddingNewEntry: {
         value: function () {
-            if (this.isAddingNewEntry) {
-                self._activeRowEntry = null;
+            var isValid = true;
+            if (!this.canAddWithError &&
+                this._activeRowEntry &&
+                this._activeRowEntry.templateObjects.errorController &&
+                typeof this._activeRowEntry.templateObjects.errorController.checkIsValid === 'function') {
+                isValid = this._activeRowEntry.templateObjects.errorController.checkIsValid();
+            }
+            if (isValid && this.isAddingNewEntry) {
+                this._activeRowEntry = null;
                 var shouldAddNewEntry = this.callDelegateMethod(
                     "tableWillAddNewEntry",
                     this,
@@ -294,6 +306,7 @@ exports.TableEditable = Component.specialize({
 
                 this._shouldHideNewEntryRow = true;
             }
+            return isValid;
         }
     },
 

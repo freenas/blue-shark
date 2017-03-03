@@ -25,7 +25,7 @@ exports.ErrorController = Montage.specialize({
         set: function(form) {
             if (this._form !== form) {
                 this._form = form;
-                this._form.errors = []
+                this._form.errors = [];
                 this._isLoaded = false;
                 this.addPathChangeListener('_form._inDocument', this, 'loadForm');
             }
@@ -37,6 +37,19 @@ exports.ErrorController = Montage.specialize({
             this._errorsMap = new Map();
             this.errors = [];
             this._handlers = new Map();
+        }
+    },
+
+    checkIsValid: {
+        value: function() {
+            var errors = [];
+            _.forEach(this._form.templateObjects, function(component) {
+                if (_.isFunction(component.handleBlur)) {
+                    component.handleBlur();
+                    errors.push(component.error);
+                }
+            });
+            return _.isEmpty(_.compact(errors));
         }
     },
 
@@ -83,7 +96,7 @@ exports.ErrorController = Montage.specialize({
                     });
                 }
             });
-            this.dispatchOwnPropertyChange('form.errors', self.form.errors);
+            this.dispatchOwnPropertyChange('form.errors', this.form.errors);
         }
     }
 });

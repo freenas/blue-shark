@@ -75,7 +75,11 @@ exports.TextField = TextField.specialize({
     handleBlur: {
         enumerable: false,
         value: function (event) {
-            if(this.validator && typeof this.validator.validate === "function") {
+            this.error = null;
+            if (this.isMandatory && (!this.value || this.value.length === 0)) {
+                this.error = new Error('Value is mandatory');
+            }
+            if (!this.error && this.validator && typeof this.validator.validate === "function") {
                 try {
                     this.validator.validate(this.value);
                 }
