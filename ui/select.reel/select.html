@@ -18,7 +18,7 @@
             ],
             "bindings": {
                 "classList.has('disabled')": {"<-": "@owner.disabled"},
-                "classList.has('is-read-only')": {"<-": "@owner.isReadOnly || !@owner.options.length"}
+                "classList.has('is-read-only')": {"<-": "@owner.isReadOnly || !@owner._options.length"}
             }
         },
 

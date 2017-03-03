@@ -129,5 +129,10 @@
 }
 
 .Select-readOnly {
+    display: none;
     color: var(--main-text-color);
+
+    @nest .Select.is-read-only & {
+        display: block;
+    }
 }
