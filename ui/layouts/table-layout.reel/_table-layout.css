@@ -33,6 +33,15 @@ Row
     align-items: stretch;
     position: relative;
     transition: background-color .15s ease-in-out;
+
+    & > div:not(:last-child):after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: -1px;;
+        border-right: 1px solid var(--table-border-color);
+    }
 }
 
 .Table-row:not(.Table-cells):nth-child(odd)          { background-color: var(--primary); }
