@@ -191,4 +191,49 @@
     }
 }
 
+.Button--add {
+    padding: 0;
+    background: none;
+    width: auto;
+    min-width: 0;
+    color: var(--green);
+
+    & .Button-label { display: none; }
+
+    & > .Button-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid currentColor;
+        width:  1.8rem;
+        height: 1.8rem;
+        padding: .25em;
+        border-radius: 50%;
+        transition: background-color .25s;
+    }
+
+    &:hover {
+        box-shadow: none;
+
+        & > .Button-content {
+            background-color: var(--green);
+            border-color:     var(--green);
+            color: var(--white);
+        }
+    }
+
+    &:focus {
+        box-shadow: none;
+
+        & > .Button-content {
+            background-color: var(--accent);
+            border-color:     var(--accent);
+            color: var(--white);
+        }
+    }
+
+    & svg { margin: 0;}
+}
+
+
 

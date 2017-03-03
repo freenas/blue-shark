@@ -104,6 +104,13 @@
                 "value": "this should still have a label"
             }
         },
+        "buttonAdd": {
+            "prototype": "blue-shark/ui/button.reel",
+            "properties": {
+                "element": {"#": "buttonAdd"},
+                "value": "create"
+            }
+        },
         "checkbox": {
             "prototype": "blue-shark/ui/checkbox.reel",
             "properties": {
@@ -149,11 +156,16 @@
             <div data-montage-id="buttonTransparent" class="Button--icon Button--transparent">
                 <svg><use xlink:href="#i-arrow"/></svg>
             </div>
+            <h2>Add Button</h2>
+            <div data-montage-id="buttonAdd" class="Button--add">
+                <svg><use xlink:href="#i-plus"/></svg>
+            </div>
             <h2>Button Loader</h2>
             <div data-montage-id="checkbox" class="g-margin-bottom"></div>
             <div data-montage-id="buttonLoader" class="Button--loader Button--primary Button--block Button--large">
                 <svg><use xlink:href="#i-freenasIcon"/></svg>
             </div>
+
 
         </div>
     </div>
