@@ -7,11 +7,17 @@
         "owner": {
             "properties": {
                 "element": {"#": "owner"},
-                "errors": {},
                 "options": [
                     {"label": "option1", "value": "option1"},
                     {"label": "option2", "value": "option2"}
                 ]
+            }
+        },
+
+        "errorController": {
+            "prototype": "blue-shark/core/error-controller",
+            "properties": {
+                "form": {"@": "owner"}
             }
         },
 
@@ -40,6 +46,7 @@
             "prototype": "blue-shark/ui/text-field.reel",
             "properties": {
                 "element": {"#": "ageTextField"},
+                "errorName": "Age",
                 "placeholder": "age"
             },
             "bindings": {
@@ -66,6 +73,7 @@
             "prototype": "blue-shark/ui/text-field.reel",
             "properties": {
                 "element": {"#": "weightTextField"},
+                "errorName": "Weight",
                 "placeholder": "weight"
             },
             "bindings": {

@@ -15,10 +15,7 @@
             "bindings": {
                 "_rowRepetitionComponent": {"<-": "@tableLayout.rowRepetitionComponent"},
                 "_rowEntries": {"<-": "@contentController.content.map{{object: this, selected: false}}"},
-                "selectedRows": {"<-": "@owner._rowEntries.filter{selected == true}"},
-                "errorsMap": {"<-": "@owner._activeRowEntry.errors.toMap()"},
-                "fooDebug": {"<-": "@owner._activeRowEntry.errors.map{this}"},
-                "errorMessages": {"<-": "errorsMap.valuesArray()"}
+                "selectedRows": {"<-": "@owner._rowEntries.filter{selected == true}"}
             }
         },
 
@@ -120,7 +117,7 @@
                 "element": {"#": "messages"}
             },
             "bindings": {
-                "content": {"<-": "@owner.errorMessages.filter{this}"}
+                "content": {"<-": "@owner._activeRowEntry.errors"}
             }
         },
 
@@ -130,7 +127,8 @@
                 "element": {"#": "message"}
             },
             "bindings": {
-                "value": {"<-": "@messages:iteration.object.message"}
+                "errorObject": {"<-": "@messages:iteration.object"},
+                "value": {"<-": "(errorObject.name ? errorObject.name + ': ' : '') + errorObject.error.message.replace('Error: ', '')"}
             }
         },
 
