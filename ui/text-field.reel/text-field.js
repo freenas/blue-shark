@@ -75,6 +75,14 @@ exports.TextField = TextField.specialize({
     handleBlur: {
         enumerable: false,
         value: function (event) {
+            if(this.validator && typeof this.validator.validate === "function") {
+                try {
+                    this.validator.validate(this.value);
+                }
+                catch (e) {
+                    this.error = e;
+                }
+            }
             this.hasFocus = false;
             this.callDelegateMethod("didEndEditing", this);
         }
