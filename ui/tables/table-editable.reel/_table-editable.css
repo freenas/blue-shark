@@ -80,8 +80,8 @@
     box-shadow: 0 4px 4px var(--shadow-1);
     visibility: hidden;
     overflow: hidden;
-    transition: visibility .5s ease-in-out,
-                max-height .5s ease-in-out;
+    /* transition: visibility .5s ease-in-out,
+                max-height .5s ease-in-out; */
 
     &.is-active {
         max-height: 10rem;

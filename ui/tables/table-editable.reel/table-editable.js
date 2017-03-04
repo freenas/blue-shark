@@ -3,7 +3,8 @@
  */
 var Component = require("montage/ui/component").Component,
     Checkbox = require("montage/ui/checkbox.reel").Checkbox,
-    Composer = require("montage/composer/composer").Composer;
+    Composer = require("montage/composer/composer").Composer,
+    _ = require("lodash");
 
 function RowEntry(object) {
     this.object = object;
@@ -135,7 +136,7 @@ exports.TableEditable = Component.specialize({
     prepareForActivationEvents: {
         value: function () {
             this.addEventListener("action", this);
-            this.element.addEventListener("click", this);
+            this._rowRepetitionComponent.element.addEventListener("click", this);
         }
     },
 
@@ -157,9 +158,9 @@ exports.TableEditable = Component.specialize({
         value: function() {
             if (this._activeRow) {
                 this._activeRow.classList.add('is-active');
-                this.rowControls.style.top = this._activeRow.offsetHeight + this._activeRow.offsetTop + "px";
+                this.rowControls.style.transform = "translateY(" + (this._activeRow.getBoundingClientRect().bottom - this.rowControls.getBoundingClientRect().top) + "px)";
             } else {
-                this.rowControls.style.top = this._tableBodyTopElement.offsetHeight + this._tableBodyTopElement.offsetTop + "px";
+                this.rowControls.style.transform = "translateY(" + (this._tableBodyTopElement.getBoundingClientRect().bottom - this.rowControls.getBoundingClientRect().top) + "px)";
             }
             this._rowRepetitionComponent.element.classList.add('is-active');
             this.rowControls.classList.add('is-active');
@@ -172,6 +173,7 @@ exports.TableEditable = Component.specialize({
                 this._activeRow.classList.remove('is-active');
                 this._activeRow = this._activeRowEntry = null;
             }
+            this.rowControls.style.transform = "translateY(0px)";
             this.rowControls.classList.remove('is-active');
             this._rowRepetitionComponent.element.classList.remove('is-active');
         }
@@ -184,13 +186,15 @@ exports.TableEditable = Component.specialize({
                 if (this._activeRow) {
                     this._activeRow.classList.remove('is-active');
                 }
-                this._activeRow = this.findRowIterationContainingElement(e.target).firstElement;
+                this._activeRowIteration = this.findRowIterationContainingElement(e.target);
+                this._activeRow = this._activeRowIteration.firstElement;
                 this._activeRowEntry = this._activeRow.querySelector('[data-montage-id=rowEntry]').component;
+                this._activeRowOriginalObject = _.cloneDeep(this._activeRowEntry.object);
                 this._showControls();
 
             // if the event target is not in the row or the row controls
             } else if(this._activeRow && !this._activeRow.contains(e.target) && !this.rowControls.contains(e.target)) {
-                this._hideControls();
+                this.handleCancelAction();
             }
         }
     },
@@ -206,6 +210,9 @@ exports.TableEditable = Component.specialize({
 
     handleCancelAction: {
         value: function () {
+            if(this._activeRow) {
+                this._activeRowEntry.object = this._activeRowOriginalObject;
+            }
             this._cancelAddingNewEntry();
             this._hideControls();
         }
@@ -324,8 +331,8 @@ exports.TableEditable = Component.specialize({
                     self.currentNewEntry.object,
                     self.contentController
                 );
-
                 self._showControls();
+
                 self.dispatchOwnPropertyChange("isAddingNewEntry", self.isAddingNewEntry);
                 self.dispatchOwnPropertyChange("currentNewEntry", self.currentNewEntry);
             });
@@ -337,7 +344,7 @@ exports.TableEditable = Component.specialize({
             if (this._shouldShowNewEntryRow) {
                 this.__shouldShowNewEntryRow = false;
                 this._startAddingNewEntry();
-                this._showControls();
+                debugger;
 
             } else if (this._shouldHideNewEntryRow) {
                 this._shouldHideNewEntryRow = false;
