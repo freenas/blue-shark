@@ -72,9 +72,8 @@
 /* Controls */
 .TableEditable-rowControls {
     max-height: 0;
-    position: absolute;
+    position: relative;
     width: 100%;
-    top: 0;
     background: var(--primary);
     border: 1px solid var(--primary--3);
     border-top: none;
@@ -89,10 +88,10 @@
         visibility: visible;
     }
 
-    &.is-first-item {
+    /* &.is-first-item {
         position: relative;
         top: initial !important;
-    }
+    } */
 }
 
 .info {
