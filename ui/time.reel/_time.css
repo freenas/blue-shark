@@ -46,6 +46,7 @@
 /* Options ---------------------------------- */
 
 .Time-optionsContainer {
+    display: none;
     position: absolute;
     height: 7em;
     top: 2em;
@@ -72,6 +73,5 @@
 
 .Time.has-options .Time-input-field:focus + .Time-optionsContainer,
 .Time-optionsContainer:active {
-    visibility: visible;
-    opacity: 1;
+    display: block;
 }
