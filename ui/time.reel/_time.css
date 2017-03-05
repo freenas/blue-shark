@@ -55,8 +55,6 @@
     font-weight: 200;
     color: var(--grey-1);
     background: var(--grey-blue);
-    opacity: 0;
-    visibility: hidden;
     z-index: 100;
     box-shadow: 0 1px 2px rgba(0,0,0,.2);
     border-bottom-left-radius: 4px;
