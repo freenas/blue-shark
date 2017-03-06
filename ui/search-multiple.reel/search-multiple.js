@@ -8,6 +8,7 @@ var Search = require("../search.reel").Search;
  * @extends Component
  */
 exports.SearchMultiple = Search.specialize(/** @lends SearchMultiple# */ {
+
     controller: {
         value: null
     },
@@ -20,6 +21,8 @@ exports.SearchMultiple = Search.specialize(/** @lends SearchMultiple# */ {
                 this._search(this._searchInput.value);
             } else if (target === this._addButton) {
                 this.switchValue = 'write';
+                this._selectComponent.selectedValues = null;
+                this._results = this.initialOptions;
                 this._searchInput.focus();
 
             } else if (target === this._cancelButton || target === this._validButton || target === this._noneButton) {
