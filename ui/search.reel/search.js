@@ -31,7 +31,7 @@ exports.Search = Component.specialize(/** @lends Search# */ {
     handleSearchChange: {
         value: function (value) {
             if (value !== null && value !== void 0 && !value.length) {
-                this._results = null;
+                this._results = this.initialOptions;
             }
         }
     },
@@ -44,13 +44,15 @@ exports.Search = Component.specialize(/** @lends Search# */ {
                 this._search(this._searchInput.value);
             } else if (target === this._changeButton) {
                 this.switchValue = 'write';
+                this._selectComponent.selectedValues = null;
+                this._results = this.initialOptions;
                 this._searchInput.focus();
 
             } else if (target === this._cancelButton || target === this._validButton || target === this._noneButton) {
                 if (target === this._validButton) {
                     var self = this;
                     this.value = this._selectComponent.selectedValues[0];
-                    this.displayedValue = _.find(this._results && this._results.length ? this._results : this.initialOptions, function (result) {
+                    this.displayedValue = _.find(this._results, function (result) {
                         return result.value === self.value;
                     }).label;
                 }
