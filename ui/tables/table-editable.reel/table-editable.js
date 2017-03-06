@@ -3,6 +3,7 @@
  */
 var Component = require("montage/ui/component").Component,
     Checkbox = require("montage/ui/checkbox.reel").Checkbox,
+    KeyComposer = require("montage/composer/key-composer").KeyComposer,
     Composer = require("montage/composer/composer").Composer,
     _ = require("lodash");
 
@@ -26,7 +27,7 @@ function findRowElement(el) {
  * @class TableEditable
  * @extends Component
  */
-exports.TableEditable = Component.specialize({
+var TableEditable = exports.TableEditable = Component.specialize({
 
     canAddWithError: {
         value: true
@@ -146,6 +147,22 @@ exports.TableEditable = Component.specialize({
     prepareForActivationEvents: {
         value: function () {
             this.addEventListener("action", this);
+            var keyboardIdentifiers = this.constructor.KEY_IDENTIFIERS,
+                keyboardIdentifiersKeys = Object.keys(keyboardIdentifiers),
+                keyboardIdentifier;
+
+            this._keyComposerMap = new Map();
+
+            for (var i = 0, length = keyboardIdentifiersKeys.length; i < length; i++) {
+                keyboardIdentifier = keyboardIdentifiers[keyboardIdentifiersKeys[i]];
+
+                this._keyComposerMap.set(
+                    keyboardIdentifier,
+                    KeyComposer.createKey(this, keyboardIdentifier, keyboardIdentifier)
+                );
+
+                this._keyComposerMap.get(keyboardIdentifier).addEventListener("keyPress", this);
+            }
             this._rowRepetitionComponent.element.addEventListener("click", this);
         }
     },
@@ -153,6 +170,12 @@ exports.TableEditable = Component.specialize({
     exitDocument: {
         value: function() {
             this._cancelAddingNewEntry();
+        }
+    },
+
+    handleKeyPress: {
+        value: function (event) {
+            var keyIdentifiers = this.constructor.KEY_IDENTIFIERS;
         }
     },
 
@@ -183,7 +206,6 @@ exports.TableEditable = Component.specialize({
                 this._activeRow.classList.remove('is-active');
                 this._activeRow = this._activeRowEntry = null;
             }
-            this.rowControls.style.transform = "translateY(0px)";
             this.rowControls.classList.remove('is-active');
             this._rowRepetitionComponent.element.classList.remove('is-active');
         }
@@ -222,6 +244,7 @@ exports.TableEditable = Component.specialize({
             if(this._activeRow) {
                 this._activeRowEntry.object = this._activeRowOriginalObject;
             }
+            document.activeElement.blur();
             this._cancelAddingNewEntry();
             this._hideControls();
         }
@@ -230,6 +253,7 @@ exports.TableEditable = Component.specialize({
     handleDoneAction: {
         value: function () {
             if (this._stopAddingNewEntry()) {
+                document.activeElement.blur();
                 this._hideControls();
             }
         }
@@ -363,5 +387,16 @@ exports.TableEditable = Component.specialize({
         }
     }
 
+}, {
+
+    KEY_IDENTIFIERS: {
+        value: {
+            enter: "enter",
+            escape: "escape"
+        }
+    }
 });
+
+TableEditable.prototype.handleEnterKeyPress = TableEditable.prototype.handleDoneAction;
+TableEditable.prototype.handleEscapeKeyPress = TableEditable.prototype.handleCancelAction;
 

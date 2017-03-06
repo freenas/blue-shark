@@ -28,15 +28,12 @@
     }
 }
 
-.Table-row {
-    position: relative;
-    z-index: 0;
-    transition: all .5s ease-in-out;
-    flex-wrap: wrap;
+.Table-row-fields {
 
     &.is-active {
-        /* set height to fix overlay transition happening before */
-        z-index: 20;
+        position: relative;
+        z-index: 100;
+
         &:after {
             content: '';
             position: absolute;
@@ -48,6 +45,17 @@
             border-bottom: none;
             pointer-events: none;
         }
+    }
+}
+
+.Table-row {
+    position: relative;
+    z-index: 0;
+    transition: all .5s ease-in-out;
+    flex-wrap: wrap;
+
+    &.is-active {
+
     }
 }
 

@@ -43,8 +43,8 @@ Row
     }
 }
 
-.Table-row:not(.Table-cells):nth-child(odd)          { background-color: var(--primary); }
-.Table-row:not(.Table-cells):nth-child(even)         { background-color: color(var(--primary) shade(10%)); }
+.Table-row-fields:nth-child(odd) .Table-row:not(.Table-cells)         { background-color: var(--primary); }
+.Table-row-fields:nth-child(even) .Table-row:not(.Table-cells)        { background-color: color(var(--primary) shade(10%)); }
 .Table-row-group .Table-row:not(.Table-cells):hover  { background-color: color(var(--primary) tint(5%)); }
 
 /*
