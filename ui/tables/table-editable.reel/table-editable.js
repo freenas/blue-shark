@@ -147,6 +147,8 @@ var TableEditable = exports.TableEditable = Component.specialize({
     prepareForActivationEvents: {
         value: function () {
             this.addEventListener("action", this);
+            this.element.addEventListener("focusin", this);
+
             var keyboardIdentifiers = this.constructor.KEY_IDENTIFIERS,
                 keyboardIdentifiersKeys = Object.keys(keyboardIdentifiers),
                 keyboardIdentifier;
@@ -164,6 +166,12 @@ var TableEditable = exports.TableEditable = Component.specialize({
                 this._keyComposerMap.get(keyboardIdentifier).addEventListener("keyPress", this);
             }
             this._rowRepetitionComponent.element.addEventListener("click", this);
+        }
+    },
+
+    handleFocusin: {
+        value: function(e) {
+            this.handleClick(e);
         }
     },
 
@@ -214,7 +222,7 @@ var TableEditable = exports.TableEditable = Component.specialize({
     handleClick: {
         value: function(e) {
             var element = findRowElement(e.target);
-            if (findRowElement(e.target)) {
+            if (element && element.component !== this._activeRowEntry) {
                 if (this._activeRow) {
                     this._activeRow.classList.remove('is-active');
                 }
