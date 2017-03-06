@@ -11,7 +11,6 @@
                 "_searchButton":  {"@": "search"},
                 "_addButton":  {"@": "add"},
                 "_validButton":  {"@": "valid"},
-                "_noneButton":  {"@": "none"},
                 "_cancelButton":  {"@": "cancel"},
                 "_selectComponent":  {"@": "select"}
             },
@@ -91,14 +90,6 @@
             }
         },
 
-        "none": {
-            "prototype": "ui/button.reel",
-            "properties": {
-                "element": {"#": "none"},
-                "value": "None"
-            }
-        },
-
         "valid": {
             "prototype": "ui/button.reel",
             "properties": {
@@ -144,7 +135,6 @@
                 </div>
                 <div class="flex-row button-group">
                     <button data-montage-id="cancel"></button>
-                    <button data-montage-id="none" class="Button--primary"></button>
                     <button data-montage-id="valid" class="Button--primary"></button>
                 </div>
             </div>

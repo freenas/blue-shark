@@ -25,13 +25,9 @@ exports.SearchMultiple = Search.specialize(/** @lends SearchMultiple# */ {
                 this._results = this.initialOptions;
                 this._searchInput.focus();
 
-            } else if (target === this._cancelButton || target === this._validButton || target === this._noneButton) {
+            } else if (target === this._cancelButton || target === this._validButton) {
                 if (target === this._validButton) {
                     this.values = _.concat(this.values || [], this._selectComponent.selectedValues);
-                }
-
-                if (target === this._noneButton) {
-                    this.value = null;
                 }
 
                 this._resetState();
