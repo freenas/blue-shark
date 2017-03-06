@@ -39,7 +39,7 @@
                 "element": {"#": "text"}
             },
             "bindings": {
-                "value": {"<-": "@owner.displayedValue || 'none'"}
+                "value": {"<-": "!!@owner.value && !!@owner.displayedValue ? @owner.displayedValue : 'none'"}
             }
         },
 

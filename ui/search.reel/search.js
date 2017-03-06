@@ -15,12 +15,24 @@ exports.Search = Component.specialize(/** @lends Search# */ {
             if (!this.controller || typeof this.controller.search !== 'function') {
                 throw new Error('Search component needs a controller that implements an `search` method.');
             }
+
+            if (firstTime) {
+                this.addPathChangeListener("_searchInput.value", this, "handleSearchChange");
+            }
         }
     },
 
     exitDocument: {
         value: function () {
             this._resetState();
+        }
+    },
+
+    handleSearchChange: {
+        value: function (value) {
+            if (value !== null && value !== void 0 && !value.length) {
+                this._results = null;
+            }
         }
     },
 
@@ -45,6 +57,7 @@ exports.Search = Component.specialize(/** @lends Search# */ {
 
                 if (target === this._noneButton) {
                     this.value = null;
+                    this.displayedValue = null;
                 }
 
                 this._resetState();
