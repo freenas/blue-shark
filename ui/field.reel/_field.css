@@ -49,6 +49,10 @@
 
 /* Control */
 
+.Field-control-substitution {
+    flex: 1;
+}
+
 .Field-control {
     flex: 1;
     display: flex;
