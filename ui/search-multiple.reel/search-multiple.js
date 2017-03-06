@@ -27,7 +27,7 @@ exports.SearchMultiple = Search.specialize(/** @lends SearchMultiple# */ {
 
             } else if (target === this._cancelButton || target === this._validButton) {
                 if (target === this._validButton) {
-                    this.values = _.concat(this.values || [], this._selectComponent.selectedValues);
+                    this.values = _.uniq(_.concat(this.values || [], this._selectComponent.selectedValues));
                 }
 
                 this._resetState();
