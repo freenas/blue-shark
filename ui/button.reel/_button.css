@@ -212,7 +212,7 @@
         transition: background-color .25s;
     }
 
-    &:hover {
+    &:hover:not(.montage--disabled) {
         box-shadow: none;
 
         & > .Button-content {
@@ -230,6 +230,11 @@
             border-color:     var(--accent);
             color: var(--white);
         }
+    }
+
+    &.montage--disabled {
+        background: none !Important;
+        color: var(--main-text-color);
     }
 
     & svg { margin: 0;}
