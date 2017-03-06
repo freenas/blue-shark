@@ -12,6 +12,16 @@ function RowEntry(object) {
 }
 
 
+function findRowElement(el) {
+    while (el) {
+        if (el.getAttribute("data-montage-id") == 'rowEntry') {
+            break;
+        }
+        el = el.parentElement;
+    }
+    return el;
+}
+
 /**
  * @class TableEditable
  * @extends Component
@@ -158,9 +168,9 @@ exports.TableEditable = Component.specialize({
         value: function() {
             if (this._activeRow) {
                 this._activeRow.classList.add('is-active');
-                this.rowControls.style.transform = "translateY(" + (this._activeRow.getBoundingClientRect().bottom - this.rowControls.getBoundingClientRect().top) + "px)";
+                this._activeRow.appendChild(this.rowControls);
             } else {
-                this.rowControls.style.transform = "translateY(" + (this._tableBodyTopElement.getBoundingClientRect().bottom - this.rowControls.getBoundingClientRect().top) + "px)";
+                this._tableBodyTopElement.appendChild(this.rowControls);
             }
             this._rowRepetitionComponent.element.classList.add('is-active');
             this.rowControls.classList.add('is-active');
@@ -181,14 +191,13 @@ exports.TableEditable = Component.specialize({
 
     handleClick: {
         value: function(e) {
-            // if a row contains the element and the row element doesn't equal the activeRow
-            if (this.findRowIterationContainingElement(e.target) && this.findRowIterationContainingElement(e.target).firstElement !== this._activeRow && !e.target.parentNode.classList.contains('Checkbox')) {
+            var element = findRowElement(e.target);
+            if (findRowElement(e.target)) {
                 if (this._activeRow) {
                     this._activeRow.classList.remove('is-active');
                 }
-                this._activeRowIteration = this.findRowIterationContainingElement(e.target);
-                this._activeRow = this._activeRowIteration.firstElement;
-                this._activeRowEntry = this._activeRow.querySelector('[data-montage-id=rowEntry]').component;
+                this._activeRow = this.findRowIterationContainingElement(element).firstElement;
+                this._activeRowEntry = element.component;
                 this._activeRowOriginalObject = _.cloneDeep(this._activeRowEntry.object);
                 this._showControls();
 
@@ -344,7 +353,6 @@ exports.TableEditable = Component.specialize({
             if (this._shouldShowNewEntryRow) {
                 this.__shouldShowNewEntryRow = false;
                 this._startAddingNewEntry();
-                debugger;
 
             } else if (this._shouldHideNewEntryRow) {
                 this._shouldHideNewEntryRow = false;
