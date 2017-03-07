@@ -97,6 +97,9 @@
             "properties": {
                 "element": {"#": "none"},
                 "value": "None"
+            },
+            "bindings": {
+                "classList.has('is-hidden')": {"<-": "@owner.hasNoneButton.defined() ? !@owner.hasNoneButton : false"}
             }
         },
 
