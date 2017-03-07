@@ -139,7 +139,7 @@
                 "hasTemplate": false
             },
             "bindings": {
-                "classList.has('is-hidden')": {"<-": "!@messages.content.length"}
+                "classList.has('has-errors')": {"<-": "@messages.content.length"}
             }
         },
         "rowControls": {
@@ -185,9 +185,9 @@
             <div data-arg="table-row-controls" data-montage-id="rowControls" class="TableEditable-rowControls">
                 <div>
                     <div class="flex-column TableEditable-rowControls-content">
-                        <div class="info flex-row" data-montage-id="rowControls-info">
+                        <div class="Table-row-info flex-row" data-montage-id="rowControls-info">
                             <svg><use xlink:href="#i-alert"/></svg>
-                            <ul data-montage-id="messages" class="messages">
+                            <ul data-montage-id="messages" class="Table-row-info-messages">
                                 <li data-montage-id="message" class="message"></li>
                             </ul>
                         </div>
