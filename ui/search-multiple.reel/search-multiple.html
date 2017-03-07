@@ -12,7 +12,8 @@
                 "_addButton":  {"@": "add"},
                 "_validButton":  {"@": "valid"},
                 "_cancelButton":  {"@": "cancel"},
-                "_selectComponent":  {"@": "select"}
+                "_selectComponent":  {"@": "select"},
+                "_multipleSelectComponent":  {"@": "multipleSelect"}
             },
             "listeners": [
                 {
@@ -49,7 +50,7 @@
                 "element": {"#": "multipleSelect"}
             },
             "bindings": {
-                "values": {"<-": "@owner.values"}
+                "values": {"<-": "@owner.entries.map{this.path(@owner.labelPath)}"}
             }
         },
 
