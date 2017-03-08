@@ -47,8 +47,8 @@ Row
     outline: none;
 }
 
-.Table-row-fields:nth-child(odd) .Table-row:not(.Table-cells)         { background-color: var(--primary); }
-.Table-row-fields:nth-child(even) .Table-row:not(.Table-cells)        { background-color: color(var(--primary) shade(10%)); }
+.Table-row-fields:nth-child(odd) .Table-row:not(.Table-cells)  { background-color: var(--primary); }
+.Table-row-fields:nth-child(even) .Table-row:not(.Table-cells) { background-color: color(var(--primary) shade(10%)); }
 .Table-row-group .Table-row:not(.Table-cells):hover  { background-color: color(var(--primary) tint(5%)); }
 
 /*
@@ -59,10 +59,11 @@ Rows - selection Enabled
 
 .Table.has-selection-enabled .Table-row { cursor: pointer; }
 
-.Table-row.selected:not(.Table-cells) {
+.Table-row-group .Table-row.selected:not(.Table-cells) {
     color: var(--white);
     background-color: var(--color-selected);
 }
+
 .Table-row-group .Table-row.selected:hover { background-color: var(--color-selected); }
 
 /* Table Cell */
