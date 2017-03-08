@@ -45,8 +45,6 @@
     }
 }
 
-
-
 /* Control */
 
 .Field-control-substitution {
@@ -148,5 +146,5 @@
 
 .Field .Spinner {
     height: 2rem;
-    width: 2rem;
+    width:  2rem;
 }
