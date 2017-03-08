@@ -95,6 +95,7 @@
 
 .MultipleSelect-input-options {
     /* Fix - should I have to do this? */
+    display: none;
     position: absolute !important;
     top: 2em;
     left: 0;
@@ -109,10 +110,6 @@
     box-shadow: 0 2px 4px rgba(0,0,0,.3);
     z-index: 100;
     overflow-x: hidden;
-    visibility: hidden;
-    opacity: 0;
-    transition-property: visibility, opacity;
-    transition-duration: .2s;
 }
 
 .MultipleSelect-input-error {
@@ -179,8 +176,7 @@ States
 .MultipleSelect-input-field.has-options:focus + .MultipleSelect-input-options.has-content,
 .MultipleSelect-input-options:active,
 .MultipleSelect-input.has-error .MultipleSelect-input-error {
-    visibility: visible;
-    opacity: 1;
+    display: block;
 }
 
 .MultipleSelect-input.has-error .MultipleSelect-input-field {
