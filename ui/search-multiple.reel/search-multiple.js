@@ -20,21 +20,18 @@ exports.SearchMultiple = Search.specialize(/** @lends SearchMultiple# */ {
 
     handleDisplayedValuesChange: {
         value: function (addedItems, removedItems) {
-            if (removedItems && removedItems.length) {
+            if (removedItems && removedItems.length && addedItems && !addedItems.length) {
                 var self = this;
 
                 removedItems.forEach(function (removedItem) {
-                    var entry = _.find(self.entries, function (entry) {
-                        return removedItem === entry[self.labelPath];
+                    var index = _.findIndex(self.values, function (value) {
+                        return value.id === removedItem.id;
                     });
 
-                    if (entry) {
-                        _.remove(self.values, function (value) {
-                            return value === entry[self.valuePath];
-                        });
+                    if (index > -1) {
+                        self.values.splice(index, 1);
                     }
                 });
-
             }
         }
     },
@@ -57,7 +54,19 @@ exports.SearchMultiple = Search.specialize(/** @lends SearchMultiple# */ {
 
             } else if (target === this._cancelButton || target === this._validButton) {
                 if (target === this._validButton) {
-                    this.values = _.uniq(_.concat(this.values || [], this._selectComponent.selectedValues));
+                    var self = this;
+
+                    this.values = _.uniqWith(
+                        _.concat(this.values || [],
+                            _.difference(this._results,
+                                _.differenceWith(this._results, this._selectComponent.selectedValues, function (object, value) {
+                                    return object[self.valuePath] === value;
+                                })
+                            )
+                        )
+                        , function (a, b) {
+                            return a.id === b.id;
+                        });
                 }
 
                 this._resetState();

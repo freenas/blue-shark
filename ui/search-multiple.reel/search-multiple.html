@@ -47,10 +47,11 @@
         "multipleSelect": {
             "prototype": "ui/multiple-select.reel",
             "properties": {
-                "element": {"#": "multipleSelect"}
+                "element": {"#": "multipleSelect"},
+                "labelPath": "label"
             },
             "bindings": {
-                "values": {"<-": "@owner.entries.map{this.path(@owner.labelPath)}"}
+                "values": {"<-": "@owner.values.map{{label: this.path(@owner.labelExpression), value: this.path(@owner.valuePath), id: id }}"}
             }
         },
 
@@ -79,7 +80,7 @@
                 "element": {"#": "select"}
             },
             "bindings": {
-                "options": {"<-": "@owner._results"}
+                "options": {"<-": "@owner._results.map{{label: this.path(@owner.labelExpression), value: this.path(@owner.valuePath)}}"}
             }
         },
 
