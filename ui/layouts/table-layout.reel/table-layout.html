@@ -67,8 +67,7 @@
                 "element": {"#": "emptyMessage"}
             },
             "bindings": {
-                "value": {"<-": "!!@owner.emptyMessage ? @owner.emptyMessage : 'No data added'"},
-                "classList.has('is-hidden')": {"<-": "@owner.rows.length || @owner.isLoading"}
+                "value": {"<-": "!!@owner.emptyMessage ? @owner.emptyMessage : 'No data added'"}
             }
         },
 
@@ -76,6 +75,9 @@
             "prototype": "ui/panel.reel",
             "properties": {
                 "element": {"#": "emptyState"}
+            },
+            "bindings": {
+                "classList.has('is-hidden')": {"<-": "@owner.rows.length || @owner.isLoading"}
             }
         }
 
