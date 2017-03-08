@@ -50,16 +50,16 @@ exports.Search = Component.specialize(/** @lends Search# */ {
 
             } else if (target === this._cancelButton || target === this._validButton || target === this._noneButton) {
                 if (target === this._validButton) {
-                    var self = this;
-                    this.value = this._selectComponent.selectedValues[0];
-                    this.displayedValue = _.find(this._results, function (result) {
-                        return result.value === self.value;
-                    }).label;
+                    var self = this,
+                        selectedValue = this._selectComponent.selectedValues[0];
+
+                    this.value = _.find(this._results, function (result) {
+                        return result[self.valuePath] === selectedValue;
+                    });
                 }
 
                 if (target === this._noneButton) {
                     this.value = null;
-                    this.displayedValue = null;
                 }
 
                 this._resetState();
