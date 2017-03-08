@@ -10,32 +10,6 @@ var Search = require("../search.reel").Search,
  */
 exports.SearchMultiple = Search.specialize(/** @lends SearchMultiple# */ {
 
-    enterDocument: {
-        value: function (firstTime) {
-            if (firstTime) {
-                this.addRangeAtPathChangeListener("_multipleSelectComponent.values", this, "handleDisplayedValuesChange");
-            }
-        }
-    },
-
-    handleDisplayedValuesChange: {
-        value: function (addedItems, removedItems) {
-            if (removedItems && removedItems.length && addedItems && !addedItems.length) {
-                var self = this;
-
-                removedItems.forEach(function (removedItem) {
-                    var index = _.findIndex(self.values, function (value) {
-                        return value.id === removedItem.id;
-                    });
-
-                    if (index > -1) {
-                        self.values.splice(index, 1);
-                    }
-                });
-            }
-        }
-    },
-
     controller: {
         value: null
     },

@@ -47,11 +47,11 @@
         "multipleSelect": {
             "prototype": "ui/multiple-select.reel",
             "properties": {
-                "element": {"#": "multipleSelect"},
-                "labelPath": "label"
+                "element": {"#": "multipleSelect"}
             },
             "bindings": {
-                "values": {"<-": "@owner.values.map{{label: this.path(@owner.labelExpression), value: this.path(@owner.valuePath), id: id }}"}
+                "values": {"<->": "@owner.values"},
+                "labelPath": {"<-": "@owner.labelExpression"}
             }
         },
 
