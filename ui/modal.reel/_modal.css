@@ -7,7 +7,7 @@
     right:  0;
     bottom: 0;
     z-index: 5000;
-    background-color: rgba(0,0,0,.5);
+    background-color: color(var(--primary--9) a(50%));
     display: flex;
     justify-content: top;
     align-items: center;
