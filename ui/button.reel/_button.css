@@ -226,14 +226,22 @@
         transition: background-color .25s;
     }
 
-    &:hover:not(.montage--disabled) {
+    &:hover {
         box-shadow: none;
+    }
+
+    &:hover:not(.montage--disabled) {
 
         & > .Button-content {
             background-color: var(--green);
             border-color:     var(--green);
             color: var(--white);
         }
+    }
+
+    &:active {
+        background: none;
+        box-shadow: none;
     }
 
     &:focus {
