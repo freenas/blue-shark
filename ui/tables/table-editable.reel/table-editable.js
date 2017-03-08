@@ -29,6 +29,10 @@ function findRowElement(el) {
  */
 var TableEditable = exports.TableEditable = Component.specialize({
 
+    showRowActions: {
+        value: true
+    },
+
     canAddWithError: {
         value: true
     },
@@ -165,7 +169,9 @@ var TableEditable = exports.TableEditable = Component.specialize({
 
                 this._keyComposerMap.get(keyboardIdentifier).addEventListener("keyPress", this);
             }
-            this._rowRepetitionComponent.element.addEventListener("click", this);
+            if (this.showRowActions) {
+                this._rowRepetitionComponent.element.addEventListener("click", this);
+            }
         }
     },
 
@@ -178,6 +184,9 @@ var TableEditable = exports.TableEditable = Component.specialize({
     exitDocument: {
         value: function() {
             this._cancelAddingNewEntry();
+            if(this.showRowActions) {
+                this._rowRepetitionComponent.element.removeEventListener("click", this);
+            }
         }
     },
 
@@ -221,19 +230,21 @@ var TableEditable = exports.TableEditable = Component.specialize({
 
     handleClick: {
         value: function(e) {
-            var element = findRowElement(e.target);
-            if (element && element.component !== this._activeRowEntry) {
-                if (this._activeRow) {
-                    this._activeRow.classList.remove('is-active');
-                }
-                this._activeRow = this.findRowIterationContainingElement(element).firstElement;
-                this._activeRowEntry = element.component;
-                this._activeRowOriginalObject = _.cloneDeep(this._activeRowEntry.object);
-                this._showControls();
+            if(this.showRowActions) {
+                var element = findRowElement(e.target);
+                if (element && element.component !== this._activeRowEntry) {
+                    if (this._activeRow) {
+                        this._activeRow.classList.remove('is-active');
+                    }
+                    this._activeRow = this.findRowIterationContainingElement(element).firstElement;
+                    this._activeRowEntry = element.component;
+                    this._activeRowOriginalObject = _.cloneDeep(this._activeRowEntry.object);
+                    this._showControls();
 
-            // if the event target is not in the row or the row controls
-            } else if(this._activeRow && !this._activeRow.contains(e.target) && !this.rowControls.contains(e.target)) {
-                this.handleCancelAction();
+                // if the event target is not in the row or the row controls
+                } else if(this._activeRow && !this._activeRow.contains(e.target) && !this.rowControls.contains(e.target)) {
+                    this.handleCancelAction();
+                }
             }
         }
     },
