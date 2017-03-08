@@ -39,7 +39,7 @@
                 "element": {"#": "text"}
             },
             "bindings": {
-                "value": {"<-": "!!@owner.value ? (@owner.value.path(@owner.labelPath) || 'none') : 'none'"}
+                "value": {"<-": "!!@owner.value ? (@owner.value.path(@owner.labelExpression) || 'none') : 'none'"}
             }
         },
 
@@ -80,9 +80,7 @@
                 "allowMultiple": false
             },
             "bindings": {
-                "options": {"<-": "@owner._results"},
-                "labelPropertyName": {"<-": "@owner.labelPath"},
-                "valuePropertyName": {"<-": "@owner.valuePath"}
+                "options": {"<-": "@owner._results.map{{label: this.path(@owner.labelExpression), value: this.path(@owner.valuePath)}}"}
             }
         },
 
