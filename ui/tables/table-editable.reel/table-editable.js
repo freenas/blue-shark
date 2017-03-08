@@ -2,56 +2,40 @@
  * @module ui/table-editable.reel
  */
 var Component = require("montage/ui/component").Component,
-    Overlay = require("montage/ui/overlay.reel").Overlay,
     Checkbox = require("montage/ui/checkbox.reel").Checkbox,
-    Composer = require("montage/composer/composer").Composer;
-
-
-function _shouldComposerSurrenderPointerToComponent(composer, pointer, component) {
-    if (component && component.element) {
-        var targetElement = component.element,
-            overlayCandidate;
-
-        if (component instanceof Composer) {
-            component = component.component;
-        }
-
-        if (component) {
-            while (component && !overlayCandidate) {
-                if (component instanceof Overlay) {
-                    overlayCandidate = component;
-                } else {
-                    component = component.parentComponent;
-                }
-            }
-
-            if (component && component.anchor) {
-                targetElement = component.anchor;
-            }
-        }
-
-        if (!this.element.contains(targetElement)) {
-            this.dismissOverlay({
-                targetElement: targetElement,
-                type: pointer
-            });
-        }
-    }
-
-    return true;
-}
+    KeyComposer = require("montage/composer/key-composer").KeyComposer,
+    Composer = require("montage/composer/composer").Composer,
+    _ = require("lodash");
 
 function RowEntry(object) {
     this.object = object;
-    this.selected = false
+    this.selected = false;
 }
 
+
+function findRowElement(el) {
+    while (el) {
+        if (el.getAttribute("data-montage-id") == 'rowEntry') {
+            break;
+        }
+        el = el.parentElement;
+    }
+    return el;
+}
 
 /**
  * @class TableEditable
  * @extends Component
  */
-exports.TableEditable = Component.specialize({
+var TableEditable = exports.TableEditable = Component.specialize({
+
+    showRowActions: {
+        value: true
+    },
+
+    canAddWithError: {
+        value: true
+    },
 
     isMultiSelectionEnabled: {
         value: true
@@ -64,7 +48,7 @@ exports.TableEditable = Component.specialize({
         get: function () {
             if (!this._rows) {
                 this._rows = []
-            };
+            }
 
             return this._rows;
         }
@@ -72,10 +56,7 @@ exports.TableEditable = Component.specialize({
 
     templateDidLoad: {
         value: function () {
-            this.rowControlsOverlay.shouldComposerSurrenderPointerToComponent = _shouldComposerSurrenderPointerToComponent;
-            this.rowControlsOverlay.anchor = this._tableBodyTopElement;
             this.addRangeAtPathChangeListener("rows", this, "handleRowsChange");
-
         }
     },
 
@@ -100,7 +81,6 @@ exports.TableEditable = Component.specialize({
             shouldHideNewEntryRow = !!shouldHideNewEntryRow;
 
             if (this.__shouldHideNewEntryRow !== shouldHideNewEntryRow) {
-                document.removeEventListener("wheel", this, true);
                 this.__shouldHideNewEntryRow = shouldHideNewEntryRow;
                 this._canShowNewEntryRow = false;
                 this.needsDraw = true;
@@ -160,59 +140,112 @@ exports.TableEditable = Component.specialize({
         }
     },
 
-    captureWheel: {
-        value: function () {
-            this.rowControlsOverlay.needsDraw = true;
-        }
-    },
-
     findRowIterationContainingElement: {
         value: function (element) {
             return this._rowRepetitionComponent._findIterationContainingElement(element);
         }
     },
 
-
     //END Public API
-
-    willPositionOverlay: {
-        value: function (overlay, calculatedPosition) {
-            var anchor = overlay.anchor,
-                width = overlay.element.offsetWidth,
-                anchorPosition = anchor.getBoundingClientRect(),
-                position = {
-                    top: anchorPosition.top + anchorPosition.height,
-                    left: anchorPosition.left + (anchorPosition.width - width)
-                };
-
-            if (position.left < 0) {
-                position.left = 0;
-            }
-
-            return position;
-        }
-    },
-
-    shouldDismissOverlay: {
-        value: function (overlay, target, eventType) {
-            if (overlay === this.rowControlsOverlay) {
-               if (!this._tableBodyTopElement.contains(target)) {
-                   if (this.isAddingNewEntry) {
-                        this._cancelAddingNewEntry();
-                    }
-               } else {
-                   return false;
-               }
-            }
-
-           return true;
-        }
-    },
 
     prepareForActivationEvents: {
         value: function () {
-            this.rowControlsOverlay.addEventListener("action", this);
             this.addEventListener("action", this);
+            this.element.addEventListener("focusin", this);
+
+            var keyboardIdentifiers = this.constructor.KEY_IDENTIFIERS,
+                keyboardIdentifiersKeys = Object.keys(keyboardIdentifiers),
+                keyboardIdentifier;
+
+            this._keyComposerMap = new Map();
+
+            for (var i = 0, length = keyboardIdentifiersKeys.length; i < length; i++) {
+                keyboardIdentifier = keyboardIdentifiers[keyboardIdentifiersKeys[i]];
+
+                this._keyComposerMap.set(
+                    keyboardIdentifier,
+                    KeyComposer.createKey(this, keyboardIdentifier, keyboardIdentifier)
+                );
+
+                this._keyComposerMap.get(keyboardIdentifier).addEventListener("keyPress", this);
+            }
+            if (this.showRowActions) {
+                this._rowRepetitionComponent.element.addEventListener("click", this);
+            }
+        }
+    },
+
+    handleFocusin: {
+        value: function(e) {
+            this.handleClick(e);
+        }
+    },
+
+    exitDocument: {
+        value: function() {
+            this._cancelAddingNewEntry();
+            if(this.showRowActions) {
+                this._rowRepetitionComponent.element.removeEventListener("click", this);
+            }
+        }
+    },
+
+    handleKeyPress: {
+        value: function (event) {
+            var keyIdentifiers = this.constructor.KEY_IDENTIFIERS;
+        }
+    },
+
+    _activeRow: {
+        value: null
+    },
+
+    _activeRowEntry: {
+        value: null
+    },
+
+    _showControls: {
+        value: function() {
+            if (this._activeRow) {
+                this._activeRow.classList.add('is-active');
+                this._activeRow.appendChild(this.rowControls);
+            } else {
+                this._tableBodyTopElement.appendChild(this.rowControls);
+            }
+            this._rowRepetitionComponent.element.classList.add('is-active');
+            this.rowControls.classList.add('is-active');
+        }
+    },
+
+    _hideControls: {
+        value: function() {
+            if(this._activeRow) {
+                this._activeRow.classList.remove('is-active');
+                this._activeRow = this._activeRowEntry = null;
+            }
+            this.rowControls.classList.remove('is-active');
+            this._rowRepetitionComponent.element.classList.remove('is-active');
+        }
+    },
+
+    handleClick: {
+        value: function(e) {
+            if(this.showRowActions) {
+                var element = findRowElement(e.target);
+                if (element && element.component !== this._activeRowEntry) {
+                    if (this._activeRow) {
+                        this._activeRow.classList.remove('is-active');
+                    }
+                    this._activeRow = this.findRowIterationContainingElement(element).firstElement;
+                    this._activeRowEntry = element.component;
+                    this._activeRowOriginalObject = _.cloneDeep(this._activeRowEntry.object);
+                    this._showControls();
+
+                // if the event target is not in the row or the row controls
+                } else if(this._activeRow && !this._activeRow.contains(e.target) && !this.rowControls.contains(e.target)) {
+                    this.handleCancelAction();
+                }
+            }
         }
     },
 
@@ -227,25 +260,31 @@ exports.TableEditable = Component.specialize({
 
     handleCancelAction: {
         value: function () {
+            if(this._activeRow) {
+                this._activeRowEntry.object = this._activeRowOriginalObject;
+            }
+            document.activeElement.blur();
             this._cancelAddingNewEntry();
+            this._hideControls();
         }
     },
 
     handleDoneAction: {
         value: function () {
-            this._stopAddingNewEntry();
+            if (this._stopAddingNewEntry()) {
+                document.activeElement.blur();
+                this._hideControls();
+            }
         }
     },
 
     handleAction: {
         value: function (event) {
             var target = event.target;
-
             if (this._toggleAllComponent.element.contains(target.element)) {
                 this._handleToggleAllAction(event);
             } else if (target instanceof Checkbox && this._rowRepetitionComponent.element.contains(target.element)) {
-                this._toggleAllComponent.checked = this.selectedRows &&
-                    this.selectedRows.length === this.rows.length;
+                this._toggleAllComponent.checked = this.selectedRows && this.selectedRows.length === this.rows.length;
             }
         }
     },
@@ -261,8 +300,6 @@ exports.TableEditable = Component.specialize({
             ) || defaultNewEntry;
 
             if (Promise.is(defaultNewEntry)) {
-                var self = this;
-
                 return defaultNewEntry.then(function (NewEntry) {
                     return new RowEntry(NewEntry);
                 });
@@ -273,7 +310,7 @@ exports.TableEditable = Component.specialize({
     },
 
     _handleToggleAllAction: {
-        value: function (event) {
+        value: function() {
             var self = this;
 
             this._rowEntries.forEach(function (rowEntry) {
@@ -300,15 +337,23 @@ exports.TableEditable = Component.specialize({
 
     _stopAddingNewEntry: {
         value: function () {
-            if (this.isAddingNewEntry) {
-                var shoulAddNewEntry = this.callDelegateMethod(
+            var isValid = true;
+            if (!this.canAddWithError &&
+                this._activeRowEntry &&
+                this._activeRowEntry.templateObjects.errorController &&
+                typeof this._activeRowEntry.templateObjects.errorController.checkIsValid === 'function') {
+                isValid = this._activeRowEntry.templateObjects.errorController.checkIsValid();
+            }
+            if (isValid && this.isAddingNewEntry) {
+                this._activeRowEntry = null;
+                var shouldAddNewEntry = this.callDelegateMethod(
                     "tableWillAddNewEntry",
                     this,
                     this.currentNewEntry.object,
                     this.contentController
                 );
 
-                if (shoulAddNewEntry !== void 0 ? !!shoulAddNewEntry : true) {
+                if (shouldAddNewEntry !== void 0 ? !!shouldAddNewEntry : true) {
                     this.contentController.add(this.currentNewEntry.object);
                     this.callDelegateMethod(
                         "tableDidAddNewEntry",
@@ -320,6 +365,7 @@ exports.TableEditable = Component.specialize({
 
                 this._shouldHideNewEntryRow = true;
             }
+            return isValid;
         }
     },
 
@@ -329,6 +375,7 @@ exports.TableEditable = Component.specialize({
 
             return this._getNewEntry().then(function (newEntry) {
                 self._currentNewEntry = newEntry;
+                self._activeRowEntry = self.element.querySelector('[data-montage-id=newEntry]').component;
 
                 self.callDelegateMethod(
                     "tableWillStartEditingNewEntry",
@@ -336,8 +383,8 @@ exports.TableEditable = Component.specialize({
                     self.currentNewEntry.object,
                     self.contentController
                 );
+                self._showControls();
 
-                self.rowControlsOverlay.show();
                 self.dispatchOwnPropertyChange("isAddingNewEntry", self.isAddingNewEntry);
                 self.dispatchOwnPropertyChange("currentNewEntry", self.currentNewEntry);
             });
@@ -354,9 +401,21 @@ exports.TableEditable = Component.specialize({
                 this._shouldHideNewEntryRow = false;
                 this.dispatchOwnPropertyChange("isAddingNewEntry", this.isAddingNewEntry);
                 this.dispatchOwnPropertyChange("currentNewEntry", this.currentNewEntry);
-                this.rowControlsOverlay.hide();
+                this._hideControls();
             }
         }
     }
 
+}, {
+
+    KEY_IDENTIFIERS: {
+        value: {
+            enter: "enter",
+            escape: "escape"
+        }
+    }
 });
+
+TableEditable.prototype.handleEnterKeyPress = TableEditable.prototype.handleDoneAction;
+TableEditable.prototype.handleEscapeKeyPress = TableEditable.prototype.handleCancelAction;
+

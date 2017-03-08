@@ -7,10 +7,10 @@
         "owner": {
             "properties": {
                 "element": {"#": "owner"},
-                "rowControlsOverlay": {"@": "rowControls"},
                 "_tableBodyTopElement": {"#": "tableBodyTop"},
                 "contentController": {"@": "contentController"},
-                "_toggleAllComponent": {"@": "toggleAll"}
+                "_toggleAllComponent": {"@": "toggleAll"},
+                "rowControls": {"#": "rowControls"}
             },
             "bindings": {
                 "_rowRepetitionComponent": {"<-": "@tableLayout.rowRepetitionComponent"},
@@ -90,6 +90,9 @@
             "properties": {
                 "element": {"#": "done"},
                 "value": "Done"
+            },
+            "bindings": {
+                "disabled": {"<-": "@messages.content.length"}
             }
         },
 
@@ -104,20 +107,57 @@
             }
         },
 
-        "rowControls": {
-            "prototype": "montage/ui/overlay.reel",
+        ":rowIteration": {
+           "alias": "@tableLayout:rowIteration"
+        },
+
+        "messages": {
+            "prototype": "montage/ui/repetition.reel",
             "properties": {
-                "element": {"#": "rowControls"},
-                "delegate": {"@": "owner"},
-                "isModal": false
+                "element": {"#": "messages"}
             },
             "bindings": {
-                "classList.has('is-visible')": {"<-": "!@owner._canShowNewEntryRow"}
+                "content": {"<-": "@owner._activeRowEntry.errors"}
             }
         },
 
-        ":rowIteration": {
-           "alias": "@tableLayout:rowIteration"
+        "message": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "message"}
+            },
+            "bindings": {
+                "errorObject": {"<-": "@messages:iteration.object"},
+                "value": {"<-": "(errorObject.name ? errorObject.name + ': ' : '') + errorObject.error.message.replace('Error: ', '')"}
+            }
+        },
+
+        "rowControls-info": {
+            "prototype": "montage/ui/component",
+            "properties": {
+                "element": {"#": "rowControls-info"},
+                "hasTemplate": false
+            },
+            "bindings": {
+                "classList.has('has-errors')": {"<-": "@messages.content.length"}
+            }
+        },
+        "rowControls": {
+            "prototype": "montage/ui/component",
+            "properties": {
+                "element": {"#": "rowControls"},
+                "hasTemplate": false
+            }
+        },
+        "addButton": {
+            "prototype": "ui/button.reel",
+            "properties": {
+                "element": {"#": "addButton"}
+            },
+            "bindings": {
+                "classList.has('is-hidden')": {"<-": "!@owner.isMultiSelectionEnabled"},
+                "value": {"<-": "!!@owner.emptyActionLabel ? @owner.emptyActionLabel : 'Add item'"}
+            }
         }
     }
     </script>
@@ -142,10 +182,23 @@
             <div data-arg="table-footer">
                 <div data-param="table-editable-footer"></div>
             </div>
-        </div>
-        <div data-montage-id="rowControls" class="TableEditable-rowControls">
-            <button data-montage-id="cancel"></button>
-            <button data-montage-id="done" class="Button--primary"></button>
+            <div data-arg="table-row-controls" data-montage-id="rowControls" class="TableEditable-rowControls">
+                <div>
+                    <div class="flex-column TableEditable-rowControls-content">
+                        <div class="Table-row-info flex-row" data-montage-id="rowControls-info">
+                            <svg><use xlink:href="#i-alert"/></svg>
+                            <ul data-montage-id="messages" class="Table-row-info-messages">
+                                <li data-montage-id="message" class="message"></li>
+                            </ul>
+                        </div>
+                        <div class="actions flex">
+                            <button data-montage-id="cancel" class="g-margin-right--half"></button>
+                            <button data-montage-id="done" class="Button--primary"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span data-arg="emptyAction" data-montage-id="addButton"></span>
         </div>
     </div>
 </body>

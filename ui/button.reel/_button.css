@@ -138,6 +138,16 @@
     & .Button-label { display: none; }
 }
 
+.Button--icon-after {
+
+    & svg { margin-right: -.25rem !important; }
+
+    & .Button-label {
+        order: -1;
+        margin-right: .25rem;
+    }
+}
+
 .Button--loader {
 
     & .Button-content {

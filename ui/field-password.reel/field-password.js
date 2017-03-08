@@ -23,7 +23,9 @@ exports.FieldPassword = Component.specialize(/** @lends FieldPassword# */ {
 
     value: {
         set: function (value) {
-            if (typeof value === 'object') value = value ? value['$password'] : null;
+            if (typeof value === 'object') {
+                value = value ? value['$password'] : null;
+            }
             if (value != this._value) {
                 this._value = value;
                 if(this.editEnabled) {
