@@ -69,8 +69,13 @@ exports.Translator = Montage.specialize({}, {
             } else {
                 if (value) {
                     result = self.i18next.then(function(t) {
-                        var translated = t(value, args) || value;
-                        self._cache.set([value, args], translated);
+                        var translated;
+                        try {
+                            translated = ((typeof value !== 'object' || args) && typeof value !== 'boolean') ? t(value, args) : value;
+                            self._cache.set([value, args], translated);
+                        } catch (e) {
+                            translated = value;
+                        }
                         return translated;
                     });
                 }
