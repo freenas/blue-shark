@@ -28,6 +28,13 @@
             "bindings": {
                 "switchValue": {"<-": "@owner.status"}
             }
+        },
+        "spinner": {
+            "prototype": "ui/spinner.reel",
+            "properties": {
+                "element": {"#": "spinner"},
+                "isShown": true
+            }
         }
     }
     </script>
@@ -42,7 +49,7 @@
                 <svg><use xlink:href="#i-alert"/></svg>
             </div>
             <div data-arg="active" class="Progress-active Progress-statusIcon">
-                <svg><use xlink:href="#i-freenasIcon"/></svg>
+                <div data-montage-id="spinner"></div>
             </div>
             <div data-arg="pending" class="Progress-pending Progress-statusIcon">
                 <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

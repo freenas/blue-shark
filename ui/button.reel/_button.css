@@ -149,6 +149,7 @@
 }
 
 .Button--loader {
+    overflow: hidden;
 
     & .Button-content {
         position: relative;
@@ -177,12 +178,10 @@
     & svg {
         position: relative;
         z-index: 1;
-        order: 1;
         margin-right: 0 !important;
         width: 0;
         transition: all .25s ease-in;
         transform-origin: 50% 50%;
-        animation: rotatedPulse 1.2s infinite;
 
         @nest .is-processing & {
             margin-left: .5rem;
@@ -207,7 +206,7 @@
 
 .Button--add {
     padding: 0;
-    background: none;
+    background-color: transparent;
     width: auto;
     min-width: 0;
     color: var(--green);
@@ -254,12 +253,9 @@
     }
 
     &.montage--disabled {
-        background: none !Important;
+        background-color: transparent !Important;
         color: var(--main-text-color);
     }
 
     & svg { margin: 0;}
 }
-
-
-
