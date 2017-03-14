@@ -97,7 +97,7 @@ DragDropComponentManager.prototype.dispatchComponentDrag = function (draggableCo
                 draggableComponent.didEnterDropZone(dropZoneComponent);
             }
         }
-        
+
         if (typeof draggableComponent.didOverDropZone === "function") {
             draggableComponent.didOverDropZone(dropZoneComponent);
         }
@@ -174,9 +174,17 @@ DragDropComponentManager.prototype._dispatchEventToComponent = function () {
         for (var i = 0, length = dropZoneComponentKeys.length; i < length; i++) {
             dropZoneComponent = dropZoneComponents[dropZoneComponentKeys[i]];
 
-            if (dropZoneComponent && typeof dropZoneComponent[handler] === "function") {
-                dropZoneComponent[handler].apply(dropZoneComponent, arguments);
+            if (dropZoneComponent) {
+                if (dropZoneComponent._inDocument) {
+                    if (dropZoneComponent && typeof dropZoneComponent[handler] === "function") {
+                        dropZoneComponent[handler].apply(dropZoneComponent, arguments);
+                    }
+                } else {
+                    this.releaseDropZoneComponent(dropZoneComponent);
+                }
             }
+
+
         }
     }
 };
