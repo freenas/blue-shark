@@ -158,6 +158,21 @@
                 "classList.has('is-hidden')": {"<-": "!@owner.isMultiSelectionEnabled"},
                 "value": {"<-": "!!@owner.emptyActionLabel ? @owner.emptyActionLabel : 'Add item'"}
             }
+        },
+
+        ":rowIteration": {
+           "alias": "@tableLayout:rowIteration"
+        },
+
+        "spinner": {
+            "prototype": "ui/spinner.reel",
+            "properties": {
+                "element": {"#": "spinner"},
+                "centerInContainer": true
+            },
+            "bindings": {
+                "isShown": {"<-": "!!@tableLayout:rowIteration.object.object._isLocked"}
+            }
         }
     }
     </script>
@@ -178,6 +193,7 @@
             <div data-arg="table-row" class="Table-row">
                 <div data-montage-id="selectRow" class="Table-selectRow"></div>
                 <div data-param="row-entry"></div>
+                <div data-montage-id="spinner" class="TableEditable-spinner"></div>
             </div>
             <div data-arg="table-footer">
                 <div data-param="table-editable-footer"></div>

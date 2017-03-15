@@ -86,17 +86,6 @@
                 "value": "naked button"
             }
         },
-        "buttonLoader": {
-            "prototype": "blue-shark/ui/button.reel",
-            "properties": {
-                "element": {"#": "buttonLoader"},
-                "value": "Button Loader"
-            },
-            "bindings" : {
-                "isProcessing": {"<-": "@checkbox.checked"},
-                "disabled": {"<-": "isProcessing"}
-            }
-        },
         "buttonIcon": {
             "prototype": "blue-shark/ui/button.reel",
             "properties": {
@@ -116,6 +105,17 @@
             "properties": {
                 "element": {"#": "buttonAdd"},
                 "value": "create"
+            }
+        },
+        "buttonLoader": {
+            "prototype": "blue-shark/ui/button.reel",
+            "properties": {
+                "element": {"#": "buttonLoader"},
+                "value": "Button Loader"
+            },
+            "bindings" : {
+                "isProcessing": {"<-": "@checkbox.checked"},
+                "disabled": {"<-": "isProcessing"}
             }
         },
         "checkbox": {
@@ -173,9 +173,7 @@
             </div>
             <h2>Button Loader</h2>
             <div data-montage-id="checkbox" class="g-margin-bottom"></div>
-            <div data-montage-id="buttonLoader" class="Button--loader Button--primary Button--block Button--large">
-                <svg><use xlink:href="#i-freenasIcon"/></svg>
-            </div>
+            <div data-montage-id="buttonLoader" class="Button--loader Button--primary Button--block Button--large"></div>
 
 
         </div>

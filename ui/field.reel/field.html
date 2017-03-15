@@ -86,7 +86,8 @@
         "loading": {
             "prototype": "ui/spinner.reel",
             "properties": {
-                "element": {"#": "loading"}
+                "element": {"#": "loading"},
+                "isShown": true
             }
         }
     }
@@ -108,7 +109,7 @@
                     <div data-param="*"></div>
                     <div data-montage-id="error" class="Field-error"></div>
                 </div>
-                <div data-montage-id="loading" data-arg="true"></div>
+                <div data-montage-id="loading" data-arg="true" class="Field-spinner"></div>
             </div>
         </div>
         <div data-montage-id="help" class="Field-help g-margin-top">
