@@ -62,7 +62,7 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
     enterDocument: {
         value: function (isFirstTime) {
             if (isFirstTime) {
-                this._mutationObserver = new MutationObserver(this.handleMutations.bind(this));
+                // this._mutationObserver = new MutationObserver(this.handleMutations.bind(this));
                 this.addPathChangeListener("selectedValue", this, "handleSelectedValueChange");
 
                 var keyIdentifiers = this.constructor.KEY_IDENTIFIERS;
@@ -75,10 +75,10 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
                 );
             }
 
-            this._mutationObserver.observe(this.element, {
-                subtree: true,
-                childList: true
-            });
+            // this._mutationObserver.observe(this.element, {
+            //     subtree: true,
+            //     childList: true
+            // });
 
             //Need to be called after creating the _mutationObserver.
             Overlay.prototype.enterDocument.call(this, isFirstTime);
@@ -89,7 +89,7 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
         value: function () {
             Overlay.prototype.exitDocument.call(this);
 
-            this._mutationObserver.disconnect();
+            // this._mutationObserver.disconnect();
         }
     },
 
@@ -128,13 +128,13 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
         }
     },
 
-    handleMutations: {
-        value: function () {
-            if (this.isShown) {
-                this.needsDraw = true;
-            }
-        }
-    },
+    // handleMutations: {
+    //     value: function (e) {
+    //         if (this.isShown) {
+    //             // this.needsDraw = true;
+    //         }
+    //     }
+    // },
 
     _saveInitialCenterPosition: {
         value: function () {
@@ -149,6 +149,7 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
 
     _isPositionChanged: {
         value: function (event) {
+            // debugger;
             if (this.anchor instanceof HTMLElement) {
                 var boundingClientRect = this.anchor.getBoundingClientRect(),
                     newCenterPositionX = boundingClientRect.left + (boundingClientRect.width / 2),
@@ -181,6 +182,8 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
                 if (!this._needsComputeBoundaries) {
 
                     var documentHeight = this.element.ownerDocument.documentElement.clientHeight;
+                    this._optionsMaxHeight = 100;
+                    this._optionsMaxHeight = documentHeight - optionsRepetitionBoundingClientRect.top;
 
                     // check if the options would go outside the viewport
                     // if the bottom of the options is greater than document height
