@@ -62,7 +62,6 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
     enterDocument: {
         value: function (isFirstTime) {
             if (isFirstTime) {
-                // this._mutationObserver = new MutationObserver(this.handleMutations.bind(this));
                 this.addPathChangeListener("selectedValue", this, "handleSelectedValueChange");
 
                 var keyIdentifiers = this.constructor.KEY_IDENTIFIERS;
@@ -75,12 +74,6 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
                 );
             }
 
-            // this._mutationObserver.observe(this.element, {
-            //     subtree: true,
-            //     childList: true
-            // });
-
-            //Need to be called after creating the _mutationObserver.
             Overlay.prototype.enterDocument.call(this, isFirstTime);
         }
     },
@@ -88,8 +81,6 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
     exitDocument: {
         value: function () {
             Overlay.prototype.exitDocument.call(this);
-
-            // this._mutationObserver.disconnect();
         }
     },
 
@@ -127,14 +118,6 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
             }
         }
     },
-
-    // handleMutations: {
-    //     value: function (e) {
-    //         if (this.isShown) {
-    //             // this.needsDraw = true;
-    //         }
-    //     }
-    // },
 
     _saveInitialCenterPosition: {
         value: function () {
