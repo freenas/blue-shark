@@ -33,14 +33,18 @@ var Select = exports.Select = Component.specialize({
             return this.__highlightedOption;
         },
         set: function (option) {
-            var self = this;
-            this.optionsOverlayComponent.templateObjects.options.iterations.forEach(function(iteration){
-                iteration._childComponents[0].classList.remove("highlighted");
-                if(iteration == option) {
-                    iteration._childComponents[0].classList.add("highlighted");
-                    self.__highlightedOption = option;
+            if (option !== this.__highlightedOption) {
+                if (this.__highlightedOption) {
+                    this.__highlightedOption._childComponents[0].classList.remove("highlighted");
                 }
-            });
+
+                if (option) {
+                    option._childComponents[0].classList.add("highlighted");
+                    this.__highlightedOption = option;
+                } else {
+                    this.__highlightedOption = null;
+                }
+            }
         }
     },
 
@@ -244,7 +248,7 @@ var Select = exports.Select = Component.specialize({
 
     _selectOption: {
         value: function (e) {
-            if(this.optionsOverlayComponent.isShown) {
+            if (this.optionsOverlayComponent.isShown && this._highlightedOption) {
                 this.optionsOverlayComponent.templateObjects.options.selection = [this._highlightedOption.object];
             }
         }
@@ -298,7 +302,8 @@ var Select = exports.Select = Component.specialize({
     },
 
     handleMouseover: {
-        value: function(event) {
+        value: function (event) {
+            console.log(event.type, event)
             if (event.target.component) {
                 var target = event.target.component.iteration;
 
