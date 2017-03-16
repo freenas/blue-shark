@@ -39,7 +39,7 @@ var SelectOptions = exports.SelectOptions = Overlay.specialize(/** @lends Select
         },
         set: function (maxHeight) {
             this.__optionsMaxHeight = maxHeight;
-            this.element.style.height = maxHeight - 16 + "px";
+            this.element.style.maxHeight = maxHeight - 16 + "px";
         }
     },
 
