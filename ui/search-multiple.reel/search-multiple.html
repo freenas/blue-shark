@@ -51,7 +51,7 @@
             },
             "bindings": {
                 "values": {"<->": "@owner.values"},
-                "labelPath": {"<-": "@owner.labelExpression"}
+                "labelPath": {"<-": "@owner.labelPath"}
             }
         },
 
@@ -80,7 +80,7 @@
                 "element": {"#": "select"}
             },
             "bindings": {
-                "options": {"<-": "@owner._results.map{{label: this.path(@owner.labelExpression), value: this.path(@owner.valuePath)}}"}
+                "options": {"<-": "@owner._results.map{{label: this.path(@owner.labelPath), value: this.path(@owner.valuePath)}}"}
             }
         },
 
