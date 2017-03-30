@@ -10,6 +10,20 @@ var Component = require("montage/ui/component").Component
  */
 exports.Search = Component.specialize(/** @lends Search# */ {
 
+    _value: {
+        value: null
+    },
+
+    value: {
+        set: function (value) {
+            this._value = value ? this.valuePath ? value[this.valuePath] || value : value : null;
+            this.displayedValue = value ? this.labelPath ? value[this.labelPath] || value : value : 'none';
+        },
+        get: function () {
+            return this._value;
+        }
+    },
+
     enterDocument: {
         value: function (firstTime) {
             if (!this.controller || typeof this.controller.search !== 'function') {
