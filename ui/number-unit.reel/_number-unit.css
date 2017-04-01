@@ -1,4 +1,7 @@
-.NumberUnit { display: flex; }
+.NumberUnit {
+    display: flex;
+    max-width: 11rem;
+}
 
 .NumberUnit .NumberUnit-count { margin-right: .5em; }
 
