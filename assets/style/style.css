@@ -13,3 +13,6 @@
 .container {
     margin: 1rem;
 }
+
+.g-margin-bottom        { margin-bottom:  1rem; }
+.g-margin-bottom--half  { margin-bottom: .5rem; }

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="field-select-create.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "owner"}
+            },
+            "listeners": [
+                {
+                    "listener": {"@": "owner"},
+                    "type": "action"
+                }
+            ]
+        },
+
+        "field": {
+            "prototype": "ui/field.reel",
+            "properties": {
+                "element": {"#": "field"}
+            },
+            "bindings": {
+                "label": {"<-": "@owner.label"},
+                "documentationReference": {"<-": "@owner.documentationReference"},
+                "disabled": {"<-": "@owner.disabled"}
+            }
+        },
+
+        "select": {
+            "prototype": "ui/select.reel",
+            "properties": {
+                "element": {"#": "select"}
+            },
+            "bindings": {
+                "options": {"<-": "@owner.options"},
+                "classList.has('is-hidden')": {"<-": "!@owner.options.length"}
+            }
+        },
+
+        "emptyMessage": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "emptyMessage"}
+            },
+            "bindings": {
+                "value": {"<-": "!!@owner.emptyMessage ? @owner.emptyMessage : 'No exising Options'"},
+                "classList.has('is-hidden')": {"<-": "@owner.options.length"}
+            }
+        },
+
+        "createButton": {
+            "prototype": "ui/button.reel",
+            "properties": {
+                "element": {"#": "createButton"}
+            },
+            "bindings": {
+                "value": {"<-": "!!@owner.createLabel ? @owner.createLabel : 'Create Option'"}
+            }
+        }
+    }
+    </script>
+</head>
+<body>
+    <div data-montage-id="owner" class="FieldSelectCreate">
+        <div data-montage-id="field">
+            <div>
+                <div data-montage-id="select" class="g-margin-bottom--half"></div>
+                <div data-montage-id="emptyMessage" class="FieldSelectCreate-emptyMessage g-margin-bottom--half"></div>
+                <div data-montage-id="createButton" class="Button--create Button--block">
+                    <svg><use xlink:href="#i-circle-plus"/></svg>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
