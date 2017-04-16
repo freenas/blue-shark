@@ -259,14 +259,27 @@ var Select = exports.Select = Component.specialize({
         value: function(distance) {
             var currentIndex = this.optionsOverlayComponent.templateObjects.options.iterations.indexOf(this._highlightedOption),
                 newIndex = currentIndex + distance,
-                contentLength = this.optionsOverlayComponent.templateObjects.options.iterations.length;
+                contentLength = this.optionsOverlayComponent.templateObjects.options.iterations.length,
+                optionsHeight = this.optionsOverlayComponent.scrollView.scrollTop + this.optionsOverlayComponent.scrollView.element.offsetHeight;
 
             if (newIndex < -1) {
                 newIndex = contentLength -1;
             }
             if (newIndex != -1 && newIndex != contentLength) {
                 this._highlightedOption = this.optionsOverlayComponent.templateObjects.options.iterations[newIndex % contentLength];
+
+                // scroll to element
+                var highlightedElement = this._highlightedOption.firstElement,
+                    highlightedElementTop = highlightedElement.offsetTop,
+                    highlightedElementBottom = highlightedElement.offsetTop + highlightedElement.offsetHeight;
+
+                if (highlightedElementTop < this.optionsOverlayComponent.scrollView.scrollTop) {
+                    return this.optionsOverlayComponent.scrollView.scrollTop = highlightedElementTop;
+                } else if (highlightedElementBottom > optionsHeight) {
+                    return this.optionsOverlayComponent.scrollView.scrollTop += (highlightedElementBottom - optionsHeight);
+                }
             }
+
         }
     },
 
